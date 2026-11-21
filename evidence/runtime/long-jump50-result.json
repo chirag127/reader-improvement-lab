@@ -1,0 +1,9 @@
+{
+  "at": "2026-11-21T16:24:39.350359+00:00",
+  "fixture_id": "long-document",
+  "input_sha256": "1e8b4d672f56b1dd1be570aeaedec4620168bb1361d9c178fb70cc8eff119bcb",
+  "expected": "50/100",
+  "actual": [
+    "50/100"
+  ]
+}

@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-21",
+  "scope": "Eight Android and related cross-platform open-source readers. This inventory indexes the dated evidence in knowledge/alternatives-android.md; the 21 draft proposals are in data/alternative-proposals-android.json.",
+  "limitations": [
+    "Source and documentation inspection only: no application build, runtime, performance, accessibility or synchronization test was executed.",
+    "Formats and platforms are documented or statically advertised capabilities, not rendering-conformance or released-artifact guarantees. Per-app qualifications apply.",
+    "Six applications received targeted implementation review; Orion and Anx received documentation, license and build-configuration review only.",
+    "Issue searches were bounded first-page searches; open issues do not prove continuing defects and closed issues do not prove working fixes.",
+    "Observation date records retrieval, not release date. Exact inspected ranges, version/activity evidence and all citations remain in the report."
+  ],
+  "alternatives": [
+    {
+      "id": "koreader",
+      "name": "KOReader",
+      "repository": "https://github.com/koreader/koreader",
+      "commit": "07d7b22098ef1693f090a881abf27ca5a25fa50a",
+      "platforms": ["Android", "Linux", "Cervantes", "Kindle", "Kobo", "PocketBook", "reMarkable"],
+      "license": "AGPL-3.0",
+      "formats": ["PDF", "DjVu", "CBT", "CBZ", "CBR", "EPUB", "FB2", "MOBI", "DOC", "RTF", "HTML", "CHM", "TXT"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "Fixed-page PDF, DjVu and comic viewing", "evidence_type": "documented", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md"},
+        {"name": "Reflowable ebook reading", "evidence_type": "documented", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md"},
+        {"name": "Scanned PDF and DjVu reflow with K2pdfopt", "evidence_type": "documented", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md"},
+        {"name": "Margins, line spacing, external fonts and hyphenation", "evidence_type": "documented", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md"},
+        {"name": "E-ink-oriented UI, contrast and fit zoom", "evidence_type": "documented", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md"},
+        {"name": "StarDict dictionary and Wikipedia lookup", "evidence_type": "documented", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md"},
+        {"name": "Calibre metadata, wireless receipt and OPDS catalogs", "evidence_type": "documented", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md"},
+        {"name": "Wallabag integration and RSS feeds", "evidence_type": "documented", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md"},
+        {"name": "Reader modules for highlights, bookmarks, TOC and full-text search", "evidence_type": "static-observation", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/frontend/apps/reader/readerui.lua"},
+        {"name": "Current-book, selected-file and history-wide annotation exports", "evidence_type": "static-observation", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/main.lua#L181-L206"},
+        {"name": "Multiple export targets and highlight style/color filters", "evidence_type": "static-observation", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/main.lua"},
+        {"name": "Plugin extensibility", "evidence_type": "documented", "source_url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md"}
+      ],
+      "code_review": {
+        "depth": "targeted-application-code",
+        "files": [
+          {"path": "frontend/document/documentregistry.lua", "url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/frontend/document/documentregistry.lua#L31-L225", "observations": ["Provider registration, MIME mapping, weights and per-document/type preferences."]},
+          {"path": "frontend/document/pdfdocument.lua", "url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/frontend/document/pdfdocument.lua#L370-L416", "observations": ["Concrete format/MIME registration seam; CBR aliases differ from the values requested in issue #15844."]},
+          {"path": "frontend/apps/reader/readerui.lua", "url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/frontend/apps/reader/readerui.lua", "observations": ["Selected ranges L94-101, L153-245 and L287-424 compose reader modules and fixed-page/reflowable controllers."]},
+          {"path": "plugins/exporter.koplugin/base.lua", "url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/base.lua#L23-L125", "observations": ["Exporter settings, identity, readiness and export contract."]},
+          {"path": "plugins/exporter.koplugin/main.lua", "url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/main.lua", "observations": ["L77-104 registers targets; L181-206 supplies export scopes; L343-394 includes style and color filters."]},
+          {"path": "plugins/exporter.koplugin/target/json.lua", "url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/target/json.lua#L26-L73", "observations": ["Serializes booknotes and optional book checksum for export/share."]},
+          {"path": "plugins/exporter.koplugin/template/md.lua", "url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/template/md.lua#L39-L65", "observations": ["Single chapter heading and hardcoded author/page/date presentation."]},
+          {"path": "plugins/exporter.koplugin/target/markdown.lua", "url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/target/markdown.lua", "observations": ["L36-103 supports style/custom formatter settings; L106-126 writes/shares Markdown."]}
+        ],
+        "limitations": ["Selected excerpts only; registry/export unit-test files were located but not read or run."]
+      },
+      "sources": [
+        {"url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/COPYING", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/koreader/koreader/commit/07d7b22098ef1693f090a881abf27ca5a25fa50a", "observed_at": "2026-11-21", "evidence_type": "static-observation"}
+      ],
+      "limitations": [
+        "Selected provider, reader-module, and export code was inspected; no runtime or rendering-conformance test was run.",
+        "Linux/macOS developer emulation is documented separately from supported end-user platforms.",
+        "The checked license evidence establishes AGPL v3; an only/or-later qualifier was not established.",
+        "Issue searches were first-page bounded; release parity and APK/source reproducibility were not checked."
+      ],
+      "report_path": "knowledge/alternatives-android.md"
+    },
+    {
+      "id": "librera",
+      "name": "Librera Reader",
+      "repository": "https://github.com/foobnix/LibreraReader",
+      "commit": "b7378bbde373bbf8b80842f3e47ea444fa9fd542",
+      "platforms": ["Android"],
+      "license": "GPL-3.0-or-later",
+      "formats": ["PDF", "EPUB", "EPUB3", "MOBI", "DjVu", "FB2", "TXT", "RTF", "AZW", "AZW3", "HTML", "CBZ", "CBR", "DOC", "DOCX", "ODT", "XPS", "TIFF", "PDB", "MHT", "FB2.ZIP"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "Folder-configured discovery and in-app file browsing", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "Cover grid/list and metadata filtering/sorting", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "Configurable TTS and a media player", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "PDF reflow, page splitting and whitespace crop", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "Musician mode with adjustable automatic scrolling", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "Bookmarks, annotations, comments and PDF drawing", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "Offline/online dictionaries and selection actions", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "Themes, custom CSS, tap zones, volume keys and reading direction", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "OPDS browsing and offline Calibre metadata/covers", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "Google Drive reading-progress and bookmark synchronization", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "Settings import/export and automatic session backup", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"},
+        {"name": "EPUB3 audio and video", "evidence_type": "documented", "source_url": "https://librera.app/librera-reader/"}
+      ],
+      "code_review": {
+        "depth": "targeted-application-code",
+        "files": [
+          {"path": "app/src/main/java/org/ebookdroid/core/codec/CodecDocument.java", "url": "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/src/main/java/org/ebookdroid/core/codec/CodecDocument.java#L11-L120", "observations": ["Common page/search/outline/annotation/metadata/location interface; CFI-capable location contract already exists."]},
+          {"path": "app/src/main/java/org/ebookdroid/droids/foliate/codec/FoliateDocument.java", "url": "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/src/main/java/org/ebookdroid/droids/foliate/codec/FoliateDocument.java", "observations": ["L31-180 integrates WebView layout and read-ahead; L378-453 and L482-503 implement CFI/text anchors with nonblocking main-thread misses."]},
+          {"path": "app/src/main/java/org/ebookdroid/droids/foliate/codec/FoliateRenderer.java", "url": "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/src/main/java/org/ebookdroid/droids/foliate/codec/FoliateRenderer.java", "observations": ["Selected open/index/resize/location/text/call ranges use main-thread dispatch with worker lock/latch waits, profiling entrypoints and bounded timeouts."]},
+          {"path": "app/src/main/java/org/ebookdroid/droids/foliate/codec/FoliateCss.java", "url": "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/src/main/java/org/ebookdroid/droids/foliate/codec/FoliateCss.java", "observations": ["Selected L20-229 ranges adapt MuPDF CSS, local font URLs, family fallbacks and paginator margins."]},
+          {"path": "app/build.gradle", "url": "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/build.gradle", "observations": ["L9-12 names 10.1.14; L121-187 and L300-327 define Pro/F-Droid/JS variants; L399-403 declares PDFium."]}
+        ],
+        "limitations": ["Selected code paths only; main-thread misses do not establish loss of anchors across every caller. No profiling or cross-flavor runtime tests were run."]
+      },
+      "sources": [
+        {"url": "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/README.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/LICENSE.txt", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/build.gradle", "observed_at": "2026-11-21", "evidence_type": "static-observation"},
+        {"url": "https://librera.app/librera-reader/", "observed_at": "2026-11-21", "evidence_type": "documented"}
+      ],
+      "limitations": [
+        "Selected codec, foliate/WebView, CSS, and build paths were inspected; no application runtime was tested.",
+        "F-Droid, Pro, and MuPDF-free JS variants must not be assumed to have identical capabilities.",
+        "The frozen-development README notice coexists with observed 2026-11-21 commits; maintenance guarantees were not established.",
+        "LibreraX is a separate product; dependency-level license and released-build parity were not fully audited."
+      ],
+      "report_path": "knowledge/alternatives-android.md"
+    },
+    {
+      "id": "mj-pdf",
+      "name": "MJ PDF",
+      "repository": "https://gitlab.com/mudlej_android/mj_pdf_reader",
+      "commit": "aef93faaa4c7fa7df373d415e1c874412cba2db5",
+      "platforms": ["Android"],
+      "license": "GPL-3.0",
+      "formats": ["PDF"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "Recent, Library and Folders with file-manager/SD-card browsing", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L57"},
+        {"name": "Reading statuses, cover grid/list, sorting and PDF discovery", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L57"},
+        {"name": "Position/history persistence across file moves and renames", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L59"},
+        {"name": "Continuous, horizontal, single-page and dual-page modes with page-fit policies", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L43"},
+        {"name": "App/PDF dark mode and configurable full-screen reading controls", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L66"},
+        {"name": "Margin hiding, RTL autodetection, password PDFs and online PDF links", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L73"},
+        {"name": "Embedded PDF highlights, existing-highlight editing and note lists", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L79"},
+        {"name": "Reusable vector signatures and supported PDF form filling", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L83"},
+        {"name": "Inline selection actions and styled quote images", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L85"},
+        {"name": "Streaming search, TOC/link lists, bookmarks and navigation history", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L88"},
+        {"name": "PDF text-mode reflow with typography controls", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md#L96"},
+        {"name": "Share/print, multiple instances, incognito and shared-file copy choices", "evidence_type": "documented", "source_url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md"}
+      ],
+      "code_review": {
+        "depth": "targeted-application-code",
+        "files": [
+          {"path": "settings.gradle", "url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/settings.gradle", "observations": ["L1-4 separates app, viewer, PDFium bindings and macrobenchmark modules."]},
+          {"path": "app/src/main/java/com/gitlab/mudlej/MjPdfReader/data/AppDatabase.kt", "url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/data/AppDatabase.kt", "observations": ["L23-68 declares Room version 15, PDF records, save destinations, scan entries, bookmarks and migrations."]},
+          {"path": "app/src/main/java/com/gitlab/mudlej/MjPdfReader/pdf/PdfExtractor.kt", "url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/pdf/PdfExtractor.kt", "observations": ["L16-167 wraps page text/metrics/thumbnail/link/note access and closes page handles; metrics have a 20000-character cap."]},
+          {"path": "app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/text_mode/TextModeContentLoader.kt", "url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/text_mode/TextModeContentLoader.kt", "observations": ["L29-168 exposes extraction ownership, jobs, caching, nearby prefetch and out-of-window cancellation."]},
+          {"path": "app/src/main/java/com/gitlab/mudlej/MjPdfReader/core/text/TextSearch.kt", "url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/core/text/TextSearch.kt", "observations": ["L15-78 maps folded-text match ranges back to original character indices."]},
+          {"path": "app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/usernotes/AnnotationListLogic.kt", "url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/usernotes/AnnotationListLogic.kt", "observations": ["L13-68 centralizes filters and formatted annotation export with TOC/color/date callbacks."]},
+          {"path": "app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/userhighlights/UserHighlightsActivity.kt", "url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/userhighlights/UserHighlightsActivity.kt", "observations": ["L65-69 and L277-316 implement SAF plain-text highlight export."]},
+          {"path": "app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/usernotes/UserNotesActivity.kt", "url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/usernotes/UserNotesActivity.kt", "observations": ["L57-61 and L223-261 implement SAF plain-text note export."]},
+          {"path": "app/src/main/res/layout/item_home_chip_row.xml", "url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/res/layout/item_home_chip_row.xml", "observations": ["Completed/Abandoned use equal-weight 0dp slots and fixed margins, consistent with issue #90's width-allocation concern."]}
+        ],
+        "limitations": ["App-layer wrappers and selected XML were read, not all viewer/JNI internals. No annotation-save, rendering, TTS or large-font scenario was executed."]
+      },
+      "sources": [
+        {"url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/LICENSE", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/build.gradle#L51", "observed_at": "2026-11-21", "evidence_type": "static-observation"},
+        {"url": "https://gitlab.com/api/v4/projects/38392439", "observed_at": "2026-11-21", "evidence_type": "static-observation"},
+        {"url": "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/roadmap.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://mudlej.com/projects/mj-pdf", "observed_at": "2026-11-21", "evidence_type": "documented"}
+      ],
+      "limitations": [
+        "GitLab is canonical; the GitHub issue-facing mirror is older and differs from the inspected source.",
+        "Selected extraction, text-mode, Room, export, and layout code was inspected; no runtime was tested.",
+        "The checked grant establishes GPL v3 without an only/or-later qualifier; the public GitLab metadata omitted archived status.",
+        "Roadmap entries are proposals, not confirmed shipped capabilities; build-file version is not a verified store release."
+      ],
+      "report_path": "knowledge/alternatives-android.md"
+    },
+    {
+      "id": "orion",
+      "name": "Orion Viewer",
+      "repository": "https://github.com/max-kammerer/orion-viewer",
+      "commit": "1adfe2da0791d1e563fd8966fc3107e9ad79fc74",
+      "platforms": ["Android"],
+      "license": "GPL-3.0-or-later",
+      "formats": ["PDF", "DjVu", "XPS", "TIFF", "CB7", "CBR", "CBZ", "CBT"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "Outline navigation", "evidence_type": "documented", "source_url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"},
+        {"name": "Internal PDF and DjVu links", "evidence_type": "documented", "source_url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"},
+        {"name": "Bookmarks", "evidence_type": "documented", "source_url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"},
+        {"name": "Screen-tap page navigation", "evidence_type": "documented", "source_url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"},
+        {"name": "Configurable tap zones and hardware key bindings", "evidence_type": "documented", "source_url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"},
+        {"name": "Text selection", "evidence_type": "documented", "source_url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"},
+        {"name": "Double-tap word selection and external dictionary translation", "evidence_type": "documented", "source_url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"},
+        {"name": "Custom zoom and border crop", "evidence_type": "documented", "source_url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"},
+        {"name": "Orientation and LTR/RTL within-page navigation", "evidence_type": "documented", "source_url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"},
+        {"name": "Built-in file manager and recently opened files", "evidence_type": "documented", "source_url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"}
+      ],
+      "code_review": {
+        "depth": "documentation-license-build-config",
+        "files": [
+          {"path": "build.gradle", "url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/build.gradle#L26-L37", "observations": ["Normal/special Android minimum SDKs and conditional analytics build switch."]},
+          {"path": "orion-viewer/build.gradle", "url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/orion-viewer/build.gradle", "observations": ["L4-14 reads version properties and conditionally enables plugins; L37-40/L93-94 selects Firebase/analytics implementation."]},
+          {"path": "orion-viewer/version.properties", "url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/orion-viewer/version.properties", "observations": ["Version 0.97.6 and base code 2514."]}
+        ],
+        "limitations": ["No application implementation review or issue sweep; documented features were not runtime-tested."]
+      },
+      "sources": [
+        {"url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/LICENSE", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/orion-viewer/version.properties", "observed_at": "2026-11-21", "evidence_type": "static-observation"}
+      ],
+      "limitations": [
+        "Functional features are documented; application implementation and issue tracker were not deeply reviewed.",
+        "Analytics are conditional in the build; distributed-APK network behavior was not tested.",
+        "Legacy Android compatibility is a configuration/documentation observation, not an installation test.",
+        "A desktop source directory does not establish a supported desktop release."
+      ],
+      "report_path": "knowledge/alternatives-android.md"
+    },
+    {
+      "id": "mupdf-android",
+      "name": "MuPDF Android Viewer",
+      "repository": "https://github.com/ArtifexSoftware/mupdf-android-viewer",
+      "commit": "f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0",
+      "platforms": ["Android"],
+      "license": "AGPL-3.0-or-later",
+      "formats": ["PDF", "XPS", "OXPS", "CBZ", "EPUB", "FB2", "MOBI"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "System Storage Access Framework document picker", "evidence_type": "static-observation", "source_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/app/src/main/java/com/artifex/mupdf/viewer/app/LibraryActivity.java#L24-L46"},
+        {"name": "Open With and ACTION_VIEW integration", "evidence_type": "static-observation", "source_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/AndroidManifest.xml#L10-L25"},
+        {"name": "Fitz rendering and reflowable document layout", "evidence_type": "static-observation", "source_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/MuPDFCore.java"},
+        {"name": "Password prompt and authentication", "evidence_type": "static-observation", "source_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/DocumentActivity.java#L327-L351"},
+        {"name": "Previous and next text-search navigation", "evidence_type": "static-observation", "source_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/DocumentActivity.java#L517-L526"},
+        {"name": "Bounded outline navigation", "evidence_type": "static-observation", "source_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/MuPDFCore.java#L199-L227"},
+        {"name": "Page slider/readout and saved reading position", "evidence_type": "static-observation", "source_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/DocumentActivity.java"},
+        {"name": "Pinch zoom, fling/scroll and edge-tap navigation", "evidence_type": "static-observation", "source_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/ReaderView.java"},
+        {"name": "Font-size relayout preserving a document bookmark", "evidence_type": "static-observation", "source_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/MuPDFCore.java#L77-L95"},
+        {"name": "Link dispatch and navigation-history code paths", "evidence_type": "static-observation", "source_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/ReaderView.java"}
+      ],
+      "code_review": {
+        "depth": "targeted-application-code",
+        "files": [
+          {"path": "app/src/main/java/com/artifex/mupdf/viewer/app/LibraryActivity.java", "url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/app/src/main/java/com/artifex/mupdf/viewer/app/LibraryActivity.java#L24-L66", "observations": ["SAF chooser dispatches ACTION_VIEW with separate-document/task flags."]},
+          {"path": "lib/src/main/java/com/artifex/mupdf/viewer/MuPDFCore.java", "url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/MuPDFCore.java", "observations": ["Selected L48-227 ranges own document/page/display-list rendering, zero-based page access, relayout bookmarks, search, links and bounded outlines."]},
+          {"path": "lib/src/main/java/com/artifex/mupdf/viewer/DocumentActivity.java", "url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/DocumentActivity.java", "observations": ["Selected intent/password/search/layout/slider/persistence ranges are itemized in the report; UI adds one to internal page indices."]},
+          {"path": "lib/src/main/java/com/artifex/mupdf/viewer/ReaderView.java", "url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/ReaderView.java", "observations": ["L120-132 manages history; L473 has empty long press; L917-928 follows an internal link only when its returned page is greater than zero."]},
+          {"path": "lib/src/main/java/com/artifex/mupdf/viewer/PageView.java", "url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/PageView.java#L565-L598", "observations": ["Internal links return resolved page index; external/no-link outcomes also return zero, creating the page-zero reproduction candidate."]},
+          {"path": "lib/src/main/AndroidManifest.xml", "url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/AndroidManifest.xml#L10-L25", "observations": ["VIEW/BROWSABLE MIME registrations advertise supported document types."]},
+          {"path": "lib/build.gradle", "url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/build.gradle#L1-L24", "observations": ["Library 1.28.5a, fitz 1.28.5, minSdk 21 and local-or-Maven JNI dependency."]}
+        ],
+        "limitations": ["No native fitz implementation review or on-device reproduction; the simplified viewer scope differs from the full MuPDF editor."]
+      },
+      "sources": [
+        {"url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/README", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/COPYING", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/build.gradle#L1-L24", "observed_at": "2026-11-21", "evidence_type": "static-observation"}
+      ],
+      "limitations": [
+        "This simplified viewer explicitly excludes annotation editing and form filling; full MuPDF product capabilities do not transfer to it.",
+        "Selected chooser, activity, core, page, and gesture code was inspected; no runtime was tested.",
+        "The page-zero link finding is a source-level reproduction candidate, not a confirmed on-device defect.",
+        "MIME handlers establish advertised formats, not complete rendering conformance or released-build parity."
+      ],
+      "report_path": "knowledge/alternatives-android.md"
+    },
+    {
+      "id": "books-story",
+      "name": "Book's Story",
+      "repository": "https://github.com/Acclorite/book-story",
+      "commit": "6ffefb974ae8eac542e36eb659f77e4802735fd9",
+      "platforms": ["Android"],
+      "license": "GPL-3.0-only",
+      "formats": ["EPUB", "PDF", "FB2", "TXT", "HTML", "HTM"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "SAF access and storage-folder discovery", "evidence_type": "static-observation", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/repository/FileSystemRepositoryImpl.kt#L34-L89"},
+        {"name": "Ebook library with custom categories", "evidence_type": "documented", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/README.md"},
+        {"name": "Chapters and reader TOC", "evidence_type": "documented", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/README.md"},
+        {"name": "Material You themes and color presets", "evidence_type": "documented", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/README.md"},
+        {"name": "Reader settings for typography, margins, colors and progress", "evidence_type": "static-observation", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderContent.kt#L33-L94"},
+        {"name": "Continuous and paged reading", "evidence_type": "static-observation", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderScaffold.kt"},
+        {"name": "Selection actions for copy, share and web search", "evidence_type": "static-observation", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderLayoutPaged.kt#L168-L177"},
+        {"name": "Double-tap paragraph translation", "evidence_type": "static-observation", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderLayoutContentParagraph.kt#L40-L58"},
+        {"name": "Images with captions, alignment, sizing and color effects", "evidence_type": "static-observation", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderLayoutContent.kt#L82-L118"},
+        {"name": "Reading ruler and perception-expander overlays", "evidence_type": "static-observation", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderScaffold.kt"},
+        {"name": "PDF-to-text reflow through PDFBox extraction", "evidence_type": "static-observation", "source_url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/parser/content/PdfContentParser.kt"}
+      ],
+      "code_review": {
+        "depth": "targeted-application-code",
+        "files": [
+          {"path": "app/src/main/java/ua/acclorite/book_story/core/data/ExtensionsData.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/core/data/ExtensionsData.kt#L11-L19", "observations": ["Six discoverable extensions; Markdown differs from the README claim."]},
+          {"path": "app/src/main/java/ua/acclorite/book_story/data/parser/file/FileParserImpl.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/parser/file/FileParserImpl.kt", "observations": ["L16-62 dispatches metadata parsing for six extensions without Markdown."]},
+          {"path": "app/src/main/java/ua/acclorite/book_story/data/parser/content/ContentParserImpl.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/parser/content/ContentParserImpl.kt", "observations": ["L27-78 dispatches content parsers through progress/error/success Flow on Dispatchers.IO."]},
+          {"path": "app/src/main/java/ua/acclorite/book_story/data/parser/content/PdfContentParser.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/parser/content/PdfContentParser.kt", "observations": ["L52-80/L102-153 use PDFBox text extraction and paragraph/separator nodes; the image callback is unused."]},
+          {"path": "app/src/main/java/ua/acclorite/book_story/core/data/ParsersData.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/core/data/ParsersData.kt", "observations": ["L9-44 supplies parser versions for cache/content compatibility."]},
+          {"path": "app/src/main/java/ua/acclorite/book_story/data/repository/FileSystemRepositoryImpl.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/repository/FileSystemRepositoryImpl.kt", "observations": ["L34-89 discovers accepted files and invokes metadata/cover parsing."]},
+          {"path": "app/src/main/java/ua/acclorite/book_story/data/repository/BookRepositoryImpl.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/repository/BookRepositoryImpl.kt", "observations": ["Selected L39-215 ranges map app/per-book Room data to chapters, nodes and metadata."]},
+          {"path": "app/src/main/java/ua/acclorite/book_story/presentation/reader/ReaderState.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/presentation/reader/ReaderState.kt", "observations": ["L20-65 models reader lifecycle states and node-based scroll targets."]},
+          {"path": "app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderLayoutContent.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderLayoutContent.kt", "observations": ["L26-129 renders typed header, paragraph, image and separator content."]},
+          {"path": "app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderScaffold.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderScaffold.kt", "observations": ["Selected L169-287 ranges select continuous/paged layouts and reading aids."]},
+          {"path": "app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderLayoutPaged.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/ui/reader/ReaderLayoutPaged.kt#L149-L177", "observations": ["Loads a node window and wires selection actions."]},
+          {"path": "app/src/main/AndroidManifest.xml", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/AndroidManifest.xml#L38-L49", "observations": ["MainActivity has MAIN/LAUNCHER only in this source manifest."]},
+          {"path": "app/src/test/java/ua/acclorite/book_story/data/parser/content/ContentParserRegressionTest.kt", "url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/test/java/ua/acclorite/book_story/data/parser/content/ContentParserRegressionTest.kt", "observations": ["L93-178 excerpts include HTML/CSS, FB2, BOM, EPUB resource/spine and NCX fixtures; not executed."]}
+        ],
+        "limitations": ["Selected excerpts and UI wiring do not establish rendering or merged-manifest behavior. Source ranges for further UI/storage excerpts are recorded in the report."]
+      },
+      "sources": [
+        {"url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/README.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/build.gradle.kts#L15-L25", "observed_at": "2026-11-21", "evidence_type": "static-observation"},
+        {"url": "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/parser/content/ContentParserImpl.kt", "observed_at": "2026-11-21", "evidence_type": "static-observation"}
+      ],
+      "limitations": [
+        "Selected ingestion, parser, persistence, and Compose paths were inspected; no runtime was tested.",
+        "README claims Markdown, but the inspected extension and parser gates enumerate six formats without Markdown.",
+        "PDF support in the inspected parser is text extraction, not original-page rendering or OCR.",
+        "The maintainer declines code PRs; suggestions, reproducible reports, and translations are invited.",
+        "The README's Android developer-verification warning was not independently verified as platform policy."
+      ],
+      "report_path": "knowledge/alternatives-android.md"
+    },
+    {
+      "id": "readest",
+      "name": "Readest",
+      "repository": "https://github.com/readest/readest",
+      "commit": "0882c8074215edc24e2ee5ac25e99cdccddb7e34",
+      "platforms": ["Android", "iOS", "macOS", "Windows", "Linux", "Web"],
+      "license": "AGPL-3.0-or-later",
+      "formats": ["EPUB", "PDF", "MOBI", "KF8", "AZW3", "FB2", "CBZ", "TXT", "HTML", "Markdown"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "Scroll and paginated reading", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "Book and current-shelf full-text search", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "Highlights, notes, bookmarks and instant annotation interactions", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "Dictionary/Wikipedia and local Yomitan ZIP/RDICT import", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "Two-document split-screen Parallel Read", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "Typography, layout, themes and code syntax highlighting", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "Library organization and OPDS/Calibre integration", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "Web clipping and selected web-novel chapter/image import", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "Sentence/book translation and multilingual TTS", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "EPUB3 Media Overlays and local audiobook pairing/read-along", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "Cross-device synchronization and KOReader interoperability", "evidence_type": "documented", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"},
+        {"name": "UI-wired Moon+ mrexpt, ReadEra bak and Readest json annotation imports", "evidence_type": "static-observation", "source_url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/app/reader/components/annotator/ImportAnnotationsDialog.tsx#L43-L57"}
+      ],
+      "code_review": {
+        "depth": "targeted-application-code",
+        "files": [
+          {"path": "apps/readest-app/src/services/appService.ts", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/appService.ts#L47-L131", "observations": ["Platform capabilities and filesystem/path/database/dialog/save abstractions."]},
+          {"path": "apps/readest-app/src/services/sync/file/provider.ts", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/sync/file/provider.ts", "observations": ["L19-99 defines normalized errors, remote file operations and optional streaming."]},
+          {"path": "apps/readest-app/src/services/sync/file/providerRegistry.ts", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/sync/file/providerRegistry.ts", "observations": ["L17-140 constructs/caches WebDAV, Drive, S3, OneDrive and iCloud adapters."]},
+          {"path": "apps/readest-app/src/services/sync/KOSyncClient.ts", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/sync/KOSyncClient.ts", "observations": ["L41-200 defines progress shape, native/LAN versus proxy transport, authentication checks and account-registration branch."]},
+          {"path": "apps/readest-app/src/services/sync/cloudSyncProvider.ts", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/sync/cloudSyncProvider.ts", "observations": ["L116-149 gates active third-party synchronization on plan/customization entitlement."]},
+          {"path": "apps/readest-app/src/utils/mrexpt.ts", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/utils/mrexpt.ts", "observations": ["L1-161 parses Moon export fields including b4/b5/b6, length, timestamp and entry ID; raw marker/color is not retained."]},
+          {"path": "apps/readest-app/src/services/annotation/providers/mrexpt.ts", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/annotation/providers/mrexpt.ts", "observations": ["L35-86 merges duplicate/newer/resurrected notes; L89-395 resolves first text-node matches to CFIs and reports unmatched/total."]},
+          {"path": "apps/readest-app/src/app/reader/components/annotator/ImportAnnotationsDialog.tsx", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/app/reader/components/annotator/ImportAnnotationsDialog.tsx#L43-L57", "observations": ["Exposes Moon+, ReadEra and Readest sources."]},
+          {"path": "apps/readest-app/src/app/reader/components/annotator/Annotator.tsx", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/app/reader/components/annotator/Annotator.tsx", "observations": ["L2260-2369 and L3087-3094 wire file selection, parsing, conversion, merge/save and UI; result toast uses added/updated rather than unmatched/total."]},
+          {"path": "apps/readest-app/src/services/annotation/providers/index.ts", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/annotation/providers/index.ts", "observations": ["L16-21 lists Foliate in a generic registry; dedicated Moon imports bypass it, so this list does not imply missing Moon support."]},
+          {"path": "apps/readest-app/src/__tests__/services/mrexpt-import.test.ts", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/__tests__/services/mrexpt-import.test.ts", "observations": ["L20-118 excerpts cover merge/no-op/resurrection/import-time cases; tests were not executed."]},
+          {"path": "apps/readest-app/src/utils/style.ts", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/utils/style.ts", "observations": ["Selected L577-640 and L1265-1330 ranges always include page/image styles while useBookLayout skips only paragraph styles."]},
+          {"path": "apps/readest-app/src/app/reader/components/FoliateViewer.tsx", "url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/app/reader/components/FoliateViewer.tsx", "observations": ["L1131 and L1387-1402 apply generated styles to the renderer."]}
+        ],
+        "limitations": ["Targeted service/import/style inspection only; no complete PDF-writeback, handwriting or encryption audit. Tests and upstream measurements were not reproduced."]
+      },
+      "sources": [
+        {"url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/LICENSE", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/package.json", "observed_at": "2026-11-21", "evidence_type": "static-observation"},
+        {"url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/docs/code-layout.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/CONTRIBUTING.md", "observed_at": "2026-11-21", "evidence_type": "documented"}
+      ],
+      "limitations": [
+        "Selected platform-service, synchronization, import, and style paths were inspected; no runtime or accessibility test was run.",
+        "Moon import is UI-wired, but v10.8 export semantics, occurrence fidelity, and release parity were not verified.",
+        "Open-source licensing is separate from hosted/distributed feature entitlements.",
+        "Issue searches and PDF-writeback inspection were bounded; roadmap text and open issues can lag code.",
+        "Contribution policy requires issue-linked changes, functional testing, and agent/model attribution when applicable."
+      ],
+      "report_path": "knowledge/alternatives-android.md"
+    },
+    {
+      "id": "anx-reader",
+      "name": "Anx Reader",
+      "repository": "https://github.com/Anxcye/anx-reader",
+      "commit": "0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a",
+      "platforms": ["Android", "iOS", "macOS", "Windows"],
+      "license": "MIT",
+      "formats": ["EPUB", "MOBI", "AZW3", "FB2", "TXT", "PDF"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "Multi-format ebook and PDF reading", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"},
+        {"name": "WebDAV synchronization of books, notes and position", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"},
+        {"name": "Spacing and font size/style/weight controls", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"},
+        {"name": "Themes, backgrounds and alignment customization", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"},
+        {"name": "Note color/style presets and chapter/time/color filtering", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"},
+        {"name": "TXT/Markdown/CSV note exports and shareable cards", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"},
+        {"name": "Reading-time statistics and heatmap", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"},
+        {"name": "TTS voice/speed/tone controls and sleep timer", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"},
+        {"name": "Side-by-side book translation and Chinese script conversion", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"},
+        {"name": "Cloud storage with on-demand book download", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"},
+        {"name": "AI dictionary, summaries, perspective analysis and mind maps", "evidence_type": "documented", "source_url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"}
+      ],
+      "code_review": {
+        "depth": "documentation-license-build-config",
+        "files": [
+          {"path": "pubspec.yaml", "url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/pubspec.yaml", "observations": ["L1-8 declares 1.15.0+6358; selected dependency ranges show Flutter/Riverpod and vendored WebDAV. No application implementation was reviewed."]}
+        ],
+        "limitations": ["Documentation and build inventory only; no application-code deep review or issue sweep."]
+      },
+      "sources": [
+        {"url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/LICENSE", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/pubspec.yaml", "observed_at": "2026-11-21", "evidence_type": "static-observation"},
+        {"url": "https://github.com/Anxcye/anx-reader/commit/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a.patch", "observed_at": "2026-11-21", "evidence_type": "static-observation"}
+      ],
+      "limitations": [
+        "The develop pin is a prerelease line, not a verified latest stable distribution.",
+        "Functional features are documented; no application-code deep review, issue sweep, or runtime test was performed.",
+        "OPDS is documented as in progress; Linux, Web, and OHOS directories do not establish supported releases.",
+        "Historical versions used different licenses; the current MIT grant must not be applied indiscriminately to older code.",
+        "AI provider behavior, costs, privacy, and cross-device synchronization were not independently verified."
+      ],
+      "report_path": "knowledge/alternatives-android.md"
+    }
+  ]
+}

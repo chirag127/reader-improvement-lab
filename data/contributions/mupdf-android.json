@@ -1,0 +1,103 @@
+{
+  "id": "mupdf-android-first-page-link",
+  "app_id": "mupdf-android",
+  "observed_at": "2026-11-21",
+  "evidence_type": "runtime-observation",
+  "evidence_scope": "Executable host Java/Robolectric regressions, static source review, debug assembly, and fork readback. No Android device, application UI, native parsing/rendering, or official-build reproduction is claimed.",
+  "upstream_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer",
+  "upstream_revision": "f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0",
+  "upstream_version": "1.28.5a",
+  "variant": "simplified Android viewer",
+  "fork_url": "https://github.com/chirag127/mupdf-android-viewer",
+  "branch": "fix/internal-links-first-page",
+  "commit": "523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+  "status": "implemented-tested",
+  "summary": "Reserve -1 for no internal destination in both PageView.hitLink overloads and accept page >= 0 in ReaderView.onSingleTapUp. This lets an internal link to zero-based page 0 navigate and record history without turning missed/external links into first-page navigation.",
+  "changed_files": [
+    "lib/build.gradle",
+    "lib/src/main/java/com/artifex/mupdf/viewer/PageView.java",
+    "lib/src/main/java/com/artifex/mupdf/viewer/ReaderView.java",
+    "lib/src/test/java/com/artifex/mupdf/viewer/LinkNavigationTest.java"
+  ],
+  "production_lines_changed": 3,
+  "test_source_sha256_lf": "7f2e971a31751b888761f19d0d3a5e943baab2656ecada9308bc8a755f962603",
+  "verification": [
+    {
+      "name": "red-regression",
+      "source_state": "Base production source plus new host-test configuration and the 15 new tests.",
+      "command": "./gradlew :lib:testDebugUnitTest --tests com.artifex.mupdf.viewer.LinkNavigationTest --console=plain --no-daemon --max-workers=4",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "tests": 15,
+      "passed": 10,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0,
+      "result": "One failure reproduces first-page tap navigation staying on page index 2; four failures specify the corrected negative no-internal-destination sentinel.",
+      "evidence_path": "evidence/contributions/mupdf-android-red-tests.json"
+    },
+    {
+      "name": "green-regression",
+      "source_state": "Tested working-tree content subsequently committed as 523ad7cb3083fc4af91c4d00e89e0c1f20859d93, verified by committed-blob SHA-256 comparison.",
+      "reproduction_command_windows": ".\\gradlew.bat :lib:testDebugUnitTest --tests com.artifex.mupdf.viewer.LinkNavigationTest :app:assembleDebug --console=plain --no-daemon --max-workers=4",
+      "process_exit_code": null,
+      "gradle_summary": "BUILD SUCCESSFUL in 1m 58s",
+      "tests": 15,
+      "passed": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "result": "All focused cases pass in the retained JUnit report; the identical tests cover navigation/history, misses, unresolved/external links, disabled links, margins, and tap suppression during scaling.",
+      "evidence_path": "evidence/contributions/mupdf-android-green-tests.json"
+    }
+  ],
+  "debug_build": {
+    "status": "assembled",
+    "result_basis": "Retained Gradle BUILD SUCCESSFUL summaries and hashed APKs; not rerun during recovery.",
+    "evidence_path": "evidence/contributions/mupdf-android-build.json",
+    "runtime_status": "not-run",
+    "runtime_result_record": "data/runtime-results.json"
+  },
+  "publication": {
+    "status": "pushed-to-fork",
+    "remote": "origin",
+    "remote_ref": "refs/heads/fix/internal-links-first-page",
+    "verified_commit": "523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+    "observed_at": "2026-11-21T15:51:06.5129979Z",
+    "verification_command": "git ls-remote origin refs/heads/fix/internal-links-first-page",
+    "exit_code": 0,
+    "evidence_path": "evidence/contributions/mupdf-android-publication.json",
+    "upstream_submission": "not-submitted"
+  },
+  "license_review": {
+    "license": "AGPL-3.0-or-later",
+    "basis": "The pinned viewer README explicitly permits version 3 or later; COPYING contains the GNU Affero General Public License v3 text. Both files are unchanged in the contribution.",
+    "contribution_scope": "Source and tests remain in the upstream-licensed fork; the public lab links to them rather than relicensing or copying the patch."
+  },
+  "contribution_guidance_review": {
+    "observed_at": "2026-11-21",
+    "reviewed": ["Pinned viewer README", "Pinned viewer COPYING", "Tracked guidance-file search", "GitHub repository community profile"],
+    "result": "README documents build and custom-release rules. The bounded guidance search and community profile returned no dedicated CONTRIBUTING file or PR template.",
+    "limitation": "The community-profile response had updated_at 2020-04-07T23:05:51Z. These observations do not establish that no other or newer contribution policy exists. Current policy and duplicate reports require checking before any future upstream submission."
+  },
+  "source_urls": [
+    "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/PageView.java#L565-L598",
+    "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/ReaderView.java#L917-L942",
+    "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/MuPDFCore.java#L190-L192",
+    "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/build.gradle",
+    "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/README",
+    "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/COPYING",
+    "https://api.github.com/repos/ArtifexSoftware/mupdf-android-viewer/community/profile",
+    "https://github.com/chirag127/mupdf-android-viewer/blob/523ad7cb3083fc4af91c4d00e89e0c1f20859d93/lib/src/test/java/com/artifex/mupdf/viewer/LinkNavigationTest.java"
+  ],
+  "limitations": [
+    "The reproduced defect is the simplified viewer's Java tap-dispatch behavior at the pinned base, not a claim about every MuPDF app, version, or official Play build.",
+    "Robolectric uses API 33 with synthetic document/link JNI substitutes and a renderer-free PageAdapter. Host tests do not parse the lab's navigation.pdf or launch DocumentActivity or external apps.",
+    "The complete original green/build shell invocations and process exit codes were not retained. The records distinguish normalized reproduction commands from observed JUnit results and Gradle summaries.",
+    "Only the focused suite and debug assembly are evidenced. Device instrumentation, full CI/lint, native rebuilding, ABI coverage, geometry/zoom edge cases, and downstream library consumers were not comprehensively tested.",
+    "The public hitLink methods change their no-internal-destination value from 0 to -1. Downstream callers outside the inspected viewer source were not inventoried.",
+    "The two interrupted push attempts had different outcomes: the first succeeded and an overlapping duplicate was rejected. A subsequent remote readback confirms the intended commit.",
+    "The contribution has not been submitted or merged upstream. The final runtime closeout records application/device A/B as not run."
+  ],
+  "report_path": "knowledge/contributions-mupdf-android.md"
+}

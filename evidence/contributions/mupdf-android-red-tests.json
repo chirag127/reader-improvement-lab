@@ -1,0 +1,105 @@
+{
+  "id": "mupdf-android-first-page-link-red",
+  "observed_at": "2026-11-21T15:08:16Z",
+  "evidence_type": "host-unit-test",
+  "upstream_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer",
+  "upstream_revision": "f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0",
+  "production_source_check": {
+    "command": "git diff --exit-code HEAD -- lib/src/main/java",
+    "exit_code": 0
+  },
+  "test_source": "lib/src/test/java/com/artifex/mupdf/viewer/LinkNavigationTest.java",
+  "test_source_sha256_lf": "7f2e971a31751b888761f19d0d3a5e943baab2656ecada9308bc8a755f962603",
+  "verification": {
+    "command": "./gradlew :lib:testDebugUnitTest --tests com.artifex.mupdf.viewer.LinkNavigationTest --console=plain --no-daemon --max-workers=4",
+    "exit_code": 1,
+    "gradle": "8.7",
+    "android_gradle_plugin": "8.5.2",
+    "java": "Temurin 17.0.21.1+2",
+    "os": "Windows 11 amd64",
+    "junit": "4.13.2",
+    "robolectric": "4.13",
+    "simulated_android_api": 33,
+    "viewer_version": "1.28.5a",
+    "fitz_version": "1.28.5"
+  },
+  "counts": {
+    "tests": 15,
+    "skipped": 0,
+    "failures": 5,
+    "errors": 0
+  },
+  "tests": [
+    {
+      "name": "laterPageLinkStillNavigatesAndRecordsHistory",
+      "status": "passed"
+    },
+    {
+      "name": "missedLinkStillTapsMainAreaWithoutHistory",
+      "status": "passed"
+    },
+    {
+      "name": "externalLinkHasNoInternalDestination",
+      "status": "failed",
+      "failure": "java.lang.AssertionError: expected:<-1> but was:<0>"
+    },
+    {
+      "name": "disabledLinksStillTapMainAreaWithoutResolving",
+      "status": "passed"
+    },
+    {
+      "name": "firstPageLinkNavigatesAndCanReturnThroughHistory",
+      "status": "failed",
+      "failure": "java.lang.AssertionError: expected:<0> but was:<2>"
+    },
+    {
+      "name": "disabledLinksPreserveMarginNavigation",
+      "status": "passed"
+    },
+    {
+      "name": "missingLinkInformationHasNoDestination",
+      "status": "failed",
+      "failure": "java.lang.AssertionError: expected:<-1> but was:<0>"
+    },
+    {
+      "name": "emptyLinksHaveNoDestination",
+      "status": "failed",
+      "failure": "java.lang.AssertionError: expected:<-1> but was:<0>"
+    },
+    {
+      "name": "tapOutsideLinkHasNoDestination",
+      "status": "failed",
+      "failure": "java.lang.AssertionError: expected:<-1> but was:<0>"
+    },
+    {
+      "name": "unresolvedLinkStillTapsMainAreaWithoutHistory",
+      "status": "passed"
+    },
+    {
+      "name": "externalLinkStillLaunchesAndTapsMainAreaWithoutHistory",
+      "status": "passed"
+    },
+    {
+      "name": "failedExternalLaunchDoesNotNavigateOrRecordHistory",
+      "status": "passed"
+    },
+    {
+      "name": "scalingDisablesExternalLinkTaps",
+      "status": "passed"
+    },
+    {
+      "name": "scalingDisablesInternalLinkTaps",
+      "status": "passed"
+    },
+    {
+      "name": "firstPageHasZeroBasedDestination",
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "Robolectric host tests exercise production MuPDFCore, PageView, ReaderView and fitz Java link classification/location-to-page conversion. JNI document/link calls and native initialization are test doubles.",
+    "No Android device, emulator, PDF parsing, rendering, DocumentActivity UI or external application was exercised.",
+    "The in-memory three-page link setup is synthetic. fixtures/documents/navigation.pdf was not read by this host test.",
+    "The four no-internal-destination failures specify the new negative sentinel; the navigation failure reproduces the observable Java tap-dispatch defect."
+  ]
+}

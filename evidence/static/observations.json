@@ -1,0 +1,940 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-21",
+  "artifact_id": "moonreader-supplied-10.8",
+  "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "evidence_type": "static-observation",
+  "authenticity": "unknown",
+  "scope": "Original analysis of the exact supplied APK. No application execution and no official-build reproduction.",
+  "source_url": null,
+  "source_url_limitation": "The supplied APK has no authenticated public download URL in this investigation.",
+  "method": "Original analyst-written summaries from privately retained local REA/JADX observations; no proprietary bodies included.",
+  "evidence_reference_convention": "private_evidence_ref is a logical receipt identifier, not a public file or URL; raw bytes are withheld.",
+  "findings": [
+    {
+      "id": "APK-PDF-001",
+      "area": "pdf",
+      "title": "PDF opening, rendering selection, text extraction and reflow already have dedicated paths",
+      "observed": [
+        "ActivityTxt.pdfOpen2 constructs com.radaee.pdf.Document, calls Open, handles several failure codes and passes the document to PDFReader.open.",
+        "PDFReader.open selects PDFGLLayoutView or PDFLayoutView; setView also dispatches to distinct comic and DjVu layouts.",
+        "PDFReader.getPageText starts page objects, reads the character range with ObjsGetString and closes the page. ActivityTxt.pdfCreateReflowText passes extracted text and a page to format-specific formatting."
+      ],
+      "inferred": [
+        "PDF rendering, extraction and reflow improvements should be described as extensions to existing capabilities."
+      ],
+      "unknown": [
+        "Native implementation and exact Radaee SDK version, rendering fidelity, reading order, OCR coverage and performance were not established."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-followup/bodies/pdf-file-open.java",
+          "size_bytes": 1632,
+          "sha256": "3ef01f149fe7c317ba74b8e6705a01f81c40ee89cf771b5ecfb57a397cfc7ec2",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.pdfOpen2(String)",
+          "lines": [
+            1,
+            32
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/pdf-open.java",
+          "size_bytes": 500,
+          "sha256": "74be54975bfb6696564fd422d4fb4fe95c81bc43a6a8b59d48feaa3d471c8b08",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.books.PDFReader.open(ActivityTxt, Document, String)"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/pdf-view-mode.java",
+          "size_bytes": 761,
+          "sha256": "327c55d533e79fc81fe9c3cd3337a6fded6bfa1591a1cb0c274f80c001afea70",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.books.PDFReader.setView(int)"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/pdf-text.java",
+          "size_bytes": 736,
+          "sha256": "51a8ab70574133c4647966a432c2288611ceccefaf41685f35721a796524ebf1",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.books.PDFReader.getPageText(int)"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/bodies/pdf-reflow-text.java",
+          "size_bytes": 854,
+          "sha256": "0c6b755abb1a251efbb263b04339024f8154ffde524d1dcbe336a865f2c16d45",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.pdfCreateReflowText(long)"
+        },
+        {
+          "private_evidence_ref": "dex-native-inventory.json",
+          "size_bytes": 3113,
+          "sha256": "d161b77e966f3abca53774f9e83e3ec8b535804c3d526f3fdebea62e03cb72f0",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "Packaged librdpdf.so members; presence only, JNI linkage not established"
+        }
+      ]
+    },
+    {
+      "id": "APK-PDF-002",
+      "area": "pdf",
+      "title": "PDF annotations have a persistence path whose status propagation needs verification",
+      "observed": [
+        "PDFReader.pdfUpdateNotesToFile applies markup and popup text, marks annotations updated and calls save; selected calls are also visible in its smali.",
+        "ActivityTxt.pdfSaveChanges clears the dirty flag before PDFReader.save, then updates the saved-time and sync-state fields.",
+        "PDFReader.save returns void and calls Document.Save without consuming its boolean result."
+      ],
+      "inferred": [
+        "A save-failure experiment should check whether the UI or synchronization state advances without a durable PDF write."
+      ],
+      "unknown": [
+        "Actual write-failure behavior, native Save semantics and handling elsewhere remain unknown. pdfUpdateNotesToFile has decompiler warnings; its full reconstructed control flow is not treated as authoritative."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/pdf-update-notes.java",
+          "size_bytes": 8121,
+          "sha256": "9eec3e7427ac55294da6cb68b373038d87de3d9be5c445082c668e69cbc89e67",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.books.PDFReader.pdfUpdateNotesToFile(boolean)"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/pdf-update-notes-smali.txt",
+          "size_bytes": 10795,
+          "sha256": "3f917b187f6dfc6017fb4f4e011e13f0f5fe84655402d25fe38f646188df9533",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.books.PDFReader.pdfUpdateNotesToFile(Z)Z"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/bodies/pdf-save-changes.java",
+          "size_bytes": 315,
+          "sha256": "3e7db305d878026c20b390bb8f327b2f4492023b04d9af1a43bec7c443c047a3",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.pdfSaveChanges()"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/pdf-save.java",
+          "size_bytes": 120,
+          "sha256": "3a4afb4409c0fe8e730f7f37e6fb8f7781dfb69b6457d9ba93f001315908e56a",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.books.PDFReader.save()"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-summaries/pdf-document.json",
+          "size_bytes": 23036,
+          "sha256": "c5a884d96173fbdcf3d87beff830dba4374e94eafdbe0e35fec6bf0e52486c67",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.radaee.pdf.Document.Save(): boolean"
+        }
+      ]
+    },
+    {
+      "id": "APK-NOTE-001",
+      "area": "notes-export",
+      "title": "Local notes and a reader-specific import/export format already exist",
+      "observed": [
+        "BookDb.exportNotesToText queries the SQLite notes table by lowerFilename. NoteInfo carries book/file identity, chapter/split/position, original text, note text, time, highlight length/color and markup flags.",
+        "PrefChapters.doShare offers .mrexpt import/export. Non-PDF serialization contains a file-length header, formatting settings and delimited note records; PDF serialization uses a page-count header and separate tagged fields.",
+        "BookDb.importNotesFromText routes PDFs to PDFReader.pdfCreateNotesFromText; the non-PDF path reads positional records and recognizes deletion markers."
+      ],
+      "inferred": [
+        "Interoperability work should build on existing export, while testing stable document identity, Unicode and format-version handling."
+      ],
+      "unknown": [
+        "Round-trip fidelity and cross-version compatibility were not tested. PDF import has substantial decompiler warnings; non-PDF import also contains visibly imperfect reconstructed control flow."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-methods/note-model.decoded.json",
+          "size_bytes": 2149,
+          "sha256": "966b315879d9731fcfc455210fbc2af3c39e022beb1fa2864536ba54d6fc0386",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.BookDb.NoteInfo"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/notes-export-text.java",
+          "size_bytes": 2802,
+          "sha256": "246546696756da33410ff623362c9a18f9c824bb89f2d3c9eb5b62f883d88be1",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.BookDb.exportNotesToText(String, ArrayList)"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/pdf-notes-text.java",
+          "size_bytes": 1631,
+          "sha256": "78180d93bee86d54bcf6d070de1c4e47c75b885a5211793d5fc9c3f4a2a45767",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.books.PDFReader.pdfCreateTextFromNotes()"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/notes-import-text.java",
+          "size_bytes": 6577,
+          "sha256": "1688eabba30519c4a2cb2d4c65cd7e0c3d5f40f4d84df1c6aa911afdd9a462e1",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.BookDb.importNotesFromText(String, String)"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/bodies/notes-share-dispatch.java",
+          "size_bytes": 8903,
+          "sha256": "78df047baa4c0da495bddc247961f6d2b62a9bfe3532f83033638c47cbea4073",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.PrefChapters.doShare(Context, String, ArrayList, boolean)"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/bodies/pdf-import-notes.java",
+          "size_bytes": 10704,
+          "sha256": "578d98fd5fe0633aecceda4bfed84c797e7f396d10f1f5bd55b82a396aaf71da",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.books.PDFReader.pdfCreateNotesFromText(String, boolean); partial Java reconstruction"
+        }
+      ]
+    },
+    {
+      "id": "APK-NOTE-002",
+      "area": "notes-export",
+      "title": "The .mrexpt export wrapper discards the write helper's boolean result",
+      "observed": [
+        "BookDb.exportNotesToFile returns false for empty serialized content; otherwise it invokes T.saveFileText(String, String) and returns true without reading that helper's boolean result.",
+        "The smali confirms the boolean-returning invoke has no move-result before the unconditional true return.",
+        "The examined PrefChapters.doShare export callback chooses its success/failure message from exportNotesToFile.",
+        "Bounded follow-up: T.saveFileText(String, String) first calls saveNormalFileText; if that returns false it tries an SD DocumentFile output stream when applicable. Caught exceptions and exhausted or unavailable fallback lead to a false return.",
+        "T.saveNormalFileText(String, String) has a false-return branch when parent-folder creation fails and reconstructs direct FileWriter output with handled failure paths. The complex exception cleanup is imperfect Java reconstruction.",
+        "Together with the previously retained exportNotesToFile smali, this supplies a static chain from a helper's non-throwing false result to the wrapper's true result for nonempty serialized notes. The earlier uncertainty that the helper might only throw is resolved at the code-path level."
+      ],
+      "inferred": [
+        "A failed direct write with no successful SD fallback can propagate as false from saveFileText, which exportNotesToFile discards. The examined export callback then has a path to its success message. This is a statically supported error-propagation concern, rather than a hypothesis based only on a boolean signature."
+      ],
+      "unknown": [
+        "No destination failure was induced in the app. Android storage grants, file-picker acceptance, error-logging side effects and the exact visible result still require runtime verification on an authenticated build.",
+        "The ordinary writer's decompiled exception cleanup contains imperfect reconstruction; its full exception-flow semantics are not asserted from this Java output. The outer saveFileText false-return and exception-handling paths are the principal new evidence."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/notes-export-file.java",
+          "size_bytes": 361,
+          "sha256": "080a02164a7ff0d5ca97cf1ac38bb3e1522da77511a5623a7453904e4b6a1489",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.BookDb.exportNotesToFile(String, String, ArrayList)"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/notes-export-file-smali.txt",
+          "size_bytes": 1105,
+          "sha256": "31ffb62e75c5a9d2a72568231670c4d0f1defcf0617657052006f2fa33e8ec74",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.BookDb.exportNotesToFile(Ljava/lang/String;Ljava/lang/String;Ljava/util/ArrayList;)Z",
+          "lines": [
+            18,
+            40
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/notes-save-helper-methods.decoded.json",
+          "size_bytes": 774,
+          "sha256": "3781abb98be430654312c6ff81a7233c2f7bf8083d73904314ef73d382b6bea7",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.T.saveFileText(String, String): boolean"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/bodies/notes-share-dispatch.java",
+          "size_bytes": 8903,
+          "sha256": "78df047baa4c0da495bddc247961f6d2b62a9bfe3532f83033638c47cbea4073",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "PrefChapters.doShare export callback",
+          "lines": [
+            75,
+            88
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-a/bodies/export-write-helper.java",
+          "size_bytes": 980,
+          "sha256": "2a3c1ef5cccbe518e108e49d3f591a23ab1cf7f5fab7878d68fa2d825788ddf2",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.T.saveFileText(String, String): boolean",
+          "lines": [
+            1,
+            23
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-c/bodies/normal-write-helper.java",
+          "size_bytes": 2851,
+          "sha256": "60be67f98e8f11718eb87a05dbd0c3039cf7480cb561f1217a9bd3b05740254e",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.T.saveNormalFileText(String, String): boolean",
+          "lines": [
+            1,
+            76
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-b/normal-writer-signatures.decoded.json",
+          "size_bytes": 355,
+          "sha256": "2402a5e710eb638155871ab43cb8c842fc250909e6b6cca8ef2ba13e6871a9a1",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "get_methods_of_class(T, filter=saveNormalFileText); one matching signature"
+        }
+      ],
+      "prior_assessments": [
+        {
+          "observed_at": "2026-11-21",
+          "inferred": [
+            "A non-throwing false return from the write helper can be misreported as export success at this wrapper. Test a failing destination and verify actual bytes before accepting success."
+          ],
+          "unknown": [
+            "The helper's implementation and real storage-failure behavior were not examined. This is a static error-propagation candidate, not a reproduced app defect."
+          ]
+        }
+      ],
+      "bounded_followup": {
+        "observed_at": "2026-11-21T16:14:18.789Z",
+        "conclusion": "Non-throwing failure paths exist in the write helper and its boolean is discarded by the export wrapper; no application failure was reproduced.",
+        "application_reproduced": false
+      }
+    },
+    {
+      "id": "APK-NOTE-003",
+      "area": "notes-export",
+      "title": "Text, cover/image sharing and Readwise upload have separate implementations",
+      "observed": [
+        "PrefChapters.createShareContent assembles checked highlights and notes with optional chapter headings; shareContent sends text/plain, optionally with a cover attachment.",
+        "For a constructed share string of at least 80000 characters, shareContent offers clipboard or text-file output.",
+        "PrefShareText.shareContent writes a cache filename ending .jpg but declares image/png in its share intent.",
+        "Readwise.addHighlights builds a token-authenticated JSON POST containing highlight text/title and optional author, note and chapter, with a result callback."
+      ],
+      "inferred": [
+        "Sharing/export recommendations should distinguish the existing formats and destinations. The image filename/MIME pairing merits a compatibility check."
+      ],
+      "unknown": [
+        "Actual encoded image type, receiving-app compatibility, Readwise endpoint availability and successful delivery were not observed. No credential values were extracted or published."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-followup/bodies/notes-share-content.java",
+          "size_bytes": 2604,
+          "sha256": "20a7737f947c2097dfd1c57df6dcef38239012ccd24d45e0dceb3510b41995d7",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.PrefChapters.createShareContent(String, ArrayList, Context)"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/bodies/notes-share-output.java",
+          "size_bytes": 4081,
+          "sha256": "b481da09dd5bf868b05882e19a2a15dcad8178f1a6b5763acce386bd9d1b581b",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.PrefChapters.shareContent(Context, String, String, boolean, boolean)"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/share-image.java",
+          "size_bytes": 976,
+          "sha256": "deefb7f664a3438499465e17e9edf515ec5b8bfdbefb93c4cc0576dfb3928cd9",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.PrefShareText.shareContent()"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/readwise-upload.java",
+          "size_bytes": 4224,
+          "sha256": "b7ad4f7051e2db6144e29f87a8d2a69c77fa46011dabd887325f30915984dc8a",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.Readwise.addHighlights(ArrayList, UploadResult)"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/readwise-model.decoded.json",
+          "size_bytes": 911,
+          "sha256": "097e2423351eefb8bd4f25c1536f12d450ad40e2df37ecfb3cde44611f77aa1b",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.Readwise.WiseItem"
+        }
+      ]
+    },
+    {
+      "id": "APK-SEARCH-001",
+      "area": "search",
+      "title": "Book search scans format-specific text using a compiled regular expression",
+      "observed": [
+        "PrefSearch.startSearch stores the entered key and launches a worker that constructs Pattern from the key plus optional case-insensitive and word-boundary syntax; the worker smali corroborates this construction.",
+        "The Java reconstruction has separate plain-text, HTML/split, ebook-chapter and PDF branches. The PDF branch reads extracted or reflow text page by page.",
+        "Direction filters, result snippets, handler-based delivery and some result-count checks are present. stopSearch only clears inSearching; examined loops check that flag."
+      ],
+      "inferred": [
+        "Test literal metacharacters, malformed regex, result-limit consistency and cancellation latency. Flag checks do not demonstrate interruption of an ongoing regex match or page extraction."
+      ],
+      "unknown": [
+        "Intended regex UX, exception-state recovery, worst-case latency and all result-cap behavior remain unverified. startSearch has a decompiler type-inference warning; the smali check is limited to selected worker behavior."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/search-start.java",
+          "size_bytes": 12064,
+          "sha256": "156bd71a9a521c6c1c775601908182c5b95b9099f2a4af8c8d5d6d4cc50135e7",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.PrefSearch.startSearch()"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/search-worker-smali.txt",
+          "size_bytes": 36938,
+          "sha256": "11a81db76335299e43dc64c0c4afa22cc7b9db6d9a87ffcf5357338652e60ec8",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.PrefSearch.AnonymousClass4.run()V",
+          "lines": [
+            3,
+            84
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/search-html.java",
+          "size_bytes": 5387,
+          "sha256": "84ca3bb3cddda59a0d1dfda0e29c2094b4f4f3336b6aede6852bcac4243c0768",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.PrefSearch.getResultFromHtml(Pattern, String, int, int, ArrayList)"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/search-stop.java",
+          "size_bytes": 74,
+          "sha256": "6e49f7dec16dddf88b261e989d3d49b9449effe6e329e6c5704434f1c1d057fd",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.PrefSearch.stopSearch()"
+        }
+      ]
+    },
+    {
+      "id": "APK-SEARCH-002",
+      "area": "search",
+      "title": "Settings/function search is distinct from book-content search",
+      "observed": [
+        "FuncSearch.getSearchResults initializes dialogs, searches lowercased dialog titles and delegates view searches to searchViewForKey."
+      ],
+      "inferred": [
+        "A proposal for more discoverable settings should acknowledge the existing function-search path."
+      ],
+      "unknown": [
+        "Coverage of every setting, localized matching, accessibility and actual navigation behavior were not tested."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/search-functions.java",
+          "size_bytes": 1224,
+          "sha256": "4a94d263b7585afc3b078678b21cd1b2d23499da57f1e7b37d5071aa221125c9",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.misc.FuncSearch.getSearchResults(PrefOptions, String)"
+        }
+      ]
+    },
+    {
+      "id": "APK-SYNC-001",
+      "area": "sync",
+      "title": "Cloud dispatch, reading-position exchange and compressed note synchronization exist",
+      "observed": [
+        "Cloud.instance(int) selects Dropbox for 2, Google Drive for 4, FTP for 8 and WebDAV otherwise.",
+        "Sync.uploadCloudPositionFile serializes a stored position with a device identifier and optional extra field. notifyNewCloudPosition parses the payload, applies a same-device/manual rule, writes preferences and signals the reader.",
+        "Note upload uses BookDb.exportNotesToText plus deletion records and compression; note download decompresses, dispatches to the PDF or ordinary-note importer and invalidates reader views.",
+        "The examined exportNotesToText xref query returned two using methods: Sync.uploadCloudNoteFile and BookDb.exportNotesToFile."
+      ],
+      "inferred": [
+        "Export and note synchronization share a serializer, making round-trip and compatibility checks relevant to both features."
+      ],
+      "unknown": [
+        "Real authentication, server compatibility, transport behavior, retries, concurrent-device conflict handling and dynamic callers were not tested."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/cloud-dispatch.java",
+          "size_bytes": 233,
+          "sha256": "d7e92ceb174a4050007661785b7861426fbb8694f2eaefa64d98d5269e1cb8d1",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Cloud.instance(int)"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/sync-upload-position.java",
+          "size_bytes": 2070,
+          "sha256": "6975df0d5fc8475421ec09e7b53b0c0f4a743d3fa1c22d77f1d56c8f10bba9c5",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.uploadCloudPositionFile(boolean, boolean)"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/bodies/sync-notify-position.java",
+          "size_bytes": 1290,
+          "sha256": "5e4eaa0b52931f61abcb5c581dbb8758e320e9d0bc28b88a40ecdb463730ad89",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.notifyNewCloudPosition(String, boolean)"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/sync-upload-notes.java",
+          "size_bytes": 763,
+          "sha256": "ca97f38e95805cb15a32e8be7f8c73666aefd80e9d6419ed36c6fb4f01256dd3",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.uploadCloudNoteFile()"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/sync-receive-notes.java",
+          "size_bytes": 688,
+          "sha256": "cc3c33da8d3100b697ec190365fa83dde906eefcaa1872c246bc47f23558fc68",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.dealDownloadedCloudNote(ByteArrayOutputStream)"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/sync-extract-notes.java",
+          "size_bytes": 547,
+          "sha256": "cd8d880121233da62f21c59a58b45699d8f00c92f93193f1aed2e7b9dcba138f",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.extractSyncNotes(String)"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/export-callers.decoded.json",
+          "size_bytes": 693,
+          "sha256": "0aaae58df6e24e54177b11ddfa8015a6ac3d8f460013799a4be9e4b2ec62a9b8",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "get_xrefs_to_method(BookDb, exportNotesToText); limit 100; returned 2"
+        }
+      ]
+    },
+    {
+      "id": "APK-SYNC-002",
+      "area": "sync",
+      "title": "Two examined file-freshness predicates reject equal-size files before comparing dates",
+      "observed": [
+        "For an existing nonempty local file and a corresponding remote item, both cloudFileIsNewer and localFileIsNewer return false when byte sizes match.",
+        "For differing sizes, the predicates compare remote date and local lastModified; cloudFileIsNewer additionally rejects syncType 8. Both equal-size branches are confirmed in smali.",
+        "Bounded follow-up: each freshness-predicate xref query returned two using methods. cloudFileIsNewer is used by verifyDownloadBookCovers and a shared nested worker reported as Sync.7.1.run; localFileIsNewer is used by verifyUploadBookCovers and that same worker.",
+        "verifyDownloadBookCovers removes both local and remote cover-list entries when cloudFileIsNewer returns false, then calls downloadShelfBookCoversFinal. verifyUploadBookCovers removes corresponding cover entries when localFileIsNewer returns false, then calls uploadShelfBookCoversFinal.",
+        "The cover-verification xrefs each returned one callback: Sync.23.1.done for download and Sync.10.1.done for upload. These are JADX using-node identities, with no claim of complete dynamic call coverage.",
+        "The shared worker method could not be resolved using the containing-class identity supplied by the xref response. A separate resolve_class query for its reported numeric name also returned resolved=false; no body was obtained for that worker."
+      ],
+      "inferred": [
+        "The equal-size early returns demonstrably gate the examined book-cover transfer lists in both directions. An equal-length changed cover represented in those lists is filtered out before the final cover-transfer call. A cover-refresh test is therefore the narrowest supported reproduction target."
+      ],
+      "unknown": [
+        "The shared Sync.7.1.run worker's enclosing workflow remains unresolved. These results do not establish equal-size suppression for every book-file, reading-position or note-sync workflow.",
+        "Real cover-list construction, provider metadata correctness, cache invalidation and visible synchronization behavior were not exercised. Other transfer entry points may use different checks."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/sync-cloud-newer.java",
+          "size_bytes": 612,
+          "sha256": "04cf25cf7d8d2c8ccfa8949b5aa2277eb38e93dfa54f587baac4607df16f44af",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.cloudFileIsNewer(String, String, HashMap)"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/sync-local-newer.java",
+          "size_bytes": 592,
+          "sha256": "8d66218be11c80bb13bdae79ee7a65645af362ce8fef5d6c2e707b0bfeb636bb",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.localFileIsNewer(String, String, HashMap)"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/sync-cloud-newer-smali.txt",
+          "size_bytes": 2443,
+          "sha256": "97bcc0ec3ec63ecbde9ad8a5b444dcfa974769afe04b9597426bd567203a0624",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "cloudFileIsNewer(Ljava/lang/String;Ljava/lang/String;Ljava/util/HashMap;)Z",
+          "lines": [
+            96,
+            148
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/sync-local-newer-smali.txt",
+          "size_bytes": 2252,
+          "sha256": "6f19b933db7e5593ca503e84cb381a7191f62d4316040978df1cb5500dfe40d2",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "localFileIsNewer(Ljava/lang/String;Ljava/lang/String;Ljava/util/HashMap;)Z",
+          "lines": [
+            79,
+            130
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-a/cloud-newer-callers.decoded.json",
+          "size_bytes": 742,
+          "sha256": "8a4490603b0052d6354802c006e8e2e064cee9292cb130180c83efcf2a0c6766",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "get_xrefs_to_method(Sync, cloudFileIsNewer); limit 100; returned 2"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-a/local-newer-callers.decoded.json",
+          "size_bytes": 738,
+          "sha256": "2060f278a355f0643fcf77567acc37d94552bfdd0e631719d3ed163d1f0389d3",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "get_xrefs_to_method(Sync, localFileIsNewer); limit 100; returned 2"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-c/bodies/verify-download-covers.java",
+          "size_bytes": 1041,
+          "sha256": "58637b34ec5d7897ec589bd0e16515a32631f704c510797c9e9e5556ccc2d65c",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.verifyDownloadBookCovers(HashMap, boolean, boolean)",
+          "lines": [
+            1,
+            21
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-c/bodies/verify-upload-covers.java",
+          "size_bytes": 1039,
+          "sha256": "c9548104174dfa3725437e111178bf058a8f7a7fc8c2994e270b3987c0a01a9f",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.verifyUploadBookCovers(HashMap, boolean)",
+          "lines": [
+            1,
+            23
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-c/download-covers-callers.decoded.json",
+          "size_bytes": 454,
+          "sha256": "c94f7b93c8ad71955577c5133456fd5324e194cef24556cdd119c6efbf6a1036",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "get_xrefs_to_method(Sync, verifyDownloadBookCovers); limit 50; returned 1"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-c/upload-covers-callers.decoded.json",
+          "size_bytes": 452,
+          "sha256": "0f156bdb316e9bf3f069f34e916345818a7e007d0c2f1c12049910cb1c1f41ef",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "get_xrefs_to_method(Sync, verifyUploadBookCovers); limit 50; returned 1"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-b/sync-shared-worker.json",
+          "size_bytes": 1166,
+          "sha256": "49d7146ac00952bdd99df4f8a0e29f4b4793aa3ca1d0de27b5aa98e28e5170dd",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "get_method_body(Sync.AnonymousClass7.AnonymousClass1, run); unresolved class, no body"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-c/sync-worker-resolution.decoded.json",
+          "size_bytes": 3802,
+          "sha256": "1c0f0aec8fd6c251c1c41f5dbcf36cac863d0718519d0db3ac8c81ba7c68ffee",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "resolve_class(com.flyersoft.components.cloud.Sync.7.1); resolved=false"
+        }
+      ],
+      "prior_assessments": [
+        {
+          "observed_at": "2026-11-21",
+          "inferred": [
+            "Same-length content edits could be missed if these predicates govern the relevant transfer. Test different bytes with equal lengths in both directions."
+          ],
+          "unknown": [
+            "Not every caller, revision/hash check or alternate transfer path was examined. This does not establish that all app synchronization ignores equal-size edits."
+          ]
+        }
+      ],
+      "bounded_followup": {
+        "observed_at": "2026-11-21T16:14:18.789Z",
+        "conclusion": "The known size gate applies to cover-download and cover-upload filtering; a second shared worker remains unresolved and all-sync generalization is unsupported.",
+        "application_reproduced": false
+      }
+    },
+    {
+      "id": "APK-SYNC-003",
+      "area": "sync",
+      "title": "The examined note-upload path clears its dirty flag before the upload callback boundary",
+      "observed": [
+        "Sync.uploadCloudNoteFile clears A.hasNewNoteForUpload before serialization and calls uploadFromInputStream with a null callback."
+      ],
+      "inferred": [
+        "A failed-upload/retry test should verify that unsynchronized notes remain pending until durable success."
+      ],
+      "unknown": [
+        "Providers or other callers may restore state or retry. No network failure or note loss was reproduced."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/sync-upload-notes.java",
+          "size_bytes": 763,
+          "sha256": "ca97f38e95805cb15a32e8be7f8c73666aefd80e9d6419ed36c6fb4f01256dd3",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.uploadCloudNoteFile()",
+          "lines": [
+            1,
+            14
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/bodies/sync-position-callback.java",
+          "size_bytes": 550,
+          "sha256": "62d263601019dbb21390304d6e257c08f010dbfb106c53d411476a6ffc7c3045",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.components.cloud.Sync.dealUploadedCloudPosition(String, boolean)"
+        }
+      ]
+    },
+    {
+      "id": "APK-TTS-001",
+      "area": "tts",
+      "title": "Platform TTS is integrated with document text, selection, page progression and a foreground service",
+      "observed": [
+        "ActivityTxt.initTTS constructs Android TextToSpeech; setSpeakQueue sets speech rate and pitch, queues identified utterances and optionally adds silence.",
+        "getSpeakText dispatches non-reflow PDF text to pdfGetTtsLines. That path uses extracted page text and character rectangles before A.getTtsLines.",
+        "Utterance progress callbacks update selection and trigger progression after the last utterance; doAfterAllUtteranceFinished advances or stops.",
+        "The manifest declares a non-exported BookTtsService with mediaPlayback type; its onStartCommand calls startForeground using the reader notification."
+      ],
+      "inferred": [
+        "TTS proposals should target reliability, control and text segmentation improvements rather than introducing a capability already present."
+      ],
+      "unknown": [
+        "Installed voices, speech-engine limits, audio focus, lifecycle robustness and actual spoken output were not tested."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/tts-init.java",
+          "size_bytes": 146,
+          "sha256": "a543114e57ca202c4d16aaa0ac75f8a40669c201bba382a60361759ade7d5aae",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.initTTS()"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/tts-queue.java",
+          "size_bytes": 2114,
+          "sha256": "4f9c1eae67ed7da32d6f89231d1d87e884a6cd2a3f25a48cffc2bdfe8e93b497",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.setSpeakQueue(int)"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/bodies/tts-text-source.java",
+          "size_bytes": 3583,
+          "sha256": "2286f5bebaf8115fc4a4beb54dad18387db51b1c5f9f7ca668175f0b52752ecf",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.getSpeakText()"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/tts-pdf-text.java",
+          "size_bytes": 1840,
+          "sha256": "1d94e5926f34580dd11805dddae03ec646fe14a0d3ccd33f3b6a6c0b91c08b20",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.pdfGetTtsLines()"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/tts-progress.java",
+          "size_bytes": 3596,
+          "sha256": "19fb5c81489ed23d2773cb4e30cfd3dc3c54d3becb2ef558e606f2e37d0b8e3b",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.setSpeakOnUtteranceComplete()"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/bodies/tts-after-page.java",
+          "size_bytes": 1035,
+          "sha256": "bea75c800677ffa469c02e78e288f1eca683e8697289f410e826c48ae28ef15a",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.doAfterAllUtteranceFinished()"
+        },
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/tts-service-start.java",
+          "size_bytes": 669,
+          "sha256": "3734d972d5573cf12d00ab8c4e59389a93bea92322acdc17a001f44868a9654a",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.BookTtsService.onStartCommand(Intent, int, int)"
+        },
+        {
+          "private_evidence_ref": "AndroidManifest.xml",
+          "size_bytes": 15668,
+          "sha256": "11acff84b924f88c85753b951ff5494d0b03dcd4a09ec56f65a48e239b8b9a56",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "BookTtsService declaration",
+          "lines": [
+            180,
+            183
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        }
+      ]
+    },
+    {
+      "id": "APK-TTS-002",
+      "area": "tts",
+      "title": "The queue submission method truncates an over-limit utterance",
+      "observed": [
+        "ActivityTxt.setSpeakQueue compares each utterance string length with maxSpeechInputLength. If longer, it submits a substring ending at maxSpeechInputLength minus 10; the loop then proceeds to the next TtsLine. The branch is confirmed in smali.",
+        "Bounded follow-up: the saved A.getTtsLines reconstruction contains delimiter matching and TtsLine construction for segments, a whole input and a remaining tail. It also contains explicit JADX duplication warnings and inconsistent reconstructed conditions/catch variables; exact branching is not established by this Java output.",
+        "A.addTtsLine and the A.TtsLine constructor each have a surviving successful request/response pair with matching decoded sidecars in interrupted run E. Its original run.json still has calls=[] and no completion or post-run hashes; the two bodies are recovered response evidence, not evidence of a finalized run.",
+        "The recovered addTtsLine body checks isAvialable() and appends the same TtsLine object. That helper itself contains no length-based splitting. The availability helper's body was not selected.",
+        "The recovered constructor shows ruby/filter substitutions, whitespace processing and assignment of the stored text and offsets. Malformed reconstructed string literals and exception-flow variables remain despite Java mode and empty provider markers. These transformations are not a verified length bound."
+      ],
+      "inferred": [
+        "The original smali-supported conditional concern stands: if an over-limit TtsLine reaches setSpeakQueue, its suffix is not submitted by that queue loop. The follow-up identifies relevant upstream stages but does not prove that an ordinary document produces such a line."
+      ],
+      "unknown": [
+        "Exact segmentation branches, filter effects and the unselected isAvialable helper prevent a reliable end-to-end reachability conclusion from these saved Java reconstructions. No additional bytecode corroboration or application speech test was performed.",
+        "Run E lacks its final receipt, per-call timing, post-run input identity, unload acknowledgment and child-exit/cleanup result. Surviving response bytes and pre-run hashes do not supply those missing lifecycle facts.",
+        "Long unbroken text, user filters and engine limits still require a controlled runtime comparison of full input with spoken output on an authenticated build. No speech loss was reproduced."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-methods/bodies/tts-queue.java",
+          "size_bytes": 2114,
+          "sha256": "4f9c1eae67ed7da32d6f89231d1d87e884a6cd2a3f25a48cffc2bdfe8e93b497",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.setSpeakQueue(int)",
+          "lines": [
+            15,
+            36
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/tts-queue-smali.txt",
+          "size_bytes": 6441,
+          "sha256": "9c6478c8b82898530ba19538e76d675c5eceb6b0e145f6740b5ba247c04afa5c",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt.setSpeakQueue(I)V",
+          "lines": [
+            197,
+            224
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-followup/tts-line-methods.decoded.json",
+          "size_bytes": 352,
+          "sha256": "c0293243cb016b94342d392cf3b4f4b60385b9fc2afc72ee3a94859c60eaa1cb",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.A.getTtsLines(String, boolean, boolean, int); signature only"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-c/bodies/tts-segmentation.java",
+          "size_bytes": 9416,
+          "sha256": "6829a0c9050aa1d4b04b81cff7c3354c1a2056d98a859cf7b6774de2be31f254",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.A.getTtsLines(String, boolean, boolean, int); warning-bearing reconstruction",
+          "lines": [
+            1,
+            193
+          ],
+          "line_scope": "Private generated evidence text, not original developer source lines"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-e/tts-line-adder.decoded.json",
+          "size_bytes": 426,
+          "sha256": "cc57cf95d58b4c3fcaf197b65ee3e724477a98df4cbed194adffe645dedf8612",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.A.addTtsLine(ArrayList, TtsLine); recovered response, interrupted run"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-e/tts-line-constructor.decoded.json",
+          "size_bytes": 6147,
+          "sha256": "fc16f0789bb7b9c7dd8d3b90ae6099cb06b0e2917ca4037d295ec153de0591eb",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.tools.A.TtsLine.<init>(String, int, int, String, boolean, int); recovered imperfect Java, interrupted run"
+        },
+        {
+          "private_evidence_ref": "mcp-bounded-followup-e/run.json",
+          "size_bytes": 1046,
+          "sha256": "f9585c8d7338da7c39166c08183adc923f656d588356921d74bf5cedb64ce9ab",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "Unmodified initial-only receipt; zero recorded calls, no finalization or post-run hashes"
+        }
+      ],
+      "prior_assessments": [
+        {
+          "observed_at": "2026-11-21",
+          "inferred": [
+            "If an over-limit TtsLine reaches this method, its suffix is not submitted by this queue loop. A long unbroken-text test should check for missing speech and accurate selection."
+          ],
+          "unknown": [
+            "Upstream A.getTtsLines segmentation and actual reachability with ordinary documents were not traced. End-to-end speech loss was not reproduced."
+          ]
+        }
+      ],
+      "bounded_followup": {
+        "observed_at": "2026-11-21T16:14:18.789Z",
+        "conclusion": "Upstream TTS stages are now located, but reconstruction and interruption limits leave over-limit reachability unresolved; the original conditional truncation observation remains.",
+        "application_reproduced": false
+      }
+    },
+    {
+      "id": "APK-STRUCT-001",
+      "area": "structure",
+      "title": "The reader activity exposes a large multi-feature surface in this build",
+      "observed": [
+        "JADX's ActivityTxt summary reports 1018 methods and 586 fields, including PDF, notes, search, synchronization and TTS members. Synthetic members and aliases are included."
+      ],
+      "inferred": [
+        "This is a useful navigation and regression-test concentration point when reasoning about cross-feature interactions."
+      ],
+      "unknown": [
+        "The counts do not measure source-code quality, runtime cost, original architecture or maintainability."
+      ],
+      "evidence": [
+        {
+          "private_evidence_ref": "mcp-focused-summaries/reader-activity.json",
+          "size_bytes": 172224,
+          "sha256": "c66c37f605609a4e374876e9fc84081a4cd1b1ddafd57bed96434bbf2c23ebba",
+          "publication": "raw evidence retained privately; digest only",
+          "selector": "com.flyersoft.moonreaderp.ActivityTxt; get_class_summary"
+        }
+      ]
+    }
+  ],
+  "updated_at": "2026-11-21T16:14:18.789Z",
+  "bounded_followup": {
+    "observed_at": "2026-11-21T16:14:18.789Z",
+    "authorization": "One bounded follow-up: export write-failure return, freshness callers, and TTS segmentation if needed.",
+    "maximum_new_method_bodies": 8,
+    "attempted_new_method_bodies": 8,
+    "selected_new_method_bodies": 7,
+    "unresolved_method_requests": 1,
+    "method_response_artifacts": 8,
+    "successful_bodies_in_finalized_runs": 5,
+    "recovered_bodies_from_interrupted_run": 2,
+    "method_requests_in_finalized_run_receipts": 6,
+    "planned_method_body_slots": 11,
+    "planned_call_slots": 33,
+    "recorded_calls_in_finalized_run_receipts": 22,
+    "retained_response_artifacts": 25,
+    "recovered_response_artifacts": 3,
+    "successful_response_artifacts": 24,
+    "failed_response_artifacts": 1,
+    "unexecuted_call_slots": 7,
+    "execution_unknown_call_slots": 1,
+    "finalized_run_receipts": 4,
+    "all_planned_calls_succeeded_runs": 3,
+    "stopped_after_selector_failure_runs": 1,
+    "interrupted_runs": 1,
+    "count_convention": "Requests are evidenced by retained exchanges, including one tool-error response. Successful body responses include two recovered from an interrupted run; their presence does not establish run completion. Planned but unexecuted/unknown slots are excluded from request counts.",
+    "reference_queries": 4,
+    "signature_queries": 3,
+    "identity_resolution_queries": 2,
+    "run_ids": [
+      "mcp-bounded-followup-a",
+      "mcp-bounded-followup-b",
+      "mcp-bounded-followup-c",
+      "mcp-bounded-followup-d",
+      "mcp-bounded-followup-e"
+    ],
+    "old_finding_ids_preserved": true,
+    "original_inventory_reused": true,
+    "application_executed": false,
+    "baseline_evidence": {
+      "private_evidence_ref": "bounded-followup-baseline/baseline.json",
+      "size_bytes": 2021,
+      "sha256": "0d8218ed55d4661abedf4b00f1d6daa18c2e17aaa110274059fe99c7592818e0",
+      "publication": "raw evidence retained privately; digest only"
+    },
+    "integration": {
+      "command_template": "node <PRIVATE_STATIC_ANALYSIS_DIR>/apply-bounded-followup.mjs",
+      "scope": "Saved-evidence integration only; no new APK analysis requests.",
+      "implementation": {
+        "private_evidence_ref": "apply-bounded-followup.mjs",
+        "size_bytes": 21405,
+        "sha256": "96f87bbdcd08360ac95827b4887d75b1a066a402ca0fc3ee2cf568789382d555",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "finding_updates": {
+        "private_evidence_ref": "bounded-followup-update.json",
+        "size_bytes": 9330,
+        "sha256": "8cd8361371cf123b2d1c21dc324cf6149f50c875bcaf1329b04398b3b343998c",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    }
+  }
+}

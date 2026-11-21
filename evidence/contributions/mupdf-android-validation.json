@@ -1,0 +1,75 @@
+{
+  "id": "mupdf-android-first-page-link-record-validation",
+  "observed_at": "2026-11-21T16:00:58.747928+00:00",
+  "evidence_type": "contribution-record-validation",
+  "upstream_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer",
+  "upstream_revision": "f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0",
+  "contribution_commit": "523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+  "contribution_url": "https://github.com/chirag127/mupdf-android-viewer/commit/523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+  "method": "Read-only Python standard-library validation of saved reports, SHA-256 identities, JSON consistency, local links, LF encoding, and private path/host-name absence; Git source and diff/status checks.",
+  "result": "passed",
+  "json_records_validated": 5,
+  "report_local_links_validated": 9,
+  "retained_test_reports_checked": 2,
+  "red_counts": {
+    "tests": 15,
+    "skipped": 0,
+    "failures": 5,
+    "errors": 0
+  },
+  "green_counts": {
+    "tests": 15,
+    "passed": 15,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0
+  },
+  "retained_build_logs_hashed": 2,
+  "retained_apks_hashed": 4,
+  "fixed_build_output_copies_hashed": 2,
+  "committed_source_blobs_hashed": 4,
+  "git_checks": [
+    {
+      "command": "git diff --check f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0 523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --exit-code f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0 523ad7cb3083fc4af91c4d00e89e0c1f20859d93 -- COPYING README",
+      "exit_code": 0
+    }
+  ],
+  "fork_status_porcelain": [],
+  "public_path_and_hostname_scan": "passed",
+  "inputs": [
+    {
+      "path": "evidence/contributions/mupdf-android-red-tests.json",
+      "sha256": "ed989b2f517bd243f37a523bd5f3726d0de00bea3862ed8cc22a039b82703801"
+    },
+    {
+      "path": "evidence/contributions/mupdf-android-green-tests.json",
+      "sha256": "ac73ca2c493b0a5dbf3bc9233ab5bea7be628ac19b83e11ad3ccd98a41497774"
+    },
+    {
+      "path": "evidence/contributions/mupdf-android-build.json",
+      "sha256": "2870e4cc991de4d83e748b61cbe827a0265223e431e480a60cf9e7ea68e31633"
+    },
+    {
+      "path": "evidence/contributions/mupdf-android-publication.json",
+      "sha256": "6cdd6f230720364f594138d1e7a3740e755a121f674d43f09516a32b8692cb88"
+    },
+    {
+      "path": "data/contributions/mupdf-android.json",
+      "sha256": "3dda31015e7ad2154c861fb581e09115f217b3b09608201ca93998f4442c59f2"
+    },
+    {
+      "path": "knowledge/contributions-mupdf-android.md",
+      "sha256": "b15baf128eb3a309096f9f7b9dbdac964237f65dc6fdb5826fd07e88d3d8c6af"
+    }
+  ],
+  "limitations": [
+    "This validates the authored contribution records against retained evidence. It is not a new test/build run, device test, signing check, or fresh remote readback.",
+    "Previously completed tests, builds, installations, and pushes were not repeated. The separate publication record contains the completed remote readback.",
+    "The path/hostname scan checks Windows drive paths and the known local account/host identifiers; it is not a comprehensive secret scanner.",
+    "Raw reports and artifacts remain local. No project-wide fixture validation or full application CI is implied by these checks."
+  ]
+}

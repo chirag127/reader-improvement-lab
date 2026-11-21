@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "evidence_type": "runtime-delivery-verification",
+  "observed_at": "2026-11-21T18:03:46.397952+00:00",
+  "status": "pass",
+  "application_tests_executed": false,
+  "network_requests_executed": false,
+  "summary": {
+    "canonical_cases": 36,
+    "case_status_counts": {
+      "pass": 3,
+      "partial": 6,
+      "not-run": 19,
+      "fail": 1,
+      "blocked": 7
+    },
+    "manifest_file_hashes_verified": 105,
+    "distinct_file_hashes_verified": 123,
+    "retained_capture_byte_comparisons": 80,
+    "screenshots": 38,
+    "selected_command_records": 213,
+    "command_snapshot_lines": 625,
+    "local_references_checked": 135,
+    "public_text_files_scanned": 67,
+    "json_files_parsed": 19,
+    "errors": 0
+  },
+  "cleanup_status": "stopped",
+  "inputs": [
+    {
+      "path": "data/runtime-results.json",
+      "sha256": "a56b72015ae29846e6cd2a364b5d2279227e44be85bc5a6fb468d2f55637613e"
+    },
+    {
+      "path": "knowledge/runtime-results.md",
+      "sha256": "38ca0ca4332340804de52bdf1327cec8393924b741cf50f74811cf486bd7ef05"
+    },
+    {
+      "path": "evidence/runtime/manifest.json",
+      "sha256": "2e977ed2edf780a31fe571ffd3c07f4186bccea28de10468c8c43e0769e61176"
+    },
+    {
+      "path": "evidence/runtime/cleanup.json",
+      "sha256": "d00d4862128fe3a5e8c543dcf5f3bfdb7c87422251bad6e76551a1ba5dfda18b"
+    }
+  ],
+  "errors": [],
+  "limitations": [
+    "Offline artifact/receipt/link verification, not another Android application run.",
+    "URLs were not fetched; private-content detection uses bounded text markers.",
+    "Earlier independent reviews are retained; this final consistency check was performed by the runtime owner."
+  ]
+}

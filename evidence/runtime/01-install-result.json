@@ -1,0 +1,10 @@
+{
+  "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "provenance": "unknown; default apksigner verification failed v1 digests; sample unchanged",
+  "serial": "emulator-5596",
+  "avd": "reader_audit_api36_20261121_c375e7e3",
+  "install_exit": 0,
+  "stdout": "Performing Push Install\r\nSuccess\r\n",
+  "observed_at": "2026-11-21",
+  "omission": "Machine-local APK path omitted from successful push-install stderr."
+}

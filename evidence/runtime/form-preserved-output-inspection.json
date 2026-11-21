@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-21T16:01:05.044798+00:00",
+  "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "original": {
+    "filename": "acroform.pdf",
+    "sha256": "3a7b514b4a6c01640bd27436857826bc258cf10b6f7ac4e58ce1c3f7af842402",
+    "size_bytes": 8218,
+    "pymupdf_version": "1.28.0",
+    "pypdf_version": "6.15.0",
+    "prev_offsets": [],
+    "startxref_offsets": [
+      7523
+    ],
+    "pages": 1,
+    "repaired": false,
+    "widgets": {
+      "reader_name": "Test Reader",
+      "subscribe": "Yes",
+      "color": "Blue"
+    },
+    "annotations": [],
+    "pypdf_fields": {
+      "reader_name": "Test Reader",
+      "subscribe": "/Yes",
+      "color": "Blue"
+    },
+    "pypdf_page_count": 1
+  },
+  "output": {
+    "filename": "acroform.pdf",
+    "sha256": "af860b1720c51d4f2ebaca787c80e9230d201ababbc9599f41c1b12e2de0067a",
+    "size_bytes": 12530,
+    "pymupdf_version": "1.28.0",
+    "pypdf_version": "6.15.0",
+    "prev_offsets": [
+      -1
+    ],
+    "startxref_offsets": [
+      7523,
+      11743
+    ],
+    "pages": 1,
+    "repaired": true,
+    "widgets": {
+      "reader_name": "LAB_FORM_20261121",
+      "subscribe": "Off",
+      "color": "Green"
+    },
+    "annotations": [],
+    "pypdf_error": "ValueError('negative seek value -1')"
+  },
+  "original_prefix_retained": true,
+  "recovery": "Preserved the existing pull; caught the independent-parser error without repeating edits or pull."
+}

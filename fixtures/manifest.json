@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "origin": {
+    "kind": "original-synthetic",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2026 Chirag Singhal",
+    "source": "scripts/generate_fixtures.py",
+    "source_url": "https://github.com/chirag127/reader-improvement-lab",
+    "note": "Original prose, vector geometry and synthetic raster page; no APK samples or personal documents."
+  },
+  "generator_sha256": "360b1e971ae7fe7c5e2975ece15249f990e0ddfb4cc86f59e0ae6506d3559286",
+  "generator_versions": {
+    "python": "3.13.14",
+    "reportlab": "5.0.0",
+    "PyMuPDF": "1.28.0",
+    "Pillow": "12.3.0"
+  },
+  "reproducibility": {
+    "recipe_revision": 1,
+    "metadata_epoch": "2000-01-01T00:00:00Z",
+    "method": "ReportLab invariant metadata, fixed attachment/annotation/ZIP dates, preserved PDF IDs, uncompressed EPUB entries; compare bytes using the declared toolchain."
+  },
+  "unicode_font": {
+    "name": "Bitstream Vera Sans",
+    "source": "reportlab/fonts/Vera.ttf",
+    "source_url": "https://pypi.org/project/reportlab/5.0.0/",
+    "sha256": "c4c45690b345435b2cba52ecabe275f05e49b389b39fe68ad03afbb551288d3d",
+    "license_path": "licenses/bitstream-vera-license.txt",
+    "license_sha256": "3361d054759a2fc686a2c058be82deaf9c2e6fe549be9004d7935a6c1736315d",
+    "embedding": "Full unmodified font; license also attached inside unicode.pdf"
+  },
+  "coordinate_convention": "Page numbers are 1-based. PDF dimensions are points. Column x coordinates are measured from the left page edge.",
+  "limitations": [
+    "Reference engine checks do not test Moon+ Reader or any Android application.",
+    "Long-document rendering samples pages 1, 50 and 100; page counts cover all pages.",
+    "Unicode coverage is precomposed Latin accents and a few symbols, not RTL, CJK, shaping, normalization or emoji.",
+    "The password case is legacy RC4-128 R3 only, not AES or a security-strength assessment.",
+    "Image-only input has no OCR layer; OCR accuracy is not checked.",
+    "No timing, memory, accessibility, PDF/A, PDF/UA or complete EPUB-conformance claim is made."
+  ],
+  "total_document_bytes": 168613,
+  "fixtures": [
+    {
+      "id": "plain-text",
+      "path": "documents/plain-text.pdf",
+      "media_type": "application/pdf",
+      "sha256": "1f0e404c0afd4db0d555da4a33d691a32bada0ddddcdb12a2f8b0591813aabf8",
+      "size_bytes": 1942,
+      "purpose": "Selection, search, copy and reading-position baseline.",
+      "expected": {
+        "page_count": 1,
+        "encrypted": false,
+        "text_layer": true,
+        "render_pages": [
+          1
+        ],
+        "text_by_page": {
+          "1": [
+            "PLAIN-TEXT-ALPHA",
+            "lighthouse-427",
+            "PLAIN-END-903"
+          ]
+        }
+      }
+    },
+    {
+      "id": "two-columns",
+      "path": "documents/two-columns.pdf",
+      "media_type": "application/pdf",
+      "sha256": "85589a24cf116339dafaf9fa42fd76c7c2dc52496932a73d0af6908d5aff1482",
+      "size_bytes": 1856,
+      "purpose": "Column geometry and content-stream reading order.",
+      "expected": {
+        "page_count": 1,
+        "encrypted": false,
+        "text_layer": true,
+        "render_pages": [
+          1
+        ],
+        "text_by_page": {
+          "1": [
+            "LEFT-01",
+            "RIGHT-01"
+          ]
+        },
+        "text_order": [
+          "LEFT-01",
+          "LEFT-02",
+          "LEFT-03",
+          "RIGHT-01",
+          "RIGHT-02",
+          "RIGHT-03"
+        ],
+        "column_regions": {
+          "left_marker": "LEFT-01",
+          "left_max_x": 290,
+          "right_marker": "RIGHT-01",
+          "right_min_x": 320
+        }
+      }
+    },
+    {
+      "id": "long-document",
+      "path": "documents/long-document.pdf",
+      "media_type": "application/pdf",
+      "sha256": "1e8b4d672f56b1dd1be570aeaedec4620168bb1361d9c178fb70cc8eff119bcb",
+      "size_bytes": 77099,
+      "purpose": "One hundred pages for distant search and navigation; no speed claim.",
+      "expected": {
+        "page_count": 100,
+        "encrypted": false,
+        "text_layer": true,
+        "render_pages": [
+          1,
+          50,
+          100
+        ],
+        "text_by_page": {
+          "1": [
+            "LONG-DOC-PAGE-001"
+          ],
+          "50": [
+            "LONG-DOC-PAGE-050"
+          ],
+          "100": [
+            "LONG-DOC-PAGE-100"
+          ]
+        }
+      }
+    },
+    {
+      "id": "mixed-geometry",
+      "path": "documents/mixed-geometry.pdf",
+      "media_type": "application/pdf",
+      "sha256": "82c24aa55cbcf4cc2d4762cb63100017eb94f7aa022d2e35770f9c463f073659",
+      "size_bytes": 3134,
+      "purpose": "Four exact media boxes and all quarter-turn rotations.",
+      "expected": {
+        "page_count": 4,
+        "encrypted": false,
+        "text_layer": true,
+        "render_pages": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "page_geometry": [
+          {
+            "media_size": [
+              612,
+              792
+            ],
+            "rotation": 0,
+            "displayed_size": [
+              612,
+              792
+            ]
+          },
+          {
+            "media_size": [
+              420,
+              595
+            ],
+            "rotation": 90,
+            "displayed_size": [
+              595,
+              420
+            ]
+          },
+          {
+            "media_size": [
+              792,
+              612
+            ],
+            "rotation": 180,
+            "displayed_size": [
+              792,
+              612
+            ]
+          },
+          {
+            "media_size": [
+              300,
+              450
+            ],
+            "rotation": 270,
+            "displayed_size": [
+              450,
+              300
+            ]
+          }
+        ],
+        "text_by_page": {
+          "1": [
+            "GEOMETRY-PAGE-1"
+          ],
+          "2": [
+            "GEOMETRY-PAGE-2"
+          ],
+          "3": [
+            "GEOMETRY-PAGE-3"
+          ],
+          "4": [
+            "GEOMETRY-PAGE-4"
+          ]
+        }
+      }
+    },
+    {
+      "id": "navigation",
+      "path": "documents/navigation.pdf",
+      "media_type": "application/pdf",
+      "sha256": "246db3dac24ecbf13691f0b599be85e0c151b5a7445ccf591ad5c0ffcd13ffc2",
+      "size_bytes": 3632,
+      "purpose": "Internal links with actual destinations and three outline entries.",
+      "expected": {
+        "page_count": 3,
+        "encrypted": false,
+        "text_layer": true,
+        "render_pages": [
+          1,
+          2,
+          3
+        ],
+        "text_by_page": {
+          "1": [
+            "NAVIGATION-START"
+          ],
+          "2": [
+            "NAVIGATION-MIDDLE"
+          ],
+          "3": [
+            "NAVIGATION-END"
+          ]
+        },
+        "outlines": [
+          {
+            "level": 1,
+            "title": "Start",
+            "page": 1
+          },
+          {
+            "level": 1,
+            "title": "Middle",
+            "page": 2
+          },
+          {
+            "level": 1,
+            "title": "End",
+            "page": 3
+          }
+        ],
+        "internal_links": [
+          {
+            "source_page": 1,
+            "target_page": 3
+          },
+          {
+            "source_page": 3,
+            "target_page": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "annotations",
+      "path": "documents/annotations.pdf",
+      "media_type": "application/pdf",
+      "sha256": "00ff37fc54d7277f9f3fa63c9abda19068523ac01f6818ab62ad3bfec9a0325a",
+      "size_bytes": 5099,
+      "purpose": "Six standard annotation types and a portable note, plus the note popup.",
+      "expected": {
+        "page_count": 1,
+        "encrypted": false,
+        "text_layer": true,
+        "render_pages": [
+          1
+        ],
+        "text_by_page": {
+          "1": [
+            "STANDARD-ANNOTATIONS"
+          ]
+        },
+        "annotation_types": [
+          "Highlight",
+          "Ink",
+          "Square",
+          "StrikeOut",
+          "Text",
+          "Underline"
+        ],
+        "note_contents": "SYNTHETIC-NOTE-001"
+      }
+    },
+    {
+      "id": "acroform",
+      "path": "documents/acroform.pdf",
+      "media_type": "application/pdf",
+      "sha256": "3a7b514b4a6c01640bd27436857826bc258cf10b6f7ac4e58ce1c3f7af842402",
+      "size_bytes": 8218,
+      "purpose": "Unflattened text, checkbox and choice controls with initial appearances.",
+      "expected": {
+        "page_count": 1,
+        "encrypted": false,
+        "text_layer": true,
+        "render_pages": [
+          1
+        ],
+        "text_by_page": {
+          "1": [
+            "ACROFORM-INITIAL-VALUES"
+          ]
+        },
+        "fields": {
+          "reader_name": {
+            "type": "Tx",
+            "value": "Test Reader"
+          },
+          "subscribe": {
+            "type": "Btn",
+            "value": "Yes"
+          },
+          "color": {
+            "type": "Ch",
+            "value": "Blue"
+          }
+        }
+      }
+    },
+    {
+      "id": "password-protected",
+      "path": "documents/password-protected.pdf",
+      "media_type": "application/pdf",
+      "sha256": "fba7029282c372aeeba6e994ef95b5f2db6a82b7ab5c5abd77481418b9ed12e4",
+      "size_bytes": 2528,
+      "purpose": "Reject missing/wrong passwords; open using the public test password.",
+      "expected": {
+        "page_count": 1,
+        "encrypted": true,
+        "text_layer": true,
+        "render_pages": [
+          1
+        ],
+        "user_password": "reader-lab",
+        "owner_password": "reader-owner-lab",
+        "encryption": "RC4-128, standard security handler revision 3",
+        "text_by_page": {
+          "1": [
+            "PASSWORD-OPEN-271"
+          ]
+        }
+      }
+    },
+    {
+      "id": "scanned-image-only",
+      "path": "documents/scanned-image-only.pdf",
+      "media_type": "application/pdf",
+      "sha256": "2034a2e94933bea0a9484a4dcca83276c5dd67a2ea48af784900ff61aa46b67b",
+      "size_bytes": 12906,
+      "purpose": "A visible image with no OCR or selectable text layer.",
+      "expected": {
+        "page_count": 1,
+        "encrypted": false,
+        "text_layer": false,
+        "render_pages": [
+          1
+        ],
+        "image_count_by_page": {
+          "1": 1
+        },
+        "visible_ocr_target": "SCAN-ANCHOR-846"
+      }
+    },
+    {
+      "id": "unicode",
+      "path": "documents/unicode.pdf",
+      "media_type": "application/pdf",
+      "sha256": "0a1f2a0d62e20a58aff7101275850403e460df8c58fe4bda261228acefbea49f",
+      "size_bytes": 48210,
+      "purpose": "Precomposed Latin accents and symbols with an unmodified embedded font.",
+      "expected": {
+        "page_count": 1,
+        "encrypted": false,
+        "text_layer": true,
+        "render_pages": [
+          1
+        ],
+        "text_by_page": {
+          "1": [
+            "café naïve façade Straße Ångström €",
+            "Symbols: Ω ∑ — €"
+          ]
+        },
+        "embedded_font_sha256": "c4c45690b345435b2cba52ecabe275f05e49b389b39fe68ad03afbb551288d3d",
+        "font_license_attachment": {
+          "name": "font-license.txt",
+          "sha256": "3361d054759a2fc686a2c058be82deaf9c2e6fe549be9004d7935a6c1736315d"
+        }
+      }
+    },
+    {
+      "id": "tiny-original",
+      "path": "documents/tiny-original.epub",
+      "media_type": "application/epub+zip",
+      "sha256": "e17b0a451015fa15e9c82f524027153ae4945025a680b4f51351ad658fc68c4b",
+      "size_bytes": 3989,
+      "purpose": "Two original reflowable chapters, spine order and navigable anchors.",
+      "expected": {
+        "spine_ids": [
+          "chapter-one",
+          "chapter-two"
+        ],
+        "nav_links": [
+          "chapter-one.xhtml#one",
+          "chapter-two.xhtml#two"
+        ],
+        "text_markers": [
+          "EPUB-CHAPTER-ONE",
+          "EPUB-CHAPTER-TWO"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "id": "moonreader-supplied-10.8",
+  "observed_at": "2026-11-21",
+  "evidence_type": "static-observation",
+  "filename": "Moon Reader Pro v10.8 (Premium).apk",
+  "sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "size_bytes": 57787496,
+  "provenance": "User-supplied APK; user is unsure of its origin. Official distribution provenance is unverified.",
+  "package": "com.flyersoft.moonreaderp",
+  "application_label": "Moon+ Reader Pro",
+  "version_name": "10.8",
+  "version_code": 1008000,
+  "min_sdk": 21,
+  "target_sdk": 36,
+  "compile_sdk": 36,
+  "launchable_activity": "com.flyersoft.moonreaderp.ActivityMain",
+  "native_abis": ["arm64-v8a", "armeabi-v7a", "x86", "x86_64"],
+  "declared_permissions": [
+    "android.permission.POST_NOTIFICATIONS",
+    "android.permission.INTERNET",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "com.android.launcher.permission.INSTALL_SHORTCUT",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+    "android.permission.MANAGE_EXTERNAL_STORAGE",
+    "android.permission.USE_FINGERPRINT",
+    "android.permission.USE_BIOMETRIC",
+    "com.flyersoft.moonreaderp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ],
+  "permission_qualifiers": {
+    "android.permission.READ_EXTERNAL_STORAGE": {"max_sdk": 32}
+  },
+  "signature_inspection": {
+    "tool": "REA inspect_apk_signature",
+    "parent_evidence_id": "ev_571096c56c5465632451f54ddfe699458396dfd94e6ecd32aa4780d097f0f937",
+    "present_schemes": ["v1", "v2", "v3"],
+    "v1_certificate_sha256": "0cfb4663831a0fb8d6973aad44e221a8ba78f7f684bd0b17d3b44bec82316484",
+    "v2_certificate_sha256": "3b61c2a82aff9f7652ffe0b04be3c8f248b5e1aa7063f1a3846f0cf5c778628a",
+    "v3_certificate_sha256": "3b61c2a82aff9f7652ffe0b04be3c8f248b5e1aa7063f1a3846f0cf5c778628a",
+    "declared_v2_v3_content_digests_match": true,
+    "v1_matches_v2_v3_certificate": false,
+    "cryptographic_signature_verification_performed_by_rea": false,
+    "authenticity": "unknown"
+  },
+  "signature_verification": {
+    "tool": "Android SDK Build Tools 36.0.0 apksigner",
+    "arguments": "verify --verbose --print-certs <supplied-apk>",
+    "exit_code": 1,
+    "result": "DOES NOT VERIFY",
+    "reported_mismatches": ["classes3.dex", "classes5.dex"],
+    "evidence": "evidence/apk-signature-verification.txt"
+  },
+  "manifest_evidence": {
+    "tool": "Android SDK Build Tools 36.0.0 aapt",
+    "arguments": "dump badging <supplied-apk>",
+    "exit_code": 0,
+    "evidence": "evidence/apk-badging-excerpt.txt"
+  },
+  "limitations": [
+    "The package and version values are declarations inside the examined APK, not authentication of its publisher.",
+    "The apksigner result applies to the command's default verification range; it does not establish installation behavior on every Android version.",
+    "Matching REA content digests do not verify cryptographic signatures or official provenance.",
+    "Permission declarations do not prove permission grants, actual data access, network traffic, or a security defect.",
+    "Locale resource and ABI declarations do not establish translation completeness or successful runtime operation.",
+    "No proprietary APK or bulk decompiled source is included in this public record."
+  ]
+}

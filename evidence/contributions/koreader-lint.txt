@@ -1,0 +1,17 @@
+KOReader focused Lua static analysis
+Observed: 2026-11-21
+Source content: ac9a701eb6d3e1ab5ab3e9e6681018d5a36df3da
+Tool: Luacheck 1.2.0, using the checkout's .luacheckrc
+Command (from the KOReader checkout, in Ubuntu/WSL):
+  luacheck --no-color frontend/document/pdfdocument.lua spec/unit/document_registry_spec.lua spec/unit/opds_spec.lua
+
+Checking frontend/document/pdfdocument.lua        OK
+Checking spec/unit/document_registry_spec.lua     OK
+Checking spec/unit/opds_spec.lua                  OK
+
+Total: 0 warnings / 0 errors in 3 files
+Exit code: 0
+
+Raw local transcript SHA-256: 9f8fe984daaeaa2ecd71007339229e83942f959c0e108058e1f178887d611a45
+This published file adds provenance to the diagnostic output.
+Static analysis does not establish application runtime behavior.

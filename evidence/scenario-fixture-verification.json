@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "evidence_type": "scenario-fixture-verification",
+  "observed_at_utc": "2026-11-21T15:25:24.106709+00:00",
+  "source_url": "https://github.com/chirag127/reader-improvement-lab",
+  "status": "pass",
+  "moon_reader_tested": false,
+  "test_plan_ids": [
+    "RT-12",
+    "RT-29",
+    "RT-36"
+  ],
+  "command": "python -X utf8 -B tests/test_scenario_fixtures.py --evidence evidence/scenario-fixture-verification.json",
+  "command_note": "Executed with the selected Python interpreter; local executable path is normalized to python.",
+  "exit_code": 0,
+  "test_run": {
+    "tests_run": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "output": "test_each_host_parser_rejects_malformed_input_then_opens_healthy_control (__main__.ScenarioFixtureContracts.test_each_host_parser_rejects_malformed_input_then_opens_healthy_control) ... ok\ntest_healthy_pdfs_have_one_nonblank_page_and_valid_qpdf_syntax (__main__.ScenarioFixtureContracts.test_healthy_pdfs_have_one_nonblank_page_and_valid_qpdf_syntax) ... ok\ntest_long_paragraph_has_single_begin_middle_and_far_suffix_markers (__main__.ScenarioFixtureContracts.test_long_paragraph_has_single_begin_middle_and_far_suffix_markers) ... ok\ntest_malformed_inputs_are_exact_benign_bytes_derived_from_a_healthy_control (__main__.ScenarioFixtureContracts.test_malformed_inputs_are_exact_benign_bytes_derived_from_a_healthy_control) ... ok\ntest_manifest_identifies_seven_bounded_original_inputs (__main__.ScenarioFixtureContracts.test_manifest_identifies_seven_bounded_original_inputs) ... ok\ntest_regeneration_is_repeatable_and_preserves_other_corpus_files (__main__.ScenarioFixtureContracts.test_regeneration_is_repeatable_and_preserves_other_corpus_files) ... ok\ntest_search_pdf_preserves_literals_in_three_independent_text_extractors (__main__.ScenarioFixtureContracts.test_search_pdf_preserves_literals_in_three_independent_text_extractors) ... ok\ntest_search_text_has_exact_literals_and_distinct_negative_rows (__main__.ScenarioFixtureContracts.test_search_text_has_exact_literals_and_distinct_negative_rows) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 21.289s\n\nOK\n"
+  },
+  "development_commands": [
+    {
+      "phase": "test-first-red",
+      "command": "python -X utf8 -B -m unittest discover -s tests -p test_scenario_fixtures.py -v",
+      "exit_code": 1,
+      "output_tail": "Ran 8 tests in 0.006s\n\nFAILED (failures=8)",
+      "interpretation": "All eight tests failed on missing scenario inputs, manifest, or generator before generation; library imports succeeded."
+    },
+    {
+      "phase": "generate",
+      "command": "python -X utf8 -B scripts/generate_scenario_fixtures.py",
+      "exit_code": 0,
+      "stdout_json": {
+        "fixtures_generated": 7,
+        "test_plan_ids": ["RT-12", "RT-29", "RT-36"],
+        "total_document_bytes": 18603,
+        "generator_versions": {"python": "3.13.14", "reportlab": "5.0.0"},
+        "moon_reader_tested": false
+      }
+    }
+  ],
+  "full_discovered_suite": {
+    "command": "python -X utf8 -B -m unittest discover -s tests -v",
+    "exit_code": 0,
+    "tests_run": 25,
+    "failures": 0,
+    "errors": 0,
+    "output_tail": "Ran 25 tests in 40.757s\n\nOK",
+    "collected_test_files_at_execution": [
+      "tests/test_fixtures.py",
+      "tests/test_scenario_fixtures.py"
+    ],
+    "interpretation": "The 17 retained corpus tests and eight scenario tests passed together. This is host-tool verification, not a reader runtime or performance result. Tests added later by other lanes require their own integration run."
+  },
+  "verified_scope": {
+    "scenario_inputs": 7,
+    "total_document_bytes": 18603,
+    "healthy_pdf_engine_pairs_opened": 8,
+    "malformed_pdf_engine_pairs_rejected": 12,
+    "post_rejection_healthy_opens": 12,
+    "search_text_extractors": ["pypdf", "PyMuPDF", "pypdfium2"],
+    "repeatability": "Two fresh generations matched each other and the retained scenario inputs and manifest byte for byte.",
+    "preservation": "The regeneration test verified existing corpus document/manifest hashes and a pre-existing output-root sentinel."
+  },
+  "environment": {
+    "python": "3.13.14",
+    "system": "Windows",
+    "machine": "AMD64",
+    "imported_libraries": {
+      "reportlab": "5.0.0",
+      "pypdf": "6.15.0",
+      "PyMuPDF": "1.28.0",
+      "pikepdf": "10.11.0",
+      "pypdfium2": "5.12.1"
+    },
+    "MuPDF": "1.29.0",
+    "PDFium": "152.0.7947.0",
+    "qpdf": "12.3.2",
+    "packages_installed": []
+  },
+  "artifact_hashes": {
+    "scripts/generate_scenario_fixtures.py": "b82beb588d1dce1bd9c2bed6f340d4b26dc2cbb085d147c953b0bcd50f832d95",
+    "data/scenario-fixtures.json": "9833585cd6882ac043547b1bf8d66e61fdbde34310b96861f4bb7369a249d42c",
+    "tests/test_scenario_fixtures.py": "2ec4d900edd484cd0173a00ee7dd2ed364ea8ab53794b5cc8b048911b9fcb183"
+  },
+  "input_hashes": [
+    {
+      "path": "fixtures/scenarios/rt12-literal-search.txt",
+      "sha256": "8b28e45b31d7b992a6242c27eb5942404d511ff0c49e7d06828af534f58a4373",
+      "size_bytes": 324
+    },
+    {
+      "path": "fixtures/scenarios/rt12-literal-search.pdf",
+      "sha256": "a9eebca731ef0e4d0a35947986ff6d89904eca55a641d214525fcc52f3685690",
+      "size_bytes": 1869
+    },
+    {
+      "path": "fixtures/scenarios/rt29-long-paragraph.txt",
+      "sha256": "7b4e7c3aff12c40cfcf4923bca80e8a7093a86046e43391b3a23677e26ab08de",
+      "size_bytes": 14446
+    },
+    {
+      "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+      "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+      "size_bytes": 1827
+    },
+    {
+      "path": "fixtures/scenarios/rt36-empty.pdf",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "fixtures/scenarios/rt36-truncated.pdf",
+      "sha256": "730b494fb87894df60bff156c4f04dbb5c32614976607132c031657707695f15",
+      "size_bytes": 64
+    },
+    {
+      "path": "fixtures/scenarios/rt36-invalid-header.pdf",
+      "sha256": "b355b03cd5f9528f4bf7e5223f5fd3aa8dd5a22823b37524780c5d191b086b8f",
+      "size_bytes": 73
+    }
+  ],
+  "host_observations": {
+    "rt36-empty.pdf": {
+      "pypdf": {
+        "load_status": "rejected",
+        "exception_type": "EmptyFileError",
+        "exception_message": "Cannot read an empty file",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      },
+      "PyMuPDF": {
+        "load_status": "rejected",
+        "exception_type": "EmptyFileError",
+        "exception_message": "Cannot open empty stream.",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      },
+      "pikepdf": {
+        "load_status": "rejected",
+        "exception_type": "PdfError",
+        "exception_message": "stream <_io.BytesIO object at 0x000001E77BB387C0>: unable to find trailer dictionary while recovering damaged file",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      },
+      "pypdfium2": {
+        "load_status": "rejected",
+        "exception_type": "PdfiumError",
+        "exception_message": "Failed to load document (PDFium: Data format error).",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      }
+    },
+    "rt36-healthy-control.pdf": {
+      "pypdf": {
+        "load_status": "opened",
+        "page_count": 1,
+        "encrypted": false,
+        "text": "RT36-HEALTHY-621\nA paper kite rests beside an original clockwork harbor.\nOpen this healthy page before and after each malformed input.\nRecovery anchor: RT36-RECOVERY-358\nThis page contains ordinary selectable text and no actions.\n",
+        "diagnostics": ""
+      },
+      "PyMuPDF": {
+        "load_status": "opened",
+        "page_count": 1,
+        "encrypted": false,
+        "text": "RT36-HEALTHY-621\nA paper kite rests beside an original clockwork harbor.\nOpen this healthy page before and after each malformed input.\nRecovery anchor: RT36-RECOVERY-358\nThis page contains ordinary selectable text and no actions.\n",
+        "render_grayscale_extrema": [
+          0,
+          255
+        ],
+        "render_size": [
+          306,
+          396
+        ],
+        "diagnostics": ""
+      },
+      "pikepdf": {
+        "load_status": "opened",
+        "page_count": 1,
+        "encrypted": false,
+        "syntax_issues": [],
+        "diagnostics": ""
+      },
+      "pypdfium2": {
+        "load_status": "opened",
+        "page_count": 1,
+        "text": "RT36-HEALTHY-621\r\nA paper kite rests beside an original clockwork harbor.\r\nOpen this healthy page before and after each malformed input.\r\nRecovery anchor: RT36-RECOVERY-358\r\nThis page contains ordinary selectable text and no actions.",
+        "render_grayscale_extrema": [
+          0,
+          255
+        ],
+        "render_size": [
+          306,
+          396
+        ],
+        "diagnostics": ""
+      }
+    },
+    "rt36-truncated.pdf": {
+      "pypdf": {
+        "load_status": "rejected",
+        "exception_type": "PdfReadError",
+        "exception_message": "EOF marker not found",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      },
+      "PyMuPDF": {
+        "load_status": "rejected",
+        "exception_type": "FileDataError",
+        "exception_message": "Failed to open stream",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      },
+      "pikepdf": {
+        "load_status": "rejected",
+        "exception_type": "PdfError",
+        "exception_message": "stream <_io.BytesIO object at 0x000001E77BB3ABB0>: unable to find trailer dictionary while recovering damaged file",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      },
+      "pypdfium2": {
+        "load_status": "rejected",
+        "exception_type": "PdfiumError",
+        "exception_message": "Failed to load document (PDFium: Data format error).",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      }
+    },
+    "rt36-invalid-header.pdf": {
+      "pypdf": {
+        "load_status": "rejected",
+        "exception_type": "PdfReadError",
+        "exception_message": "PDF starts with 'This ', but '%PDF-' expected",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      },
+      "PyMuPDF": {
+        "load_status": "rejected",
+        "exception_type": "FileDataError",
+        "exception_message": "Failed to open stream",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      },
+      "pikepdf": {
+        "load_status": "rejected",
+        "exception_type": "PdfError",
+        "exception_message": "stream <_io.BytesIO object at 0x000001E77BB3B4C0>: unable to find trailer dictionary while recovering damaged file",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      },
+      "pypdfium2": {
+        "load_status": "rejected",
+        "exception_type": "PdfiumError",
+        "exception_message": "Failed to load document (PDFium: Data format error).",
+        "diagnostics": "",
+        "healthy_reopen": {
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+          "page_count": 1,
+          "load_status": "opened"
+        }
+      }
+    },
+    "rt12-literal-search.pdf": {
+      "pypdf": {
+        "load_status": "opened",
+        "page_count": 1,
+        "encrypted": false,
+        "text": "RT12-LITERAL-SEARCH-681\nOriginal UTF-8 café note\nEach labeled row is separate\nS01 | a.b | literal dot\nS02 | a+b | literal plus\nS03 | [x] | literal brackets\nS04 | axb | negative control one\nS05 | aaab | negative control two\nS06 | x | negative control three\nS07 | ab | negative control four\nS08 | a-b | negative control five\n",
+        "diagnostics": ""
+      },
+      "PyMuPDF": {
+        "load_status": "opened",
+        "page_count": 1,
+        "encrypted": false,
+        "text": "RT12-LITERAL-SEARCH-681\nOriginal UTF-8 café note\nEach labeled row is separate\nS01 | a.b | literal dot\nS02 | a+b | literal plus\nS03 | [x] | literal brackets\nS04 | axb | negative control one\nS05 | aaab | negative control two\nS06 | x | negative control three\nS07 | ab | negative control four\nS08 | a-b | negative control five\n",
+        "render_grayscale_extrema": [
+          0,
+          255
+        ],
+        "render_size": [
+          306,
+          396
+        ],
+        "diagnostics": ""
+      },
+      "pikepdf": {
+        "load_status": "opened",
+        "page_count": 1,
+        "encrypted": false,
+        "syntax_issues": [],
+        "diagnostics": ""
+      },
+      "pypdfium2": {
+        "load_status": "opened",
+        "page_count": 1,
+        "text": "RT12-LITERAL-SEARCH-681\r\nOriginal UTF-8 café note\r\nEach labeled row is separate\r\nS01 | a.b | literal dot\r\nS02 | a+b | literal plus\r\nS03 | [x] | literal brackets\r\nS04 | axb | negative control one\r\nS05 | aaab | negative control two\r\nS06 | x | negative control three\r\nS07 | ab | negative control four\r\nS08 | a-b | negative control five",
+        "render_grayscale_extrema": [
+          0,
+          255
+        ],
+        "render_size": [
+          306,
+          396
+        ],
+        "diagnostics": ""
+      }
+    }
+  },
+  "limitations": [
+    "Host parser rejection and subsequent healthy opens are not application error handling or UI recovery tests.",
+    "Search checks verify literal input identity/extraction, not application matching or regex handling.",
+    "The actual Android TTS engine limit, segmentation, selected ranges and audible suffix remain unknown; no speech was run.",
+    "36 dpi nonblank renders do not establish visual fidelity or accessibility.",
+    "Malformed inputs are zero bytes, a 64-byte prefix of the new healthy PDF, and plain text with a .pdf extension; no exploit payloads.",
+    "Byte repeatability covers the recorded generator and toolchain, not arbitrary platforms or dependency versions.",
+    "Test runner duration in output is not a reader performance measurement."
+  ]
+}

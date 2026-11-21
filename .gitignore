@@ -1,0 +1,25 @@
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+.superpowers/
+.local/
+private/
+raw/
+artifacts/private/
+*.apk
+*.aab
+*.apks
+*.dex
+*.jar
+*.so
+*.keystore
+*.jks
+*.pem
+*.key
+*.log
+# Reviewed, hash-bound three-line activity diagnostic used by the runtime report.
+!evidence/runtime/48-form-transition-diagnostic.log

@@ -1,0 +1,41 @@
+{
+  "id": "moon-backlog-independent-review",
+  "observed_at": "2026-11-21T16:26:17.072125+00:00",
+  "evidence_type": "independent-evidence-review",
+  "reviewer": "Separate read-only agent, previously responsible for the MuPDF contribution; not the Moon backlog author.",
+  "status": "no-material-findings",
+  "inputs": [
+    {
+      "path": "data/moon-improvements.json",
+      "sha256": "b112d2e54f2225ab02200bdd34503fc575545a09ed2090038f22fa0f02a76d0c"
+    },
+    {
+      "path": "knowledge/moon-improvements.md",
+      "sha256": "6c9b342212d9e09664bf6d4955d249c30407e654ad532c3d33b6b482f55fd960"
+    }
+  ],
+  "scope": "All 64 proposals and their navigation catalog, compared with the retained official baseline, supplied-artifact findings, Android and desktop/web dossiers, and their source ledgers.",
+  "checks": {
+    "proposals": 64,
+    "acceptance_criteria": 190,
+    "baseline_reference_occurrences": 170,
+    "local_link_occurrences": 255,
+    "catalog_detail_links": 64,
+    "external_source_occurrences_matched_to_retained_references": 92,
+    "priority_counts": {"high": 30, "medium": 31, "low": 3},
+    "relationship_counts": {"extension": 53, "reliability-candidate": 7, "new-capability-candidate": 4}
+  },
+  "conclusions": [
+    "Distinctness was assessed by requested user outcome, not string uniqueness alone.",
+    "MOON-002 reflects the helper's non-throwing failure paths while preserving the application-reproduction gap.",
+    "MOON-004 is cover-sync-specific and retains the unresolved shared-worker limitation.",
+    "Existing reflow, settings search, Readwise, forms, speech, export, synchronization and relinking capabilities are acknowledged.",
+    "Every proposal remains a draft; numerical budgets and acceptance scenarios are prospective."
+  ],
+  "limitations": [
+    "This is an agent evidence review, not human or developer approval.",
+    "External sources were compared with retained research, not fetched again during review.",
+    "The review did not execute application workflows or acceptance scenarios, authenticate the supplied APK, verify native or decompiler correctness, or exhaust upstream duplicate reports.",
+    "Changes to the reviewed inputs require reassessment of affected conclusions."
+  ]
+}

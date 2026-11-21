@@ -1,0 +1,31 @@
+KOReader CBR MIME alias regression — before implementation
+Observed: 2026-11-21
+Evidence scope: host Lua module tests; no application UI or device test.
+Source: https://github.com/koreader/koreader/commit/107b6ddaa7d671d10a82aee395f270608ce02720
+Source state: base implementation plus the regression tests later committed in
+ac9a701eb6d3e1ab5ab3e9e6681018d5a36df3da; pdfdocument.lua still unmodified.
+Command (from the lab, in Ubuntu/WSL):
+  bash evidence/contributions/koreader-host-tests.sh "$SOURCE_DIR" "$RUNTIME_DIR" "$SCRATCH_DIR"
+Environment: Ubuntu 26.04 x86_64, WSL2; Busted 2.3.0;
+LuaJIT 2.1.1783773675 and native dependencies from KOReader v2026.07.1.
+Release asset SHA-256: 299aadb28147a25e9432ced1214ea444a4184393b5ae97cf42402c8a61b1a1b0
+The harness loads frontend/plugins and both test files from the source checkout.
+It uses stock commonrequire, isolated KO_HOME, and dummy display/audio drivers.
+Tags excluded: notest,internet. Eight internet-tagged OPDS cases were excluded.
+
+Diagnostic excerpts (host-specific paths and repetitive loader traces omitted):
+  38 successes / 4 failures / 0 errors / 0 pending : 21.194554 seconds
+  document registry module comic book MIME types should recognize application/vnd.comicbook+rar as cbr
+    hasProvider(nil, mimetype): false; expected true (document_registry_spec.lua:36).
+  document registry module comic book MIME types should recognize application/x-cbr as cbr
+    hasProvider(nil, mimetype): false; expected true (document_registry_spec.lua:36).
+  OPDS module OPDS browser module comic book downloads should offer a download for a suffixless application/vnd.comicbook+rar link
+    getFiletype(acquisition): nil; expected 'cbr' (opds_spec.lua:657).
+  OPDS module OPDS browser module comic book downloads should offer a download for a suffixless application/x-cbr link
+    getFiletype(acquisition): nil; expected 'cbr' (opds_spec.lua:657).
+Exit code: 1 (expected red regression).
+
+Raw local transcript SHA-256: f2cecef2efef8c751843ed0125dcac9b3489edc1881c1137269733d51827161a
+This published file is a diagnostic excerpt, not that raw transcript.
+The failing OPDS assertions stop before button generation for the two missing
+aliases. The green run separately exercises their generated download buttons.

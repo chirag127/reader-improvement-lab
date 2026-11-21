@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "evidence_type": "fixture-tooling-verification",
+  "observed_on": "2026-11-21",
+  "source_url": "https://github.com/chirag127/reader-improvement-lab",
+  "status": "pass",
+  "moon_reader_tested": false,
+  "scope": "Original synthetic corpus, host reference-library readback, and fixture integration tests.",
+  "artifacts": {
+    "manifest": {
+      "path": "fixtures/manifest.json",
+      "sha256": "3ab01e4f9644c4e4ed0217946ac33e8fbcf403dd6e054401c574ba438b8820eb"
+    },
+    "generator": {
+      "path": "scripts/generate_fixtures.py",
+      "sha256": "360b1e971ae7fe7c5e2975ece15249f990e0ddfb4cc86f59e0ae6506d3559286"
+    },
+    "checker": {
+      "path": "scripts/check_fixtures.py",
+      "sha256": "a4f1f67fb074cd29636b7c13e89bc225f0bab4560e7f05ed9431a4aa317aeb16"
+    },
+    "reference_results": {
+      "path": "fixtures/reference-results.json",
+      "sha256": "0c95109f61f9e565f429b4d7b021aa33186d74cbf58855aacaf0fb159d936c02",
+      "observed_at_utc": "2026-11-21T14:46:57.736714+00:00"
+    },
+    "tests": "tests/test_fixtures.py",
+    "tests_sha256": "fe42d939f4ded40120a639d40dd0055f14fa014e969223124fce09bebd508dd0",
+    "dependencies": "fixtures/requirements.txt",
+    "dependencies_sha256": "e612be993ad44b16545c042ccda244ccfcee9648ce4719bea10b22c24ae26425",
+    "interpretation": "knowledge/testing-fixtures.md"
+  },
+  "corpus": {
+    "documents": 11,
+    "pdf_documents": 10,
+    "pdf_pages": 114,
+    "epub_documents": 1,
+    "epub_spine_chapters": 2,
+    "total_document_bytes": 168613,
+    "total_fixture_directory_bytes_at_readback": 511122,
+    "preferred_size_budget_bytes": 5000000,
+    "origin": "Original synthetic prose, vector geometry, and raster page.",
+    "content_license": "MIT",
+    "font_license": "fixtures/licenses/bitstream-vera-license.txt",
+    "document_hashes_changed_during_checker_corrections": false
+  },
+  "environment": {
+    "python": "3.13.14",
+    "system": "Windows",
+    "machine": "AMD64",
+    "imports_verified": {
+      "reportlab": "5.0.0",
+      "PyMuPDF": "1.28.0",
+      "pypdf": "6.15.0",
+      "pikepdf": "10.11.0",
+      "pypdfium2": "5.12.1",
+      "Pillow": "12.3.0"
+    },
+    "underlying_engines": {
+      "MuPDF": "1.29.0",
+      "PDFium": "152.0.7947.0",
+      "qpdf": "12.3.2"
+    },
+    "packages_installed_by_fixture_lane": [],
+    "dependency_scope": "Pinned direct packages; not a complete OS or transitive dependency lock."
+  },
+  "command_convention": "Commands ran from the repository root in PowerShell with the explicitly selected Python 3.13.14 executable. Its machine-local absolute path is normalized to python here. Arguments and result excerpts are retained; no personal path is required to reproduce them.",
+  "commands": [
+    {
+      "id": "test-first-red",
+      "command": "python -X utf8 -B -m unittest discover -s tests -p test_fixtures.py -v",
+      "exit_code": 1,
+      "phase": "Before generator, checker, or corpus existed",
+      "output_tail": "Ran 17 tests in 0.009s\n\nFAILED (failures=17)",
+      "interpretation": "Expected assertion failures identified missing fixtures, manifest, generator, and checker. Imports succeeded."
+    },
+    {
+      "id": "generate",
+      "command": "python -X utf8 -B scripts/generate_fixtures.py",
+      "exit_code": 0,
+      "stdout_json": {
+        "fixtures_generated": 11,
+        "total_document_bytes": 168613,
+        "generator_versions": {
+          "python": "3.13.14",
+          "reportlab": "5.0.0",
+          "PyMuPDF": "1.28.0",
+          "Pillow": "12.3.0"
+        }
+      }
+    },
+    {
+      "id": "reference-readback-final",
+      "command": "python -X utf8 -B scripts/check_fixtures.py --fixtures fixtures --output fixtures/reference-results.json",
+      "exit_code": 0,
+      "stdout_json": {
+        "evidence_type": "reference-engine-check",
+        "moon_reader_tested": false,
+        "fixtures_passed": 11,
+        "fixtures_failed": 0,
+        "engine_checks_passed": 42,
+        "engine_checks_failed": 0
+      },
+      "stderr": "",
+      "result_artifact": "fixtures/reference-results.json",
+      "count_meaning": "42 fixture/engine pairs: four libraries for each of ten PDFs, plus ZIP/XML and MuPDF for one EPUB. Each pair has individually listed property comparisons."
+    },
+    {
+      "id": "full-discovered-suite-final",
+      "command": "python -X utf8 -B -m unittest discover -s tests -v",
+      "exit_code": 0,
+      "tests_run": 17,
+      "failures": 0,
+      "errors": 0,
+      "output_tail": "Ran 17 tests in 27.817s\n\nOK",
+      "collected_test_files_at_execution": [
+        "tests/test_fixtures.py"
+      ],
+      "interpretation": "The full discover command collected the 17 fixture tests present at this execution. Tests added subsequently by other lanes need their own integration run. The duration is unittest's wall-clock report, not a reader performance measurement."
+    },
+    {
+      "id": "tracked-diff-whitespace",
+      "command": "git diff --check -- scripts/generate_fixtures.py scripts/check_fixtures.py tests/test_fixtures.py fixtures knowledge/testing-fixtures.md evidence/fixture-verification.json",
+      "exit_code": 0,
+      "stdout": "",
+      "limitation": "Git diff does not inspect untracked additions; this result alone does not validate all new files."
+    }
+  ],
+  "passing_tests": [
+    "test_acroform_fields_remain_editable_widgets_with_initial_values",
+    "test_annotations_are_standard_objects_with_a_portable_note",
+    "test_epub_has_a_valid_container_two_spine_chapters_and_working_toc",
+    "test_generation_is_byte_repeatable_across_two_output_directories",
+    "test_internal_links_and_outlines_resolve_to_real_pages",
+    "test_long_document_keeps_all_hundred_pages_and_distant_search_anchors",
+    "test_manifest_covers_every_artifact_with_hash_size_and_expectations",
+    "test_mixed_geometry_preserves_media_boxes_and_rotations",
+    "test_password_is_required_and_public_test_password_unlocks_content",
+    "test_plain_text_is_searchable_in_three_independent_parsers",
+    "test_reference_checker_records_real_host_engines_without_app_claims",
+    "test_reference_checker_rejects_an_altered_document_hash",
+    "test_reference_checker_rejects_wrong_expected_page_count",
+    "test_scan_has_an_image_but_no_selectable_text_layer",
+    "test_selected_pages_render_nonblank_in_mupdf_and_pdfium",
+    "test_two_columns_have_distinct_regions_and_column_major_content",
+    "test_unicode_preserves_accents_and_includes_font_permission_notice"
+  ],
+  "resolved_development_findings": [
+    {
+      "observation": "The initial post-generation run reported four failures and thirty errors.",
+      "causes": [
+        "PDFium page, text-page, and bitmap objects require explicit closing rather than native context-manager use.",
+        "MuPDF annotation handles require retaining their page object.",
+        "MuPDF exposes these /Fit destinations as named-link dictionaries with string page values; resolve_link on the actual URI returns the correct zero-based page.",
+        "The reference checker was not yet present when that run started."
+      ],
+      "resolution": "Corrected resource lifetimes and link resolution, completed the checker, and reran all tests without changing document bytes."
+    },
+    {
+      "observation": "The first passing standalone reference check emitted pikepdf's Page.images deprecation warning.",
+      "resolution": "Changed to documented Page.get_images(), then reran the full suite and standalone checker. The final checker emitted no warning."
+    }
+  ],
+  "readback_coverage": {
+    "fixture_engine_pairs_passed": 42,
+    "fixture_engine_pairs_failed": 0,
+    "individual_property_comparisons_passed": 590,
+    "pdf_pages_counted_per_library": 114,
+    "text_extraction": "All 114 PDF pages read by pypdf, MuPDF, and PDFium; expected anchors and text-layer presence checked.",
+    "pdf_renders_per_engine": 17,
+    "render_engines": ["MuPDF", "PDFium"],
+    "render_resolution_dpi": 36,
+    "long_document_render_pages": [1, 50, 100],
+    "render_assertion": "Nonblank grayscale extrema only; observed pixel hashes are not required to agree between engines.",
+    "annotations": "Six standard annotation types and note contents in pypdf, MuPDF, and qpdf.",
+    "forms": "Three unflattened widgets and initial values in pypdf, MuPDF, and qpdf; initial appearance dictionaries in qpdf.",
+    "navigation": "pypdf and MuPDF resolve both internal destinations; pypdf, MuPDF, and PDFium inspect the three outlines.",
+    "password": "Empty/wrong-password rejection and public user-password acceptance checked with all four PDF libraries.",
+    "unicode": "Literal precomposed accents and selected symbols; full embedded font SHA-256 and attached license read back independently by pypdf and MuPDF.",
+    "epub": "ZIP CRC and container/spine/navigation anchors, plus independent MuPDF extraction of both chapter markers."
+  },
+  "reproducibility": {
+    "verified": "Two fresh output directories produced identical document bytes and identical manifests in the integration test.",
+    "identification": "Use fixtures/manifest.json SHA-256 values for the actual distributed inputs.",
+    "stability_boundary": "Same generator, reviewed font, and recorded toolchain. Cross-platform or dependency-version byte identity is not claimed.",
+    "metadata_epoch": "2000-01-01T00:00:00Z is an artificial fixed timestamp, not the authoring or observation date.",
+    "runtime_coordination": "Generate into a new directory and communicate changed hashes before replacing inputs already used by a runtime investigation."
+  },
+  "limitations": [
+    "No Moon+ Reader, proprietary reader, Android emulator, or real-device workflow was tested by this lane.",
+    "A host-engine pass covers only listed checks; unchecked_expectations in the reference artifact explicitly identifies other manifest keys.",
+    "Nonblank renders do not establish visual fidelity, cross-engine equivalence, usability, or accessibility.",
+    "No performance, memory, OCR accuracy, form-edit persistence, or annotation round-trip claim is made.",
+    "Unicode scope is precomposed Latin accents and selected symbols; RTL, CJK, complex shaping, normalization, and emoji are not covered.",
+    "Encryption scope is legacy RC4-128 revision 3 with public test passwords, not AES or cryptographic-strength evaluation.",
+    "No damaged-document, PDF/A, PDF/UA, or complete EPUB-conformance validation is included.",
+    "Publication and tests added by other lanes remain the integration owner's responsibility."
+  ]
+}

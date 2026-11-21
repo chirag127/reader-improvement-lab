@@ -1,0 +1,38 @@
+name: Evidence-backed improvement
+description: Propose a concrete improvement, including an extension to an existing feature.
+title: "[Proposal] "
+body:
+  - type: input
+    id: application
+    attributes:
+      label: Application or repository
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: User workflow and problem
+      description: Describe what someone is trying to accomplish and the friction they face.
+    validations:
+      required: true
+  - type: textarea
+    id: baseline
+    attributes:
+      label: Existing behavior and evidence
+      description: Cite the current feature documentation or source. Say whether this extends an existing feature, proposes a new capability, or needs current-build verification.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed outcome and acceptance criteria
+      description: Provide a checkable outcome using a concrete input and observable result.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Comparison sources and related requests
+      description: Link exact alternative implementations and existing upstream issues. Describe platform or licensing constraints where relevant.
+    validations:
+      required: true

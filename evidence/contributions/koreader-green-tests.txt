@@ -1,0 +1,27 @@
+KOReader CBR MIME alias regression — after implementation
+Observed: 2026-11-21
+Evidence scope: host Lua module tests; no application UI or device test.
+Tested working-tree content subsequently committed as:
+https://github.com/chirag127/koreader/commit/ac9a701eb6d3e1ab5ab3e9e6681018d5a36df3da
+Base: 107b6ddaa7d671d10a82aee395f270608ce02720
+Command (from the lab, in Ubuntu/WSL):
+  bash evidence/contributions/koreader-host-tests.sh "$SOURCE_DIR" "$RUNTIME_DIR" "$SCRATCH_DIR"
+Environment: Ubuntu 26.04 x86_64, WSL2; Busted 2.3.0;
+LuaJIT 2.1.1783773675 and native dependencies from KOReader v2026.07.1.
+Release asset SHA-256: 299aadb28147a25e9432ced1214ea444a4184393b5ae97cf42402c8a61b1a1b0
+Tags excluded: notest,internet. Eight internet-tagged OPDS cases were excluded.
+
+Diagnostic excerpt:
+  42 successes / 0 failures / 0 errors / 0 pending : 25.933191 seconds
+Exit code: 0
+
+Coverage: 29 existing tests and 13 added cases across document_registry_spec.lua
+and opds_spec.lua. Six MIME cases check registry recognition and extension mapping;
+six parse synthetic OPDS acquisition feeds, resolve suffixless link types, and
+produce one correctly labeled download button. One case checks a single MuPDF
+provider of weight 100 for each of .cbr and .cbz despite alias registrations.
+
+Raw local transcript SHA-256: 0799a0498153e111ff344c2ce576707bbd7fdb6774916529131e0e9a381f7ff1
+This published file is a diagnostic excerpt, not that raw transcript.
+Native dependencies were reused from a release, not built from the source pin.
+No download callback was invoked and no comic archive was opened or rendered.

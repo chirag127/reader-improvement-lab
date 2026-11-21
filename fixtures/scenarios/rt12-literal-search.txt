@@ -1,0 +1,11 @@
+RT12-LITERAL-SEARCH-681
+Original UTF-8 café note
+Each labeled row is separate
+S01 | a.b | literal dot
+S02 | a+b | literal plus
+S03 | [x] | literal brackets
+S04 | axb | negative control one
+S05 | aaab | negative control two
+S06 | x | negative control three
+S07 | ab | negative control four
+S08 | a-b | negative control five

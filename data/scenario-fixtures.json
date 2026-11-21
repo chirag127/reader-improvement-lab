@@ -1,0 +1,347 @@
+{
+  "schema_version": 1,
+  "evidence_type": "synthetic-scenario-inputs",
+  "moon_reader_tested": false,
+  "test_plan_ids": [
+    "RT-12",
+    "RT-29",
+    "RT-36"
+  ],
+  "test_plan_path": "knowledge/testing-plan.md",
+  "origin": {
+    "kind": "original-synthetic",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2026 Chirag Singhal",
+    "source": "scripts/generate_scenario_fixtures.py",
+    "source_url": "https://github.com/chirag127/reader-improvement-lab",
+    "note": "Original prose and standard-font PDFs; no proprietary samples, personal documents, or exploit payloads"
+  },
+  "generator_sha256": "b82beb588d1dce1bd9c2bed6f340d4b26dc2cbb085d147c953b0bcd50f832d95",
+  "generator_versions": {
+    "python": "3.13.14",
+    "reportlab": "5.0.0"
+  },
+  "reproducibility": {
+    "recipe_revision": 1,
+    "metadata_epoch": "2000-01-01T00:00:00Z",
+    "method": "Fixed text, UTF-8 with LF endings, ReportLab invariant metadata and deterministic PDF IDs",
+    "boundary": "Same generator and recorded toolchain; cross-platform byte identity is not claimed"
+  },
+  "limitations": [
+    "The fixture tooling does not run Moon+ Reader or any Android application.",
+    "Literal data and extraction checks do not establish application search mode or matching behavior.",
+    "Actual TTS engine input limit and segmentation are unknown; no speech is submitted.",
+    "Malformed parser rejection does not establish application crash handling or UI recovery.",
+    "Only seven named scenario files and this manifest are generated; the original corpus is separate."
+  ],
+  "total_document_bytes": 18603,
+  "fixtures": [
+    {
+      "id": "rt12-literal-search-text",
+      "test_plan_id": "RT-12",
+      "path": "fixtures/scenarios/rt12-literal-search.txt",
+      "media_type": "text/plain; charset=utf-8",
+      "sha256": "8b28e45b31d7b992a6242c27eb5942404d511ff0c49e7d06828af534f58a4373",
+      "size_bytes": 324,
+      "purpose": "Literal search metacharacters with distinct labeled negative controls.",
+      "expected": {
+        "encoding": "utf-8",
+        "bom": false,
+        "line_endings": "LF",
+        "rows": [
+          {
+            "id": "S01",
+            "token": "a.b"
+          },
+          {
+            "id": "S02",
+            "token": "a+b"
+          },
+          {
+            "id": "S03",
+            "token": "[x]"
+          },
+          {
+            "id": "S04",
+            "token": "axb"
+          },
+          {
+            "id": "S05",
+            "token": "aaab"
+          },
+          {
+            "id": "S06",
+            "token": "x"
+          },
+          {
+            "id": "S07",
+            "token": "ab"
+          },
+          {
+            "id": "S08",
+            "token": "a-b"
+          }
+        ],
+        "literal_queries": [
+          {
+            "query": "a.b",
+            "occurrences": 1,
+            "positive_row_ids": [
+              "S01"
+            ],
+            "negative_row_ids": [
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08"
+            ]
+          },
+          {
+            "query": "a+b",
+            "occurrences": 1,
+            "positive_row_ids": [
+              "S02"
+            ],
+            "negative_row_ids": [
+              "S01",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08"
+            ]
+          },
+          {
+            "query": "[x]",
+            "occurrences": 1,
+            "positive_row_ids": [
+              "S03"
+            ],
+            "negative_row_ids": [
+              "S01",
+              "S02",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08"
+            ]
+          }
+        ],
+        "title_marker": "RT12-LITERAL-SEARCH-681",
+        "application_search_mode": "Record at runtime; literal-mode expectations only"
+      }
+    },
+    {
+      "id": "rt12-literal-search-pdf",
+      "test_plan_id": "RT-12",
+      "path": "fixtures/scenarios/rt12-literal-search.pdf",
+      "media_type": "application/pdf",
+      "sha256": "a9eebca731ef0e4d0a35947986ff6d89904eca55a641d214525fcc52f3685690",
+      "size_bytes": 1869,
+      "purpose": "A selectable one-page PDF with the same literal search rows.",
+      "expected": {
+        "page_count": 1,
+        "text_layer": true,
+        "encrypted": false,
+        "rows": [
+          {
+            "id": "S01",
+            "token": "a.b"
+          },
+          {
+            "id": "S02",
+            "token": "a+b"
+          },
+          {
+            "id": "S03",
+            "token": "[x]"
+          },
+          {
+            "id": "S04",
+            "token": "axb"
+          },
+          {
+            "id": "S05",
+            "token": "aaab"
+          },
+          {
+            "id": "S06",
+            "token": "x"
+          },
+          {
+            "id": "S07",
+            "token": "ab"
+          },
+          {
+            "id": "S08",
+            "token": "a-b"
+          }
+        ],
+        "literal_queries": [
+          {
+            "query": "a.b",
+            "occurrences": 1,
+            "positive_row_ids": [
+              "S01"
+            ],
+            "negative_row_ids": [
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08"
+            ]
+          },
+          {
+            "query": "a+b",
+            "occurrences": 1,
+            "positive_row_ids": [
+              "S02"
+            ],
+            "negative_row_ids": [
+              "S01",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08"
+            ]
+          },
+          {
+            "query": "[x]",
+            "occurrences": 1,
+            "positive_row_ids": [
+              "S03"
+            ],
+            "negative_row_ids": [
+              "S01",
+              "S02",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08"
+            ]
+          }
+        ],
+        "title_marker": "RT12-LITERAL-SEARCH-681",
+        "application_search_mode": "Record at runtime; literal-mode expectations only"
+      }
+    },
+    {
+      "id": "rt29-long-paragraph",
+      "test_plan_id": "RT-29",
+      "path": "fixtures/scenarios/rt29-long-paragraph.txt",
+      "media_type": "text/plain; charset=utf-8",
+      "sha256": "7b4e7c3aff12c40cfcf4923bca80e8a7093a86046e43391b3a23677e26ab08de",
+      "size_bytes": 14446,
+      "purpose": "One paragraph with far-apart speech markers for runtime segmentation checks.",
+      "expected": {
+        "encoding": "utf-8",
+        "ascii_only": true,
+        "paragraph_count": 1,
+        "newline_count": 0,
+        "sentence_terminators": [],
+        "unicode_codepoints": 14446,
+        "utf16_code_units": 14446,
+        "markers": [
+          {
+            "text": "RT29-BEGIN-173",
+            "occurrences": 1,
+            "codepoint_offset": 0
+          },
+          {
+            "text": "RT29-MIDDLE-509",
+            "occurrences": 1,
+            "codepoint_offset": 7215
+          },
+          {
+            "text": "RT29-SUFFIX-947",
+            "occurrences": 1,
+            "codepoint_offset": 14431
+          }
+        ],
+        "sizing_reference_utf16_code_units": 4000,
+        "sizing_reference_scope": "Synthetic sizing reference only, not a measured platform or engine limit",
+        "actual_tts_engine_limit": null,
+        "actual_tts_engine_limit_status": "unknown",
+        "runtime_requirement": "Measure the selected platform/engine limit and utterance segmentation before making truncation claims"
+      }
+    },
+    {
+      "id": "rt36-healthy-control",
+      "test_plan_id": "RT-36",
+      "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+      "media_type": "application/pdf",
+      "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+      "size_bytes": 1827,
+      "purpose": "Healthy control for opening before and after each malformed input.",
+      "expected": {
+        "page_count": 1,
+        "text_layer": true,
+        "encrypted": false,
+        "text_markers": [
+          "RT36-HEALTHY-621",
+          "RT36-RECOVERY-358"
+        ]
+      }
+    },
+    {
+      "id": "rt36-empty",
+      "test_plan_id": "RT-36",
+      "path": "fixtures/scenarios/rt36-empty.pdf",
+      "media_type": "application/pdf",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "purpose": "Benign zero-byte input for graceful rejection and subsequent healthy opening.",
+      "expected": {
+        "byte_length": 0,
+        "construction": "Empty byte string",
+        "intended_host_result": "rejected",
+        "application_result": "not-run"
+      }
+    },
+    {
+      "id": "rt36-truncated",
+      "test_plan_id": "RT-36",
+      "path": "fixtures/scenarios/rt36-truncated.pdf",
+      "media_type": "application/pdf",
+      "sha256": "730b494fb87894df60bff156c4f04dbb5c32614976607132c031657707695f15",
+      "size_bytes": 64,
+      "purpose": "Benign header-only prefix of the new healthy PDF, without a complete page or trailer.",
+      "expected": {
+        "byte_length": 64,
+        "construction": "First 64 bytes of rt36-healthy-control.pdf",
+        "source_path": "fixtures/scenarios/rt36-healthy-control.pdf",
+        "source_sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5",
+        "contains_eof_marker": false,
+        "intended_host_result": "rejected",
+        "application_result": "not-run"
+      }
+    },
+    {
+      "id": "rt36-invalid-header",
+      "test_plan_id": "RT-36",
+      "path": "fixtures/scenarios/rt36-invalid-header.pdf",
+      "media_type": "application/pdf",
+      "sha256": "b355b03cd5f9528f4bf7e5223f5fd3aa8dd5a22823b37524780c5d191b086b8f",
+      "size_bytes": 73,
+      "purpose": "Benign original plain text carrying a .pdf extension, without any PDF structure.",
+      "expected": {
+        "construction": "Original plain text with LF endings and a .pdf extension",
+        "actual_content_type": "text/plain; charset=utf-8",
+        "pdf_header_present": false,
+        "intended_host_result": "rejected",
+        "application_result": "not-run"
+      }
+    }
+  ]
+}

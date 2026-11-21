@@ -1,0 +1,13 @@
+* text=auto eol=lf
+*.pdf binary
+*.epub -text
+*.png -text
+*.jpg -text
+*.webp -text
+*.zip -text
+# Preserve the original bytes of these hash-bound execution receipts.
+evidence/runtime/cleanup.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+evidence/runtime/verification.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Keep the upstream license and reviewed Markdown hard breaks byte-identical.
+fixtures/licenses/bitstream-vera-license.txt whitespace=-blank-at-eol,-blank-at-eof
+knowledge/moon-improvements.md whitespace=-blank-at-eol

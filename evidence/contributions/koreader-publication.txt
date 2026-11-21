@@ -1,0 +1,24 @@
+KOReader contribution fork publication
+Observed: 2026-11-21
+Repository: https://github.com/chirag127/koreader.git
+Branch: fix/cbr-opds-mime-aliases
+Commit: ac9a701eb6d3e1ab5ab3e9e6681018d5a36df3da
+Parent: 107b6ddaa7d671d10a82aee395f270608ce02720
+
+Command: git push --set-upstream origin fix/cbr-opds-mime-aliases
+Result: new branch pushed to origin and local tracking branch configured.
+Exit code: 0
+
+Command: git ls-remote origin refs/heads/fix/cbr-opds-mime-aliases
+Output:
+ac9a701eb6d3e1ab5ab3e9e6681018d5a36df3da refs/heads/fix/cbr-opds-mime-aliases
+Exit code: 0
+
+Command: git status --short --branch
+Output:
+## fix/cbr-opds-mime-aliases...origin/fix/cbr-opds-mime-aliases
+Exit code: 0
+
+The remote branch readback verifies publication of the tested source commit.
+It does not establish upstream acceptance, a completed CI run, or an application test.
+No upstream issue, pull request, comment, or release was created.

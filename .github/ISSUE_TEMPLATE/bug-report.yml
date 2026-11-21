@@ -1,0 +1,46 @@
+name: Reproducible reader defect
+description: Record an observed defect with a build, synthetic input, and reproduction evidence.
+title: "[Bug candidate] "
+body:
+  - type: input
+    id: application
+    attributes:
+      label: Application and exact version
+      description: Include package ID or repository commit where available.
+    validations:
+      required: true
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Build provenance and environment
+      description: Distribution source, artifact SHA-256, OS/API, device or emulator, and relevant settings. Identify unknown provenance explicitly.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps and synthetic fixture
+      description: Number the steps, link an openly shareable fixture with its hash, and state repeat count.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior and basis
+      description: Explain the user-visible outcome expected and cite documentation or a relevant contract.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and evidence
+      description: Include a minimal sanitized diagnostic excerpt or screenshot. Distinguish an observed application failure from a fixture/tool failure.
+    validations:
+      required: true
+  - type: textarea
+    id: duplicates
+    attributes:
+      label: Existing upstream reports and limitations
+      description: Link related reports, note the date and terms searched, and state what remains untested.
+    validations:
+      required: true

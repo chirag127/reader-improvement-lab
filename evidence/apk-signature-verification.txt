@@ -1,0 +1,15 @@
+Observation date: 2026-11-21
+Evidence type: static-observation / local cryptographic verifier execution
+Artifact SHA-256: e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc
+Tool: Android SDK Build Tools 36.0.0, apksigner
+Command: apksigner verify --verbose --print-certs <supplied-apk>
+Exit code: 1
+
+DOES NOT VERIFY
+ERROR: SHA-256 digest of classes3.dex does not match the digest specified in META-INF/MANIFEST.MF. Expected: <OkWj0DcMVYtEYVugShU3POAoCWjMN2TPRZa+i9JzmCw=>, actual: <FAS5ZDH8Iff8mQjuCxpUkTuFdSc6mpQsf3V+a9mbrWs=>
+ERROR: SHA-256 digest of classes5.dex does not match the digest specified in META-INF/MANIFEST.MF. Expected: <yhyHi0EisKoEEiXP73WJKu44mExfvJb+qsvnUk9xtiE=>, actual: <6Tu7pM486Mcpaa5JdTfYDDVq7M+kQYf5bzYv2pqwreM=>
+
+Curation: Local filesystem paths and Java native-access warnings are omitted.
+Interpretation: This artifact failed this verification. The result does not identify
+who changed the file, prove maliciousness, authenticate either declared signer,
+or establish a defect in an official Moon+ Reader release.

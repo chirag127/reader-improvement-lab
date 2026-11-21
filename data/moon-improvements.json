@@ -1,0 +1,1431 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-21",
+  "application_id": "moonreader",
+  "scope": "Exactly 64 draft improvement proposals derived from the dated Moon official baseline, supplied-artifact observations and already-reviewed alternatives. These are desired outcomes, not absence claims or application-test results. APK references apply only to the unknown-origin artifact with SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; they do not establish defects in the official Play build. Relative sources are repository-root-relative. Acceptance scenarios and numerical budgets are proposed checks, not executed measurements. Current availability must be checked before treating any refinement as missing.",
+  "proposals": [
+    {
+      "id": "MOON-001",
+      "title": "Retain PDF dirty state until a save succeeds",
+      "application_id": "moonreader",
+      "category": "reliability",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "reliability-candidate",
+      "existing_capability": "Moon advertises PDF annotations and handwriting, and the supplied artifact has annotation writeback and PDF-save paths.",
+      "baseline_refs": ["MF-05", "APK-PDF-002"],
+      "rationale": "The examined wrapper discards Document.Save's boolean while its caller clears dirty state before saving; this identifies a conditional status-propagation concern, not an observed official-app failure.",
+      "requested_change": "Propagate the durable save outcome through the annotation UI and sync bookkeeping. Keep edits pending after failure, explain the failed destination, and offer retry or Save a copy without claiming that the original was saved.",
+      "acceptance_criteria": [
+        "Annotate a synthetic two-page PDF, then make its test destination reject writes: saving reports failure, the original bytes remain readable, and the edit remains visibly pending.",
+        "Restore write access and retry: reopening the saved PDF shows the annotation exactly once; dirty state and the saved revision advance only after successful persistence.",
+        "While the first save is failing, a sync attempt does not advertise the failed edit as a successfully saved PDF revision."
+      ],
+      "sources": ["knowledge/apk-analysis.md#focused-verification-candidates", "evidence/static/observations.json", "data/artifact.json", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": [
+        "The static candidate is limited to supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; official-build reproduction is outstanding.",
+        "Native Save semantics, alternate failure handlers and actual storage-provider behavior were not established; some PDF reconstruction has decompiler warnings."
+      ]
+    },
+    {
+      "id": "MOON-002",
+      "title": "Report annotation export success only after a durable write",
+      "application_id": "moonreader",
+      "category": "reliability",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "reliability-candidate",
+      "existing_capability": "Current-book export is documented, and the supplied artifact already provides .mrexpt serialization and an export-to-file UI.",
+      "baseline_refs": ["MF-14", "APK-NOTE-001", "APK-NOTE-002"],
+      "rationale": "Smali corroborates that exportNotesToFile ignores its write helper's boolean and returns true for nonempty content. The saved focused follow-up describes ordinary output and an SD document-provider fallback returning false on handled failures, strengthening the conditional error-propagation concern without reproducing a destination failure.",
+      "requested_change": "Return the actual write/close result to the UI, distinguish an empty selection from a destination failure, and preserve the previous valid export when replacement cannot finish.",
+      "acceptance_criteria": [
+        "Export three synthetic notes through a test destination whose writer returns false without throwing: the UI reports failure and does not announce a completed export.",
+        "Retry to a writable destination: reading the resulting file recovers all three notes, including multiline Unicode text, and the completion view identifies that destination.",
+        "Interrupt replacement of an existing export: either the previous complete file or the new complete file is recoverable, with no partial file presented as successful."
+      ],
+      "sources": ["knowledge/apk-analysis.md#focused-verification-candidates", "evidence/static/observations.json", "data/artifact.json", "https://www.moondownload.com/faq.html"],
+      "limitations": [
+        "The wrapper observation concerns supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc, not an authenticated official release.",
+        "The helper follow-up is summarized in knowledge/apk-analysis.md and strengthens static reachability only. Real provider failures, storage grants, close/durability semantics and replacement guarantees still need runtime checks."
+      ]
+    },
+    {
+      "id": "MOON-003",
+      "title": "Persist a retryable outbox for failed note uploads",
+      "application_id": "moonreader",
+      "category": "reliability",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "reliability-candidate",
+      "existing_capability": "Moon already synchronizes highlights, notes and bookmarks, and the artifact serializes and compresses notes for cloud upload.",
+      "baseline_refs": ["MF-12", "APK-SYNC-001", "APK-SYNC-003"],
+      "rationale": "The examined upload site clears hasNewNoteForUpload before transfer and supplies a null callback; other recovery paths may exist, so durable retry is a verification target.",
+      "requested_change": "Keep a durable pending note revision until a transfer is acknowledged. Retain failure details and retry eligibility across process restart, with idempotent replay and bounded retry scheduling.",
+      "acceptance_criteria": [
+        "Create a synthetic note, have a controlled cloud endpoint reject the upload, then restart the app: the same note revision remains pending with a retry action.",
+        "Reconnect the endpoint and retry: the second client receives that note once and the local pending revision clears only after acknowledgement.",
+        "Lose the acknowledgement after the endpoint accepts a payload: retrying does not create a second logical annotation."
+      ],
+      "sources": ["knowledge/apk-analysis.md#focused-verification-candidates", "evidence/static/observations.json", "data/artifact.json", "https://www.moondownload.com/faq.html"],
+      "limitations": [
+        "APK-SYNC-003 is bounded to supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; it is not a reproduced official-app upload loss.",
+        "Unexamined callers may restore the flag or implement retries; actual provider acknowledgement and deduplication behavior were not tested."
+      ]
+    },
+    {
+      "id": "MOON-004",
+      "title": "Detect same-size cover revisions during synchronization",
+      "application_id": "moonreader",
+      "category": "reliability",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "reliability-candidate",
+      "existing_capability": "Moon documents custom covers, cover-cache rebuilding and cloud shelf synchronization. The saved artifact follow-up identifies cover-upload and cover-download verifiers that use the existing freshness predicates.",
+      "baseline_refs": ["MF-13", "MF-15", "MF-16", "APK-SYNC-002"],
+      "rationale": "Both predicates treat equal-sized nonempty files as unchanged before comparing dates. The saved follow-up traces their use in removing candidates from cover-transfer lists; an unresolved shared worker does not establish the same behavior for book files, notes or reading positions.",
+      "requested_change": "Detect changed cover revisions using a trustworthy revision identifier or content digest when size alone cannot establish equality, then invalidate the affected displayed cover after successful transfer.",
+      "acceptance_criteria": [
+        "Use two valid synthetic cover images of identical byte length but different pixels and digests: replace cover A with B through the custom-cover workflow and verify that upload and download each transfer B and display it on the receiving test client.",
+        "Repeat with identical byte counts and timestamps but different cover bytes on a controlled provider: the documented digest/revision fallback detects the changed cover.",
+        "Run cover sync again with identical content: no redundant cover payload or false conflict occurs, and unrelated covers retain their revisions."
+      ],
+      "sources": ["knowledge/apk-analysis.md#focused-verification-candidates", "evidence/static/observations.json", "data/artifact.json", "https://www.moondownload.com/privacymrp.html"],
+      "limitations": [
+        "The predicates and cover-verifier follow-up concern supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; official-build cover transfers were not exercised. The linked APK report identifies the bounded cover-transfer callers.",
+        "The shared nested worker remained unresolved, so this candidate is deliberately cover-scoped. Provider ETags need not be content hashes; the equality contract must be checked per provider."
+      ]
+    },
+    {
+      "id": "MOON-005",
+      "title": "Chunk over-limit TTS text without dropping the remainder",
+      "application_id": "moonreader",
+      "category": "reliability",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "reliability-candidate",
+      "existing_capability": "Moon already integrates Android TTS, queues utterances and advances through PDF pages and ebook chapters.",
+      "baseline_refs": ["MF-02", "APK-TTS-001", "APK-TTS-002"],
+      "rationale": "The examined queue shortens an over-limit string to a prefix and advances to the next line. Upstream segmentation may make that branch unreachable for normal documents.",
+      "requested_change": "If an over-limit segment can reach the queue, split and enqueue its complete remainder at Unicode-safe boundaries, preserving document offsets and advancing only after all chunks complete.",
+      "acceptance_criteria": [
+        "Feed a synthetic paragraph longer than twice the selected engine's input limit through the actual document-to-TTS path: a recording test engine receives every source token in order, including a unique final sentinel.",
+        "Place an emoji surrogate pair and combining character at a proposed split boundary: submitted utterances remain valid text and do not duplicate or omit characters.",
+        "Pause after the first chunk and resume: the remaining chunks finish before the next paragraph starts."
+      ],
+      "sources": ["knowledge/apk-analysis.md#focused-verification-candidates", "evidence/static/observations.json", "data/artifact.json", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": [
+        "The queue observation is specific to supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; no truncation was heard or reproduced on an official build.",
+        "Over-limit reachability, engine-specific limits and existing upstream segmentation must be measured before reporting a defect."
+      ]
+    },
+    {
+      "id": "MOON-006",
+      "title": "Recover unfinished note edits after lifecycle interruption",
+      "application_id": "moonreader",
+      "category": "reliability",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon documents ebook notes, highlights and bookmarks; this proposal concerns an unfinished editor draft rather than adding annotation support.",
+      "baseline_refs": ["MF-07", "MF-14"],
+      "rationale": "An editable draft and a committed annotation have different lifecycles; reliable recovery should preserve the former without publishing a half-written note as final.",
+      "requested_change": "Checkpoint unfinished note text and its source selection locally, distinguish recovered drafts from saved notes, and let the user resume or explicitly discard the recovered draft.",
+      "acceptance_criteria": [
+        "Enter a multiline synthetic note without pressing Save, rotate the device and recreate the activity: text, selection and caret position are restored in the editor.",
+        "Background the editor, terminate its process in the disposable test environment and reopen the book: a recoverable draft is offered and the previously saved note remains intact.",
+        "Choose Discard on that draft and reopen again: the discarded text does not reappear or enter annotation export."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "https://www.moondownload.com/", "https://www.moondownload.com/faq.html"],
+      "limitations": ["Current draft autosave, lifecycle restoration and interaction with existing backups were not tested; this is a desired recovery contract, not a reported loss."]
+    },
+    {
+      "id": "MOON-007",
+      "title": "Preserve multi-column reading order in PDF text reflow",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "PDF rendering and reading controls are documented, and APK-PDF-001 establishes an existing PDF text-extraction and reflow path in the supplied artifact.",
+      "baseline_refs": ["MF-06", "APK-PDF-001"],
+      "rationale": "Presence of native reflow does not establish paragraph ordering for columns, sidebars or mixed writing directions; those are concrete quality extensions.",
+      "requested_change": "Offer reading-order-aware reflow with a per-document override or region-order correction for ambiguous layouts, retaining a clear route back to original-page view.",
+      "acceptance_criteria": [
+        "Reflow a synthetic two-column PDF with numbered paragraphs 1-6 on the left and 7-12 on the right: the displayed text follows the authored order without alternating columns.",
+        "Use a page with a sidebar and an RTL body: the reader can select the intended region order, and that override survives reopening without altering the PDF bytes."
+      ],
+      "sources": ["knowledge/apk-analysis.md#pdf--existing-rendering-extraction-reflow-and-annotations", "evidence/static/observations.json", "data/artifact.json", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": [
+        "Reflow presence is artifact-specific to SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; current official-build controls and output order require checking.",
+        "Native extraction, tagged-PDF handling and the exact PDF SDK version were not inspected; no multi-column failure was reproduced."
+      ]
+    },
+    {
+      "id": "MOON-008",
+      "title": "Keep reflow selection and annotations anchored to PDF pages",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already has documented PDF annotations and a supplied-artifact PDF reflow path; this request concerns their combined workflow.",
+      "baseline_refs": ["MF-05", "MF-06", "APK-PDF-001", "APK-PDF-002"],
+      "rationale": "The reviewed baseline records Foxit's versioned manual describing annotation within reflow. That is a documented design reference, while Moon's combined-mode behavior remains untested.",
+      "requested_change": "Retain a source-page/text-range anchor when changing between original and reflow views, and expose selection-to-annotation editing with an explicit fallback when the range cannot be mapped reliably.",
+      "acceptance_criteria": [
+        "Highlight the second occurrence of a repeated phrase in reflow on a synthetic three-page PDF: original view shows the same occurrence and page, and returning to reflow retains the selection.",
+        "Change reflow font size and rotate: the note still opens at its source passage rather than the start of the document.",
+        "For an intentionally ambiguous extraction range, show an unresolved mapping choice instead of silently attaching the annotation to a different occurrence."
+      ],
+      "sources": ["knowledge/apk-analysis.md#pdf--existing-rendering-extraction-reflow-and-annotations", "data/artifact.json", "knowledge/moon-baseline.md#comparator-qualifications", "https://help.foxit.com/manuals/pdf-editor/mobile/en_us/2026.4.0/Adjust_PDF_Views.html"],
+      "limitations": [
+        "Moon static evidence applies only to supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; combined reflow/annotation availability needs official-build checking.",
+        "The Foxit comparison is documentation, not an executed cross-reader test; native coordinate/text mapping and PDF import reconstruction remain incomplete."
+      ]
+    },
+    {
+      "id": "MOON-009",
+      "title": "Explain per-page PDF text availability and reflow fallback",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon's supplied artifact already extracts PDF text for reflow and search, while the official PDF feature list includes speech and reading modes.",
+      "baseline_refs": ["MF-02", "MF-06", "APK-PDF-001"],
+      "rationale": "A scan, a mixed text/image document and a parser error need different explanations; an empty reflow view should not be presented as proof that the whole book has no searchable content.",
+      "requested_change": "Show text availability and extraction errors per page, keep original-page viewing available, and explain which actions need a text layer. Describe any existing OCR route accurately rather than implying that extraction itself performs OCR.",
+      "acceptance_criteria": [
+        "Open a synthetic PDF with one image-only page followed by one text page: reflow explains the first page's lack of extractable text and still displays the second page's text.",
+        "Have a controlled extractor fail on one page: the UI distinguishes extraction failure from an image-only page and offers original view without losing the current page.",
+        "Searching the mixed document reports which pages were unsearchable instead of displaying an unqualified zero-result claim for the whole file."
+      ],
+      "sources": ["knowledge/apk-analysis.md#pdf--existing-rendering-extraction-reflow-and-annotations", "data/artifact.json", "knowledge/moon-baseline.md#comparator-qualifications", "https://feedback.xodo.com/support/solutions/articles/35000202857-reading-mode-reflow-"],
+      "limitations": [
+        "PDF extraction evidence is confined to supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; current error messaging and OCR availability are unknown.",
+        "The reviewed Xodo help is older documentation of a no-text explanation, not evidence of current Moon or Xodo runtime behavior."
+      ]
+    },
+    {
+      "id": "MOON-010",
+      "title": "Preserve annotation geometry through crop and rotation",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon advertises PDF highlighting, handwriting, annotations and multiple reading orientations.",
+      "baseline_refs": ["MF-05", "MF-06", "MF-19"],
+      "rationale": "Screen-space drawing and PDF page-space coordinates differ under crop boxes, rotation and zoom; interoperability needs a geometry-specific contract in addition to successful saving.",
+      "requested_change": "Normalize markup geometry to the PDF's page coordinate system and consistently transform it for cropped, rotated, zoomed and dual-page views.",
+      "acceptance_criteria": [
+        "Highlight a marked word and draw around a target rectangle in a synthetic PDF with a nonzero crop origin and pages rotated 0, 90, 180 and 270 degrees: marks remain on the intended targets after reopening.",
+        "Save the annotated copy and inspect it in two independent named viewers: the highlight quadrilaterals and ink bounds match the fixture targets within a declared coordinate tolerance.",
+        "Switch between single- and dual-page views and zoom twice: no annotation migrates to the neighboring page."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["No geometry defect was reproduced. The support boundary for PDF rotation/crop combinations and viewer-specific annotation appearances needs fixture testing."]
+    },
+    {
+      "id": "MOON-011",
+      "title": "Round-trip supported PDF form values across viewers",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "PDF form filling is already advertised in Moon+ Reader Pro; this proposal specifies persistence and compatibility of supported field types.",
+      "baseline_refs": ["MF-05"],
+      "rationale": "A field looking filled in the current session does not alone establish saved values, appearance streams or interoperability with other readers.",
+      "requested_change": "Define and verify a supported form-field matrix, persist values with readable appearances, and explain unsupported dynamic or scripted forms without silently treating them as ordinary editable fields.",
+      "acceptance_criteria": [
+        "Fill a synthetic AcroForm containing Unicode text, multiline text, a checkbox, a radio group and a choice field: values survive closing and reopening the file in Moon.",
+        "Open the saved file in two independent named viewers and inspect both visible appearances and stored field values: each supported field retains the chosen value.",
+        "Open a fixture with an explicitly unsupported form type: the app identifies that limitation before offering a misleading editable workflow."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["The official broad form claim does not identify every field type; no form round trip, XFA support or script execution was verified in this lane."]
+    },
+    {
+      "id": "MOON-012",
+      "title": "Make PDF handwriting and annotation undo transactional",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents PDF handwriting, highlighting and annotation editing.",
+      "baseline_refs": ["MF-05"],
+      "rationale": "Undo should operate on a recognizable editing action, not an arbitrary subset of sampled pen points or a different page's most recent change.",
+      "requested_change": "Group completed pen strokes and annotation edits into explicit undoable actions, maintain per-document history, and ensure the final selected undo/redo state is the state saved to the PDF.",
+      "acceptance_criteria": [
+        "Draw three strokes on page 1, erase the middle stroke and undo once: the complete middle stroke returns while the other two remain unchanged.",
+        "Edit a note on page 2, undo and redo it, then save and reopen: the note text and ink match the final redo state.",
+        "Switch to a second PDF and invoke Undo: it cannot undo a change in the first document."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Current undo granularity, history persistence and stylus handling have not been inspected; this extends the existing editing workflow without declaring undo absent."]
+    },
+    {
+      "id": "MOON-013",
+      "title": "Keep glyph and transparency output consistent across PDF backends",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon renders PDFs, and the supplied artifact selects GL or ordinary PDF layouts through existing Radaee wrapper paths.",
+      "baseline_refs": ["MF-06", "APK-PDF-001"],
+      "rationale": "Backend selection is a concrete comparison seam for missing glyphs, transparency differences and text-selection misalignment; the static map supplies no fidelity measurement.",
+      "requested_change": "Maintain a backend conformance corpus for embedded subset fonts, ligatures and transparent overlays, with a recoverable alternate rendering path and a diagnostic indication of the active backend.",
+      "acceptance_criteria": [
+        "Render the same synthetic PDF containing embedded subset glyphs, a ligature and a transparent color patch through each supported backend: all expected characters and overlay relationships appear at the fixture's marked positions.",
+        "Select a numbered text span at two zoom levels in each backend: its selection bounds stay aligned with the visible span within the documented test tolerance.",
+        "Switch backend while viewing page 3: page, zoom and existing annotations are retained and the diagnostic view reports the newly active backend."
+      ],
+      "sources": ["knowledge/apk-analysis.md#pdf--existing-rendering-extraction-reflow-and-annotations", "evidence/static/observations.json", "data/artifact.json", "https://www.moondownload.com/download.html"],
+      "limitations": [
+        "Backend paths were observed in supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; backend availability and switching UI in the official build need checking.",
+        "No native implementation, exact SDK version or rendering defect was established; reference-renderer agreement alone would not certify all PDF conformance."
+      ]
+    },
+    {
+      "id": "MOON-014",
+      "title": "Preserve figures when applying PDF night themes",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises PDF night mode and six additional PDF themes, alongside general theme customization.",
+      "baseline_refs": ["MF-06", "MF-08"],
+      "rationale": "Recoloring a page can help body text while changing the meaning of color-coded charts; a figure-aware override refines existing themes.",
+      "requested_change": "Provide an inspectable preserve-figure-colors option or per-page original-color override, with a quick original/theme comparison that leaves document bytes untouched.",
+      "acceptance_criteria": [
+        "Apply night mode to a synthetic PDF with black body text and a red/green/blue legend: the preserve-figure option keeps the legend colors while applying the selected reading treatment to body text.",
+        "Set an original-color exception on page 2, reopen the book and return to page 1: only page 2 retains the exception and the source PDF hash is unchanged."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Current image-preservation controls and theme behavior were not tested; separating vector diagrams from body content may require an explicit page override rather than automatic classification."]
+    },
+    {
+      "id": "MOON-015",
+      "title": "Persist page-group crop and zoom profiles",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents PDF scroll/reading controls and orientations, and the observed v10.8 notes advertise double-tap zoom for PDF, DjVu and comics.",
+      "baseline_refs": ["MF-06", "MF-19"],
+      "rationale": "Alternating scanned margins and occasional landscape inserts benefit from scoped view presets instead of repeatedly adjusting the same pages.",
+      "requested_change": "Allow per-document crop/zoom profiles scoped to odd, even or selected pages, with a preview and reversible reset; define how double-tap zoom and rotation interact with those profiles.",
+      "acceptance_criteria": [
+        "Set different margins for odd and even pages of a synthetic six-page PDF: navigation and reopening apply each profile to the intended pages without cropping the wrong edge.",
+        "Give page 4 a landscape override, rotate the device and double-tap zoom: returning to fit mode restores that page's saved profile while other pages retain their own settings.",
+        "Reset the profiles: full page bounds return and the original document bytes remain unchanged."
+      ],
+      "sources": ["knowledge/moon-baseline.md#observed-v108-release-notes", "knowledge/moon-baseline.md#existing-capability-baseline", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Existing crop/profile granularity and double-tap interactions have not been exercised; this is not a claim that crop or zoom controls are missing."]
+    },
+    {
+      "id": "MOON-016",
+      "title": "Offer an independently navigable two-document workspace",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "low",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "new-capability-candidate",
+      "existing_capability": "Moon already advertises landscape dual-page reading of one book; independently reading two documents is a different workflow.",
+      "baseline_refs": ["MF-06", "MF-19"],
+      "rationale": "Readest's reviewed README documents two-document Parallel Read, providing a design reference for comparing a PDF reference with a separate text or translation.",
+      "requested_change": "Evaluate an in-app two-document workspace with independent navigation, selection and unsaved state, explicit active-pane focus, and restoration of each document's position.",
+      "acceptance_criteria": [
+        "Open a synthetic PDF in one pane and a synthetic EPUB in the other: turning or searching in one pane leaves the other pane's location unchanged.",
+        "Create an annotation in each pane, rotate and restore the workspace: each note belongs to the correct document and each pane returns to its own location.",
+        "Close one pane with an unfinished edit: its save/discard decision applies only to that pane and the other document remains usable."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/alternatives-android.md", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"],
+      "limitations": [
+        "Current availability needs checking: the reviewed Moon sources establish dual-page layout, not the presence or absence of a two-document workspace.",
+        "Readest's parallel-reading claim is documentation-only here; Android window size, memory and input constraints need focused feasibility testing."
+      ]
+    },
+    {
+      "id": "MOON-017",
+      "title": "Make literal and regular-expression search explicit modes",
+      "application_id": "moonreader",
+      "category": "search",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "The supplied artifact already searches book content with a compiled regular expression and case/whole-word options; Moon also documents library search.",
+      "baseline_refs": ["MF-15", "APK-SEARCH-001"],
+      "rationale": "Entered punctuation becomes regex syntax in the inspected worker. An explicit mode contract would let ordinary quotation searches and intentional patterns coexist without guessing how punctuation is interpreted.",
+      "requested_change": "Expose clearly labeled Literal and Regular expression modes, quote metacharacters in literal mode, explain case/whole-word interactions, and show the active mode when recalling a query.",
+      "acceptance_criteria": [
+        "Search a synthetic chapter containing A+B, AAB and [draft]: literal A+B and [draft] each match only their exact text, while regex A+B matches AAB under the stated regex rules.",
+        "Recall a saved regex query after switching books: its mode is visible before execution, and changing to Literal changes the matching semantics without rewriting the entered text.",
+        "Enable whole-word matching for a literal term containing parentheses: escaping preserves the literal query and the documented word-boundary rule determines the result."
+      ],
+      "sources": ["knowledge/apk-analysis.md#search--content-and-settings-have-different-paths", "evidence/static/observations.json", "data/artifact.json"],
+      "limitations": [
+        "Regex construction was observed only in supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; intended UI semantics and existing mode controls on an official build need checking.",
+        "No literal-query failure was reproduced; selected worker smali corroborates construction, not every format's matching behavior."
+      ]
+    },
+    {
+      "id": "MOON-018",
+      "title": "Recover from invalid patterns and cancel expensive searches",
+      "application_id": "moonreader",
+      "category": "search",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "reliability-candidate",
+      "existing_capability": "Moon's artifact has a background content-search worker and a stopSearch flag; this proposal strengthens failure and cancellation behavior of that existing search.",
+      "baseline_refs": ["APK-SEARCH-001"],
+      "rationale": "A loop flag does not establish interruption of a regex match or native extraction call. The inspected code leaves exception recovery, worst-case execution and stale-result handling unresolved.",
+      "requested_change": "Validate patterns before starting work, keep the search form usable after errors, and use cancellable or time-bounded matching/extraction ownership with query generations so abandoned work cannot publish into a replacement search.",
+      "acceptance_criteria": [
+        "Submit the malformed regex (: the form shows a syntax error, clears its busy state and successfully runs a subsequent valid query without reopening the book.",
+        "On a declared test device, run (a+)+$ against a synthetic long a-prefix ending in a nonmatching character and press Cancel: within a proposed one-second UI budget the form becomes usable and bounded worker cleanup is recorded.",
+        "Delay query A's extraction callback, cancel A and complete query B: releasing A's callback neither changes B's results nor navigates to A's matches."
+      ],
+      "sources": ["knowledge/apk-analysis.md#focused-verification-candidates", "evidence/static/observations.json", "data/artifact.json"],
+      "limitations": [
+        "This conditional concern is confined to supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; actual regex hangs, exceptions and official-build cancellation were not reproduced.",
+        "The search reconstruction has warnings; interrupting a native call may require isolating work rather than relying on thread interruption alone. The time budget is a proposed target."
+      ]
+    },
+    {
+      "id": "MOON-019",
+      "title": "Normalize search text while preserving exact highlight offsets",
+      "application_id": "moonreader",
+      "category": "search",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already has format-specific content search, snippets and PDF text extraction, alongside support for many document formats and languages.",
+      "baseline_refs": ["MF-01", "MF-20", "APK-SEARCH-001"],
+      "rationale": "Equivalent Unicode text and line-break artifacts can differ from stored characters. The reviewed PDF.js find-controller analysis shows normalized-to-original offset mapping as a design reference, not proof of Moon's current behavior.",
+      "requested_change": "Define optional diacritic and typographic normalization with a mapping back to original ranges, including phrase matching across inline text-node or soft-line boundaries without highlighting unrelated text.",
+      "acceptance_criteria": [
+        "Search a synthetic EPUB containing NFC and decomposed cafe-with-accent, and a phrase split by an inline emphasis element: equivalent queries find the intended occurrences under the selected normalization policy.",
+        "In a PDF containing the fi ligature and a line-end hyphenated word, each enabled normalization match highlights the actual source glyph range; copying the result retains original text.",
+        "Disable diacritic folding and repeat a cafe query: accented and unaccented results follow the displayed exact-match policy."
+      ],
+      "sources": ["knowledge/apk-analysis.md#search--content-and-settings-have-different-paths", "data/artifact.json", "knowledge/alternatives-desktop-web.md#31-pdfjs", "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/pdf_find_controller.js#L635-L946"],
+      "limitations": [
+        "Moon search observations concern supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; current normalization options and offset fidelity were not tested.",
+        "The PDF.js comparison uses the repository's pinned source review; no browser or Android equivalence test was executed, and language-specific normalization needs explicit policy."
+      ]
+    },
+    {
+      "id": "MOON-020",
+      "title": "Scope searches to chapters or page ranges with stable return context",
+      "application_id": "moonreader",
+      "category": "search",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon's content-search path already has direction filters, snippets and format-specific scans; this request refines scope and navigation rather than adding search.",
+      "baseline_refs": ["MF-01", "APK-SEARCH-001"],
+      "rationale": "A reader checking one chapter or appendix should be able to distinguish that scope from the entire book and return to the exact reading context after inspecting a hit.",
+      "requested_change": "Expose chapter and PDF-page-range scopes with labeled physical/page-label semantics, retain query/scope/selected hit across view changes, and make Back restore the pre-search passage and zoom.",
+      "acceptance_criteria": [
+        "Search a three-chapter EPUB whose target word occurs once per chapter with chapter 2 selected: only the chapter-2 hit is listed, and switching to Whole book yields three hits.",
+        "Search physical pages 3-5 in a PDF with Roman-numeral front matter: the scope label identifies the chosen numbering system and excludes hits outside that range.",
+        "Open a result, change orientation and return with Back: the original passage and PDF zoom are restored while the scoped query remains available."
+      ],
+      "sources": ["knowledge/apk-analysis.md#search--content-and-settings-have-different-paths", "data/artifact.json", "knowledge/alternatives-desktop-web.md#calibre--library-conversion-and-configurable-ebook-reading", "https://manual.calibre-ebook.com/viewer.html"],
+      "limitations": [
+        "The supplied search path is bound to SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; existing chapter/range controls and navigation history in the official build need checking.",
+        "Calibre's documented chapter scope is an adjacent workflow reference; it does not establish identical PDF or Android behavior."
+      ]
+    },
+    {
+      "id": "MOON-021",
+      "title": "Stream capped search results with honest completion counts",
+      "application_id": "moonreader",
+      "category": "search",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "The artifact already delivers search results through handlers and contains result-count checks in some format branches.",
+      "baseline_refs": ["APK-SEARCH-001"],
+      "rationale": "Partial delivery, a display cap and a completed total are different states. Uniform state reporting makes a frequent-term search useful before every result has been materialized.",
+      "requested_change": "Use a consistent paged result model across supported formats, distinguish loaded, matched and still-searching counts, and expose Continue or Refine when a configured cap is reached.",
+      "acceptance_criteria": [
+        "Search equivalent synthetic TXT, EPUB and PDF inputs with 1,200 known matches and a proposed display cap of 100: each shows the first page of hits and labels the cap instead of claiming that 100 is the total.",
+        "Request more results until completion: every known hit is reachable exactly once in documented order, with a final total of 1,200.",
+        "Replace the query while the next result page is loading: the old batch cannot inflate the new query's count or move its selection."
+      ],
+      "sources": ["knowledge/apk-analysis.md#search--content-and-settings-have-different-paths", "evidence/static/observations.json", "data/artifact.json"],
+      "limitations": [
+        "Branch-level checks were observed only in supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; no inconsistent cap was reproduced.",
+        "The proposed 100-result page size is a test configuration, not a measured current limit; complete search coverage and extraction failures require separate reporting."
+      ]
+    },
+    {
+      "id": "MOON-022",
+      "title": "Offer an opt-in offline full-text index for selected shelves",
+      "application_id": "moonreader",
+      "category": "search",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "new-capability-candidate",
+      "existing_capability": "Moon already documents library import/search and shelves, and the artifact searches inside books; this candidate concerns cross-book content indexing.",
+      "baseline_refs": ["MF-15", "APK-SEARCH-001"],
+      "rationale": "Readest's reviewed README advertises search across a current library shelf. A scoped local index could connect passages across a collection while making index coverage and storage cost explicit.",
+      "requested_change": "Evaluate an offline, opt-in shelf index with incremental content revision checks, per-book coverage states, exclusion controls and document-plus-passage results.",
+      "acceptance_criteria": [
+        "Index a selected shelf of ten synthetic books containing a unique sentinel in two books: an offline query returns the two passages and identifies all ten books' indexing states.",
+        "Edit one indexed book to remove its sentinel and reindex: its stale hit disappears without rescanning unchanged books' content.",
+        "Remove a book from the selected shelf and purge its index entry: subsequent search yields no cached passage from that book and reports the reduced scope."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/apk-analysis.md#search--content-and-settings-have-different-paths", "data/artifact.json", "knowledge/alternatives-android.md", "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"],
+      "limitations": [
+        "Current availability needs checking: library search and in-book search do not establish whether Moon already offers a cross-book full-text index.",
+        "The static search baseline concerns supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; Readest shelf search was documented, not benchmarked here. Index size and encrypted-document policy remain design questions."
+      ]
+    },
+    {
+      "id": "MOON-023",
+      "title": "Combine annotation text and metadata filters in a review view",
+      "application_id": "moonreader",
+      "category": "search",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already provides highlights, notes and bookmarks, library organization and selected-note sharing; this request refines finding and reviewing those annotations.",
+      "baseline_refs": ["MF-07", "MF-15", "APK-NOTE-003"],
+      "rationale": "Searching original quotations separately from personal note text, then intersecting color/type/date/book filters, supports review without confusing annotation results with ordinary book-content hits.",
+      "requested_change": "Provide composable filters over annotation quote text, note text, type, color, date and selected books, with a visible filter summary and direct navigation to the source annotation.",
+      "acceptance_criteria": [
+        "Create twelve synthetic annotations across three books, including a quote-only match and a note-only match: choosing Note text excludes the quote-only match and selecting a book/color intersection produces the expected subset.",
+        "Open one filtered result, edit its note and return: the view re-evaluates that record against the filters while retaining the remaining result order and selection.",
+        "Export the displayed selection: the chosen annotation count equals the filtered set, not every note in the current book."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/apk-analysis.md#notesexport--a-local-model-and-several-distinct-outputs", "data/artifact.json", "knowledge/alternatives-desktop-web.md#34-zotero-reader", "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/annotation-manager.js#L243-L478"],
+      "limitations": [
+        "Current Moon annotation-filter combinations are untested; the request extends existing notes without declaring annotation search or color filtering absent.",
+        "The sharing baseline is specific to supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc. Zotero's inspected filters are a source-level reference, not an Android usability result."
+      ]
+    },
+    {
+      "id": "MOON-024",
+      "title": "Deep-link settings search results with aliases and context",
+      "application_id": "moonreader",
+      "category": "search",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "APK-SEARCH-002 establishes existing settings/function search over dialog titles and views; Moon also documents many configurable reading controls.",
+      "baseline_refs": ["MF-04", "MF-08", "APK-SEARCH-002"],
+      "rationale": "A matching dialog title is less useful than a navigable setting with its active value and applicable document mode; aliases can bridge user vocabulary and localized labels.",
+      "requested_change": "Extend existing settings search with stable control destinations, curated localized aliases, current-value summaries and explanations for context-dependent settings, preserving a route back to reading.",
+      "acceptance_criteria": [
+        "Search the proposed alias speak in English: a TTS settings result opens the exact relevant control, identifies its current value and returns to the previous passage after dismissal.",
+        "Search for a PDF-only control while reading an EPUB: the result explains its PDF context instead of opening an unrelated control or silently doing nothing.",
+        "Change app language and repeat with a documented translated alias: the same logical setting is reached and receives accessibility focus."
+      ],
+      "sources": ["knowledge/apk-analysis.md#search--content-and-settings-have-different-paths", "evidence/static/observations.json", "data/artifact.json", "https://www.moondownload.com/faq.html"],
+      "limitations": [
+        "Settings search is static evidence from supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; existing aliases, deep links and localization coverage require official-build checking.",
+        "The suggested alias and control-summary behavior are proposed acceptance inputs, not verified current labels or entrypoints."
+      ]
+    },
+    {
+      "id": "MOON-025",
+      "title": "Version the annotation export schema and stable identities",
+      "application_id": "moonreader",
+      "category": "export-interoperability",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon documents annotation export and backup, and the supplied artifact already serializes PDF and non-PDF annotations through reader-specific .mrexpt paths.",
+      "baseline_refs": ["MF-14", "APK-NOTE-001"],
+      "rationale": "Readest already consumes .mrexpt, but its interpretation is not a publisher specification. Stable schema and identity semantics would make compatible migration less dependent on inferred positional fields.",
+      "requested_change": "Publish a versioned export contract with document revision identity, stable annotation IDs, quote/note separation, original timestamps, color/type semantics and format-specific locator definitions; provide an explicit backward-compatible upgrade path.",
+      "acceptance_criteria": [
+        "Export an unchanged synthetic EPUB and PDF twice: schema version, document identity and annotation IDs remain stable, while any export-time metadata is explicitly separate.",
+        "Rename the source file and re-export: annotation IDs persist and the contract distinguishes path metadata from content revision identity.",
+        "Parse a fixture containing an unknown optional field and one declaring an unsupported major version: a reference consumer preserves the former and explicitly rejects or negotiates the latter without misreading records."
+      ],
+      "sources": ["knowledge/apk-analysis.md#notesexport--a-local-model-and-several-distinct-outputs", "evidence/static/observations.json", "data/artifact.json", "knowledge/alternatives-android.md#readest", "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/utils/mrexpt.ts"],
+      "limitations": [
+        "Existing serialization evidence concerns supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; a publisher-endorsed schema and official-build round trips were not established.",
+        "Readest's third-party parser is not authoritative for Moon field meanings; verify actual lawful exports before fixing a compatibility contract."
+      ]
+    },
+    {
+      "id": "MOON-026",
+      "title": "Reconcile migration anchors with exact and fallback outcomes",
+      "application_id": "moonreader",
+      "category": "export-interoperability",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already imports and exports reader-specific annotations, and Readest has a reviewed UI-wired Moon importer; this request improves anchor fidelity and visible reconciliation.",
+      "baseline_refs": ["MF-14", "APK-NOTE-001"],
+      "rationale": "The reviewed Readest converter can select first text-node matches or fall back to a chapter location. That specific third-party behavior motivates richer occurrence/context information and honest import outcomes, not an allegation about Moon's importer.",
+      "requested_change": "Carry occurrence-disambiguating quote context in supported exports and provide an import reconciliation preview with exact, chapter-fallback, ambiguous and skipped categories, including manual resolution before committing uncertain anchors.",
+      "acceptance_criteria": [
+        "Migrate synthetic notes on repeated phrases in two chapters and on a phrase split by inline elements: exact outcomes identify the intended occurrences rather than the first matching text alone.",
+        "Import a changed-edition fixture containing one missing quote and two ambiguous candidates: the reconciliation counts sum to all input records and expose those records for review instead of labeling them exact.",
+        "Resolve one ambiguous entry manually and reimport the same file: the resolution persists and a second logical annotation is not created."
+      ],
+      "sources": ["knowledge/apk-analysis.md#notesexport--a-local-model-and-several-distinct-outputs", "data/artifact.json", "knowledge/alternatives-android.md#readest", "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/annotation/providers/mrexpt.ts", "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/app/reader/components/annotator/Annotator.tsx"],
+      "limitations": [
+        "Moon import/export observations are confined to supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; its import reconstruction is imperfect and actual matching behavior is untested.",
+        "Readest already has duplicate/update handling; its source-level anchor limitations do not prove a defect in Moon or universal incompatibility. Changed editions may remain intrinsically ambiguous."
+      ]
+    },
+    {
+      "id": "MOON-027",
+      "title": "Export selected books as configurable study documents",
+      "application_id": "moonreader",
+      "category": "export-interoperability",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already offers current-book export, selected-note text sharing and optional chapter headings; this request extends selection scope and output presentation.",
+      "baseline_refs": ["MF-14", "APK-NOTE-003"],
+      "rationale": "The reviewed KOReader exporter has selected-file/history scope and Markdown/JSON/text/HTML targets. Those existing comparator workflows support a concrete multi-book study-export design without implying Moon has no export.",
+      "requested_change": "Offer selected-book batch study exports with Markdown and CSV presentation presets, configurable book/chapter hierarchy and metadata columns, a preview, and per-book completion accounting.",
+      "acceptance_criteria": [
+        "Select notes from two of three synthetic books: Markdown output includes only those two, separates quote from commentary, and preserves the three-level chapter hierarchy selected in the preset.",
+        "Export notes containing commas, quotes, newlines and Markdown delimiters to CSV and Markdown: a CSV parser recovers exact cells and the Markdown preview does not accidentally convert note text into unrelated headings.",
+        "Make one book's destination fail during a batch: the summary names the successful and failed books and permits retrying only the failed output."
+      ],
+      "sources": ["knowledge/apk-analysis.md#notesexport--a-local-model-and-several-distinct-outputs", "data/artifact.json", "knowledge/alternatives-android.md#koreader", "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/main.lua", "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/template/md.lua#L39-L65"],
+      "limitations": [
+        "Current Moon batch scopes and structured-format options were not exhaustively inspected; sharing observations concern supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc.",
+        "KOReader's export paths were source-reviewed, not executed here; desktop note-tool rendering and CSV dialect compatibility require separate checks."
+      ]
+    },
+    {
+      "id": "MOON-028",
+      "title": "Preserve Unicode and delimiter-like text through annotation round trips",
+      "application_id": "moonreader",
+      "category": "export-interoperability",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "The existing .mrexpt serializer carries original text, note text and formatting metadata, with distinct PDF/non-PDF representations and an import path.",
+      "baseline_refs": ["MF-14", "APK-NOTE-001"],
+      "rationale": "Free-form note content can resemble record separators or metadata. A lossless escaping and compatibility contract is independently useful even when schema versioning and ordinary exports already work.",
+      "requested_change": "Specify and verify encoding, escaping, newline and null/empty-value semantics for both representations, preserving original note content and reporting malformed records without silently truncating adjacent entries.",
+      "acceptance_criteria": [
+        "Round-trip synthetic PDF and EPUB notes containing emoji, combining marks, RTL text, blank lines and text resembling format separators: quote text, commentary and note count are exactly preserved.",
+        "Include empty commentary, a zero-length optional field and a long multiline note: export/import preserves the documented distinction between missing and empty values.",
+        "Truncate one record in a test export: import identifies its failure and does not join its text to the next annotation or report a fully successful round trip."
+      ],
+      "sources": ["knowledge/apk-analysis.md#notesexport--a-local-model-and-several-distinct-outputs", "evidence/static/observations.json", "data/artifact.json"],
+      "limitations": [
+        "Serialization was examined only in supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; no Unicode or delimiter corruption was reproduced.",
+        "PDF import has decompiler warnings and non-PDF reconstructed control flow is imperfect; exact on-disk syntax must be validated from lawful generated exports."
+      ]
+    },
+    {
+      "id": "MOON-029",
+      "title": "Make Readwise delivery resumable and duplication-aware",
+      "application_id": "moonreader",
+      "category": "export-interoperability",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "APK-NOTE-003 records an existing token-authenticated Readwise highlight upload with metadata and a result callback, alongside Moon's general sharing support.",
+      "baseline_refs": ["MF-07", "APK-NOTE-003"],
+      "rationale": "External delivery has partial-batch, expired-token and uncertain-acknowledgement cases distinct from local export or Moon-to-Moon cloud note synchronization.",
+      "requested_change": "Track per-record external delivery outcomes, resume unsent portions, map supported source identities to the service's available deduplication/update contract, and expose uncertainty when delivery cannot be confirmed.",
+      "acceptance_criteria": [
+        "Send five synthetic highlights through a controlled compatible endpoint that accepts two then fails: the UI reports two acknowledged and three pending, and retry does not resend known-acknowledged records.",
+        "Return an authentication failure: the token-repair flow retains the pending selection and resumes it after reauthentication without exposing the token in the error display.",
+        "Drop the acknowledgement after a successful remote write: reconcile using supported service identifiers when possible, otherwise show an uncertain-delivery state rather than silently claiming exactly-once delivery."
+      ],
+      "sources": ["knowledge/apk-analysis.md#notesexport--a-local-model-and-several-distinct-outputs", "evidence/static/observations.json", "data/artifact.json"],
+      "limitations": [
+        "Readwise integration presence is specific to supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; live service success, retry behavior and current official-build UI were not tested.",
+        "Current Readwise API limits, idempotency facilities and update semantics were not researched in this lane; do not promise server capabilities the service does not expose."
+      ]
+    },
+    {
+      "id": "MOON-030",
+      "title": "Align quote-image encoding, filename and share MIME type",
+      "application_id": "moonreader",
+      "category": "export-interoperability",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "reliability-candidate",
+      "existing_capability": "Moon already has rendered quote/image sharing in PrefShareText; the candidate concerns its transfer metadata rather than adding quote cards.",
+      "baseline_refs": ["MF-07", "APK-NOTE-003"],
+      "rationale": "The inspected path pairs a .jpg cache filename with an image/png share intent. The actual encoded bytes and receiving-app behavior were not observed, so compatibility needs a focused check.",
+      "requested_change": "Derive the file extension, content-provider MIME type and intent MIME type from the actual encoder, and preserve a readable URI grant for the receiving application.",
+      "acceptance_criteria": [
+        "Share a synthetic quote card to a diagnostic receiver: its filename extension, byte signature, provider-reported type and intent type all identify the same image format.",
+        "Open the received image in two independent named image consumers, including one that trusts MIME metadata: both decode the complete card after the sender leaves the foreground.",
+        "Cancel the share and generate another card: any reused URI resolves to the correct new image rather than stale bytes."
+      ],
+      "sources": ["knowledge/apk-analysis.md#notesexport--a-local-model-and-several-distinct-outputs", "evidence/static/observations.json", "data/artifact.json"],
+      "limitations": [
+        "The metadata pairing was observed only in supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; no encoding or share failure was reproduced on an official build.",
+        "Receiver tolerance, content-provider MIME overrides and actual image encoding remain unknown; the pairing alone does not prove failure."
+      ]
+    },
+    {
+      "id": "MOON-031",
+      "title": "Deliver large text shares as complete readable attachments",
+      "application_id": "moonreader",
+      "category": "export-interoperability",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon's artifact already offers text/plain sharing and a clipboard or text-file fallback for constructed share strings of at least 80,000 characters.",
+      "baseline_refs": ["MF-07", "MF-14", "APK-NOTE-003"],
+      "rationale": "The existing fallback is valuable; its next refinement is a complete, verifiable transfer that does not depend on a receiver accepting a large inline payload or clipboard.",
+      "requested_change": "Make a UTF-8 text attachment with an explicit readable content URI available directly from large-share fallback, show its size/destination, and keep the attachment alive for the documented share lifetime.",
+      "acceptance_criteria": [
+        "Share synthetic selections just below and above 80,000 characters, including a unique trailing sentinel: a diagnostic receiver can recover the entire selected text through the offered attachment in both cases.",
+        "Background the sender before the receiver opens the attachment: the transient grant still permits reading its bytes for the documented handoff lifetime.",
+        "Repeat with non-ASCII text whose byte length exceeds its character count: the preview and received byte count agree and no multibyte character is cut off."
+      ],
+      "sources": ["knowledge/apk-analysis.md#notesexport--a-local-model-and-several-distinct-outputs", "evidence/static/observations.json", "data/artifact.json"],
+      "limitations": [
+        "The 80,000-character branch is specific to supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; official-build thresholds and existing attachment handoff behavior need checking.",
+        "The current fallback was not run; recipient payload limits and provider-grant lifetimes vary and must be recorded per test."
+      ]
+    },
+    {
+      "id": "MOON-032",
+      "title": "Distinguish editable PDF exports from flattened copies and sidecars",
+      "application_id": "moonreader",
+      "category": "export-interoperability",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents PDF annotations and file export, and the supplied artifact has PDF writeback plus a separate tagged annotation representation.",
+      "baseline_refs": ["MF-05", "MF-14", "APK-PDF-002", "APK-NOTE-001"],
+      "rationale": "An editable annotated PDF, a flattened visual copy and an annotation sidecar have different downstream behavior; successful sharing should identify which artifact was produced.",
+      "requested_change": "Label available export products explicitly, provide a new-copy workflow for portable PDF annotations, and make any flattening choice explain loss of editability while keeping the original intact.",
+      "acceptance_criteria": [
+        "Export a synthetic PDF with one highlight, one popup note and one ink stroke as an editable annotated copy: two independent named viewers can inspect the supported annotation objects and their text.",
+        "Choose flattened output if supported: the marks remain visibly present, the output is labeled flattened, and the original PDF and editable annotation data remain available.",
+        "Choose the reader-specific sidecar output: its filename and summary identify it as annotation data requiring a matching book, rather than a self-contained annotated PDF."
+      ],
+      "sources": ["knowledge/apk-analysis.md#pdf--existing-rendering-extraction-reflow-and-annotations", "knowledge/apk-analysis.md#notesexport--a-local-model-and-several-distinct-outputs", "data/artifact.json", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/faq.html"],
+      "limitations": [
+        "Writeback and sidecar observations concern supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc; existing output choices, flattening support and official-build interoperability are unverified.",
+        "PDF save success and coordinate fidelity are separate checks covered by MOON-001 and MOON-010; this proposal addresses export-product semantics and editability."
+      ]
+    },
+    {
+      "id": "MOON-033",
+      "title": "Export citation-ready notes with source-passage backlinks",
+      "application_id": "moonreader",
+      "category": "export-interoperability",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "new-capability-candidate",
+      "existing_capability": "Moon already offers annotations, sharing, book shortcuts and current-book export; this candidate concerns reusable citations and links to individual source passages.",
+      "baseline_refs": ["MF-07", "MF-14", "MF-15"],
+      "rationale": "The reviewed Zotero reader guide documents annotation-to-note citations and Show on Page backlinks. A comparable export workflow could reduce manual source reconstruction without changing Moon into a reference manager.",
+      "requested_change": "Evaluate a citation-ready export preset carrying available title/author/edition identifiers, PDF page label or EPUB chapter/location, clearly separated quotation/commentary and a documented passage-link handler with recoverable missing-book behavior.",
+      "acceptance_criteria": [
+        "Export notes from a synthetic PDF with printed page labels and an EPUB with chapter metadata: each citation identifies the available source metadata and distinguishes page labels from physical page indices.",
+        "Activate an exported passage link from a separate note app: Moon opens the intended annotation occurrence rather than merely the book's last-read position.",
+        "Move the source file and activate the link: the reader resolves the existing library identity or offers relinking, without opening a different same-titled book."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/alternatives-desktop-web.md#zotero-reader--annotations-connected-to-research-notes", "https://www.zotero.org/support/pdf_reader", "https://www.moondownload.com/faq.html"],
+      "limitations": [
+        "Current availability needs checking: reviewed Moon documentation establishes sharing and shortcuts, not the presence or absence of passage-level external links or citation presets.",
+        "Zotero's documented desktop workflow is a design reference only; Android link dispatch, missing metadata and cross-edition anchor ambiguity need separate verification."
+      ]
+    },
+    {
+      "id": "MOON-034",
+      "title": "Preview and verify whole-library backup restoration",
+      "application_id": "moonreader",
+      "category": "export-interoperability",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents all-books/settings Backup and Restore, including Free-to-Pro migration; current-book annotation export is a separate existing workflow.",
+      "baseline_refs": ["MF-09", "MF-14", "MF-15"],
+      "rationale": "A restorable library includes relationships and external assets as well as note text. A coverage manifest and preflight make it possible to check what a backup will actually recover before replacing live state.",
+      "requested_change": "Attach a versioned coverage manifest to whole-library backups, distinguish included files from external references, and provide a restore preview with integrity checks, collision choices and an all-or-recoverable commit boundary.",
+      "acceptance_criteria": [
+        "Back up a synthetic three-book library with shelves, reading positions, notes, custom covers and a custom font: the manifest accounts for every item as included, referenced or explicitly excluded, with hashes for included assets.",
+        "Restore into an empty disposable profile: included items and their relationships match the manifest; unresolved external references are listed and never presented as restored files.",
+        "Preview a restore containing a conflicting library record, then cancel; repeat with a truncated archive: both operations leave the live library unchanged and identify the conflict or integrity failure before any replacement."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "data/moon-baseline.json", "https://www.moondownload.com/faq.html"],
+      "limitations": ["Backup format, existing preflight controls and restoration completeness were not exercised. This concerns whole-library recovery; annotation interchange semantics remain in MOON-025 through MOON-028."]
+    },
+    {
+      "id": "MOON-035",
+      "title": "Make publisher-style and reader-style precedence inspectable",
+      "application_id": "moonreader",
+      "category": "epub-typesetting",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already provides extensive typography controls and publisher-formatting preview; the observed v10.8 notes also advertise improved CSS rendering for embedded font styles.",
+      "baseline_refs": ["MF-08", "MF-10"],
+      "rationale": "The reviewed Readest style boundary illustrates that preserving paragraph rules need not preserve image or page rules. Readers need to know which authored styles their active Moon settings override before describing a rendering problem.",
+      "requested_change": "Expose per-book publisher-versus-reader style precedence by rule group, with an inspectable preview and a reset of only the selected overrides; keep emphasis and source document bytes intact.",
+      "acceptance_criteria": [
+        "Open a synthetic EPUB with authored image width of 50 percent, an indented quotation and distinct strong/emphasis spans: publisher-first mode preserves those fixture relationships and displays which rule groups remain user-overridden.",
+        "Override only body line spacing: image width, quotation indentation and authored emphasis retain their prior semantics while body line spacing changes to the selected value.",
+        "Reset that per-book override and reopen: the original layout policy returns, another book's preferences are unchanged, and the EPUB hash is unchanged."
+      ],
+      "sources": ["knowledge/moon-baseline.md#observed-v108-release-notes", "knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/alternatives-android.md#readest", "https://www.moondownload.com/faq.html", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/utils/style.ts"],
+      "limitations": ["Current Moon CSS precedence, override granularity and preview behavior have not been tested. Readest's pinned implementation is a design reference, not evidence of a Moon defect or complete EPUB conformance."]
+    },
+    {
+      "id": "MOON-036",
+      "title": "Map embedded and custom font faces without synthetic-style surprises",
+      "application_id": "moonreader",
+      "category": "epub-typesetting",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already supports embedded font styling and custom TTF, OTF and TTC fonts, with documented font selection controls.",
+      "baseline_refs": ["MF-08", "MF-09"],
+      "rationale": "Choosing the intended family is different from selecting its correct weight/style face and fallback glyphs. The reviewed Librera font-adaptation work supplies a focused conformance-corpus idea rather than a measured Moon failure.",
+      "requested_change": "Resolve family, weight and style consistently for embedded and imported fonts, expose the selected face and any synthetic styling or fallback, and keep fallback decisions scoped to the affected glyphs.",
+      "acceptance_criteria": [
+        "Render a synthetic EPUB embedding visibly distinct regular, bold and italic faces: body, strong and emphasis samples use the intended faces, and selecting a bold heading does not globally bold the body.",
+        "Repeat with a regular-only custom font and a TTC with two named faces: the UI identifies the selected face and whether bold/italic is synthesized instead of silently labeling a different face as selected.",
+        "Include a CJK character absent from the selected Latin font: the missing glyph uses a documented fallback while adjacent Latin text retains its chosen face and copied text preserves all original characters."
+      ],
+      "sources": ["knowledge/moon-baseline.md#observed-v108-release-notes", "knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/alternatives-android.md#librera-reader", "https://www.moondownload.com/faq.html", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Font discovery, shaping and face-selection behavior were not executed in Moon or Librera here. Supported variable-font axes and every font collection layout remain outside this proposal's minimum corpus."]
+    },
+    {
+      "id": "MOON-037",
+      "title": "Keep EPUB tables and code blocks readable at large type",
+      "application_id": "moonreader",
+      "category": "epub-typesetting",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon's FAQ already recommends publisher-formatting preview for tables, and typography controls already permit larger text; a table fallback is therefore documented.",
+      "baseline_refs": ["MF-01", "MF-08", "MF-10"],
+      "rationale": "Wide structured content needs a readable overflow path that does not shrink all surrounding prose or discard the reader's current passage. This can refine the existing preview workflow.",
+      "requested_change": "Give oversized tables and preformatted blocks a scoped overflow/zoom treatment with an obvious entry and return path, preserving cell relationships and code whitespace while leaving surrounding prose at the selected size.",
+      "acceptance_criteria": [
+        "At 200 percent reading text size, inspect a synthetic EPUB table with ten columns and merged header cells: every labeled cell is reachable through the chosen overflow treatment and retains its intended row/header association.",
+        "View a code block with indentation, blank lines and a long unbroken line: all characters are reachable and copying the block recovers the original whitespace under the displayed wrap policy.",
+        "Enter publisher preview or the scoped enlarged view from the middle of chapter 2 and return: the same source paragraph and user body-text size are restored."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "https://www.moondownload.com/faq.html", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["No table clipping or whitespace loss was reproduced. The active rendering mode must be recorded before testing; an existing preview may already satisfy part of this contract."]
+    },
+    {
+      "id": "MOON-038",
+      "title": "Honor language-specific shaping, direction and hyphenation",
+      "application_id": "moonreader",
+      "category": "epub-typesetting",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises EPUB reading, justification and hyphenation, plus a multilingual interface; interface-language counts do not certify publication-language layout.",
+      "baseline_refs": ["MF-01", "MF-08", "MF-20"],
+      "rationale": "Paragraph language and direction can change within a book independently of the app locale. Shaping, line breaking and logical copy order should follow publication content rather than one global language assumption.",
+      "requested_change": "Apply inherited publication language and bidirectional text semantics to shaping, line breaking and hyphenation, with an explicit per-book correction when metadata is absent or incorrect.",
+      "acceptance_criteria": [
+        "Render a reviewed synthetic Arabic paragraph containing Latin abbreviations, digits and punctuation: joined forms and visual ordering match the fixture reference, while selection/copy returns the authored logical character order.",
+        "Lay out English and German paragraphs carrying different language tags at two column widths: discretionary breaks use the selected language's declared dictionary, and disabling hyphenation removes inserted breaks without deleting authored soft-hyphen metadata.",
+        "Override incorrect book-language metadata, reopen and resize: the selected correction persists for that book, applies to untagged paragraphs and does not override an explicitly different language on a nested passage."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/alternatives-android.md#31-koreader--broad-reading-and-e-ink-reference", "https://www.moondownload.com/", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["No multilingual layout defect or complete language-support matrix was established. Fixture references need language-competent review; font fallback is separately addressed by MOON-036."]
+    },
+    {
+      "id": "MOON-039",
+      "title": "Restore exact EPUB passages after repagination",
+      "application_id": "moonreader",
+      "category": "epub-typesetting",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already provides bookmarks, configurable typography and multiple orientations; this request concerns local reading-position fidelity when those settings change.",
+      "baseline_refs": ["MF-07", "MF-08", "MF-19"],
+      "rationale": "A page number or percentage can move after relayout. The reviewed Librera location contract and MuPDF bookmark-based relayout provide implementation references for retaining a source passage without blocking the reading UI.",
+      "requested_change": "Checkpoint a source-stable local reading locator with a documented fallback, restore its sentence after font/spacing/orientation changes, and identify fallback recovery when the source revision no longer resolves exactly.",
+      "acceptance_criteria": [
+        "Stop at a uniquely labeled sentence in chapter 2 of a synthetic EPUB, double font size, change spacing and rotate: each completed relayout keeps that same sentence visible rather than a nearby percentage-only location.",
+        "Close and reopen after switching between paged and continuous reading: the same sentence is restored, with no accumulated drift over ten repetitions.",
+        "Replace the file with an edited synthetic edition that removes the checkpoint sentence: restoration labels its fallback and offers the nearest retained context instead of claiming an exact match."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/alternatives-android.md#librera-reader", "knowledge/alternatives-android.md#mupdf-android-viewer", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Moon's current locator representation and local restore fidelity were not inspected. This targets local repagination, distinct from cross-reader import anchoring in MOON-026 and remote position choices in MOON-043."]
+    },
+    {
+      "id": "MOON-040",
+      "title": "Retain popup-footnote context and nested return navigation",
+      "application_id": "moonreader",
+      "category": "epub-typesetting",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises EPUB3 popup footnotes and media; this proposal extends the documented footnote workflow.",
+      "baseline_refs": ["MF-07", "MF-11"],
+      "rationale": "Several references can point to one note, and a note can contain another link. The return destination should be the actual referring occurrence rather than an arbitrary backlink or the chapter start.",
+      "requested_change": "Maintain an occurrence-aware return stack for popup notes and nested internal links, preserve the source reading context, and explain broken note destinations while leaving a reliable close/back action.",
+      "acceptance_criteria": [
+        "Open the same footnote from two distinct references in a synthetic EPUB: closing each popup returns to its own referring occurrence and restores keyboard or accessibility focus there.",
+        "Follow a nested link from a long footnote, scroll, then use Back twice: the first return restores the footnote's scroll position and the second restores the original body passage.",
+        "Activate a reference with a missing target: a recoverable message identifies the unresolved reference and closing it leaves the body passage unchanged."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Current popup history, link recognition and focus restoration were not exercised. EPUB3 media advertising does not establish every footnote markup convention or media-overlay behavior."]
+    },
+    {
+      "id": "MOON-041",
+      "title": "Expose sync completion per data type and destination",
+      "application_id": "moonreader",
+      "category": "sync",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already synchronizes positions, highlights, notes, bookmarks and shelf files through documented clouds; its FAQ explicitly describes annotation synchronization continuing after position synchronization.",
+      "baseline_refs": ["MF-12", "MF-13"],
+      "rationale": "Position arrival is not a receipt for every annotation or book file. Separate completion states let the user know when another device can safely rely on each data type.",
+      "requested_change": "Show per-book and per-destination states for positions, annotations and book files, including last acknowledged revision/time, pending work and actionable failures; reserve an overall completed label for all selected work being acknowledged.",
+      "acceptance_criteria": [
+        "On a controlled endpoint, acknowledge a new position immediately and delay notes: the UI shows position complete and notes pending, with no unqualified all-synced indication.",
+        "Fail the book-file transfer while allowing annotation transfer: the summary names the failed data type and destination, and retry selection can target that operation.",
+        "Go offline after a successful sync and create another note: the previous success remains visibly historical while the new note revision is pending, including after reopening the status view."
+      ],
+      "sources": ["knowledge/moon-baseline.md#sync-sequencing-matters", "data/moon-baseline.json", "https://www.moondownload.com/faq.html", "https://www.moondownload.com/privacymrp.html"],
+      "limitations": ["Current status displays and provider acknowledgement semantics were not tested. This is a visibility contract; the durable note retry mechanism is separately scoped in MOON-003."]
+    },
+    {
+      "id": "MOON-042",
+      "title": "Resolve concurrent annotation edits and deletions explicitly",
+      "application_id": "moonreader",
+      "category": "sync",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents synchronization of highlights, notes and bookmarks across devices; conflict resolution is not established by that documentation alone.",
+      "baseline_refs": ["MF-07", "MF-12", "MF-13"],
+      "rationale": "Two valid offline edits are different from a failed upload. Concurrent edit/edit and edit/delete changes need a user-understandable convergence policy that retains recoverable alternatives.",
+      "requested_change": "Detect conflicting annotation revisions, preserve both versions until a documented merge or user choice resolves them, and treat deletions as explicit revisions so an old client cannot silently resurrect a resolved deletion.",
+      "acceptance_criteria": [
+        "Edit one synthetic note differently on two offline clients, then sync in both arrival orders: the same conflict is exposed with both texts recoverable, and the chosen resolution converges on both clients.",
+        "Delete a note on client A while editing it on client B: the conflict explains both actions; choosing Delete leaves it absent after two further sync cycles and reconnection of the stale client.",
+        "Modify two different annotations independently: both changes merge without an unnecessary same-record conflict, and logical annotation counts remain unchanged."
+      ],
+      "sources": ["knowledge/moon-baseline.md#sync-sequencing-matters", "https://www.moondownload.com/faq.html", "https://www.moondownload.com/privacymrp.html"],
+      "limitations": ["No conflict or resurrection was reproduced. Existing revision, merge and deletion-retention policies are unknown; this proposal does not prescribe a particular distributed-data algorithm."]
+    },
+    {
+      "id": "MOON-043",
+      "title": "Keep reading-position history before applying remote jumps",
+      "application_id": "moonreader",
+      "category": "sync",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already uploads reading position on Pause and checks newer remote position on Resume according to its FAQ.",
+      "baseline_refs": ["MF-12", "MF-13"],
+      "rationale": "A user may reread an earlier chapter deliberately, and a second device may hold stale progress. Furthest percentage and most recently received position are not interchangeable intentions.",
+      "requested_change": "Retain a bounded per-book position history around remote updates, identify the source device and revision context, and make the active jump/stay policy visible with an undo of the most recent remote jump.",
+      "acceptance_criteria": [
+        "Resume client B at chapter 4 while client A offers chapter 1: the configured policy is visible, and applying the remote position can be undone to B's exact prior passage.",
+        "Deliberately reread chapter 1 and explicitly publish that newer position: the other client can accept it rather than always forcing the furthest percentage.",
+        "Deliver the same remote position twice and reopen: history contains one logical remote revision, and Undo does not bounce between duplicate entries."
+      ],
+      "sources": ["knowledge/moon-baseline.md#sync-sequencing-matters", "https://www.moondownload.com/faq.html"],
+      "limitations": ["Current prompts, position history and conflict policies were not exercised. Device clocks and changed book editions require documented handling; local repagination fidelity is separately addressed by MOON-039."]
+    },
+    {
+      "id": "MOON-044",
+      "title": "Resume cloud book downloads without exposing partial files",
+      "application_id": "moonreader",
+      "category": "sync",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents cloud shelf/book-file synchronization and library downloads; this request concerns transfer integrity and interruption recovery for book payloads.",
+      "baseline_refs": ["MF-13", "MF-15"],
+      "rationale": "A partially received book should not become a normal readable library item, and resumed bytes must belong to one remote revision. These are distinct from annotation outbox and sync-status requirements.",
+      "requested_change": "Stage cloud book downloads until integrity and revision checks complete, resume only when the provider supports a safe revision-bound continuation, and otherwise restart explicitly while retaining a usable prior local copy.",
+      "acceptance_criteria": [
+        "Interrupt a controlled 20 MiB synthetic book transfer halfway through: the partial item is labeled incomplete and cannot replace an existing readable edition or be opened as a completed new book.",
+        "Reconnect to an unchanged remote revision: completion produces exactly the expected fixture digest and one library record, with the outcome identifying resumed versus restarted transfer.",
+        "Change the remote revision before reconnection: completion never splices old and new bytes; the reader restarts or offers a revision choice and retains the prior valid local copy until success."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/moon-baseline.md#sync-sequencing-matters", "https://www.moondownload.com/privacymrp.html"],
+      "limitations": ["Provider range/revision capabilities and current staging behavior were not inspected or tested. The 20 MiB case is a proposed fixture size, not a measured threshold or a claim that every provider permits resumable transfer."]
+    },
+    {
+      "id": "MOON-045",
+      "title": "Distinguish duplicate books from changed editions before merging",
+      "application_id": "moonreader",
+      "category": "library",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already provides library import, file management and custom covers; the observed v10.8 notes explicitly add missing-file association from the Bookmarks tab.",
+      "baseline_refs": ["MF-07", "MF-14", "MF-15"],
+      "rationale": "Relinking a known missing file, recognizing a byte-identical duplicate and selecting a different edition are distinct identity decisions. The reviewed ReadEra documentation advertises duplicate detection, providing a workflow reference without proving Moon lacks it.",
+      "requested_change": "Show the basis for a duplicate or relink suggestion, distinguish identical content from a same-titled changed edition, and preview which library identity, notes and reading state a merge would retain before applying it.",
+      "acceptance_criteria": [
+        "Import two byte-identical synthetic EPUBs with different filenames and a third with the same title but changed text: the first pair is identified as identical content and the third is presented as a different revision, not silently merged.",
+        "Merge the identical pair after preview: one logical library item remains, every distinct note is retained, and the chosen reading state is visible; canceling the same preview makes no changes.",
+        "Use the existing missing-file association workflow to select the changed edition: the preview identifies the revision change and does not label unresolved old annotation locations as exact."
+      ],
+      "sources": ["knowledge/moon-baseline.md#observed-v108-release-notes", "knowledge/moon-baseline.md#commercial-and-legacy-android-comparators", "data/commercial-alternatives.json", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://readera.org/"],
+      "limitations": ["Current Moon duplicate detection, identity rules and relinking safeguards were not tested. ReadEra's duplicate-detection claim is documentation only; cross-reader anchor reconciliation is separately scoped in MOON-026."]
+    },
+    {
+      "id": "MOON-046",
+      "title": "Make bulk library organization reversible and previewable",
+      "application_id": "moonreader",
+      "category": "library",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents shelves, favorites, authors, tags and custom covers; its v10.8 notes include displaying a user's rating on a book cover.",
+      "baseline_refs": ["MF-15"],
+      "rationale": "Organizing many books should preserve intentional metadata corrections and make the scope of a batch action inspectable. This concerns library metadata rather than annotation filtering or backup restoration.",
+      "requested_change": "Preview bulk shelf, tag and metadata changes with per-book differences, distinguish user overrides from imported metadata, and provide a grouped undo with explicit partial-success accounting.",
+      "acceptance_criteria": [
+        "Select four of six synthetic books, add one tag and move them to a shelf: the preview names exactly four affected books, and applying it changes only their selected fields without rewriting document bytes.",
+        "Undo that batch after editing an unrelated book: the four books recover their prior shelf/tag values while the unrelated edit remains intact.",
+        "Refresh embedded metadata for a book with a manually corrected author: the preview retains the user override unless explicitly replaced, and a failed batch item is counted separately from successful changes."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/moon-baseline.md#observed-v108-release-notes", "https://www.moondownload.com/", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Existing batch actions, metadata provenance and undo behavior were not inspected. The proposal concerns reversible catalog edits, not a claim that basic library organization is missing."]
+    },
+    {
+      "id": "MOON-047",
+      "title": "Make OPDS navigation and acquisition compatibility explicit",
+      "application_id": "moonreader",
+      "category": "library",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises OPDS and personal calibre servers, and its FAQ documents adding a catalog through Online Library.",
+      "baseline_refs": ["MF-01", "MF-15", "MF-17"],
+      "rationale": "Catalog browsing, authentication, pagination and acquisition-type recognition need an explicit compatibility boundary. The reviewed KOReader MIME-alias case demonstrates a narrow interoperability test idea, not a reproduced Moon problem.",
+      "requested_change": "Document supported catalog profiles and authentication methods, preserve navigation/search context through pagination and authentication recovery, and resolve supported acquisition MIME aliases without relying solely on a filename suffix.",
+      "acceptance_criteria": [
+        "Browse a controlled three-page catalog with twelve unique entries, follow an item and return: all twelve entries remain reachable exactly once and the previous result page, query and selection are restored.",
+        "Expire a test catalog session during pagination: the reader explains the authentication requirement and resumes the same catalog context after successful reauthentication instead of displaying an empty library as a completed result.",
+        "Offer the same synthetic CBR through suffixless URLs using application/vnd.comicbook-rar, application/vnd.comicbook+rar and application/x-cbr: supported aliases expose the intended acquisition action, while an unsupported media type is explicitly identified."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/alternatives-android.md#koreader", "data/alternative-proposals-android.json", "https://www.moondownload.com/faq.html", "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/frontend/document/pdfdocument.lua"],
+      "limitations": ["Moon catalog profiles, authentication and MIME dispatch were not exercised. KOReader's pinned source and reported alias issue do not establish a shared implementation or defect; OPDS is a catalog protocol, not a rendered book format."]
+    },
+    {
+      "id": "MOON-048",
+      "title": "Recover unavailable library locations without discarding reading state",
+      "application_id": "moonreader",
+      "category": "library",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already manages book files, notes and covers, offers backup/restore, and advertises v10.8 missing-file relinking; its FAQ also documents cover-cache rebuilding.",
+      "baseline_refs": ["MF-07", "MF-14", "MF-15", "MF-16"],
+      "rationale": "A disconnected volume or expired access grant is different from a deleted book. Preserving library identity while repairing a location avoids making a temporary storage problem into an irreversible metadata operation.",
+      "requested_change": "Distinguish unavailable storage, denied access and a confirmed missing file, retain affected library records and annotations, and offer location-level access repair with a relink preview before changing document associations.",
+      "acceptance_criteria": [
+        "Place three synthetic books in one removable or controlled document-provider location, record positions and notes, then make that location unavailable: all three records retain their metadata and show an unavailable-location state rather than being deleted.",
+        "Restore the same location or its access grant: all three books reopen at their retained positions with their original notes and no duplicate library records.",
+        "Choose a different location containing one identical book and one same-named different book: the repair preview distinguishes the matches and leaves the ambiguous association unchanged until the user resolves it."
+      ],
+      "sources": ["knowledge/moon-baseline.md#observed-v108-release-notes", "knowledge/moon-baseline.md#existing-capability-baseline", "https://www.moondownload.com/faq.html", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Current access-grant recovery and missing-file classification were not tested. This is storage-availability recovery; duplicate merging is MOON-045 and narrower initial permission scope is MOON-057."]
+    },
+    {
+      "id": "MOON-049",
+      "title": "Expose document structure to assistive navigation",
+      "application_id": "moonreader",
+      "category": "accessibility",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already provides EPUB/PDF reading, speech and EPUB3 media/footnotes. Those documented capabilities do not establish heading, table or alternative-text semantics in an accessibility tree.",
+      "baseline_refs": ["MF-01", "MF-02", "MF-06", "MF-11"],
+      "rationale": "The reviewed PDF.js structure builder maps semantic document roles, while Thorium documents screen-reader and accessibility-metadata support. They provide bounded design references for structural navigation beyond simply speaking extracted text.",
+      "requested_change": "Expose supported EPUB and tagged-PDF headings, lists, links, tables, language changes and image alternatives to Android assistive navigation, with an explicit reading-order fallback for unstructured content.",
+      "acceptance_criteria": [
+        "Open synthetic EPUB and tagged-PDF fixtures containing three heading levels, a list and a two-column table: the actual accessibility tree exposes their roles and text, and a named TalkBack version can navigate the headings in source order.",
+        "Navigate a table cell and an image with authored alternative text: the reader announces the applicable row/column header context and the alternative text without reading the same content twice through duplicate layers.",
+        "Open an untagged PDF: the available fallback is identified without inventing authored structural roles, and text navigation can return to the original page location."
+      ],
+      "sources": ["knowledge/moon-baseline.md#nonfunctional-claims-and-unknowns", "knowledge/alternatives-desktop-web.md#31-pdfjs", "knowledge/alternatives-desktop-web.md#thorium-reader--accessible-publishing-and-library-access", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/struct_tree_layer_builder.js"],
+      "limitations": ["Moon accessibility semantics and TalkBack behavior were not tested. PDF.js source structure and Thorium documentation are not Android accessibility certification; meaningful structure depends on the publication and extraction path."]
+    },
+    {
+      "id": "MOON-050",
+      "title": "Make annotation editing and status feedback usable with TalkBack",
+      "application_id": "moonreader",
+      "category": "accessibility",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already offers ebook notes/highlights, PDF annotations/forms and customizable input controls; the reviewed baseline does not assess nonvisual operation of those interfaces.",
+      "baseline_refs": ["MF-04", "MF-05", "MF-07"],
+      "rationale": "Reading document text accessibly is separate from editing an annotation, identifying its color/type and understanding save or validation feedback. The entire task needs a continuous, predictable focus path.",
+      "requested_change": "Label annotation actions and state changes semantically, make color/style choices distinguishable without color vision, and retain logical accessibility focus through editing, validation, saving and returning to the source passage.",
+      "acceptance_criteria": [
+        "Using a named TalkBack version without visual targeting, open an existing synthetic EPUB highlight, change its named style, enter a note and save: every action is reachable and its role, value and selected state are announced.",
+        "Trigger a controlled save failure in a PDF note editor: the failure and pending state are announced once, the draft text remains available, and Retry receives a meaningful accessible label.",
+        "Cancel a color chooser and close the editor: focus returns first to its invoking control and then to the same source annotation, without jumping to an unrelated toolbar or reading the whole document again."
+      ],
+      "sources": ["knowledge/moon-baseline.md#nonfunctional-claims-and-unknowns", "knowledge/moon-baseline.md#existing-capability-baseline", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/"],
+      "limitations": ["No unlabeled control, focus trap or inaccessible editor was reproduced. This targets application interaction semantics; document structure is MOON-049 and durable save handling is MOON-001/MOON-002."]
+    },
+    {
+      "id": "MOON-051",
+      "title": "Keep reading controls operable at large system text sizes",
+      "application_id": "moonreader",
+      "category": "accessibility",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already offers book font scaling, themes, multiple orientations and a localized interface; book text size alone does not establish scalable menus, dialogs or library controls.",
+      "baseline_refs": ["MF-08", "MF-19", "MF-20"],
+      "rationale": "The reviewed MJ PDF large-text report supplies a concrete narrow-layout fixture idea. A reader's controls should remain usable when system accessibility scaling and long translations expand interface text.",
+      "requested_change": "Adapt library filters, reader toolbars and note/settings dialogs to large system font/display scales with wrapping or reachable overflow, preserving complete labels, visible focus and independently targetable actions.",
+      "acceptance_criteria": [
+        "At a proposed 320 dp viewport width and 200 percent system font scale, open the library filters, note editor and reading-settings dialog: every action and its full label is reachable without overlapping another action.",
+        "Repeat with a long-label test translation in portrait and landscape: selected states remain visible, primary action touch targets meet a proposed 48 by 48 dp budget, and accessible names retain the full text even where visual truncation is intentional.",
+        "Change system text scale while a multiline note editor is open: entered text and focused control persist and Save/Cancel remain reachable without reducing the chosen book font size."
+      ],
+      "sources": ["knowledge/moon-baseline.md#nonfunctional-claims-and-unknowns", "knowledge/alternatives-android.md#mj-pdf-4", "data/alternative-proposals-android.json", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["No Moon layout clipping was reproduced; MJ PDF's report is specific to that project. The viewport, scaling and target-size values are proposed acceptance configurations, not measurements of Moon's current UI."]
+    },
+    {
+      "id": "MOON-052",
+      "title": "Provide complete remappable keyboard and switch navigation",
+      "application_id": "moonreader",
+      "category": "accessibility",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents customizable taps, swipes and hardware/headset keys. Readest's reviewed README separately advertises full keyboard and screen-reader support.",
+      "baseline_refs": ["MF-04", "MF-19"],
+      "rationale": "Page-turn bindings are only one part of hands-free operation. Users also need predictable focus traversal, conflict-aware remapping and a recoverable route out of menus or selection modes.",
+      "requested_change": "Expose focusable commands for library, navigation, search and annotation tasks, support keyboard/switch activation with visible focus, and make conflicting remappings reviewable with a reset that remains reachable after an unsuitable binding.",
+      "acceptance_criteria": [
+        "With a physical keyboard or controlled keyboard input and no pointer, open a synthetic book from the shelf, navigate its contents, search for a term, open a note and return to reading: all required commands are reachable and focus is always identifiable.",
+        "Assign one key to two incompatible reader actions: the binding editor explains the conflict before application and provides a keyboard-reachable restore-defaults action.",
+        "Use a named Android switch-access configuration to traverse a popup and dismiss it: focus returns to the invoking control, and a remapped page-turn key does not turn pages while entering note text."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/alternatives-android.md#37-readest--cross-platform-reader-with-an-observed-moon-import-path", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"],
+      "limitations": ["Existing keyboard coverage, remapping conflicts and switch-access behavior were not tested. Readest's support statement is documentation only and does not prove equivalent behavior on every platform."]
+    },
+    {
+      "id": "MOON-053",
+      "title": "Make background TTS interruption and media-control policy predictable",
+      "application_id": "moonreader",
+      "category": "tts",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already provides TTS, background speech and headset/Bluetooth controls. Its FAQ specifically discusses screen-off interruptions and battery restrictions affecting both the reader and speech engine.",
+      "baseline_refs": ["MF-02", "MF-03", "MF-04"],
+      "rationale": "User pause, competing audio, route disconnection and OS/engine suspension have different recovery expectations. The existing background workflow needs an observable policy rather than a generic instruction to change every battery setting.",
+      "requested_change": "Apply a documented audio-focus and route-change policy consistently across reader, notification and headset controls, preserve explicit user pause, and expose the last known interruption reason with app-versus-engine diagnostic context.",
+      "acceptance_criteria": [
+        "On a declared Android/engine combination permitting background playback, narrate a synthetic document for ten minutes with the screen off: foreground and notification controls agree on playback state, and any interruption has a recorded reason or explicitly unknown cause.",
+        "Request exclusive audio focus from a controlled second player, then release it: TTS follows the displayed pause/resume policy; an explicit user Pause during that interruption prevents automatic restart.",
+        "Disconnect a test headset while speaking under the pause-on-disconnect policy: speech stops within a proposed one-second budget and does not unexpectedly continue through the speaker; reconnecting preserves the explicit paused state."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "data/moon-baseline.json", "https://www.moondownload.com/faq.html", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["No speech interruption or media-control defect was reproduced. Device battery policy and speech-engine behavior can limit background operation; the duration and response budget are prospective tests, not promises for every Android device."]
+    },
+    {
+      "id": "MOON-054",
+      "title": "Resolve TTS language and offline voice availability explicitly",
+      "application_id": "moonreader",
+      "category": "tts",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises support for TTS engines and multilingual reading; the baseline distinguishes engine availability and text extraction from the existence of the speech feature.",
+      "baseline_refs": ["MF-01", "MF-02", "MF-20"],
+      "rationale": "A selected engine may lack the publication's language or require a network voice. Explicit resolution and fallback make multilingual and offline reading predictable without implying Moon ships every voice.",
+      "requested_change": "Show the resolved engine, voice, language and known offline requirement, allow per-book language/voice corrections, and explain unavailable voices before starting with an explicit user-approved fallback.",
+      "acceptance_criteria": [
+        "Narrate a synthetic EPUB with English and German language-tagged passages using installed test voices: the selected policy chooses the intended voice for each passage or clearly identifies a fixed-voice override.",
+        "Disable networking with only a network-required voice selected: the reader explains the requirement and offers an installed offline alternative when available instead of silently entering a playing state with no output.",
+        "Remove the preferred test voice and reopen the book: the unavailable selection is identified, the chosen fallback is displayed, and a per-book correction does not change another book's voice preferences."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/faq.html"],
+      "limitations": ["Current voice selection, language inheritance and offline indicators were not exercised. Engines may expose incomplete voice/network metadata; unknown capability should be labeled rather than treated as a verified offline guarantee."]
+    },
+    {
+      "id": "MOON-055",
+      "title": "Keep narration position and sentence navigation synchronized",
+      "application_id": "moonreader",
+      "category": "tts",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents ebook/PDF speech and configurable hands-free controls; this proposal refines the relationship between spoken position, reading position and navigation.",
+      "baseline_refs": ["MF-02", "MF-04", "MF-06", "MF-08"],
+      "rationale": "Browsing visually while listening, changing typography and skipping a sentence should not leave the displayed passage tied to a stale utterance. The reviewed calibre guide documents speech highlighting as a workflow reference.",
+      "requested_change": "Maintain a source-anchored narration cursor distinct from optional visual browsing, expose previous/next sentence and return-to-spoken-passage actions, and discard stale progress callbacks after a speech jump or document change.",
+      "acceptance_criteria": [
+        "Narrate a synthetic EPUB and text PDF with uniquely numbered sentences: Previous sentence repeats the expected sentence and Next sentence starts the following one, with the displayed speech marker matching the actual submitted utterance.",
+        "While paused mid-document, change font size or orientation and browse elsewhere: Return to speech restores the narration sentence, and resuming follows the documented sentence-boundary policy rather than the new visual position.",
+        "Delay a progress callback, jump to sentence 20 and resume, then release the old callback: it cannot move the speech marker or playback back to the abandoned sentence or a previously closed book."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/alternatives-desktop-web.md#calibre--library-conversion-and-configurable-ebook-reading", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://manual.calibre-ebook.com/viewer.html"],
+      "limitations": ["Current Moon speech-navigation controls and progress mapping were not tested. Calibre highlighting is documented rather than measured here; engines without fine-grained timing need an explicitly coarser marker. Over-limit text completeness remains MOON-005."]
+    },
+    {
+      "id": "MOON-056",
+      "title": "Reconcile Pro privacy disclosures by actual data flow",
+      "application_id": "moonreader",
+      "category": "privacy",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already publishes a Pro-specific privacy policy and describes user-selected cloud synchronization. The official-source baseline records MD-01 as a wording discrepancy between collection-denial statements and third-party/log-data language.",
+      "baseline_refs": ["MF-13"],
+      "rationale": "Readers need to distinguish developer-operated collection, optional third-party services and transfers they request to their own cloud. Conflicting policy language warrants clarification without inferring undisclosed traffic.",
+      "requested_change": "Publish a dated, Pro-specific data-flow inventory identifying which statements apply to each optional feature, the data and recipient involved, retention/deletion behavior and available controls, and reconcile it with store disclosures and in-app explanations.",
+      "acceptance_criteria": [
+        "For cloud sync, external dictionary/translation and any diagnostics actually present, the published inventory identifies whether data leaves the device, the recipient category, relevant fields, trigger and retention/control policy; absent or unknown flows are not invented.",
+        "Compare the Pro policy's collection summary with its third-party and Log Data sections and the store disclosure: each statement has an explicit, consistent scope and the document carries a revision date.",
+        "Follow each documented optional-flow control in the named Pro build: its label and explanation match the inventory, and unsupported controls are not described as available."
+      ],
+      "sources": ["knowledge/moon-baseline.md#policy-wording-inquiry", "data/moon-baseline.json", "knowledge/reporting.md#privacy-policy-clarification-draft", "https://www.moondownload.com/privacymrp.html", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["MD-01 is documentation evidence, not a verified telemetry defect or legal finding. No network capture or token-storage audit supports this proposal; the combined free/Pro policy cannot alone establish an SDK or data flow in Pro."]
+    },
+    {
+      "id": "MOON-057",
+      "title": "Support selected-file and folder access for core reading tasks",
+      "application_id": "moonreader",
+      "category": "privacy",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already provides file management, PDF annotation saving and backup/export. Play and the Pro policy explain broad storage access for those workflows; availability of a folder-scoped alternative was not established.",
+      "baseline_refs": ["MF-05", "MF-14", "MF-15"],
+      "rationale": "Someone reading a chosen folder should be able to understand which tasks require broader access. A smaller optional permission scope can improve trust while preserving an explicit full-library management choice.",
+      "requested_change": "Provide a clearly documented selected-file/folder workflow for opening, organizing references to and exporting accessible books, with explicit read-only versus writable destination handling and task-specific explanations when broader access is genuinely required.",
+      "acceptance_criteria": [
+        "With All Files Access denied on a declared Android version, select one synthetic-book folder: supported books can be opened and annotated within the documented scope, and an unrelated unselected folder is not indexed by this workflow.",
+        "Open a read-only provider PDF and save an annotated copy to a separately selected writable destination: the original is unchanged, the copy is readable, and the UI identifies both access scopes accurately.",
+        "Export notes or a backup to a selected destination, then revoke its grant: the next write requests repair for that destination without representing an unrelated broad permission as already granted."
+      ],
+      "sources": ["knowledge/moon-baseline.md#nonfunctional-claims-and-unknowns", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/privacymrp.html", "https://www.moondownload.com/faq.html"],
+      "limitations": ["Existing scoped-access routes and actual permission use were not tested; published permission explanations do not prove unnecessary access. Android/provider capabilities vary, and recovery of existing unavailable locations is separately covered by MOON-048."]
+    },
+    {
+      "id": "MOON-058",
+      "title": "Protect backup and sync packages independently of startup lock",
+      "application_id": "moonreader",
+      "category": "privacy",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "new-capability-candidate",
+      "existing_capability": "Moon already advertises password/fingerprint startup protection, backup/restore and cloud synchronization. App locking does not by itself establish encryption of backup or cloud packages.",
+      "baseline_refs": ["MF-12", "MF-13", "MF-14", "MF-19"],
+      "rationale": "Confidentiality of a copied backup or cloud annotation package is a separate boundary from access to the running app. The desired property should be explicit and compatible with the user's recovery and interoperability needs.",
+      "requested_change": "Evaluate opt-in authenticated encryption for Moon-managed backups and reading-state/annotation sync packages, with documented device enrollment, recovery and exposed metadata. Label encrypted packages distinctly from ordinary book files and interoperable exports.",
+      "acceptance_criteria": [
+        "Create an encrypted synthetic backup containing a unique note sentinel: an independent package inspection cannot recover its protected text without the key, while an authorized second disposable profile restores the exact covered content and manifest.",
+        "Use an incorrect recovery secret and a separately bit-flipped package: each is rejected with an authentication/integrity error before replacing live library state.",
+        "Enroll a second test client, rotate the shared protection key and restore with the documented recovery material: authorized clients recover the same note revision, and the UI lists metadata or ordinary book files outside the encryption scope."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/moon-baseline.md#nonfunctional-claims-and-unknowns", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/privacymrp.html", "https://www.moondownload.com/faq.html"],
+      "limitations": ["Current availability needs checking: no existing encryption or key-storage design was inspected, so this is not a claim that current payloads are plaintext. Encryption design, recovery security and older-client compatibility require focused review; a sentinel search alone would not establish cryptographic security."]
+    },
+    {
+      "id": "MOON-059",
+      "title": "Reduce cold-open time to the first usable reading passage",
+      "application_id": "moonreader",
+      "category": "performance",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises broad-format reading and smooth scrolling; the baseline contains no measured open latency or large-document advantage. The reviewed Librera work identifies separate opening/indexing stages as a profiling reference.",
+      "baseline_refs": ["MF-01", "MF-06", "MF-15"],
+      "rationale": "Time to display a page, time until it accepts input and completion of background indexing are different user-visible costs. Optimizing a measured critical path avoids trading a fast splash screen for a blocked reader.",
+      "requested_change": "Instrument open-to-first-readable and open-to-interactive milestones by format/cache state, prioritize the requested passage over nonessential indexing, and adopt changes only after comparable baseline/candidate measurements preserve rendering and position fidelity.",
+      "acceptance_criteria": [
+        "On one declared device/build configuration, record twenty cold and twenty warm opens of each named synthetic PDF/EPUB with fixed hashes/settings, reporting p50/p95 readable and interactive latency separately from indexing completion.",
+        "For a measured slow case selected before optimization, the candidate reduces cold-open p95 interactive latency by a proposed 20 percent while warm-open p95 worsens by no more than 10 percent and the same source passage/annotations remain visible.",
+        "Cancel a deliberately delayed open and select a second book: the second reader becomes usable without an eventual callback navigating back to the abandoned book, and the timing record includes cancellation cleanup."
+      ],
+      "sources": ["knowledge/moon-baseline.md#nonfunctional-claims-and-unknowns", "knowledge/alternatives-android.md#librera-reader", "data/alternative-proposals-android.json", "https://www.moondownload.com/", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["No Moon performance regression or timing baseline was measured. Counts and percentage budgets are proposed acceptance targets; Librera's reported loading issue does not demonstrate a Moon bottleneck or justify a predetermined optimization."]
+    },
+    {
+      "id": "MOON-060",
+      "title": "Bound retained document resources across repeated reading sessions",
+      "application_id": "moonreader",
+      "category": "performance",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already renders multiple document formats, supports PDF annotations and maintains a library with cover caches; cache rebuilding is an existing documented operation.",
+      "baseline_refs": ["MF-01", "MF-05", "MF-06", "MF-15", "MF-16"],
+      "rationale": "Useful caching and resources accidentally retained after a document closes have different lifetimes. A repeatable retention budget can guide cleanup without alleging a leak from code size or a single memory reading.",
+      "requested_change": "Measure per-document memory, file/render handles and cache retention across open/use/close cycles, bound caches by a declared policy, and release closed-document work on success, failure and cancellation while preserving persistent annotations.",
+      "acceptance_criteria": [
+        "Run fifty open/navigate/annotate/close cycles over a fixed ten-document synthetic corpus on a declared device, recording managed/native memory and open-handle counts after the same cleanup window each cycle; after warmup, the final ten-cycle retained-memory median stays within a proposed 10 percent of the preceding ten-cycle median and handle counts do not grow per cycle.",
+        "Inject a document-open failure and cancel a pending render in separate cycles: resources return within the declared cleanup window and a different book opens normally without the failed document remaining active.",
+        "Evict the document/cover caches under the chosen storage budget and reopen: saved notes and positions remain intact, required caches rebuild, and the measured cache size returns within its declared bound."
+      ],
+      "sources": ["knowledge/moon-baseline.md#nonfunctional-claims-and-unknowns", "knowledge/moon-baseline.md#existing-capability-baseline", "https://www.moondownload.com/faq.html", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["No memory leak, cache corruption or handle-growth measurement was made. The proposed plateau check is a bounded regression test, not proof that all lifetime leaks are absent; device allocator behavior and cache warmup must be recorded."]
+    },
+    {
+      "id": "MOON-061",
+      "title": "Offer a measured low-refresh reading profile for e-ink screens",
+      "application_id": "moonreader",
+      "category": "performance",
+      "priority": "low",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already offers themes, page animations, auto-scroll and extensive input controls. KOReader's reviewed README documents an animation-free, e-ink-oriented interface as a comparison point.",
+      "baseline_refs": ["MF-04", "MF-08", "MF-18"],
+      "rationale": "A coordinated low-refresh preset can reduce unnecessary repainting and improve legibility on supported e-ink hardware without requiring users to discover each independent setting.",
+      "requested_change": "Provide a reversible low-refresh preset that coordinates motion, contrast and status-update frequency, and expose hardware refresh options only where the device actually supports them; measure redraw and energy effects before advertising benefits.",
+      "acceptance_criteria": [
+        "Enable the preset and turn sixty pages of a fixed synthetic EPUB/PDF corpus: page transitions avoid intermediate animation frames, reading controls retain clear selected states, and disabling the preset restores the user's prior settings.",
+        "On a declared supported e-ink test device, compare the same scripted workload with the ordinary profile and report redraw counts, ghosting observations and energy measurements with uncertainty; publish no battery-improvement claim unsupported by those results.",
+        "Open the preset on a device without a supported full-refresh interface: unsupported hardware actions are labeled unavailable while the ordinary low-motion/contrast controls remain usable."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/alternatives-android.md#31-koreader--broad-reading-and-e-ink-reference", "https://www.moondownload.com/", "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/README.md"],
+      "limitations": ["Existing Moon e-ink presets and refresh integrations were not inspected; no e-ink or energy test was run. KOReader's positioning is documentation rather than a measured head-to-head advantage, and emulator output cannot establish physical ghosting or energy use."]
+    },
+    {
+      "id": "MOON-062",
+      "title": "Prepare minimal redacted diagnostics for a chosen support problem",
+      "application_id": "moonreader",
+      "category": "support",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises customer email support and publishes a FAQ covering speech, export, sync and rendering settings. The reviewed sources do not establish a mandatory report template or verified in-app reporting menu.",
+      "baseline_refs": ["MF-02", "MF-06", "MF-12", "MF-14"],
+      "rationale": "A report needs the relevant build, mode and outcome without exposing the user's entire library or cloud credentials. A previewable diagnostic summary can make a narrowly scoped support conversation reproducible.",
+      "requested_change": "Offer an optional problem-specific diagnostic summary with build/OS, relevant mode or engine, last operation outcome and user-entered reproduction steps; preview and redact it locally before saving or explicitly sharing through the published support route.",
+      "acceptance_criteria": [
+        "Prepare separate synthetic TTS, PDF-save and sync reports: each contains the named build/OS, relevant engine/mode and operation outcome, while unknown values remain explicitly unknown rather than guessed.",
+        "Seed the test profile with canary credentials, private-looking filenames and unrelated note text: none appears in the default diagnostic output; an explicitly selected synthetic fixture is listed separately with its hash and attachment choice.",
+        "Edit the preview, cancel sharing and reopen it: no submission has occurred, the draft remains recoverable locally, and a later explicit export contains exactly the approved fields."
+      ],
+      "sources": ["knowledge/reporting.md#verified-official-channels", "knowledge/reporting.md#build-an-evidence-packet", "knowledge/moon-baseline.md#dated-source-ledger", "https://www.moondownload.com/", "https://www.moondownload.com/faq.html", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Current diagnostics or in-app support tools were not established, so this does not declare them absent. No report was submitted by this proposal; automatic secret removal would require explicit adversarial tests before being treated as complete."]
+    },
+    {
+      "id": "MOON-063",
+      "title": "Publish a versioned format-by-mode capability and fallback matrix",
+      "application_id": "moonreader",
+      "category": "support",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already publishes broad format lists, PDF forms/annotations, EPUB3 media and table-preview guidance. Its FAQ explicitly states that DRM-protected books are unsupported.",
+      "baseline_refs": ["MF-01", "MF-05", "MF-06", "MF-10", "MF-11", "MF-21"],
+      "rationale": "A supported extension does not promise every speech, selection, form or media workflow for every file. A mode-aware matrix would prevent avoidable support ambiguity and help users reach existing fallbacks.",
+      "requested_change": "Publish a build/edition-scoped matrix separating document rendering, text extraction, speech, annotation, form and media behavior, with prerequisites, exact entrypoints and explicit supported/conditional/unsupported/unknown labels linked to fallback guidance.",
+      "acceptance_criteria": [
+        "Look up a searchable PDF, image-only PDF, EPUB3 media book and DRM-protected EPUB: each row separately identifies viewing, text-dependent actions and any compatibility limitation, without treating a filename extension as proof that every action works.",
+        "Follow the table-layout fallback from the matrix in the named build: it reaches the documented publisher-formatting preview, and PDF form support states which field families were actually checked.",
+        "For every cell labeled tested, the matrix links a build, synthetic fixture and dated result; documented-only and untested mode combinations remain visibly different from executed passes."
+      ],
+      "sources": ["knowledge/moon-baseline.md#existing-capability-baseline", "knowledge/moon-baseline.md#nonfunctional-claims-and-unknowns", "data/moon-baseline.json", "https://www.moondownload.com/faq.html", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["A complete current publisher matrix was not established in the bounded baseline review; that does not prove none exists. This is a documentation/referral contract, not a request to remove DRM or to declare every format fully conformant."]
+    },
+    {
+      "id": "MOON-064",
+      "title": "Publish build-specific changes with traceable resolution status",
+      "application_id": "moonreader",
+      "category": "support",
+      "priority": "low",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already publishes Play release notes; the dated baseline records five v10.8 changes, including embedded-font CSS improvements, double-tap zoom and missing-file relinking. A complete official history was not recovered.",
+      "baseline_refs": ["MF-08", "MF-15", "MF-19"],
+      "rationale": "Users checking whether a reported interaction changed need edition/build context and a stable reference. A note saying optimized or fixed should not imply independent verification on all documents or devices.",
+      "requested_change": "Maintain a searchable, stable-linked changelog identifying edition, version/build and publication date, with affected workflows and known conditions. Where a support problem is referenced, distinguish a claimed fix, a shipped fix and a separately recorded reproduction/retest result.",
+      "acceptance_criteria": [
+        "Locate the v10.8 entries by searching for relink, zoom and embedded font: stable links identify the relevant changes and preserve the distinction between listing update date and a verified release/build date.",
+        "For one synthetic support case used to demonstrate the process, follow its changelog reference: the affected and candidate-fixed build, remaining conditions and retest status are visible without exposing a private email thread.",
+        "Publish a subsequent entry without overwriting the earlier one: both remain independently addressable, and an untested claimed fix is not labeled independently verified."
+      ],
+      "sources": ["knowledge/moon-baseline.md#observed-v108-release-notes", "knowledge/reporting.md#submission-and-follow-up", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/press.html"],
+      "limitations": ["The existing release-history and support-status coverage was a bounded documentation search, not proof of absence. No official public tracker or response SLA was established, and this proposal does not invent either one."]
+    }
+  ]
+}

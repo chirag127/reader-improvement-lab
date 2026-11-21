@@ -1,0 +1,102 @@
+{
+  "id": "mupdf-android-first-page-link-debug-builds",
+  "observed_at": "2026-11-21",
+  "evidence_type": "host-build",
+  "upstream_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer",
+  "upstream_revision": "f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0",
+  "contribution_commit": "523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+  "contribution_url": "https://github.com/chirag127/mupdf-android-viewer/commit/523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+  "environment": {
+    "os": "Windows 11 amd64",
+    "java": "Temurin 17.0.21.1+2",
+    "gradle": "8.7",
+    "android_gradle_plugin": "8.5.2",
+    "compile_sdk": 33,
+    "target_sdk": 36,
+    "min_sdk": 21,
+    "fitz_dependency": "com.artifex.mupdf:fitz:1.28.5",
+    "native_dependency_built_from_source": false
+  },
+  "apk_metadata": {
+    "source": "app/build/outputs/apk/debug/output-metadata.json",
+    "application_id": "com.artifex.mupdf.viewer.app",
+    "version_name": "1.28.5a",
+    "version_code": 270,
+    "variant": "debug"
+  },
+  "builds": [
+    {
+      "name": "baseline",
+      "production_revision": "f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0",
+      "source_note": "Baseline production source with the added host-test configuration and tests already present; not an official release APK.",
+      "reproduction_command_windows": ".\\gradlew.bat :app:assembleDebug --console=plain --no-daemon --max-workers=4",
+      "original_full_invocation_retained": false,
+      "process_exit_code": null,
+      "log_filename": "baseline-build.log",
+      "log_sha256": "b74fb0507973a8bda0e5e99d306a980708149fc8c6f60e11c75aa87a01786e40",
+      "log_bytes": 3901,
+      "log_modified_utc": "2026-11-21T15:12:47.5882001Z",
+      "summary": ["BUILD SUCCESSFUL in 3m 7s", "51 actionable tasks: 36 executed, 15 up-to-date"]
+    },
+    {
+      "name": "fixed",
+      "production_revision": "523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+      "source_note": "Built before the commit; all four changed files were subsequently verified against the committed Git blobs using their recorded LF SHA-256 hashes.",
+      "reproduction_command_windows": ".\\gradlew.bat :lib:testDebugUnitTest --tests com.artifex.mupdf.viewer.LinkNavigationTest :app:assembleDebug --console=plain --no-daemon --max-workers=4",
+      "original_full_invocation_retained": false,
+      "process_exit_code": null,
+      "log_filename": "green-build.log",
+      "log_sha256": "cda80553652a3d35f716fc6ffeb24c2ddec5dd053a3614c69c8b437b79555e93",
+      "log_bytes": 5123,
+      "log_modified_utc": "2026-11-21T15:16:44.2885805Z",
+      "summary": ["BUILD SUCCESSFUL in 1m 58s", "65 actionable tasks: 7 executed, 58 up-to-date"]
+    }
+  ],
+  "artifacts": [
+    {
+      "build": "baseline",
+      "local_filename": "baseline-app-x86_64-debug.apk",
+      "abi": "x86_64",
+      "bytes": 7601972,
+      "sha256": "27b7930e66e334e90a02a70203d7ba554cfb48809eff42b5f0e2aae3a791ea9b"
+    },
+    {
+      "build": "baseline",
+      "local_filename": "baseline-app-universal-debug.apk",
+      "abi": "universal",
+      "bytes": 24167401,
+      "sha256": "88b458db93f24d9a55e8f94e51c8c203d28cedd53fbea4f3bb1fe017bab01481"
+    },
+    {
+      "build": "fixed",
+      "local_filename": "fixed-app-x86_64-debug.apk",
+      "build_output": "app/build/outputs/apk/debug/app-x86_64-debug.apk",
+      "abi": "x86_64",
+      "bytes": 7602006,
+      "sha256": "c0866838dcf88cc7d1d637b9a5b5c2083a3d77a4e108b650066660639d3aa198"
+    },
+    {
+      "build": "fixed",
+      "local_filename": "fixed-app-universal-debug.apk",
+      "build_output": "app/build/outputs/apk/debug/app-universal-debug.apk",
+      "abi": "universal",
+      "bytes": 24167432,
+      "sha256": "de13402c7133d1ff2a661bc15b4a3a1ae3df23230c5bfd0e5c83a6edfe76220f"
+    }
+  ],
+  "recovered_at": "2026-11-21T15:47:07.1199528Z",
+  "retained_diagnostics": [
+    "SDK processing warned about SDK XML version 4 with a tool understanding versions up to 3.",
+    "The baseline build could not strip libmupdf_java.so and packaged it as-is.",
+    "Packaging reported no .so files for armeabi, riscv64, mips, and mips64.",
+    "The green compile reported deprecated Java APIs; Gradle reported deprecated features incompatible with Gradle 9.0."
+  ],
+  "limitations": [
+    "Build task completion is established by the retained BUILD SUCCESSFUL summaries. The full shell invocations and process exit codes were not retained; reproduction commands are normalized, not asserted to be exact original invocations.",
+    "These existing builds were recovered without rerunning Gradle. APKs, raw logs, JDK, and local configuration remain outside the public lab repository.",
+    "APK metadata comes from Gradle output metadata and hashes identify the retained files; no installation, launch, rendering, navigation, or signing verification is claimed by this record.",
+    "The debug package keeps the upstream application ID for the separate disposable-runtime audit. It is not a published app release. Upstream README release guidance requires a different package name for a custom release.",
+    "Fitz native binaries came from the declared Maven dependency, not a locally rebuilt JNI tree. Upstream appcompat uses a dynamic 1.1.+ dependency. These artifacts are not claimed to be byte-reproducible across fresh dependency resolution or debug keys.",
+    "Successful assembly and a universal filename do not establish working native support for every generated ABI split. Application runtime results belong to the separate runtime investigation."
+  ]
+}

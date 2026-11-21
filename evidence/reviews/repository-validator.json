@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "repository-validator-independent-review",
+  "observed_at": "2026-11-21T18:50:11Z",
+  "evidence_type": "independent-evidence-review",
+  "source_url": "https://github.com/chirag127/reader-improvement-lab",
+  "application_tests_executed": false,
+  "reviewer": "Separate read-only reviewer; implementation and integration owned by the parent",
+  "verdict": "Original V1-V4 findings and the runtime citation-binding residual resolved for the inspected scope",
+  "inputs": [
+    {"path": "scripts/validate_repository.py", "sha256": "614c042648c3d71520526d80d9f2d04e8efb32a5c3ef73063040111b7cff84fa"},
+    {"path": "tests/test_repository_validation.py", "sha256": "eb6e880a29014a9e1cf0c674857f1b1b997d7fbf680bb528a414bc1c40b13a30"}
+  ],
+  "findings": [
+    {"id": "V1", "original": "Malformed required fields could trigger exceptions; malformed current receipt rows could silently skip hash checks.", "original_evidence": "Independent synthetic probes reproduced missing fixture-path KeyError, array artifacts AttributeError and skipped null review input.", "resolution": "Typed field/container guards and required current hash rows; regression cases retain these negative inputs.", "status": "resolved-for-reported-cases"},
+    {"id": "V2", "original": "NTFS junctions could cause the scanner to read a sibling directory outside the corpus.", "original_evidence": "Independent synthetic junction probe read an outside canary without a scan error.", "resolution": "Reject reparse points before traversal and check resolved containment; Windows junction regression covers both reading and receipt output.", "status": "resolved-by-inspection-and-parent-tests"},
+    {"id": "V3", "original": "An output receipt could overwrite an examined public input even when validation failed.", "original_evidence": "Independent CLI probe overwrote a synthetic README with a failure report.", "resolution": "Reject public destinations and symlink/junction/hardlink aliases; replace permitted receipts atomically.", "status": "resolved-by-inspection-and-parent-tests"},
+    {"id": "V4", "original": "Contribution identity, publication-commit agreement and nested public evidence references were not checked.", "original_evidence": "Source-traced dispatcher and record omissions; not a separately reproduced initial end-to-end case.", "resolution": "Contribution contracts and recursive declared public-reference checks, with mutation regressions.", "status": "resolved-for-original-contribution-defect"},
+    {"id": "V5", "original": "A runtime case could cite an existing file omitted from the hashed manifest; changing that file left selected checks unchanged.", "original_evidence": "Independent component probe at 18:28:48 UTC returned zero errors before and after changing the unmanifested citation.", "resolution": "Only successfully hashed normalized manifest paths bind case, subcheck and auxiliary evidence. Omission, mutation, alias and external-source regressions are present.", "status": "resolved-by-final-inspection"}
+  ],
+  "review_history": [
+    {"observed_at": "2026-11-21T17:52:26Z", "validator_sha256": "b95189e924e415f14260f4e236bc15fdb475a48d2e5bb08b3041e8a653dc7df4", "result": "V1-V4 reported; five completed original-input probes, temporary inputs cleaned up."},
+    {"observed_at": "2026-11-21T18:28:48Z", "validator_sha256": "b9e2391869b53837b19d2b693f8d58e3f57cb6f2a5e2f0883ef39f83766a7430", "result": "Original findings resolved for their scope; runtime citation-binding residual independently reproduced."},
+    {"observed_at": "2026-11-21T18:50:11Z", "result": "Final binding change and its regressions inspected; no material regression found within that change."}
+  ],
+  "verification": {"evidence_path": "evidence/host-suite-verification.json", "scope": "The parent subsequently executed all 68 host tests at the final input hashes, including 43 validator tests. The reviewer did not rerun this suite."},
+  "limitations": [
+    "Final residual closure is by independent code inspection plus separately recorded parent tests, not a new independent application run.",
+    "No exhaustive malformed-input, CommonMark or secret-detection coverage is claimed. Concurrent malicious filesystem mutation is outside the tool's scope.",
+    "Matching hashes bind bytes; they do not authenticate an APK publisher or establish the truth of application observations.",
+    "The last three citation-binding regressions were added after the independent pre-fix component probe; a pre-fix run of those exact unittest methods was not recorded."
+  ]
+}

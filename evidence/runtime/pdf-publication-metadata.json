@@ -1,0 +1,74 @@
+{
+  "observed_at": "2026-11-21",
+  "purpose": "Publication metadata review only; no new app test.",
+  "files": [
+    {
+      "path": "evidence/runtime/inputs/legacy-core.pdf",
+      "metadata": {
+        "format": "PDF 1.3",
+        "title": "Synthetic Reader Audit Core",
+        "author": "Reader audit fixture generator",
+        "subject": "unspecified",
+        "keywords": "",
+        "creator": "anonymous",
+        "producer": "ReportLab PDF Library - (opensource)",
+        "creationDate": "D:20000101000000+00'00'",
+        "modDate": "D:20000101000000+00'00'",
+        "trapped": "",
+        "encryption": null
+      },
+      "attachments": []
+    },
+    {
+      "path": "evidence/runtime/outputs/legacy-core-notes.pdf",
+      "metadata": {
+        "format": "PDF 1.3",
+        "title": "Synthetic Reader Audit Core",
+        "author": "Reader audit fixture generator",
+        "subject": "unspecified",
+        "keywords": "",
+        "creator": "anonymous",
+        "producer": "ReportLab PDF Library - (opensource)",
+        "creationDate": "D:20000101000000+00'00'",
+        "modDate": "D:20261121150740+00'00'",
+        "trapped": "",
+        "encryption": null
+      },
+      "attachments": []
+    },
+    {
+      "path": "evidence/runtime/outputs/acroform.pdf",
+      "metadata": {
+        "format": "PDF 1.3",
+        "title": "Three editable AcroForm controls",
+        "author": "Reader Improvement Lab — original synthetic corpus",
+        "subject": "Original MIT-licensed test input; no reader-app result implied",
+        "keywords": "",
+        "creator": "scripts/generate_fixtures.py",
+        "producer": "ReportLab PDF Library - (opensource)",
+        "creationDate": "D:20000101000000+00'00'",
+        "modDate": "D:20261121155304+00'00'",
+        "trapped": "",
+        "encryption": null
+      },
+      "attachments": []
+    },
+    {
+      "path": "evidence/runtime/outputs/acroform-repeat.pdf",
+      "metadata": {
+        "format": "PDF 1.3",
+        "title": "Three editable AcroForm controls",
+        "author": "Reader Improvement Lab — original synthetic corpus",
+        "subject": "Original MIT-licensed test input; no reader-app result implied",
+        "keywords": "",
+        "creator": "scripts/generate_fixtures.py",
+        "producer": "ReportLab PDF Library - (opensource)",
+        "creationDate": "D:20000101000000+00'00'",
+        "modDate": "D:20261121160553+00'00'",
+        "trapped": "",
+        "encryption": null
+      },
+      "attachments": []
+    }
+  ]
+}

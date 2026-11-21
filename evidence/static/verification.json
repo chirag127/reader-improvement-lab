@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-21T14:55:24.554Z",
+  "artifact_id": "moonreader-supplied-10.8",
+  "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "evidence_type": "static-observation",
+  "verification_kind": "saved static evidence consistency and publication-boundary checks",
+  "status": "pass",
+  "checks": [
+    {
+      "name": "publication-boundary:knowledge/apk-analysis.md",
+      "passed": true,
+      "details": "No local user/workspace paths, raw-body fields or smali instructions in the assigned public outputs."
+    },
+    {
+      "name": "publication-boundary:data/apk-structure.json",
+      "passed": true,
+      "details": "No local user/workspace paths, raw-body fields or smali instructions in the assigned public outputs."
+    },
+    {
+      "name": "publication-boundary:evidence/static/observations.json",
+      "passed": true,
+      "details": "No local user/workspace paths, raw-body fields or smali instructions in the assigned public outputs."
+    },
+    {
+      "name": "publication-boundary:evidence/static/provenance.json",
+      "passed": true,
+      "details": "No local user/workspace paths, raw-body fields or smali instructions in the assigned public outputs."
+    },
+    {
+      "name": "selected-artifact",
+      "passed": true,
+      "details": {
+        "sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+        "public_record_count": 3
+      }
+    },
+    {
+      "name": "static-scope",
+      "passed": true,
+      "details": "All assigned JSON records retain the static evidence category and unknown authenticity."
+    },
+    {
+      "name": "coverage-counts",
+      "passed": true,
+      "details": {
+        "class_summaries": 21,
+        "method_bodies": 44,
+        "smali_requests": 6,
+        "tool_calls": 83
+      }
+    },
+    {
+      "name": "class-inventory-reconciliation",
+      "passed": true,
+      "details": {
+        "listed": 12959,
+        "namespace_groups": 291
+      }
+    },
+    {
+      "name": "manifest-and-members",
+      "passed": true,
+      "details": {
+        "components": 25,
+        "permissions": 12,
+        "root_dex": 5,
+        "native_members": 24
+      }
+    },
+    {
+      "name": "recorded-run-outcomes",
+      "passed": true,
+      "details": "REA exit 0 and 83 error-free MCP responses; owned JVM termination remains explicitly recorded."
+    },
+    {
+      "name": "finding-contract",
+      "passed": true,
+      "details": {
+        "findings": 13,
+        "required_areas": [
+          "pdf",
+          "notes-export",
+          "search",
+          "sync",
+          "tts"
+        ]
+      }
+    },
+    {
+      "name": "private-receipt-readback",
+      "passed": true,
+      "details": {
+        "checked": 152,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "citation-line-ranges",
+      "passed": true,
+      "details": {
+        "invalid": []
+      }
+    },
+    {
+      "name": "knowledge-links",
+      "passed": true,
+      "details": {
+        "checked": 5,
+        "unresolved": [],
+        "verification_link": "This command creates evidence/static/verification.json."
+      }
+    },
+    {
+      "name": "private-evidence-consistency",
+      "passed": true,
+      "details": {
+        "status": "pass",
+        "checks": 210
+      }
+    }
+  ],
+  "checked_public_files": [
+    {
+      "file": "knowledge/apk-analysis.md",
+      "size_bytes": 15318,
+      "sha256": "d3da1996a97ae77c524559cd855b9f52d0a155aed783f9d7b7a90ee6d8161e2a"
+    },
+    {
+      "file": "data/apk-structure.json",
+      "size_bytes": 84660,
+      "sha256": "dcd44eea73cabcdbce2d8f4be3e3e780f950189f5ea66219ff98ce285f8046f5"
+    },
+    {
+      "file": "evidence/static/observations.json",
+      "size_bytes": 36788,
+      "sha256": "ff20482259c767139b2a3a708d150cfec0f40f0a2faa6b9fda3fb79599d42b4e"
+    },
+    {
+      "file": "evidence/static/provenance.json",
+      "size_bytes": 67905,
+      "sha256": "0c1db025de7779278f7a28b96b59c778523029e86bed0691f854536af200345e"
+    }
+  ],
+  "private_verification_receipt": {
+    "private_evidence_ref": "verification.json",
+    "sha256": "3ffa6d6284e56e9376d7db2f1747ef82357cfc0b5b93507901a2576f6aa74a84",
+    "checks": 210
+  },
+  "command_template": "node <PRIVATE_STATIC_ANALYSIS_DIR>/verify-public-static-evidence.mjs",
+  "verifier_receipt": {
+    "private_evidence_ref": "verify-public-static-evidence.mjs",
+    "sha256": "bcd865fbae90b287d46e2cd86874959dde235ca63fce7e57f39df0d1090e93f8",
+    "size_bytes": 9255
+  },
+  "limitations": [
+    "The checks validate saved records, counts, citations and hashes; they do not execute the reader or prove decompiler correctness.",
+    "Privacy checks here are bounded string checks plus analyst review of the four lane-owned outputs, not a security audit.",
+    "Private raw evidence and the local verifier are not published; digest receipts alone cannot reproduce the analysis.",
+    "The verification file does not hash itself. Other lanes and overall repository validation belong to the integration owner."
+  ]
+}

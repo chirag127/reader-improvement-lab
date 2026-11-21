@@ -1,0 +1,131 @@
+{
+  "id": "repository-validator-development",
+  "observed_at": "2026-11-21",
+  "evidence_type": "host-tooling-verification",
+  "application_tests_executed": false,
+  "scope": "Offline research-record validation and its controlled regression tests. These retained results precede final runtime integration and publication.",
+  "inputs": [
+    {"path": "scripts/validate_repository.py", "sha256": "b95189e924e415f14260f4e236bc15fdb475a48d2e5bb08b3041e8a653dc7df4"},
+    {"path": "tests/test_repository_validation.py", "sha256": "8d6bec5e2a0b43857c1bbd01d4779c7cc1c56957beb797226861111486263784"}
+  ],
+  "environment": {"python": "3.13.14", "platform": "Windows", "validator_dependencies": "Python standard library"},
+  "commands": [
+    {
+      "phase": "red-before-implementation",
+      "command": "python -X utf8 -B -m unittest discover -s tests -p test_repository_validation.py -v",
+      "working_directory": ".",
+      "exit_code": 1,
+      "tests": 13,
+      "failures": 13,
+      "output_tail": "Ran 13 tests in 1.008s\nFAILED (failures=13)",
+      "interpretation": "Expected failures: the repository validator did not yet exist."
+    },
+    {
+      "phase": "first-implementation",
+      "command": "python -X utf8 -B -m unittest discover -s tests -p test_repository_validation.py -v",
+      "working_directory": ".",
+      "exit_code": 1,
+      "tests": 13,
+      "failures": 1,
+      "failed_test": "test_heading_suffixes_explicit_anchors_and_code_examples_are_handled",
+      "interpretation": "Fragment-only links incorrectly resolved against the containing directory rather than the current document. The other twelve tests passed."
+    },
+    {
+      "phase": "green-after-anchor-correction",
+      "command": "python -X utf8 -B -m unittest discover -s tests -p test_repository_validation.py -v",
+      "working_directory": ".",
+      "exit_code": 0,
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "output_tail": "Ran 13 tests in 19.887s\nOK",
+      "interpretation": "The original regression cases pass after correcting same-document fragment resolution."
+    },
+    {
+      "phase": "real-corpus-check",
+      "command": "python -X utf8 -B scripts/validate_repository.py --output .local/repository-validation-corrected.json",
+      "working_directory": ".",
+      "observed_at": "2026-11-21T16:57:15.444581+00:00",
+      "exit_code": 0,
+      "summary": {"alternatives": 25, "moon_proposals": 64, "alternative_proposals": 34, "fixtures": 18, "public_files": 89, "json_files": 26, "local_links_checked": 478, "file_hashes_checked": 33, "errors": 0},
+      "interpretation": "Counts describe the files present in this historical run, before subsequent evidence additions."
+    }
+  ],
+  "recovery_verification": {
+    "scope": "Expanded standard-library validator, controlled mutation tests, and one read-only current-corpus check; the original commands and identities above remain historical.",
+    "source_url": "https://github.com/chirag127/reader-improvement-lab",
+    "environment": {"python": "3.11.9", "platform": "Windows", "validator_dependencies": "Python standard library; Git for a checkout's tracked and unignored file inventory"},
+    "inputs_before_execution": [
+      {"path": "scripts/validate_repository.py", "sha256": "2b5694b3328bc5950f74c48ba47487c173654527d5aeffffaf656ea5e8d30bb8", "size_bytes": 56429},
+      {"path": "tests/test_repository_validation.py", "sha256": "163b6fcdf19d38deffb8dc359dd28644b92ee400e50925224b70bf4d47af4e97", "size_bytes": 29263}
+    ],
+    "focused_tests": {
+      "status": "pass",
+      "command": "python -X utf8 -B -m unittest discover -s tests -p test_repository_validation.py -v",
+      "working_directory": ".",
+      "shell_job_id": "sh_1ff68f13d001Tx3ViRX02SHReW",
+      "job_state": "completed",
+      "exit_code": 0,
+      "tests": 40,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "output_tail": "Ran 40 tests in 84.361s\n\nOK",
+      "interpretation": "The completion notification reported all 40 focused tests successful. Tests mutate temporary synthetic records and files; none execute a reader, regenerate the research fixtures or rerun upstream contribution tests."
+    },
+    "inputs_after_execution": [
+      {"path": "scripts/validate_repository.py", "sha256": "2b5694b3328bc5950f74c48ba47487c173654527d5aeffffaf656ea5e8d30bb8", "size_bytes": 56429},
+      {"path": "tests/test_repository_validation.py", "sha256": "163b6fcdf19d38deffb8dc359dd28644b92ee400e50925224b70bf4d47af4e97", "size_bytes": 29263}
+    ],
+    "input_identity_unchanged": true,
+    "repository_check": {
+      "command": "python -X utf8 -B scripts/validate_repository.py --root . --json",
+      "working_directory": ".",
+      "shell_job_id": "sh_1ff68f13d00298TMTp3pIaswsN",
+      "job_state": "completed",
+      "observed_at": "2026-11-21T18:40:32.458249+00:00",
+      "exit_code": 1,
+      "status": "fail",
+      "application_tests_executed": false,
+      "publication_inventory": "git-tracked-and-unignored",
+      "summary": {
+        "alternatives": 25,
+        "moon_proposals": 64,
+        "alternative_proposals": 34,
+        "contributions": 2,
+        "fixtures": 18,
+        "runtime_cases": 36,
+        "runtime_blocked": 7,
+        "runtime_fail": 1,
+        "runtime_not-run": 19,
+        "runtime_partial": 6,
+        "runtime_pass": 3,
+        "public_files": 201,
+        "json_files": 49,
+        "local_links_checked": 944,
+        "file_hashes_checked": 231,
+        "errors": 2
+      },
+      "errors": [
+        {"code": "unpublished-link", "path": "data/runtime-results.json", "message": "Target is not a publication candidate: evidence/runtime/48-form-transition-diagnostic.log"},
+        {"code": "unpublished-link", "path": "evidence/runtime/manifest.json", "message": "Hashed input is not a publication candidate: evidence/runtime/48-form-transition-diagnostic.log"}
+      ],
+      "pending": [],
+      "interpretation": "The Git-ignored local diagnostic is referenced by two public records. The integration owner must resolve its publication eligibility and references before final validation. Runtime status counts are read from the retained ledger, not new application executions."
+    },
+    "review": {
+      "method": "Same-agent adversarial review of the validator, controlled mutation cases and returned outcomes, focusing on missing references, evidence-class confusion, hash drift, historical receipts and filesystem boundaries.",
+      "limitation": "No separate-agent review of the final expanded validator implementation is claimed. The Git inventory regression substitutes the command response while exercising actual temporary files; the corpus check uses the real Git inventory."
+    },
+    "active_owned_jobs": [],
+    "remaining": [
+      "Integration owner resolves the ignored runtime diagnostic reference and performs final combined validation/publication."
+    ]
+  },
+  "limitations": [
+    "No reader application, emulator or upstream service was exercised by these commands.",
+    "This record preserves development evidence; later changes to the validator or corpus require the relevant checks to be rerun.",
+    "External URLs were checked syntactically. Semantic distinctness and source interpretation depend on separately recorded evidence review.",
+    "The combined fixture/scenario/validator suite is a separate execution with its own receipt."
+  ]
+}

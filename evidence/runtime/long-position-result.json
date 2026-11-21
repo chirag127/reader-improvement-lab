@@ -1,0 +1,9 @@
+{
+  "at": "2026-11-21T16:24:59.735669+00:00",
+  "fixture_id": "long-document",
+  "expected": "50/100",
+  "actual": [
+    "50/100"
+  ],
+  "scope": "Opened page 1, selected page 100 search result, jumped to 50, closed and force-stopped, then reopened."
+}

@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "evidence_type": "runtime-resource-cleanup",
+  "started_at_utc": "2026-11-21T17:58:51.039792Z",
+  "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "serial": "emulator-5596",
+  "avd": "reader_audit_api36_20261121_c375e7e3",
+  "private_adb_port": 5049,
+  "status": "stopped",
+  "commands": [
+    {
+      "started_at_utc": "2026-11-21T17:58:57.072157Z",
+      "command": [
+        "adb",
+        "-H",
+        "localhost",
+        "-P",
+        "5049",
+        "-s",
+        "emulator-5596",
+        "emu",
+        "avd",
+        "name"
+      ],
+      "status": "returned",
+      "exit_code": 0,
+      "stdout": "reader_audit_api36_20261121_c375e7e3\r\r\nOK",
+      "stderr": ""
+    },
+    {
+      "started_at_utc": "2026-11-21T17:58:57.290498Z",
+      "command": [
+        "adb",
+        "-H",
+        "localhost",
+        "-P",
+        "5049",
+        "-s",
+        "emulator-5596",
+        "emu",
+        "kill"
+      ],
+      "status": "returned",
+      "exit_code": 0,
+      "stdout": "OK: killing emulator, bye bye\r\r\nOK",
+      "stderr": ""
+    },
+    {
+      "started_at_utc": "2026-11-21T17:59:02.737586Z",
+      "command": [
+        "adb",
+        "-H",
+        "localhost",
+        "-P",
+        "5049",
+        "-s",
+        "emulator-5596",
+        "kill-server"
+      ],
+      "status": "returned",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "authorization": "Final ownership-bound shutdown of the existing disposable audit AVD and its private ADB server.",
+  "application_tests_executed": false,
+  "exclusive_driver_lock_acquired": true,
+  "limitations": [
+    "Process and port observations apply to this cleanup instant; no shared ADB server or personal device is targeted."
+  ],
+  "preserved_evidence_files_verified_before_shutdown": 105,
+  "before": {
+    "ports": [
+      {
+        "LocalAddress": "::1",
+        "LocalPort": 5597,
+        "OwningProcess": 108196
+      },
+      {
+        "LocalAddress": "::1",
+        "LocalPort": 5596,
+        "OwningProcess": 108196
+      },
+      {
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 5597,
+        "OwningProcess": 108196
+      },
+      {
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 5596,
+        "OwningProcess": 108196
+      },
+      {
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 5049,
+        "OwningProcess": 131056
+      }
+    ],
+    "processes": [
+      {
+        "pid": 131056,
+        "name": "adb.exe",
+        "created_at_utc": "2026-11-21T14:33:02.460902+00:00"
+      },
+      {
+        "pid": 108196,
+        "name": "qemu-system-x86_64-headless.exe",
+        "created_at_utc": "2026-11-21T14:33:32.829868+00:00"
+      }
+    ]
+  },
+  "process_identity_and_port_bindings_verified": true,
+  "emulator_exit_wait": {
+    "method": "WaitForSingleObject on retained verified process handle",
+    "timeout_ms": 45000,
+    "result": 0
+  },
+  "adb_exit_wait": {
+    "method": "WaitForSingleObject on retained verified process handle",
+    "timeout_ms": 15000,
+    "result": 0
+  },
+  "after": {
+    "ports": [],
+    "processes": []
+  },
+  "ended_at_utc": "2026-11-21T17:59:07.894071Z",
+  "exclusive_driver_lock_released_on_process_exit": true
+}

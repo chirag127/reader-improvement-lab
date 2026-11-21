@@ -1,0 +1,84 @@
+{
+  "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "serial": "emulator-5596",
+  "fixture": {
+    "id": "navigation",
+    "device_path": "/sdcard/Download/reader-lab-canonical/navigation.pdf",
+    "sha256": "246db3dac24ecbf13691f0b599be85e0c151b5a7445ccf591ad5c0ffcd13ffc2",
+    "media_type": "application/pdf",
+    "expected": {
+      "page_count": 3,
+      "encrypted": false,
+      "text_layer": true,
+      "render_pages": [
+        1,
+        2,
+        3
+      ],
+      "text_by_page": {
+        "1": [
+          "NAVIGATION-START"
+        ],
+        "2": [
+          "NAVIGATION-MIDDLE"
+        ],
+        "3": [
+          "NAVIGATION-END"
+        ]
+      },
+      "outlines": [
+        {
+          "level": 1,
+          "title": "Start",
+          "page": 1
+        },
+        {
+          "level": 1,
+          "title": "Middle",
+          "page": 2
+        },
+        {
+          "level": 1,
+          "title": "End",
+          "page": 3
+        }
+      ],
+      "internal_links": [
+        {
+          "source_page": 1,
+          "target_page": 3
+        },
+        {
+          "source_page": 3,
+          "target_page": 1
+        }
+      ]
+    }
+  },
+  "status": "PASS",
+  "observed": [
+    {
+      "capture": "35-navigation-link-forward-controlled",
+      "expected": "3/3",
+      "actual": [
+        "3/3"
+      ]
+    },
+    {
+      "capture": "36-navigation-link-return-controlled",
+      "expected": "1/3",
+      "actual": [
+        "1/3"
+      ]
+    },
+    {
+      "capture": "37-navigation-page-down-controlled",
+      "expected": "2/3",
+      "actual": [
+        "2/3"
+      ]
+    }
+  ],
+  "scope": "One exclusive 1-to-3-to-1 link cycle and one page-down; earlier concurrent run excluded",
+  "status_interpretation": "The retained PASS is a link-cycle/page-down subcheck; full canonical RT-04 is partial."
+}

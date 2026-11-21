@@ -1,0 +1,33 @@
+{
+  "source_fixture": "fixtures-v2/01-core.pdf",
+  "returned_sha256": "7e203e424dc989ec8d2aed970fb7cbf4203c5ff89b94878cf8db8946d3defacc",
+  "annotations": [
+    {
+      "page": 1,
+      "type": "Highlight",
+      "info": {
+        "content": "AUDIT_NOTE_PERSIST_20261121AUDIT_NOTE_PERSIST_20261121",
+        "name": "",
+        "title": "",
+        "creationDate": "",
+        "modDate": "D:20261121145648+00'00'",
+        "subject": "",
+        "id": "1322757268"
+      }
+    },
+    {
+      "page": 1,
+      "type": "Highlight",
+      "info": {
+        "content": "AUDIT_NOTE_PERSIST_20261121",
+        "name": "",
+        "title": "",
+        "creationDate": "",
+        "modDate": "D:20261121150212+00'00'",
+        "subject": "",
+        "id": "1322757268"
+      }
+    }
+  ],
+  "note_stored_in_pdf": true
+}

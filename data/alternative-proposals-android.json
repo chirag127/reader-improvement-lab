@@ -1,0 +1,495 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-21",
+  "proposals": [
+    {
+      "id": "ALT-K01",
+      "title": "OPDS CBR MIME aliases and a feed regression fixture",
+      "application_id": "koreader",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "Open issue #15844 requests two CBR MIME aliases. At the reviewed commit, PdfDocument registers application/vnd.comicbook-rar and application/vnd.rar; the reported application/vnd.comicbook+rar and application/x-cbr aliases are absent from that registration block. DocumentRegistry maps registered MIME values to extensions.",
+      "acceptance_criteria": [
+        "All four MIME aliases resolve to CBR through the document registry.",
+        "A local OPDS feed fixture exposes a download action for each alias.",
+        "Existing CBZ acquisition behavior passes the same regression check."
+      ],
+      "sources": [
+        "https://github.com/koreader/koreader/issues/15844",
+        "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/frontend/document/pdfdocument.lua#L370-L416",
+        "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/frontend/document/documentregistry.lua#L31-L225"
+      ],
+      "status": "draft",
+      "limitations": [
+        "Source inspection and an upstream report do not establish the full OPDS UI failure at this commit; trace feed logic and reproduce first.",
+        "Duplicate search examined six of 47 issue results for mime; related PRs and all comments were not exhausted."
+      ]
+    },
+    {
+      "id": "ALT-K02",
+      "title": "Configurable Markdown export metadata and header presentation",
+      "application_id": "koreader",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "Open issues #14885 and #13321 request cleaner exported metadata and formatting. The inspected Markdown template hardcodes author, chapter, page, timestamp and separator presentation. Style and custom formatter strings already exist.",
+      "acceptance_criteria": [
+        "Page and timestamp visibility can be configured independently.",
+        "A blockquote-oriented preset handles multiline quotations, absent notes and Unicode.",
+        "Default settings preserve the existing export output."
+      ],
+      "sources": [
+        "https://github.com/koreader/koreader/issues/14885",
+        "https://github.com/koreader/koreader/issues/13321",
+        "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/template/md.lua#L39-L65",
+        "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/target/markdown.lua"
+      ],
+      "status": "draft",
+      "limitations": [
+        "This extends existing Markdown export, not an absent feature.",
+        "Export-title duplicate search examined 12 of 13 open issue results; proposed output fixtures were not executed."
+      ]
+    },
+    {
+      "id": "ALT-K03",
+      "title": "Hierarchical chapter context in annotation exports",
+      "application_id": "koreader",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "Open issue #12480 requests ancestor TOC context. The inspected template emits a single entry.chapter at one heading level. Current source already includes highlight-color filtering despite another open request mentioning that capability.",
+      "acceptance_criteria": [
+        "Annotations in a three-level TOC fixture retain their ancestor chapter context.",
+        "Older annotations without hierarchical metadata retain a readable fallback.",
+        "The parser and annotation model are inspected before choosing storage or migration changes."
+      ],
+      "sources": [
+        "https://github.com/koreader/koreader/issues/12480",
+        "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/template/md.lua#L39-L65",
+        "https://github.com/koreader/koreader/blob/07d7b22098ef1693f090a881abf27ca5a25fa50a/plugins/exporter.koplugin/main.lua"
+      ],
+      "status": "draft",
+      "limitations": [
+        "The annotation parser and complete metadata model were not inspected; the storage change is undecided.",
+        "Do not re-request color filtering as absent. Issue search was first-page bounded and no export fixture was run."
+      ]
+    },
+    {
+      "id": "ALT-L01",
+      "title": "Profile and reduce foliate cold-open and indexing cost",
+      "application_id": "librera",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "Open issue #1692 reports loading regressions in Librera Pro 10.0.35. The reviewed FoliateRenderer and FoliateDocument expose open/index timing, profiling, page indexing and read-ahead boundaries suitable for a measured investigation.",
+      "acceptance_criteria": [
+        "Measure cold and warm open-to-first-readable-page latency on a fixed device, EPUB corpus and layout configuration.",
+        "Measure indexing latency separately from initial display latency.",
+        "Promote an optimization only when layout, reading anchors and navigation remain equivalent."
+      ],
+      "sources": [
+        "https://github.com/foobnix/LibreraReader/issues/1692",
+        "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/src/main/java/org/ebookdroid/droids/foliate/codec/FoliateRenderer.java",
+        "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/src/main/java/org/ebookdroid/droids/foliate/codec/FoliateDocument.java"
+      ],
+      "status": "draft",
+      "limitations": [
+        "No latency measurement or regression reproduction was performed; the report concerns an earlier version than the source pin.",
+        "The foliate issue search examined six of six results, including a separate LibreraX report; other queries and PRs were not exhausted."
+      ]
+    },
+    {
+      "id": "ALT-L02",
+      "title": "Foliate font discovery, weight and justification conformance",
+      "application_id": "librera",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "Issue #1692 reports font filtering, bold-weight and Turkish justification concerns. FoliateCss rewrites local font URLs, supplies fallback families and adapts layout rules. Issue #1691 concerns LibreraX and is not evidence of the same implementation defect.",
+      "acceptance_criteria": [
+        "Exercise regular-only fonts, genuine bold faces, variable fonts and large headings.",
+        "Preserve authored strong/bold emphasis without applying bold indiscriminately to body text.",
+        "Compare Turkish justified-text fixtures under both relevant engines after tracing actual font discovery."
+      ],
+      "sources": [
+        "https://github.com/foobnix/LibreraReader/issues/1692",
+        "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/src/main/java/org/ebookdroid/droids/foliate/codec/FoliateCss.java"
+      ],
+      "status": "draft",
+      "limitations": [
+        "The reporter's font-filtering diagnosis is unverified; font discovery was not traced end to end.",
+        "LibreraX is a separate product. No rendering or font fixtures were executed in this source-only review."
+      ]
+    },
+    {
+      "id": "ALT-L03",
+      "title": "Exact-position persistence across layout and lifecycle changes",
+      "application_id": "librera",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "Old open issue #672 describes percentage-based position drift across screen sizes. Current source already has CFI location contracts; FoliateDocument deliberately returns a miss rather than blocking on main-thread location calls. Caller behavior needs focused verification.",
+      "acceptance_criteria": [
+        "Restore the same text after rotation, font changes, backgrounding and device-size migration.",
+        "Identify which save/restore callers fall back to percentage and whether they lose a previously valid anchor.",
+        "If needed, retain a nonblocking last-known CFI without making main-thread WebView calls wait."
+      ],
+      "sources": [
+        "https://github.com/foobnix/LibreraReader/issues/672",
+        "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/src/main/java/org/ebookdroid/core/codec/CodecDocument.java#L11-L120",
+        "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/src/main/java/org/ebookdroid/droids/foliate/codec/FoliateDocument.java"
+      ],
+      "status": "draft",
+      "limitations": [
+        "Current Librera does not lack CFI support; the old report is not proof of a current regression.",
+        "All callers and cross-device sync paths were not reviewed or exercised."
+      ]
+    },
+    {
+      "id": "ALT-L04",
+      "title": "Current build-flavor and rendering-engine capability documentation",
+      "application_id": "librera",
+      "priority": "low",
+      "evidence_type": "proposal",
+      "basis": "The README's frozen-development notice coexists with a 10.1.14 commit and build configuration for PDFium, foliate and MuPDF-free JS variants. A dated flavor matrix would make documented capabilities easier to interpret.",
+      "acceptance_criteria": [
+        "Document maintainer-approved current maintenance/support status without misrepresenting the war notice.",
+        "Map MuPDF, PDFium and foliate capabilities across F-Droid, Pro and JS variants.",
+        "Identify minimum API and GMS/network-dependent features with links to the corresponding build/source definitions."
+      ],
+      "sources": [
+        "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/README.md",
+        "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/app/build.gradle",
+        "https://github.com/foobnix/LibreraReader/blob/b7378bbde373bbf8b80842f3e47ea444fa9fd542/LICENSE.txt"
+      ],
+      "status": "draft",
+      "limitations": [
+        "No claim of abandonment, licensing violation or identical behavior across variants is made.",
+        "Published-build parity and maintainer willingness to update the documentation were not established."
+      ]
+    },
+    {
+      "id": "ALT-B01",
+      "title": "Page-preserving PDF mode or explicit PDF capability messaging",
+      "application_id": "books-story",
+      "priority": "low",
+      "evidence_type": "proposal",
+      "basis": "Open issue #117 requests showing PDF pages without parsing. The inspected PdfContentParser uses PDFBox text extraction to produce paragraph/separator nodes rather than original PDF page rendering.",
+      "acceptance_criteria": [
+        "Provide original-page handling for scanned or layout-sensitive PDFs if that direction is accepted, or explicitly communicate the text-only boundary.",
+        "Exercise two-column, image-only, table and mixed-script PDFs.",
+        "Keep original-page rendering distinct from reflowable ebook layout and parser-version invalidation."
+      ],
+      "sources": [
+        "https://github.com/Acclorite/book-story/issues/117",
+        "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/parser/content/PdfContentParser.kt",
+        "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/README.md"
+      ],
+      "status": "draft",
+      "limitations": [
+        "The maintainer explicitly declines code PRs; contribute a suggestion, reproducer or translation rather than an unsolicited implementation.",
+        "PDF issue search examined six of 27 results. No PDF fixture or full implementation absence search was run."
+      ]
+    },
+    {
+      "id": "ALT-B02",
+      "title": "Android Open With and share import",
+      "application_id": "books-story",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "Open issue #310 requests VIEW/SEND handling. The inspected MainActivity manifest has MAIN/LAUNCHER only, while FileSystemRepositoryImpl already provides a metadata/cover ingestion path.",
+      "acceptance_criteria": [
+        "Supported content URIs received from a file manager or mail share enter the existing library-import flow.",
+        "Temporary read grants and source lifetime are handled before deferred import.",
+        "Duplicate import and cancellation preserve existing library records."
+      ],
+      "sources": [
+        "https://github.com/Acclorite/book-story/issues/310",
+        "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/AndroidManifest.xml#L38-L49",
+        "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/repository/FileSystemRepositoryImpl.kt",
+        "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/README.md"
+      ],
+      "status": "draft",
+      "limitations": [
+        "A source-manifest observation is not a merged APK-manifest or on-device resolver test.",
+        "The maintainer declines code PRs; use the existing issue for a proposal or reproducible evidence."
+      ]
+    },
+    {
+      "id": "ALT-B03",
+      "title": "Reconcile Markdown support claims with import dispatch",
+      "application_id": "books-story",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "README advertises seven extensions including Markdown. ExtensionsData, FileParserImpl and ContentParserImpl enumerate six without Markdown. The historical Markdown request #93 is closed, which does not establish present support.",
+      "acceptance_criteria": [
+        "Confirm whether Markdown omission is intentional for this revision or rewrite.",
+        "If supported, demonstrate discovery, import and rendering with a small Markdown fixture.",
+        "Otherwise correct documentation to list the six implemented extension gates."
+      ],
+      "sources": [
+        "https://github.com/Acclorite/book-story/issues/93",
+        "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/README.md",
+        "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/core/data/ExtensionsData.kt#L11-L19",
+        "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/parser/file/FileParserImpl.kt",
+        "https://github.com/Acclorite/book-story/blob/6ffefb974ae8eac542e36eb659f77e4802735fd9/app/src/main/java/ua/acclorite/book_story/data/parser/content/ContentParserImpl.kt"
+      ],
+      "status": "draft",
+      "limitations": [
+        "The maintainer declines code PRs; clarify intended behavior through the supported suggestion/report route.",
+        "Two of two Markdown issue results were read, including closed #93; no runtime import or branch-history investigation was performed."
+      ]
+    },
+    {
+      "id": "ALT-R01",
+      "title": "Occurrence-aware Moon import anchors across text nodes",
+      "application_id": "readest",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "The mrexpt parser retains b4/b5/b6 and text length, but the inspected conversion loop locates the first match in individual DOM text nodes rather than using offsets to choose a repeated occurrence. Existing Moon import is UI-wired.",
+      "acceptance_criteria": [
+        "Verify offset and chapter semantics against lawful Moon+ v10.8 exports before using them as location hints.",
+        "Repeated phrases within and across chapters resolve to the intended occurrence or expose ambiguity.",
+        "Phrases split by inline elements, CJK text and whitespace changes preserve intended range boundaries or report a bounded fallback."
+      ],
+      "sources": [
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/utils/mrexpt.ts",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/annotation/providers/mrexpt.ts",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/app/reader/components/annotator/Annotator.tsx"
+      ],
+      "status": "draft",
+      "limitations": [
+        "No v10.8 export was tested; offsets are not certified portable across editions.",
+        "The mrexpt issue query returned zero and Moon returned 38 with ten examined; this is not an exhaustive issue/PR novelty check."
+      ]
+    },
+    {
+      "id": "ALT-R02",
+      "title": "Moon import fidelity and visible reconciliation outcomes",
+      "application_id": "readest",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "The parser does not retain the raw marker/color value; conversion applies one chosen style/color and returns unmatched/total. The inspected Annotator success path reports added/updated counts without those reconciliation values. Duplicate/no-op reimport and deletion resurrection already exist.",
+      "acceptance_criteria": [
+        "Preserve color and style distinctions where verified export data permits a reliable mapping.",
+        "Report exact matches, chapter-start fallbacks, skipped entries and ambiguity separately.",
+        "Make partial-import outcomes reviewable while preserving existing duplicate/no-op, newer-note and deletion-resurrection behavior."
+      ],
+      "sources": [
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/utils/mrexpt.ts",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/annotation/providers/mrexpt.ts",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/app/reader/components/annotator/Annotator.tsx",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/__tests__/services/mrexpt-import.test.ts"
+      ],
+      "status": "draft",
+      "limitations": [
+        "This extends a real importer; neither a missing-importer claim nor full v10.8 compatibility is established.",
+        "Existing merge tests were read, not executed. Import-related issue and PR searches were bounded."
+      ]
+    },
+    {
+      "id": "ALT-R03",
+      "title": "Stronger publisher CSS and layout preservation option",
+      "application_id": "readest",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "Open issue #7417 requests Force Book Layout. The inspected style assembly always includes page/image CSS while useBookLayout skips only paragraph CSS; FoliateViewer applies the assembled styles.",
+      "acceptance_criteria": [
+        "A synthetic EPUB with authored img width of 50 percent keeps that width in a publisher-first mode.",
+        "Functional link, footnote and overflow behavior remains correct.",
+        "Verify the option in Chromium, Android WebView and WebKit with both paginated and scrolled reading."
+      ],
+      "sources": [
+        "https://github.com/readest/readest/issues/7417",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/utils/style.ts",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/app/reader/components/FoliateViewer.tsx"
+      ],
+      "status": "draft",
+      "limitations": [
+        "Reporter measurements are upstream-report evidence, not independently collected results.",
+        "No browser or device fixture was run; related PRs and the complete stylesheet interaction surface were not exhausted."
+      ]
+    },
+    {
+      "id": "ALT-R04",
+      "title": "Interoperable annotated PDF export",
+      "application_id": "readest",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "Open issue #7572 requests standard annotations embedded in an exported PDF. The inspected annotation data flow and BaseAppService.saveFile provide input/output seams. Overlay annotations and JSON/Markdown exports are different capabilities.",
+      "acceptance_criteria": [
+        "Export a new PDF containing standard highlights and notes that reopen in two independent readers.",
+        "Preserve annotation geometry with cropped and rotated pages.",
+        "Treat flattening as an explicit separate option and retain the original file."
+      ],
+      "sources": [
+        "https://github.com/readest/readest/issues/7572",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/services/appService.ts#L47-L131",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/apps/readest-app/src/app/reader/components/annotator/Annotator.tsx"
+      ],
+      "status": "draft",
+      "limitations": [
+        "A complete repository-wide PDF-writeback absence check was not performed; confirm implementation and related PRs before coding.",
+        "No annotated PDF was exported or cross-reader-tested."
+      ]
+    },
+    {
+      "id": "ALT-M01",
+      "title": "Readable Library filter chips at large text and display scaling",
+      "application_id": "mj-pdf",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "Open GitLab issue #90 supplies Android 9 emulator comparisons at 1080 by 1920 pixels: density 540/fontScale 1.3 versus 420/1.0. Current pinned XML still uses equal-weight 0dp chip widths and fixed margins for Completed and Abandoned.",
+      "acceptance_criteria": [
+        "Reproduce the reported scaling combination and baseline before changing layout.",
+        "Keep Completed, Abandoned and long translations readable at large scale and narrow window widths without shrinking user-selected text.",
+        "Preserve unambiguous selection, keyboard focus and accessibility labels after any wrapping or scrolling change."
+      ],
+      "sources": [
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/work_items/90",
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/res/layout/item_home_chip_row.xml"
+      ],
+      "status": "draft",
+      "limitations": [
+        "The emulator observations belong to the upstream reporter; this review did not render the layout.",
+        "GitLab duplicate review examined the newest returned open-issue page only; related merge requests were not exhausted."
+      ]
+    },
+    {
+      "id": "ALT-M02",
+      "title": "Text-mode read-aloud with synchronized highlighting",
+      "application_id": "mj-pdf",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "The pinned roadmap lists improved Text Mode and TTS with synchronized highlighting for v3.7. TextModeContentLoader and PdfExtractor provide incremental extraction and native-page ownership seams.",
+      "acceptance_criteria": [
+        "Start, pause and resume narration with sentence-level highlighting.",
+        "Handle page jumps and activity close without leaked handles or competing extraction ownership.",
+        "Begin narration without extracting every document page first."
+      ],
+      "sources": [
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/roadmap.md",
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/text_mode/TextModeContentLoader.kt",
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/pdf/PdfExtractor.kt"
+      ],
+      "status": "draft",
+      "limitations": [
+        "This is a documented roadmap enhancement, not a missing-feature conclusion from an exhaustive implementation search.",
+        "No TTS, lifecycle or native-handle test was executed."
+      ]
+    },
+    {
+      "id": "ALT-M03",
+      "title": "Structured study exports beyond existing plain text",
+      "application_id": "mj-pdf",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "The roadmap lists Markdown, Anki, Obsidian and flashcard exports for v3.8. AnnotationListLogic centralizes export data, and both UserHighlightsActivity and UserNotesActivity already expose SAF plain-text export.",
+      "acceptance_criteria": [
+        "Retain stable document, page and annotation identifiers with separate quoted text and user notes.",
+        "Preserve color and TOC context and make repeated exports deterministic.",
+        "Exercise escaping, multiline Unicode and annotations created by independent PDF tools."
+      ],
+      "sources": [
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/roadmap.md",
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/usernotes/AnnotationListLogic.kt",
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/userhighlights/UserHighlightsActivity.kt",
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/usernotes/UserNotesActivity.kt"
+      ],
+      "status": "draft",
+      "limitations": [
+        "Plain-text export is already implemented; this proposal adds interoperable structured output.",
+        "No exports were executed and candidate-specific merge-request deduplication remains incomplete."
+      ]
+    },
+    {
+      "id": "ALT-M04",
+      "title": "Large-screen multi-document tabs with isolated lifecycle",
+      "application_id": "mj-pdf",
+      "priority": "low",
+      "evidence_type": "proposal",
+      "basis": "Open GitLab issue #88 requests tabs in one view and the roadmap's v3.3 entry discusses large screens and possible tabs. Separate Android instances already exist. Extractor/loader ownership is relevant to tab resource isolation.",
+      "acceptance_criteria": [
+        "Switch between several PDFs while retaining independent page, zoom and unsaved annotation state.",
+        "Closing a tab releases its native resources without disrupting other tabs.",
+        "Specify and verify process restoration and bounded memory use with large files."
+      ],
+      "sources": [
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/work_items/88",
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/roadmap.md",
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md",
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/app/src/main/java/com/gitlab/mudlej/MjPdfReader/ui/text_mode/TextModeContentLoader.kt"
+      ],
+      "status": "draft",
+      "limitations": [
+        "In-window tabs are distinct from existing multiple-instance behavior.",
+        "No tablet, restoration or memory test was run; tab architecture and maintainer acceptance remain undecided."
+      ]
+    },
+    {
+      "id": "ALT-U01",
+      "title": "Separate no-link from valid page index zero",
+      "application_id": "mupdf-android",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "MuPDFCore.resolveLink returns a document page number; PageView returns it for internal links but also uses zero for external/no-link outcomes. ReaderView.onSingleTapUp follows only page > 0, making a valid index-zero destination indistinguishable in that path.",
+      "acceptance_criteria": [
+        "A three-page PDF follows links from page 3 to page 1/index 0 and page 2/index 1.",
+        "Navigation history returns to the source page after either internal link.",
+        "External URLs and no-link taps retain distinct behavior."
+      ],
+      "sources": [
+        "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/PageView.java#L565-L598",
+        "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/MuPDFCore.java",
+        "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/ReaderView.java"
+      ],
+      "status": "draft",
+      "limitations": [
+        "This is a source-level reproduction candidate, not a confirmed on-device defect.",
+        "The link issue query returned three results (#33, #26, #1), none an exact page-zero report; this does not establish novelty across all issues or PRs."
+      ]
+    },
+    {
+      "id": "ALT-U02",
+      "title": "Basic text selection and copy within simplified viewer scope",
+      "application_id": "mupdf-android",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "Open issues #29 and #36 request text selection/copy. The inspected ReaderView long-press handler is empty. PageView and MuPDFCore define the relevant page/engine boundaries.",
+      "acceptance_criteria": [
+        "Support selection handles, clipboard copy and cancellation at multiple zoom levels.",
+        "Preserve selection geometry under page rotation.",
+        "Explain image-only PDF behavior without implying OCR, form editing or annotation editing."
+      ],
+      "sources": [
+        "https://github.com/ArtifexSoftware/mupdf-android-viewer/issues/29",
+        "https://github.com/ArtifexSoftware/mupdf-android-viewer/issues/36",
+        "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/ReaderView.java",
+        "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/README"
+      ],
+      "status": "draft",
+      "limitations": [
+        "This simplified viewer deliberately excludes forms and annotation editing; capabilities of the full MuPDF product are separate.",
+        "Six of 31 open issue results were examined. No selection or clipboard interaction was tested."
+      ]
+    },
+    {
+      "id": "ALT-U03",
+      "title": "Share the currently open document",
+      "application_id": "mupdf-android",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "Open issue #25 requests a share action. The inspected DocumentActivity intent handling and LibraryActivity SAF opening path expose the selected document URI, providing an integration seam.",
+      "acceptance_criteria": [
+        "A share action passes a readable content URI and transient read grant to a receiving app.",
+        "Document-provider sources work without requiring a raw filesystem path.",
+        "Verify receiver readability and URI lifetime rather than merely showing a share sheet."
+      ],
+      "sources": [
+        "https://github.com/ArtifexSoftware/mupdf-android-viewer/issues/25",
+        "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/lib/src/main/java/com/artifex/mupdf/viewer/DocumentActivity.java",
+        "https://github.com/ArtifexSoftware/mupdf-android-viewer/blob/f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0/app/src/main/java/com/artifex/mupdf/viewer/app/LibraryActivity.java#L24-L66"
+      ],
+      "status": "draft",
+      "limitations": [
+        "No share receiver or URI-grant lifecycle test was run.",
+        "Duplicate checking was bounded to the newest open-issue page; related PRs and complete activity/menu behavior were not exhaustively reviewed."
+      ]
+    }
+  ]
+}

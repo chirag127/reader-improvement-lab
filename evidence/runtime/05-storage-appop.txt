@@ -1,0 +1,1 @@
+Uid mode: MANAGE_EXTERNAL_STORAGE: allow

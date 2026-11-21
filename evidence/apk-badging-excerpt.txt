@@ -1,0 +1,18 @@
+Observation date: 2026-11-21
+Evidence type: static-observation / manifest declarations
+Artifact SHA-256: e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc
+Tool: Android SDK Build Tools 36.0.0, aapt
+Command: aapt dump badging <supplied-apk>
+Exit code: 0
+
+package: name='com.flyersoft.moonreaderp' versionCode='1008000' versionName='10.8' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+install-location:'internalOnly'
+sdkVersion:'21'
+targetSdkVersion:'36'
+application-label:'Moon+ Reader Pro'
+launchable-activity: name='com.flyersoft.moonreaderp.ActivityMain'  label='Moon+ Reader Pro' icon=''
+native-code: 'arm64-v8a' 'armeabi-v7a' 'x86' 'x86_64'
+
+Curation: Selected identity fields from the successful command. Permission names
+and their observed READ_EXTERNAL_STORAGE qualifier are transcribed in data/artifact.json.
+These are package declarations, not runtime or official-provenance findings.

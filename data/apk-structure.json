@@ -1,0 +1,3299 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-21",
+  "artifact_id": "moonreader-supplied-10.8",
+  "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "evidence_type": "static-observation",
+  "id": "moonreader-supplied-10.8-static-structure",
+  "artifact_record": "data/artifact.json",
+  "observations": "evidence/static/observations.json",
+  "provenance": "evidence/static/provenance.json",
+  "authenticity": "unknown",
+  "package_name": "com.flyersoft.moonreaderp",
+  "sdk_declarations": {
+    "min": 21,
+    "target": 36,
+    "compile": 36,
+    "source": "REA decoded root manifest and parent aapt artifact record; not runtime support verification"
+  },
+  "manifest": {
+    "rea_evidence_id": "ev_2197257034924089fcc7e23e8721f63b439afeae495f011eaad051297f1c3679",
+    "status": "complete",
+    "components_status": "complete",
+    "component_count": 25,
+    "requested_permission_count": 12,
+    "permission_record": "data/artifact.json",
+    "application_attributes": [
+      {
+        "name": "android:theme",
+        "value": "@style/MRThemeSelector"
+      },
+      {
+        "name": "android:label",
+        "value": "@string/app_name"
+      },
+      {
+        "name": "android:icon",
+        "value": "@drawable/icon"
+      },
+      {
+        "name": "android:name",
+        "value": "androidx.multidex.MultiDexApplication"
+      },
+      {
+        "name": "android:allowBackup",
+        "value": "true"
+      },
+      {
+        "name": "android:resizeableActivity",
+        "value": "true"
+      },
+      {
+        "name": "android:networkSecurityConfig",
+        "value": "@xml/network_security_config"
+      },
+      {
+        "name": "android:roundIcon",
+        "value": "@drawable/icon_round"
+      },
+      {
+        "name": "android:appComponentFactory",
+        "value": "androidx.core.app.CoreComponentFactory"
+      },
+      {
+        "name": "android:requestLegacyExternalStorage",
+        "value": "true"
+      },
+      {
+        "name": "android:enableOnBackInvokedCallback",
+        "value": "false"
+      }
+    ],
+    "components": [
+      {
+        "kind": "activity",
+        "name": "com.flyersoft.moonreaderp.ActivityMain",
+        "exported": true,
+        "exported_default": true,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.flyersoft.moonreaderp.ClickTip",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.flyersoft.moonreaderp.PicGalleryShow",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.flyersoft.moonreaderp.NetBookInfo",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.flyersoft.moonreaderp.BookDownloadCancelAct",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.flyersoft.moonreaderp.SelectImageAct",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.flyersoft.moonreaderp.SelectFileAct",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.flyersoft.moonreaderp.MediaAct",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "receiver",
+        "name": "com.flyersoft.components.OpenFile_Receiver",
+        "exported": true,
+        "exported_default": true,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "service",
+        "name": "com.flyersoft.moonreaderp.BookTtsService",
+        "exported": false,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": "mediaPlayback"
+      },
+      {
+        "kind": "service",
+        "name": "com.flyersoft.moonreaderp.BookDownloadService",
+        "exported": false,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "provider",
+        "name": "com.flyersoft.moonreaderp.BookViewProvider",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "provider",
+        "name": "androidx.core.content.FileProvider",
+        "exported": false,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.dropbox.core.android.AuthActivity",
+        "exported": true,
+        "exported_default": true,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.radaee.util.PopupEditAct",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.radaee.util.CaptureSignature",
+        "exported": null,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "receiver",
+        "name": "com.flyersoft.components.WidgetProvider",
+        "exported": true,
+        "exported_default": true,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "service",
+        "name": "com.flyersoft.components.WidgetService",
+        "exported": null,
+        "exported_default": false,
+        "permission": "android.permission.BIND_REMOTEVIEWS",
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.flyersoft.components.WidgetOptionActivity",
+        "exported": true,
+        "exported_default": true,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.google.android.gms.auth.api.signin.internal.SignInHubActivity",
+        "exported": false,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "service",
+        "name": "com.google.android.gms.auth.api.signin.RevocationBoundService",
+        "exported": true,
+        "exported_default": false,
+        "permission": "com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION",
+        "foreground_service_type": null
+      },
+      {
+        "kind": "activity",
+        "name": "com.google.android.gms.common.api.GoogleApiActivity",
+        "exported": false,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "provider",
+        "name": "androidx.startup.InitializationProvider",
+        "exported": false,
+        "exported_default": false,
+        "permission": null,
+        "foreground_service_type": null
+      },
+      {
+        "kind": "receiver",
+        "name": "androidx.profileinstaller.ProfileInstallReceiver",
+        "exported": true,
+        "exported_default": true,
+        "permission": "android.permission.DUMP",
+        "foreground_service_type": null
+      }
+    ],
+    "launcher_activity": "com.flyersoft.moonreaderp.ActivityMain",
+    "view_mime_declarations": [
+      "text/*",
+      "image/*",
+      "application/pdf",
+      "application/djvu",
+      "application/x-cbr",
+      "application/x-cbz",
+      "application/comicbook+zip",
+      "application/comicbook+rar",
+      "application/vnd.comicbook+rar",
+      "application/vnd.comicbook+zip",
+      "application/epub",
+      "application/epub+zip",
+      "application/mobi",
+      "application/x-mobipocket-ebook",
+      "application/x-kindle-application",
+      "application/rtf",
+      "application/x-rtf",
+      "application/azw",
+      "application/azw3",
+      "application/x-mobi8-ebook",
+      "application/octet-stream",
+      "application/x-fictionbook+xml",
+      "application/x-fictionbook",
+      "application/x-fb2",
+      "application/x-zip-compressed-fb2",
+      "application/fb2+zip",
+      "application/fb2.zip",
+      "application/fb2",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "message/rfc822",
+      "application/x-chm",
+      "application/chm",
+      "application/vnd.ms-htmlhelp",
+      "application/vnd.oasis.opendocument.text",
+      "*/*"
+    ],
+    "resource_count_full_mode": 2160,
+    "evidence": {
+      "private_evidence_ref": "rea-package-bundle.json",
+      "size_bytes": 70971,
+      "sha256": "1728a32da91247c2533d1ebfca832566a27ce14c9c587f6a4a76d1e679b45c43",
+      "publication": "raw evidence retained privately; digest only"
+    },
+    "limitations": [
+      "Declarations do not establish effective grants, Android intent resolution, successful launch or security defects.",
+      "An omitted exported attribute is retained as null, alongside REA's separately derived default."
+    ]
+  },
+  "classes": {
+    "listed": 12959,
+    "reported_total": 12959,
+    "exhausted": true,
+    "scope": "JADX list_classes top-level display names; not all raw DEX class definitions",
+    "namespace_grouping": "First three package segments; shallow groups include descendants and dependency classes.",
+    "namespaces": [
+      {
+        "namespace": "com.dropbox.core",
+        "classes": 2345
+      },
+      {
+        "namespace": "com.google.android",
+        "classes": 1700
+      },
+      {
+        "namespace": "io.reactivex.rxjava3",
+        "classes": 854
+      },
+      {
+        "namespace": "org.apache.http",
+        "classes": 653
+      },
+      {
+        "namespace": "com.google.common",
+        "classes": 636
+      },
+      {
+        "namespace": "com.vladsch.flexmark",
+        "classes": 482
+      },
+      {
+        "namespace": "org.apache.commons",
+        "classes": 481
+      },
+      {
+        "namespace": "com.google.api",
+        "classes": 345
+      },
+      {
+        "namespace": "com.facebook.imagepipeline",
+        "classes": 282
+      },
+      {
+        "namespace": "org.checkerframework.checker",
+        "classes": 222
+      },
+      {
+        "namespace": "kotlinx.coroutines.flow",
+        "classes": 181
+      },
+      {
+        "namespace": "com.fasterxml.jackson",
+        "classes": 160
+      },
+      {
+        "namespace": "com.github.mikephil",
+        "classes": 159
+      },
+      {
+        "namespace": "kotlinx.coroutines",
+        "classes": 137
+      },
+      {
+        "namespace": "androidx.collection",
+        "classes": 113
+      },
+      {
+        "namespace": "androidx.constraintlayout.core",
+        "classes": 108
+      },
+      {
+        "namespace": "kotlin",
+        "classes": 97
+      },
+      {
+        "namespace": "com.github.junrar",
+        "classes": 96
+      },
+      {
+        "namespace": "com.facebook.common",
+        "classes": 94
+      },
+      {
+        "namespace": "kotlin.jvm.internal",
+        "classes": 84
+      },
+      {
+        "namespace": "kotlin.collections",
+        "classes": 83
+      },
+      {
+        "namespace": "com.google.gson",
+        "classes": 80
+      },
+      {
+        "namespace": "androidx.appcompat.widget",
+        "classes": 79
+      },
+      {
+        "namespace": "androidx.core.view",
+        "classes": 78
+      },
+      {
+        "namespace": "com.facebook.drawee",
+        "classes": 75
+      },
+      {
+        "namespace": "com.flyersoft.views",
+        "classes": 69
+      },
+      {
+        "namespace": "io.opencensus.trace",
+        "classes": 69
+      },
+      {
+        "namespace": "androidx.annotation",
+        "classes": 68
+      },
+      {
+        "namespace": "com.flyersoft.components",
+        "classes": 68
+      },
+      {
+        "namespace": "androidx.transition",
+        "classes": 62
+      },
+      {
+        "namespace": "kotlinx.coroutines.internal",
+        "classes": 60
+      },
+      {
+        "namespace": "com.flyersoft.staticlayout",
+        "classes": 58
+      },
+      {
+        "namespace": "androidx.lifecycle",
+        "classes": 55
+      },
+      {
+        "namespace": "org.checkerframework.common",
+        "classes": 54
+      },
+      {
+        "namespace": "com.facebook.soloader",
+        "classes": 53
+      },
+      {
+        "namespace": "com.flyersoft.moonreaderp",
+        "classes": 53
+      },
+      {
+        "namespace": "androidx.fragment.app",
+        "classes": 52
+      },
+      {
+        "namespace": "com.flyersoft.books",
+        "classes": 51
+      },
+      {
+        "namespace": "androidx.core.graphics",
+        "classes": 50
+      },
+      {
+        "namespace": "androidx.window.layout",
+        "classes": 49
+      },
+      {
+        "namespace": "com.facebook.fresco",
+        "classes": 49
+      },
+      {
+        "namespace": "kotlinx.coroutines.channels",
+        "classes": 49
+      },
+      {
+        "namespace": "io.opencensus.metrics",
+        "classes": 47
+      },
+      {
+        "namespace": "androidx.core.app",
+        "classes": 45
+      },
+      {
+        "namespace": "androidx.window.embedding",
+        "classes": 44
+      },
+      {
+        "namespace": "okio",
+        "classes": 44
+      },
+      {
+        "namespace": "androidx.core.content",
+        "classes": 43
+      },
+      {
+        "namespace": "androidx.recyclerview.widget",
+        "classes": 43
+      },
+      {
+        "namespace": "kotlin.text",
+        "classes": 42
+      },
+      {
+        "namespace": "androidx.emoji2.text",
+        "classes": 41
+      },
+      {
+        "namespace": "ch.randelshofer.fastdoubleparser",
+        "classes": 38
+      },
+      {
+        "namespace": "com.radaee.view",
+        "classes": 38
+      },
+      {
+        "namespace": "io.opencensus.stats",
+        "classes": 38
+      },
+      {
+        "namespace": "okhttp3",
+        "classes": 38
+      },
+      {
+        "namespace": "org.checkerframework.framework",
+        "classes": 37
+      },
+      {
+        "namespace": "com.facebook.infer",
+        "classes": 35
+      },
+      {
+        "namespace": "androidx.constraintlayout.motion",
+        "classes": 34
+      },
+      {
+        "namespace": "javax.xml.stream",
+        "classes": 34
+      },
+      {
+        "namespace": "androidx.core.util",
+        "classes": 33
+      },
+      {
+        "namespace": "androidx.appcompat.view",
+        "classes": 32
+      },
+      {
+        "namespace": "androidx.core.os",
+        "classes": 31
+      },
+      {
+        "namespace": "kotlin.reflect",
+        "classes": 31
+      },
+      {
+        "namespace": "kotlin.sequences",
+        "classes": 31
+      },
+      {
+        "namespace": "kotlin.ranges",
+        "classes": 29
+      },
+      {
+        "namespace": "com.facebook.cache",
+        "classes": 27
+      },
+      {
+        "namespace": "com.google.errorprone",
+        "classes": 26
+      },
+      {
+        "namespace": "kotlin.io",
+        "classes": 25
+      },
+      {
+        "namespace": "com.burgstaller.okhttp",
+        "classes": 24
+      },
+      {
+        "namespace": "com.rtfparserkit.parser",
+        "classes": 24
+      },
+      {
+        "namespace": "kotlin.jvm",
+        "classes": 24
+      },
+      {
+        "namespace": "kotlin.jvm.functions",
+        "classes": 24
+      },
+      {
+        "namespace": "androidx.window.area",
+        "classes": 23
+      },
+      {
+        "namespace": "com.flyersoft.tools",
+        "classes": 23
+      },
+      {
+        "namespace": "androidx.appcompat.app",
+        "classes": 22
+      },
+      {
+        "namespace": "androidx.core.widget",
+        "classes": 22
+      },
+      {
+        "namespace": "io.opencensus.tags",
+        "classes": 22
+      },
+      {
+        "namespace": "kotlinx.coroutines.selects",
+        "classes": 22
+      },
+      {
+        "namespace": "androidx.window.core",
+        "classes": 21
+      },
+      {
+        "namespace": "com.radaee.pdf",
+        "classes": 21
+      },
+      {
+        "namespace": "kotlin.io.path",
+        "classes": 21
+      },
+      {
+        "namespace": "android.support.v4",
+        "classes": 20
+      },
+      {
+        "namespace": "androidx.media",
+        "classes": 20
+      },
+      {
+        "namespace": "io.opencensus.common",
+        "classes": 20
+      },
+      {
+        "namespace": "javax.annotation",
+        "classes": 20
+      },
+      {
+        "namespace": "kotlin.time",
+        "classes": 20
+      },
+      {
+        "namespace": "okhttp3.internal.platform",
+        "classes": 20
+      },
+      {
+        "namespace": "org.jetbrains.annotations",
+        "classes": 20
+      },
+      {
+        "namespace": "com.radaee.annotui",
+        "classes": 19
+      },
+      {
+        "namespace": "com.radaee.util",
+        "classes": 19
+      },
+      {
+        "namespace": "org.ccil.cowan",
+        "classes": 19
+      },
+      {
+        "namespace": "androidx.core.text",
+        "classes": 18
+      },
+      {
+        "namespace": "kotlin.internal",
+        "classes": 18
+      },
+      {
+        "namespace": "kotlinx.coroutines.scheduling",
+        "classes": 18
+      },
+      {
+        "namespace": "org.jsoup.nodes",
+        "classes": 18
+      },
+      {
+        "namespace": "androidx.constraintlayout.widget",
+        "classes": 17
+      },
+      {
+        "namespace": "kotlinx.coroutines.debug",
+        "classes": 17
+      },
+      {
+        "namespace": "kotlin.coroutines.jvm",
+        "classes": 15
+      },
+      {
+        "namespace": "org.mydroid.core",
+        "classes": 15
+      },
+      {
+        "namespace": "androidx.profileinstaller",
+        "classes": 14
+      },
+      {
+        "namespace": "com.facebook.datasource",
+        "classes": 14
+      },
+      {
+        "namespace": "com.radaee.reader",
+        "classes": 14
+      },
+      {
+        "namespace": "com.zx",
+        "classes": 14
+      },
+      {
+        "namespace": "okhttp3.internal.http2",
+        "classes": 14
+      },
+      {
+        "namespace": "org.jsoup.parser",
+        "classes": 14
+      },
+      {
+        "namespace": "bolts",
+        "classes": 13
+      },
+      {
+        "namespace": "io.opencensus.contrib",
+        "classes": 12
+      },
+      {
+        "namespace": "androidx.activity",
+        "classes": 11
+      },
+      {
+        "namespace": "androidx.activity.result",
+        "classes": 11
+      },
+      {
+        "namespace": "androidx.versionedparcelable",
+        "classes": 11
+      },
+      {
+        "namespace": "com.google.j2objc",
+        "classes": 11
+      },
+      {
+        "namespace": "kotlin.coroutines",
+        "classes": 11
+      },
+      {
+        "namespace": "kotlinx.coroutines.sync",
+        "classes": 11
+      },
+      {
+        "namespace": "okhttp3.internal.http",
+        "classes": 11
+      },
+      {
+        "namespace": "org.nibor.autolink",
+        "classes": 11
+      },
+      {
+        "namespace": "com.hailong.biometricprompt",
+        "classes": 10
+      },
+      {
+        "namespace": "com.luhuiguo.chinese",
+        "classes": 10
+      },
+      {
+        "namespace": "kotlin.collections.builders",
+        "classes": 10
+      },
+      {
+        "namespace": "kotlin.contracts",
+        "classes": 10
+      },
+      {
+        "namespace": "okhttp3.internal.connection",
+        "classes": 10
+      },
+      {
+        "namespace": "org.apache.tools",
+        "classes": 10
+      },
+      {
+        "namespace": "org.comic",
+        "classes": 10
+      },
+      {
+        "namespace": "org.djvu",
+        "classes": 10
+      },
+      {
+        "namespace": "org.intellij.lang",
+        "classes": 10
+      },
+      {
+        "namespace": "org.jsoup.select",
+        "classes": 10
+      },
+      {
+        "namespace": "androidx.core.provider",
+        "classes": 9
+      },
+      {
+        "namespace": "androidx.emoji2.viewsintegration",
+        "classes": 9
+      },
+      {
+        "namespace": "androidx.lifecycle.viewmodel",
+        "classes": 9
+      },
+      {
+        "namespace": "androidx.vectordrawable.graphics",
+        "classes": 9
+      },
+      {
+        "namespace": "kotlin.comparisons",
+        "classes": 9
+      },
+      {
+        "namespace": "kotlin.random",
+        "classes": 9
+      },
+      {
+        "namespace": "okhttp3.internal.ws",
+        "classes": 9
+      },
+      {
+        "namespace": "androidx.cardview.widget",
+        "classes": 8
+      },
+      {
+        "namespace": "androidx.core.location",
+        "classes": 8
+      },
+      {
+        "namespace": "androidx.dynamicanimation.animation",
+        "classes": 8
+      },
+      {
+        "namespace": "androidx.viewpager2.widget",
+        "classes": 8
+      },
+      {
+        "namespace": "androidx.window.java",
+        "classes": 8
+      },
+      {
+        "namespace": "com.facebook.imageutils",
+        "classes": 8
+      },
+      {
+        "namespace": "com.flyersoft.opds",
+        "classes": 8
+      },
+      {
+        "namespace": "kotlin.io.encoding",
+        "classes": 8
+      },
+      {
+        "namespace": "androidx.arch.core",
+        "classes": 7
+      },
+      {
+        "namespace": "androidx.core.net",
+        "classes": 7
+      },
+      {
+        "namespace": "androidx.window",
+        "classes": 7
+      },
+      {
+        "namespace": "io.opencensus.internal",
+        "classes": 7
+      },
+      {
+        "namespace": "javax.annotation.meta",
+        "classes": 7
+      },
+      {
+        "namespace": "kotlin.collections.unsigned",
+        "classes": 7
+      },
+      {
+        "namespace": "androidx.constraintlayout.helper",
+        "classes": 6
+      },
+      {
+        "namespace": "androidx.constraintlayout.utils",
+        "classes": 6
+      },
+      {
+        "namespace": "androidx.multidex",
+        "classes": 6
+      },
+      {
+        "namespace": "androidx.savedstate",
+        "classes": 6
+      },
+      {
+        "namespace": "androidx.startup",
+        "classes": 6
+      },
+      {
+        "namespace": "kotlin.annotation",
+        "classes": 6
+      },
+      {
+        "namespace": "kotlin.properties",
+        "classes": 6
+      },
+      {
+        "namespace": "okhttp3.internal.cache",
+        "classes": 6
+      },
+      {
+        "namespace": "okio.internal",
+        "classes": 6
+      },
+      {
+        "namespace": "org.jsoup",
+        "classes": 6
+      },
+      {
+        "namespace": "org.reactivestreams",
+        "classes": 6
+      },
+      {
+        "namespace": "androidx.appcompat.graphics",
+        "classes": 5
+      },
+      {
+        "namespace": "androidx.collection.internal",
+        "classes": 5
+      },
+      {
+        "namespace": "androidx.concurrent.futures",
+        "classes": 5
+      },
+      {
+        "namespace": "androidx.core.database",
+        "classes": 5
+      },
+      {
+        "namespace": "androidx.documentfile.provider",
+        "classes": 5
+      },
+      {
+        "namespace": "androidx.tracing",
+        "classes": 5
+      },
+      {
+        "namespace": "androidx.window.reflection",
+        "classes": 5
+      },
+      {
+        "namespace": "com.facebook.imageformat",
+        "classes": 5
+      },
+      {
+        "namespace": "kotlin.enums",
+        "classes": 5
+      },
+      {
+        "namespace": "kotlin.experimental",
+        "classes": 5
+      },
+      {
+        "namespace": "kotlin.math",
+        "classes": 5
+      },
+      {
+        "namespace": "kotlinx.coroutines.android",
+        "classes": 5
+      },
+      {
+        "namespace": "okhttp3.internal.tls",
+        "classes": 5
+      },
+      {
+        "namespace": "org.jsoup.helper",
+        "classes": 5
+      },
+      {
+        "namespace": "_COROUTINE",
+        "classes": 4
+      },
+      {
+        "namespace": "androidx.core.internal",
+        "classes": 4
+      },
+      {
+        "namespace": "androidx.cursoradapter.widget",
+        "classes": 4
+      },
+      {
+        "namespace": "androidx.customview.poolingcontainer",
+        "classes": 4
+      },
+      {
+        "namespace": "androidx.customview.widget",
+        "classes": 4
+      },
+      {
+        "namespace": "androidx.interpolator.view",
+        "classes": 4
+      },
+      {
+        "namespace": "androidx.loader.content",
+        "classes": 4
+      },
+      {
+        "namespace": "androidx.viewpager.widget",
+        "classes": 4
+      },
+      {
+        "namespace": "com.dozof.app",
+        "classes": 4
+      },
+      {
+        "namespace": "com.ramotion.cardslider",
+        "classes": 4
+      },
+      {
+        "namespace": "com.zx.cmz",
+        "classes": 4
+      },
+      {
+        "namespace": "io.grpc",
+        "classes": 4
+      },
+      {
+        "namespace": "javax.annotation.concurrent",
+        "classes": 4
+      },
+      {
+        "namespace": "kotlin.annotations.jvm",
+        "classes": 4
+      },
+      {
+        "namespace": "kotlin.concurrent",
+        "classes": 4
+      },
+      {
+        "namespace": "kotlin.coroutines.intrinsics",
+        "classes": 4
+      },
+      {
+        "namespace": "kotlin.js",
+        "classes": 4
+      },
+      {
+        "namespace": "okhttp3.internal",
+        "classes": 4
+      },
+      {
+        "namespace": "okhttp3.internal.concurrent",
+        "classes": 4
+      },
+      {
+        "namespace": "org.checkerframework.dataflow",
+        "classes": 4
+      },
+      {
+        "namespace": "org.jspecify.annotations",
+        "classes": 4
+      },
+      {
+        "namespace": "org.mydroid.droids",
+        "classes": 4
+      },
+      {
+        "namespace": "androidx.activity.contextaware",
+        "classes": 3
+      },
+      {
+        "namespace": "androidx.annotation.experimental",
+        "classes": 3
+      },
+      {
+        "namespace": "androidx.coordinatorlayout.widget",
+        "classes": 3
+      },
+      {
+        "namespace": "androidx.core.telephony",
+        "classes": 3
+      },
+      {
+        "namespace": "androidx.viewpager2.adapter",
+        "classes": 3
+      },
+      {
+        "namespace": "com.android.vending",
+        "classes": 3
+      },
+      {
+        "namespace": "com.facebook.binaryresource",
+        "classes": 3
+      },
+      {
+        "namespace": "com.google.firebase",
+        "classes": 3
+      },
+      {
+        "namespace": "com.google.thirdparty",
+        "classes": 3
+      },
+      {
+        "namespace": "com.rtfparserkit.converter",
+        "classes": 3
+      },
+      {
+        "namespace": "com.rtfparserkit.utils",
+        "classes": 3
+      },
+      {
+        "namespace": "io.opencensus.resource",
+        "classes": 3
+      },
+      {
+        "namespace": "kotlinx.coroutines.future",
+        "classes": 3
+      },
+      {
+        "namespace": "org.jsoup.internal",
+        "classes": 3
+      },
+      {
+        "namespace": "androidx.appcompat.resources",
+        "classes": 2
+      },
+      {
+        "namespace": "androidx.core.animation",
+        "classes": 2
+      },
+      {
+        "namespace": "androidx.core.hardware",
+        "classes": 2
+      },
+      {
+        "namespace": "androidx.core.service",
+        "classes": 2
+      },
+      {
+        "namespace": "androidx.core.transition",
+        "classes": 2
+      },
+      {
+        "namespace": "androidx.loader.app",
+        "classes": 2
+      },
+      {
+        "namespace": "androidx.print",
+        "classes": 2
+      },
+      {
+        "namespace": "androidx.resourceinspection.annotation",
+        "classes": 2
+      },
+      {
+        "namespace": "com.example2014.components",
+        "classes": 2
+      },
+      {
+        "namespace": "com.google.licensingservicehelper",
+        "classes": 2
+      },
+      {
+        "namespace": "com.rtfparserkit.rtf",
+        "classes": 2
+      },
+      {
+        "namespace": "kotlin.system",
+        "classes": 2
+      },
+      {
+        "namespace": "kotlinx.coroutines.intrinsics",
+        "classes": 2
+      },
+      {
+        "namespace": "kotlinx.coroutines.stream",
+        "classes": 2
+      },
+      {
+        "namespace": "okhttp3.internal.cache2",
+        "classes": 2
+      },
+      {
+        "namespace": "okhttp3.internal.http1",
+        "classes": 2
+      },
+      {
+        "namespace": "org.jsoup.safety",
+        "classes": 2
+      },
+      {
+        "namespace": "defpackage",
+        "classes": 1
+      },
+      {
+        "namespace": "android.security.keystore",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.appcompat",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.appcompat.content",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.appcompat.text",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.cardview",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.coordinatorlayout",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.core",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.core.accessibilityservice",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.core.ktx",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.core.math",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.cursoradapter",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.customview",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.customview.view",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.documentfile",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.drawerlayout",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.drawerlayout.widget",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.dynamicanimation",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.emoji2",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.fragment",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.interpolator",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.legacy.content",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.legacy.coreutils",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.lifecycle.livedata",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.lifecycle.process",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.lifecycle.runtime",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.loader",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.localbroadcastmanager",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.localbroadcastmanager.content",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.media.app",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.media.session",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.media.utils",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.recyclerview",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.vectordrawable",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.vectordrawable.animated",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.viewpager",
+        "classes": 1
+      },
+      {
+        "namespace": "androidx.viewpager2",
+        "classes": 1
+      },
+      {
+        "namespace": "com",
+        "classes": 1
+      },
+      {
+        "namespace": "com.example.licensingservicehelper",
+        "classes": 1
+      },
+      {
+        "namespace": "com.example2014.numberpicker",
+        "classes": 1
+      },
+      {
+        "namespace": "com.facebook.callercontext",
+        "classes": 1
+      },
+      {
+        "namespace": "com.facebook.drawable",
+        "classes": 1
+      },
+      {
+        "namespace": "com.facebook.fbcore",
+        "classes": 1
+      },
+      {
+        "namespace": "com.facebook.imagepipelinebase",
+        "classes": 1
+      },
+      {
+        "namespace": "com.facebook.memory",
+        "classes": 1
+      },
+      {
+        "namespace": "com.facebook.nativefilters",
+        "classes": 1
+      },
+      {
+        "namespace": "com.facebook.nativeimagetranscoder",
+        "classes": 1
+      },
+      {
+        "namespace": "com.facebook.widget",
+        "classes": 1
+      },
+      {
+        "namespace": "com.flyersoft.material",
+        "classes": 1
+      },
+      {
+        "namespace": "com.radaee.viewlib",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.collections.jdk8",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.coroutines.cancellation",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.internal.jdk7",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.internal.jdk8",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.jdk7",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.jvm.jdk8",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.jvm.optionals",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.random.jdk8",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.streams.jdk8",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.text.jdk8",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlin.time.jdk8",
+        "classes": 1
+      },
+      {
+        "namespace": "kotlinx.coroutines.time",
+        "classes": 1
+      },
+      {
+        "namespace": "okhttp3.internal.authenticator",
+        "classes": 1
+      },
+      {
+        "namespace": "okhttp3.internal.io",
+        "classes": 1
+      },
+      {
+        "namespace": "okhttp3.internal.proxy",
+        "classes": 1
+      },
+      {
+        "namespace": "okhttp3.internal.publicsuffix",
+        "classes": 1
+      },
+      {
+        "namespace": "org.mydroid.common",
+        "classes": 1
+      },
+      {
+        "namespace": "p002i.p003i",
+        "classes": 1
+      }
+    ],
+    "loader_diagnostic": {
+      "classes": 27211,
+      "methods": 191473,
+      "instructions": 5008727,
+      "scope": "JADX root-loader log; not the top-level list scope",
+      "evidence": {
+        "private_evidence_ref": "mcp-inventory/java.stderr.log",
+        "size_bytes": 7805,
+        "sha256": "90426eca970fcbdd94de8b8029743ae7a34a3cbd228ec7ae06c8c8dc4ef5de94",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    "inventory_evidence": {
+      "private_evidence_ref": "mcp-inventory/classes.json",
+      "size_bytes": 676249,
+      "sha256": "2ead47460ffcc2a6c8fe86a610a1ce13a5cea5957fece8ee3b1a0efd55aa3ab7",
+      "publication": "raw evidence retained privately; digest only"
+    },
+    "selected_class_summary_count": 21,
+    "selected_class_summaries": [
+      {
+        "class_name": "com.flyersoft.books.PDFReader",
+        "methods": 96,
+        "fields": 38,
+        "inner_classes": 3,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/pdf-reader.json",
+          "size_bytes": 15027,
+          "sha256": "dc2d135ff72db0f4f4150851dfa4c232a53594d974c413625c8dcbc4332455e2",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.radaee.pdf.Document",
+        "methods": 188,
+        "fields": 1,
+        "inner_classes": 9,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/pdf-document.json",
+          "size_bytes": 23036,
+          "sha256": "c5a884d96173fbdcf3d87beff830dba4374e94eafdbe0e35fec6bf0e52486c67",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.radaee.pdf.Page",
+        "methods": 409,
+        "fields": 5,
+        "inner_classes": 2,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/pdf-page.json",
+          "size_bytes": 52542,
+          "sha256": "1362970bac875467d2a69eecf628c772d3220890230fbf7d6e637a4198084670",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "methods": 1018,
+        "fields": 586,
+        "inner_classes": 8,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/reader-activity.json",
+          "size_bytes": 172224,
+          "sha256": "c66c37f605609a4e374876e9fc84081a4cd1b1ddafd57bed96434bbf2c23ebba",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.BookDb",
+        "methods": 88,
+        "fields": 22,
+        "inner_classes": 7,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/book-db.json",
+          "size_bytes": 13925,
+          "sha256": "5f46c34ae38484499ae9e500ba606555624eb3aca2125ea91795590002d95b49",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefEditNote",
+        "methods": 8,
+        "fields": 17,
+        "inner_classes": 5,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/edit-note.json",
+          "size_bytes": 2876,
+          "sha256": "038186130e4e53f102f03b72089c137c956d743475a9e0f744cfee145266fb7a",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefShareText",
+        "methods": 27,
+        "fields": 17,
+        "inner_classes": 8,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/share-text.json",
+          "size_bytes": 5576,
+          "sha256": "ec0891d0d5202b1a1f0790fd85d277490ef7178c9cab186ce839019fd1a386ba",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.staticlayout.BookmarkItem",
+        "methods": 4,
+        "fields": 3,
+        "inner_classes": 0,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/bookmarks.json",
+          "size_bytes": 1220,
+          "sha256": "43fd5692c1901e3d219ae1ce7d8db01f94e94fbcb6a39595d5ac3c702ea35fa4",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.Readwise",
+        "methods": 5,
+        "fields": 0,
+        "inner_classes": 6,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/readwise.json",
+          "size_bytes": 1547,
+          "sha256": "cdafde6266c943af03668e7d9d952a810fe8d8537969d21d92d9f654c682ab67",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+        "methods": 22,
+        "fields": 23,
+        "inner_classes": 14,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/search.json",
+          "size_bytes": 5595,
+          "sha256": "931d454c55d2d494473a337dfab06d34604d77328a813b43fcebf0784e6e4a03",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.misc.FuncSearch",
+        "methods": 8,
+        "fields": 9,
+        "inner_classes": 1,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/function-search.json",
+          "size_bytes": 2316,
+          "sha256": "082762471b27e248d078cf8a8625d35e491a0cf02b66250ab3db75987dfbe02c",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "methods": 95,
+        "fields": 19,
+        "inner_classes": 2,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/sync.json",
+          "size_bytes": 15964,
+          "sha256": "ae92c49a5b071107d46d85ebd4f2e5f04485aa94918cc274b7fd7a2976127a48",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Cloud",
+        "methods": 47,
+        "fields": 15,
+        "inner_classes": 5,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/cloud.json",
+          "size_bytes": 7295,
+          "sha256": "3f67eb975402a438f86ef9f85d481e93f73c47728bef1f00eb8ecf6c45c4b311",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Dropbox",
+        "methods": 30,
+        "fields": 3,
+        "inner_classes": 21,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/dropbox.json",
+          "size_bytes": 5885,
+          "sha256": "22329bcfdf89604531a601c1968165dbe12648bc495955cd7ef57ab24b74621a",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Gdrive",
+        "methods": 52,
+        "fields": 12,
+        "inner_classes": 0,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/gdrive.json",
+          "size_bytes": 7898,
+          "sha256": "bd030efb93571f17537e3aaa06d50d5d3d60a3d625e698e6ae157184fa5f42fd",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.WebDav",
+        "methods": 27,
+        "fields": 1,
+        "inner_classes": 26,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/webdav.json",
+          "size_bytes": 5690,
+          "sha256": "9d549b5d1387000296ea615019235ebeaf0e003bffcd9fefbb19a2e36f6b449e",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.BookTtsService",
+        "methods": 7,
+        "fields": 0,
+        "inner_classes": 0,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/tts-service.json",
+          "size_bytes": 1351,
+          "sha256": "0e9feaeadf0c9c024c91d1465ca5e559c405579da4ebe0955c92bbae1247d792",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.BookDb.NoteInfo",
+        "methods": 2,
+        "fields": 19,
+        "inner_classes": 0,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/note-model.json",
+          "size_bytes": 2019,
+          "sha256": "93ecd3447559169b0f668eded34c1636c2dae98e41bcca8011043820fe60f8fa",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefChapters",
+        "methods": 74,
+        "fields": 70,
+        "inner_classes": 7,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/chapters-summary.json",
+          "size_bytes": 15283,
+          "sha256": "5e5c8aba2963f9d7a9750a9f3b028add810f42c3a15679fb896b767539b72f5e",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.Readwise.WiseItem",
+        "methods": 2,
+        "fields": 5,
+        "inner_classes": 0,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/readwise-model.json",
+          "size_bytes": 1124,
+          "sha256": "d0826cb486795ced267e16fec5e86933271e0ca32c84bfcc07fc525311e8e537",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.BookDb.BookDBHelper",
+        "methods": 3,
+        "fields": 0,
+        "inner_classes": 0,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/notes-db-helper.json",
+          "size_bytes": 948,
+          "sha256": "63292fb306f70b4b19f027572b01e7bf2af6acf1ad0e60a3dd7e1937df1e3042",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      }
+    ],
+    "limitations": [
+      "Display names may be aliases; synthetic members are counted. The API raw_class_count value is not treated as a raw DEX definition count.",
+      "Package/class presence does not establish dependency version, execution, network traffic or telemetry."
+    ]
+  },
+  "archive": {
+    "root_dex_count": 5,
+    "native_member_count": 24,
+    "native_abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "x86",
+      "x86_64"
+    ],
+    "members": [
+      {
+        "name": "classes.dex",
+        "uncompressed_bytes": 7635072,
+        "compressed_bytes": 2729303
+      },
+      {
+        "name": "classes2.dex",
+        "uncompressed_bytes": 548,
+        "compressed_bytes": 319
+      },
+      {
+        "name": "classes3.dex",
+        "uncompressed_bytes": 8504392,
+        "compressed_bytes": 3159652
+      },
+      {
+        "name": "classes4.dex",
+        "uncompressed_bytes": 6828952,
+        "compressed_bytes": 2530724
+      },
+      {
+        "name": "classes5.dex",
+        "uncompressed_bytes": 6993328,
+        "compressed_bytes": 2479042
+      },
+      {
+        "name": "lib/arm64-v8a/libimagepipeline.so",
+        "uncompressed_bytes": 8760,
+        "compressed_bytes": 8760
+      },
+      {
+        "name": "lib/arm64-v8a/libmloader.so",
+        "uncompressed_bytes": 253392,
+        "compressed_bytes": 253392
+      },
+      {
+        "name": "lib/arm64-v8a/libmydjvu.so",
+        "uncompressed_bytes": 1967952,
+        "compressed_bytes": 1967952
+      },
+      {
+        "name": "lib/arm64-v8a/libnative-filters.so",
+        "uncompressed_bytes": 23712,
+        "compressed_bytes": 23712
+      },
+      {
+        "name": "lib/arm64-v8a/libnative-imagetranscoder.so",
+        "uncompressed_bytes": 585376,
+        "compressed_bytes": 585376
+      },
+      {
+        "name": "lib/arm64-v8a/librdpdf.so",
+        "uncompressed_bytes": 5446384,
+        "compressed_bytes": 5446384
+      },
+      {
+        "name": "lib/armeabi-v7a/libimagepipeline.so",
+        "uncompressed_bytes": 5876,
+        "compressed_bytes": 5876
+      },
+      {
+        "name": "lib/armeabi-v7a/libmloader.so",
+        "uncompressed_bytes": 170400,
+        "compressed_bytes": 170400
+      },
+      {
+        "name": "lib/armeabi-v7a/libmydjvu.so",
+        "uncompressed_bytes": 1848832,
+        "compressed_bytes": 1848832
+      },
+      {
+        "name": "lib/armeabi-v7a/libnative-filters.so",
+        "uncompressed_bytes": 12588,
+        "compressed_bytes": 12588
+      },
+      {
+        "name": "lib/armeabi-v7a/libnative-imagetranscoder.so",
+        "uncompressed_bytes": 341072,
+        "compressed_bytes": 341072
+      },
+      {
+        "name": "lib/armeabi-v7a/librdpdf.so",
+        "uncompressed_bytes": 4071896,
+        "compressed_bytes": 4071896
+      },
+      {
+        "name": "lib/x86/libimagepipeline.so",
+        "uncompressed_bytes": 7040,
+        "compressed_bytes": 7040
+      },
+      {
+        "name": "lib/x86/libmloader.so",
+        "uncompressed_bytes": 236116,
+        "compressed_bytes": 236116
+      },
+      {
+        "name": "lib/x86/libmydjvu.so",
+        "uncompressed_bytes": 2149308,
+        "compressed_bytes": 2149308
+      },
+      {
+        "name": "lib/x86/libnative-filters.so",
+        "uncompressed_bytes": 22040,
+        "compressed_bytes": 22040
+      },
+      {
+        "name": "lib/x86/libnative-imagetranscoder.so",
+        "uncompressed_bytes": 664736,
+        "compressed_bytes": 664736
+      },
+      {
+        "name": "lib/x86/librdpdf.so",
+        "uncompressed_bytes": 6044052,
+        "compressed_bytes": 6044052
+      },
+      {
+        "name": "lib/x86_64/libimagepipeline.so",
+        "uncompressed_bytes": 8464,
+        "compressed_bytes": 8464
+      },
+      {
+        "name": "lib/x86_64/libmloader.so",
+        "uncompressed_bytes": 252840,
+        "compressed_bytes": 252840
+      },
+      {
+        "name": "lib/x86_64/libmydjvu.so",
+        "uncompressed_bytes": 2151472,
+        "compressed_bytes": 2151472
+      },
+      {
+        "name": "lib/x86_64/libnative-filters.so",
+        "uncompressed_bytes": 30528,
+        "compressed_bytes": 30528
+      },
+      {
+        "name": "lib/x86_64/libnative-imagetranscoder.so",
+        "uncompressed_bytes": 720432,
+        "compressed_bytes": 720432
+      },
+      {
+        "name": "lib/x86_64/librdpdf.so",
+        "uncompressed_bytes": 5962736,
+        "compressed_bytes": 5962736
+      }
+    ],
+    "evidence": {
+      "private_evidence_ref": "dex-native-inventory.json",
+      "size_bytes": 3113,
+      "sha256": "d161b77e966f3abca53774f9e83e3ec8b535804c3d526f3fdebea62e03cb72f0",
+      "publication": "raw evidence retained privately; digest only"
+    },
+    "limitations": [
+      "ZIP member declarations only; no native library execution, disassembly or JNI binding analysis."
+    ]
+  },
+  "focused_code": {
+    "method_body_requests": 52,
+    "selected_methods": [
+      {
+        "class_name": "com.flyersoft.books.PDFReader",
+        "method_name": "open",
+        "overload_index": 0,
+        "overload_count": 3,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 499,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/pdf-open.json",
+          "size_bytes": 1259,
+          "sha256": "b02cc8ad1633b7a1df886c54bd78fbc8b021509d2d28f46ba00692b5ab6f325f",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.books.PDFReader",
+        "method_name": "getPageText",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 735,
+        "requested_max_bytes": 60000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/pdf-text.json",
+          "size_bytes": 1551,
+          "sha256": "ebd3989b81f21610ce966a0dd97abb394b64796b5cd4fa4137a267286f1f79cd",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.books.PDFReader",
+        "method_name": "setView",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 760,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/pdf-view-mode.json",
+          "size_bytes": 1544,
+          "sha256": "a4dfa97dcd7e58d42925af2e8ace235ed905b32a9466472210caf7ea250860f7",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.books.PDFReader",
+        "method_name": "save",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 119,
+        "requested_max_bytes": 60000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/pdf-save.json",
+          "size_bytes": 826,
+          "sha256": "3b2df2b038f753f5a21bff782dd5a92b8f6561e0d3b95a0c1bad3e606f8ef574",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.books.PDFReader",
+        "method_name": "pdfUpdateNotesToFile",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": true,
+        "returned_body_bytes": 8120,
+        "requested_max_bytes": 120000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/pdf-update-notes.json",
+          "size_bytes": 9466,
+          "sha256": "84825da5bf14124e8648304510c765d803f8b463cc62163524371d6948fcb82a",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.books.PDFReader",
+        "method_name": "pdfCreateTextFromNotes",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1630,
+        "requested_max_bytes": 60000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/pdf-notes-text.json",
+          "size_bytes": 2605,
+          "sha256": "283a7f50eb81416946d2cfb55e3600ef6391c3e75c57acd185cba53e7d123a0d",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.radaee.pdf.Document",
+        "method_name": "Open",
+        "overload_index": 0,
+        "overload_count": 2,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 470,
+        "requested_max_bytes": 20000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/pdf-native-open.json",
+          "size_bytes": 1242,
+          "sha256": "bdfed5fa051aa152cc0935f13fec5d491702ee297631788aeda79432bdd5e490",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.radaee.pdf.Page",
+        "method_name": "ObjsGetString",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 110,
+        "requested_max_bytes": 20000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/pdf-native-text.json",
+          "size_bytes": 808,
+          "sha256": "e69f0dd4cbd5c141225a4070640c693574457eeed251b0a2e33d0479b1bb1da1",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.BookDb",
+        "method_name": "exportNotesToText",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 2801,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/notes-export-text.json",
+          "size_bytes": 3787,
+          "sha256": "b60a3e7f26f751ce8ebc8e5551d30cc595048bfe931d5e3c27b9b8f8e836be0b",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.BookDb",
+        "method_name": "exportNotesToFile",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 360,
+        "requested_max_bytes": 30000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/notes-export-file.json",
+          "size_bytes": 1111,
+          "sha256": "cdbafe303b15c3f41e620ffebc6bf539fb489ceaa18e0047e9111d9d6546eb79",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.BookDb",
+        "method_name": "importNotesFromText",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 6576,
+        "requested_max_bytes": 120000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/notes-import-text.json",
+          "size_bytes": 7854,
+          "sha256": "4f391571f9f8284cc6a2521345935181c65ad10a17a7c2178fa9594844161529",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefEditNote",
+        "method_name": "onClick",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1937,
+        "requested_max_bytes": 60000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/notes-edit.json",
+          "size_bytes": 2856,
+          "sha256": "ed433bb37295546ec1954df43a67092f7d354a8805b0f5ad905645ccbf8dd571",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefShareText",
+        "method_name": "shareContent",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 975,
+        "requested_max_bytes": 30000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/share-image.json",
+          "size_bytes": 1830,
+          "sha256": "b433352876da868a92d862c2322f0b833ecaf4a7eee62ae9f720e7701d1ce855",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.Readwise",
+        "method_name": "addHighlights",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 4223,
+        "requested_max_bytes": 60000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/readwise-upload.json",
+          "size_bytes": 5345,
+          "sha256": "df7ccc2843fb8f61ba0c2c2d139ce98724c455e95bc37563cf8c51cca09a9cb6",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+        "method_name": "startSearch",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": true,
+        "returned_body_bytes": 12063,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/search-start.json",
+          "size_bytes": 13583,
+          "sha256": "8809b50e490ffe9814e50f9229e355d0c978776a2423dc79b97e7aa9eec635a6",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+        "method_name": "getResultFromHtml",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 5386,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/search-html.json",
+          "size_bytes": 6537,
+          "sha256": "22ffa6562a9a5f3259ec4ed375d7e2fdd6980ec3c3c038858c7d93a4b3a7c51b",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+        "method_name": "stopSearch",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 73,
+        "requested_max_bytes": 30000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/search-stop.json",
+          "size_bytes": 813,
+          "sha256": "20c64716d15e70d46c5cc1155b8e9cf8ec918c1100660e685b315b5a0b98c23e",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.misc.FuncSearch",
+        "method_name": "getSearchResults",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1223,
+        "requested_max_bytes": 30000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/search-functions.json",
+          "size_bytes": 2068,
+          "sha256": "716651282e340eea88cc3b4f7c00bc6b1bdaa43570883bdac8cbe71b2ec3c02f",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "uploadCloudPositionFile",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 2069,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/sync-upload-position.json",
+          "size_bytes": 3028,
+          "sha256": "5b53880a03a392badc9ca4c5a7cc10cc54456510ad734943f97d2423719be909",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "dealDownloadedCloudPosition",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1030,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/sync-receive-position.json",
+          "size_bytes": 1911,
+          "sha256": "8eae1c8e293e6569db54759f1cecc5b3f5d13e369f15260bba21c79bfac32e62",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "uploadCloudNoteFile",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 762,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/sync-upload-notes.json",
+          "size_bytes": 1570,
+          "sha256": "63c47a0f97a921de17bf6ce55a1b2ff5639c49dc72b8ec01aff2a76e8e5d3f02",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "dealDownloadedCloudNote",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 687,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/sync-receive-notes.json",
+          "size_bytes": 1507,
+          "sha256": "6424cf8ab565f941e48e88fea2bad4d40116ecc61fd5d453bac6364ef3765996",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "extractSyncNotes",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 546,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/sync-extract-notes.json",
+          "size_bytes": 1347,
+          "sha256": "296cf4a1342174b0f1ca4adf1d452cfb0a8c5b2e3cbbfe48842418786ec6022b",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "cloudFileIsNewer",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 611,
+        "requested_max_bytes": 30000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/sync-cloud-newer.json",
+          "size_bytes": 1420,
+          "sha256": "91ec5951a6b33a979bde508f69d3675c4c8fb8e27648fd9f62caff4a62c7e966",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "localFileIsNewer",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 591,
+        "requested_max_bytes": 30000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/sync-local-newer.json",
+          "size_bytes": 1400,
+          "sha256": "b7a26baaf22c86b7ec35783d12897b1130ddf4aba099f8478ae79221bfe1859c",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Cloud",
+        "method_name": "instance",
+        "overload_index": 1,
+        "overload_count": 2,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 232,
+        "requested_max_bytes": 30000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/cloud-dispatch.json",
+          "size_bytes": 1019,
+          "sha256": "3fb6214804bf48ca3ef63f6a65f4be093c9317acdc9a53a0efc7ad8e5df2a70a",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "initTTS",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 145,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/tts-init.json",
+          "size_bytes": 883,
+          "sha256": "6b80ac855618faea5305af4f4baaf73a77dc96909d9231ffc9b35db7b53995a4",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "setSpeakQueue",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 2113,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/tts-queue.json",
+          "size_bytes": 3040,
+          "sha256": "042d4002173ba22c8ce984a54d8c1bd70a96e33c8ec7a1c3bfb4c82f31dee333",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "pdfGetTtsLines",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1839,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/tts-pdf-text.json",
+          "size_bytes": 2775,
+          "sha256": "dbc5e07731d3d7f4439012c695c49eb75f99670dc457814bde3709bfdd381290",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "speakPdfNoFlowText",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1014,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/tts-pdf-speak.json",
+          "size_bytes": 1877,
+          "sha256": "e8217dde2f53b6e33eefcd8eb391e2fda32c48fc13ba904c48cd5286c621f17f",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "setSpeakOnUtteranceComplete",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 3595,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/tts-progress.json",
+          "size_bytes": 4650,
+          "sha256": "8f690cf3a8867ae5a7e1dfb833184f32c1bf7f54e75cf6a86cf360beb7e88c1c",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.BookTtsService",
+        "method_name": "onStartCommand",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 668,
+        "requested_max_bytes": 30000,
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/tts-service-start.json",
+          "size_bytes": 1498,
+          "sha256": "747ed17153204846ca27150ab54f382f03e7f3073d80c4a8c7de5d56e7d91985",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "pdfOpen2",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1631,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/pdf-file-open.json",
+          "size_bytes": 2593,
+          "sha256": "7eca91cab97daf635ef8eac031aadb4050d1309ac6146ecc9311cfee1ac227b5",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "pdfCreateReflowText",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 853,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/pdf-reflow-text.json",
+          "size_bytes": 1706,
+          "sha256": "e5e348e51195c1a5cf65788e878f7d45435076caff35146ef225cf61b4e48f42",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "pdfSaveChanges",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 314,
+        "requested_max_bytes": 60000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/pdf-save-changes.json",
+          "size_bytes": 1097,
+          "sha256": "5020c5b515da5e42c6d5d0f9f348bede475d54066e3ce4c87397fcc2c1cba937",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.books.PDFReader",
+        "method_name": "pdfCreateNotesFromText",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": true,
+        "returned_body_bytes": 10703,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/pdf-import-notes.json",
+          "size_bytes": 12445,
+          "sha256": "61c0aa93ec677d5e1424f96925207dc2ef89a1f66e2ed55c688dac228d461631",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefChapters",
+        "method_name": "doShare",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 8902,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/notes-share-dispatch.json",
+          "size_bytes": 10207,
+          "sha256": "135494b28201f06293e85953811e505f72be4c4018311ec97c263a9f2bce0f75",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefChapters",
+        "method_name": "createShareContent",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 2603,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/notes-share-content.json",
+          "size_bytes": 3721,
+          "sha256": "6aafa85220275c66dc5399bb641ec1df4ef7a8febfaf8c9f3ae627c11a1f8a95",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefChapters",
+        "method_name": "shareContent",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 4080,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/notes-share-output.json",
+          "size_bytes": 5202,
+          "sha256": "52cdb2e8feddbaa739829881f34c0d6dda79ddb35cd265aadac5263061d6d46b",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "notifyNewCloudPosition",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1289,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/sync-notify-position.json",
+          "size_bytes": 2179,
+          "sha256": "d777f8bdb612f86067028497e40837025b66e025e3658beba68326a311d948f7",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "dealUploadedCloudPosition",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 549,
+        "requested_max_bytes": 40000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/sync-position-callback.json",
+          "size_bytes": 1391,
+          "sha256": "0e1c311a6af37eaeceafce3b8fedb63a94d3aa05e5402f19759cf8efe1e61dff",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "downloadCloudNoteFile",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 600,
+        "requested_max_bytes": 40000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/sync-download-notes.json",
+          "size_bytes": 1398,
+          "sha256": "e73e9430c9e37b71ebff2754a274dbd04a84286c5666022f3c527a51ee77eb0e",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "getSpeakText",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 3582,
+        "requested_max_bytes": 100000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/tts-text-source.json",
+          "size_bytes": 4704,
+          "sha256": "ab4bacbb6844049e763ba525c855a05f628d615e49df5bf4220010193eb5aa07",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "doAfterAllUtteranceFinished",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1034,
+        "requested_max_bytes": 80000,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/tts-after-page.json",
+          "size_bytes": 1936,
+          "sha256": "2469f81d62c6b5be549d153a97134ba63bd462d10ca3fedc5d25dc63d039abf6",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.T",
+        "method_name": "saveFileText",
+        "overload_index": 0,
+        "overload_count": 2,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 979,
+        "requested_max_bytes": 80000,
+        "run_id": "mcp-bounded-followup-a",
+        "evidence_status": "response-recorded-in-finalized-run",
+        "input_identity_scope": "matching pre-run and post-run hashes",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-a/export-write-helper.json",
+          "size_bytes": 1787,
+          "sha256": "9fa5c2d0ca7030b3b208a7b0763f06b614a95e31d540b7fe4fed7aebd00403f5",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.T",
+        "method_name": "saveNormalFileText",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 2850,
+        "requested_max_bytes": 80000,
+        "run_id": "mcp-bounded-followup-c",
+        "evidence_status": "response-recorded-in-finalized-run",
+        "input_identity_scope": "matching pre-run and post-run hashes",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-c/normal-write-helper.json",
+          "size_bytes": 3859,
+          "sha256": "5a914a919cc8502630007dd713603ddf640cb61143a07b56d7fa83e5a6daa9c4",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "verifyDownloadBookCovers",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1040,
+        "requested_max_bytes": 80000,
+        "run_id": "mcp-bounded-followup-c",
+        "evidence_status": "response-recorded-in-finalized-run",
+        "input_identity_scope": "matching pre-run and post-run hashes",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-c/verify-download-covers.json",
+          "size_bytes": 1889,
+          "sha256": "3f1bc21cd3491fb77441fe595e5f85a2d33a53a8ca59103bf75d3cd5952c7767",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "verifyUploadBookCovers",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 1038,
+        "requested_max_bytes": 80000,
+        "run_id": "mcp-bounded-followup-c",
+        "evidence_status": "response-recorded-in-finalized-run",
+        "input_identity_scope": "matching pre-run and post-run hashes",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-c/verify-upload-covers.json",
+          "size_bytes": 1889,
+          "sha256": "d454410aa8846068597f3397b3fa27df27e08cb888f56ead5bd7770293ada3f4",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.A",
+        "method_name": "getTtsLines",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": true,
+        "returned_body_bytes": 9415,
+        "requested_max_bytes": 100000,
+        "run_id": "mcp-bounded-followup-c",
+        "evidence_status": "response-recorded-in-finalized-run",
+        "input_identity_scope": "matching pre-run and post-run hashes",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-c/tts-segmentation.json",
+          "size_bytes": 11285,
+          "sha256": "1de4d4f261a763801589d84bc61b7651723ced3d2a03ae70f5217ef9c40975e8",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.A",
+        "method_name": "addTtsLine",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 176,
+        "requested_max_bytes": 80000,
+        "run_id": "mcp-bounded-followup-e",
+        "evidence_status": "recovered-response-from-interrupted-run",
+        "input_identity_scope": "pre-run hashes only; post-run identity unknown",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-e/tts-line-adder.json",
+          "size_bytes": 877,
+          "sha256": "0cab2db8e9554e710f2df3ef59a6cf4b52fdcb2932c341854f71bbf4d08435b3",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.A.TtsLine",
+        "method_name": "<init>",
+        "overload_index": 0,
+        "overload_count": 1,
+        "output_mode": "java",
+        "automatic_smali_fallback": false,
+        "provider_markers": [],
+        "explicit_jadx_warning": false,
+        "returned_body_bytes": 5630,
+        "requested_max_bytes": 80000,
+        "run_id": "mcp-bounded-followup-e",
+        "evidence_status": "recovered-response-from-interrupted-run",
+        "input_identity_scope": "pre-run hashes only; post-run identity unknown",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-e/tts-line-constructor.json",
+          "size_bytes": 6957,
+          "sha256": "44a57f60cf71523c4930908a01709aecaa24ab570667ee2b50781c35fea080a2",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      }
+    ],
+    "smali_requests": 6,
+    "selected_disassemblies": [
+      {
+        "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+        "method_name": "setSpeakQueue",
+        "requested_max_bytes": 100000,
+        "returned_text_bytes": 6441,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/tts-queue-smali.json",
+          "size_bytes": 7223,
+          "sha256": "2233e924868bacbd47e794afba995af2a555c9772c0ed2389547b5e1456137a9",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "cloudFileIsNewer",
+        "requested_max_bytes": 30000,
+        "returned_text_bytes": 2443,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/sync-cloud-newer-smali.json",
+          "size_bytes": 3082,
+          "sha256": "d9bbe882be111328df6cd048d4c837aa19ac21264bf5e5f5918efc5afc259447",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync",
+        "method_name": "localFileIsNewer",
+        "requested_max_bytes": 30000,
+        "returned_text_bytes": 2252,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/sync-local-newer-smali.json",
+          "size_bytes": 2876,
+          "sha256": "90a3aa20dd1c51e8f39de69ffc11432348d576229515dbb9c21cafabb9ed4ab1",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.moonreaderp.PrefSearch.AnonymousClass4",
+        "method_name": "run",
+        "requested_max_bytes": 180000,
+        "returned_text_bytes": 36938,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/search-worker-smali.json",
+          "size_bytes": 38744,
+          "sha256": "aecdfa6d9260c445e206d14d8a5429f994ddca7c076440f66d19c7931f1786a0",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.books.PDFReader",
+        "method_name": "pdfUpdateNotesToFile",
+        "requested_max_bytes": 120000,
+        "returned_text_bytes": 10795,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/pdf-update-notes-smali.json",
+          "size_bytes": 11744,
+          "sha256": "74f0b830706aabc76afef06c8811afa67b1c03b99021b6015de0ac73374e76f0",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "class_name": "com.flyersoft.tools.BookDb",
+        "method_name": "exportNotesToFile",
+        "requested_max_bytes": 30000,
+        "returned_text_bytes": 1105,
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/notes-export-file-smali.json",
+          "size_bytes": 1633,
+          "sha256": "94bce067185bca3ecc9cc55cc70fe2c7aeaf38164e30ab8009890a3fde65a3a4",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      }
+    ],
+    "reference_query_count": 5,
+    "reference_query": {
+      "class_name": "com.flyersoft.tools.BookDb",
+      "method_name": "exportNotesToText",
+      "limit": 100,
+      "returned_using_methods": [
+        "com.flyersoft.components.cloud.Sync.uploadCloudNoteFile",
+        "com.flyersoft.tools.BookDb.exportNotesToFile"
+      ],
+      "evidence": {
+        "private_evidence_ref": "mcp-followup/export-callers.json",
+        "size_bytes": 1104,
+        "sha256": "3eee94cb9b5a6f6923d488970e0086f5fe792d950df346dfc95b5e5e93d8a912",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    "application_executed": false,
+    "limitations": [
+      "Output-mode and warning metadata are retained for every selected body; Java-mode responses do not establish correct source recovery. Imperfect reconstructions can occur without provider markers.",
+      "Six smali requests corroborate only selected claims. Reflection, dynamic loading, unexamined callers and native implementations remain unknown.",
+      "Performance, accessibility, storage-failure behavior, sync reliability and actual speech were not tested in this lane."
+    ],
+    "successful_method_body_responses": 51,
+    "successful_method_body_responses_in_finalized_runs": 49,
+    "recovered_method_body_responses_from_interrupted_runs": 2,
+    "method_body_requests_in_finalized_runs": 50,
+    "failed_method_requests": [
+      {
+        "class_name": "com.flyersoft.components.cloud.Sync.AnonymousClass7.AnonymousClass1",
+        "method_name": "run",
+        "max_bytes": 100000,
+        "outcome": "class selector unresolved",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-b/sync-shared-worker.json",
+          "size_bytes": 1166,
+          "sha256": "49d7146ac00952bdd99df4f8a0e29f4b4793aa3ca1d0de27b5aa98e28e5170dd",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      }
+    ],
+    "additional_reference_queries": [
+      {
+        "tool": "get_xrefs_to_method",
+        "arguments": {
+          "class_name": "com.flyersoft.components.cloud.Sync",
+          "method_name": "cloudFileIsNewer",
+          "limit": 100,
+          "resolve_line": false
+        },
+        "target": "com.flyersoft.components.cloud.Sync.cloudFileIsNewer",
+        "reported_total": 2,
+        "returned_count": 2,
+        "using_nodes": [
+          {
+            "kind": "method",
+            "name": "run",
+            "full_name": "com.flyersoft.components.cloud.Sync.7.1.run",
+            "containing_class": "com.flyersoft.components.cloud.Sync.AnonymousClass7.AnonymousClass1",
+            "top_class": "com.flyersoft.components.cloud.Sync"
+          },
+          {
+            "kind": "method",
+            "name": "verifyDownloadBookCovers",
+            "full_name": "com.flyersoft.components.cloud.Sync.verifyDownloadBookCovers",
+            "containing_class": "com.flyersoft.components.cloud.Sync",
+            "top_class": "com.flyersoft.components.cloud.Sync"
+          }
+        ],
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-a/cloud-newer-callers.json",
+          "size_bytes": 1159,
+          "sha256": "282c7c4189efe954a5e458a1e415ce35285041556491b0aef53cf978b6b0a083",
+          "publication": "raw evidence retained privately; digest only"
+        },
+        "limitations": [
+          "JADX using-node relationships only; dynamic and reflective callers remain unknown."
+        ]
+      },
+      {
+        "tool": "get_xrefs_to_method",
+        "arguments": {
+          "class_name": "com.flyersoft.components.cloud.Sync",
+          "method_name": "localFileIsNewer",
+          "limit": 100,
+          "resolve_line": false
+        },
+        "target": "com.flyersoft.components.cloud.Sync.localFileIsNewer",
+        "reported_total": 2,
+        "returned_count": 2,
+        "using_nodes": [
+          {
+            "kind": "method",
+            "name": "run",
+            "full_name": "com.flyersoft.components.cloud.Sync.7.1.run",
+            "containing_class": "com.flyersoft.components.cloud.Sync.AnonymousClass7.AnonymousClass1",
+            "top_class": "com.flyersoft.components.cloud.Sync"
+          },
+          {
+            "kind": "method",
+            "name": "verifyUploadBookCovers",
+            "full_name": "com.flyersoft.components.cloud.Sync.verifyUploadBookCovers",
+            "containing_class": "com.flyersoft.components.cloud.Sync",
+            "top_class": "com.flyersoft.components.cloud.Sync"
+          }
+        ],
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-a/local-newer-callers.json",
+          "size_bytes": 1155,
+          "sha256": "a307730a64aad75752cdd8d04b8510e752fb1190df5320ccde46bf6267885874",
+          "publication": "raw evidence retained privately; digest only"
+        },
+        "limitations": [
+          "JADX using-node relationships only; dynamic and reflective callers remain unknown."
+        ]
+      },
+      {
+        "tool": "get_xrefs_to_method",
+        "arguments": {
+          "class_name": "com.flyersoft.components.cloud.Sync",
+          "method_name": "verifyDownloadBookCovers",
+          "limit": 50,
+          "resolve_line": false
+        },
+        "target": "com.flyersoft.components.cloud.Sync.verifyDownloadBookCovers",
+        "reported_total": 1,
+        "returned_count": 1,
+        "using_nodes": [
+          {
+            "kind": "method",
+            "name": "done",
+            "full_name": "com.flyersoft.components.cloud.Sync.23.1.done",
+            "containing_class": "com.flyersoft.components.cloud.Sync.AnonymousClass23.AnonymousClass1",
+            "top_class": "com.flyersoft.components.cloud.Sync"
+          }
+        ],
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-c/download-covers-callers.json",
+          "size_bytes": 914,
+          "sha256": "1c82d65b9304b96fc2581862f5c6527d3928472921dff5994f27d1a06097991f",
+          "publication": "raw evidence retained privately; digest only"
+        },
+        "limitations": [
+          "JADX using-node relationships only; dynamic and reflective callers remain unknown."
+        ]
+      },
+      {
+        "tool": "get_xrefs_to_method",
+        "arguments": {
+          "class_name": "com.flyersoft.components.cloud.Sync",
+          "method_name": "verifyUploadBookCovers",
+          "limit": 50,
+          "resolve_line": false
+        },
+        "target": "com.flyersoft.components.cloud.Sync.verifyUploadBookCovers",
+        "reported_total": 1,
+        "returned_count": 1,
+        "using_nodes": [
+          {
+            "kind": "method",
+            "name": "done",
+            "full_name": "com.flyersoft.components.cloud.Sync.10.1.done",
+            "containing_class": "com.flyersoft.components.cloud.Sync.AnonymousClass10.AnonymousClass1",
+            "top_class": "com.flyersoft.components.cloud.Sync"
+          }
+        ],
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-c/upload-covers-callers.json",
+          "size_bytes": 912,
+          "sha256": "645e9fb234735c1ae46ba17aaed6b49c8fe69ccfd743b3bed8de9ab685121a30",
+          "publication": "raw evidence retained privately; digest only"
+        },
+        "limitations": [
+          "JADX using-node relationships only; dynamic and reflective callers remain unknown."
+        ]
+      }
+    ],
+    "additional_signature_queries": [
+      {
+        "tool": "get_methods_of_class",
+        "arguments": {
+          "class_name": "com.flyersoft.tools.T",
+          "filter": "saveNormalFileText",
+          "limit": 30
+        },
+        "total_matching": 1,
+        "count": 1,
+        "items": [
+          {
+            "name": "saveNormalFileText",
+            "signature": "saveNormalFileText(String, String): boolean",
+            "full_name": "com.flyersoft.tools.T.saveNormalFileText"
+          }
+        ],
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-b/normal-writer-signatures.json",
+          "size_bytes": 760,
+          "sha256": "f33b6055b4bdac2ead8bf7d8e7ac16457a503d354b31b89c000541b96530151d",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "tool": "get_methods_of_class",
+        "arguments": {
+          "class_name": "com.flyersoft.tools.A",
+          "filter": "addTtsLine",
+          "limit": 20
+        },
+        "total_matching": 1,
+        "count": 1,
+        "items": [
+          {
+            "name": "addTtsLine",
+            "signature": "addTtsLine(A$TtsLine>, A$TtsLine): void",
+            "full_name": "com.flyersoft.tools.A.addTtsLine"
+          }
+        ],
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-d/tts-line-adder-signatures.json",
+          "size_bytes": 732,
+          "sha256": "98ae121ef4a092ba470abe42d44ffd5f02a804c274eea1729e951e700efb335c",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "tool": "get_methods_of_class",
+        "arguments": {
+          "class_name": "com.flyersoft.tools.A.TtsLine",
+          "filter": "<init>",
+          "limit": 20
+        },
+        "total_matching": 1,
+        "count": 1,
+        "items": [
+          {
+            "name": "<init>",
+            "signature": "<init>(String, int, int, String, boolean, int): void",
+            "full_name": "com.flyersoft.tools.A.TtsLine.<init>"
+          }
+        ],
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-d/tts-line-constructor-signatures.json",
+          "size_bytes": 756,
+          "sha256": "7e80db4553aa46ee1ad2971b643fc33637b3f2f27632181fcf6e08a796a15885",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      }
+    ],
+    "identity_resolution_queries": [
+      {
+        "tool": "get_inner_classes",
+        "arguments": {
+          "class_name": "com.flyersoft.components.cloud.Sync"
+        },
+        "tool_error": false,
+        "returned_count": 2,
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-c/sync-inner-identities.json",
+          "size_bytes": 849,
+          "sha256": "8c794dd536cb29a501c9d3a203d9974491e1fd3a38e3168c73a2dff7412ab7e9",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      {
+        "tool": "resolve_class",
+        "arguments": {
+          "class_name": "com.flyersoft.components.cloud.Sync.7.1"
+        },
+        "tool_error": false,
+        "resolved": false,
+        "limitation": "An unresolved selector is a coverage gap, not proof that a class or caller is absent.",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-c/sync-worker-resolution.json",
+          "size_bytes": 4047,
+          "sha256": "ace003f4d0810db69294037528b0fce5e0389612acf90e24ff32f4e4194da11c",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      }
+    ],
+    "bounded_followup": {
+      "observed_at": "2026-11-21T16:14:18.789Z",
+      "authorization": "One bounded follow-up: export write-failure return, freshness callers, and TTS segmentation if needed.",
+      "maximum_new_method_bodies": 8,
+      "attempted_new_method_bodies": 8,
+      "selected_new_method_bodies": 7,
+      "unresolved_method_requests": 1,
+      "method_response_artifacts": 8,
+      "successful_bodies_in_finalized_runs": 5,
+      "recovered_bodies_from_interrupted_run": 2,
+      "method_requests_in_finalized_run_receipts": 6,
+      "planned_method_body_slots": 11,
+      "planned_call_slots": 33,
+      "recorded_calls_in_finalized_run_receipts": 22,
+      "retained_response_artifacts": 25,
+      "recovered_response_artifacts": 3,
+      "successful_response_artifacts": 24,
+      "failed_response_artifacts": 1,
+      "unexecuted_call_slots": 7,
+      "execution_unknown_call_slots": 1,
+      "finalized_run_receipts": 4,
+      "all_planned_calls_succeeded_runs": 3,
+      "stopped_after_selector_failure_runs": 1,
+      "interrupted_runs": 1,
+      "count_convention": "Requests are evidenced by retained exchanges, including one tool-error response. Successful body responses include two recovered from an interrupted run; their presence does not establish run completion. Planned but unexecuted/unknown slots are excluded from request counts.",
+      "reference_queries": 4,
+      "signature_queries": 3,
+      "identity_resolution_queries": 2,
+      "run_ids": [
+        "mcp-bounded-followup-a",
+        "mcp-bounded-followup-b",
+        "mcp-bounded-followup-c",
+        "mcp-bounded-followup-d",
+        "mcp-bounded-followup-e"
+      ],
+      "old_finding_ids_preserved": true,
+      "original_inventory_reused": true,
+      "application_executed": false,
+      "baseline_evidence": {
+        "private_evidence_ref": "bounded-followup-baseline/baseline.json",
+        "size_bytes": 2021,
+        "sha256": "0d8218ed55d4661abedf4b00f1d6daa18c2e17aaa110274059fe99c7592818e0",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "integration": {
+        "command_template": "node <PRIVATE_STATIC_ANALYSIS_DIR>/apply-bounded-followup.mjs",
+        "scope": "Saved-evidence integration only; no new APK analysis requests.",
+        "implementation": {
+          "private_evidence_ref": "apply-bounded-followup.mjs",
+          "size_bytes": 21405,
+          "sha256": "96f87bbdcd08360ac95827b4887d75b1a066a402ca0fc3ee2cf568789382d555",
+          "publication": "raw evidence retained privately; digest only"
+        },
+        "finding_updates": {
+          "private_evidence_ref": "bounded-followup-update.json",
+          "size_bytes": 9330,
+          "sha256": "8cd8361371cf123b2d1c21dc324cf6149f50c875bcaf1329b04398b3b343998c",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      }
+    }
+  },
+  "updated_at": "2026-11-21T16:14:18.789Z"
+}

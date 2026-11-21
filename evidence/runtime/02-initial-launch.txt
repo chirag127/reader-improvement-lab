@@ -1,0 +1,13 @@
+Starting: Intent { cmp=com.flyersoft.moonreaderp/.ActivityMain }
+
+Status: ok
+
+LaunchState: COLD
+
+Activity: com.flyersoft.moonreaderp/.ActivityMain
+
+TotalTime: 2619
+
+WaitTime: 2628
+
+Complete

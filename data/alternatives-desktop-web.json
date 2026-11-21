@@ -1,0 +1,430 @@
+{
+  "observed_at": "2026-11-21",
+  "scope": "Bounded public-source catalog of ten desktop/web readers and adjacent reading workflows. Four targeted implementation reviews: PDF.js, Okular, Sioyek and Zotero Reader. Detailed release evidence, comparisons, review ranges and proposal reasoning are in knowledge/alternatives-desktop-web.md.",
+  "limitations": [
+    "Not exhaustive market coverage. No application, screen-reader, rendering-conformance, performance or synchronization tests were run in this lane.",
+    "Source pins usually identify development heads, not released binaries; release/version distinctions are recorded in the report.",
+    "GitHub REST requests reached a shared unauthenticated rate limit; subsequent evidence used raw source and public HTML. Issue searches were bounded.",
+    "One Zotero comparator expression was evaluated separately in JavaScript; that is not a Zotero application or full-method reproduction.",
+    "Licenses identify reviewed project declarations, not an exhaustive dependency-license audit. Unknown does not mean absent."
+  ],
+  "alternatives": [
+    {
+      "id": "pdfjs",
+      "name": "Mozilla PDF.js",
+      "repository": "https://github.com/mozilla/pdf.js",
+      "commit": "57dead10694ead8fb21b97f7812fc95311a38ea1",
+      "license": "Apache-2.0",
+      "platforms": ["Modern browsers", "Legacy browser build", "Firefox integration", "Chrome extension", "Node.js library API"],
+      "formats": ["PDF"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "Web-standards PDF parsing and rendering", "evidence_type": "documented", "source_url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/README.md"},
+        {"name": "Worker-backed loading and custom range transport", "evidence_type": "static-observation", "source_url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/src/display/api.js#L120-L170"},
+        {"name": "Case, whole-word and diacritic-aware normalized search", "evidence_type": "static-observation", "source_url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/pdf_find_controller.js#L710-L877"},
+        {"name": "Search result counts with a polite live region", "evidence_type": "static-observation", "source_url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/viewer.html#L343-L385"},
+        {"name": "Highlight editing, serialization and comment data", "evidence_type": "static-observation", "source_url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/src/display/editor/highlight.js#L509-L623"},
+        {"name": "Free-text, ink and image-stamp viewer controls", "evidence_type": "static-observation", "source_url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/viewer.html#L588-L668"},
+        {"name": "Annotation/form value storage and modified-state hooks", "evidence_type": "static-observation", "source_url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/src/display/annotation_storage.js#L29-L158"},
+        {"name": "Tagged structure, table header relationships and MathML mapping", "evidence_type": "static-observation", "source_url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/struct_tree_layer_builder.js#L330-L674"},
+        {"name": "Frozen annotation data for printing", "evidence_type": "static-observation", "source_url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/src/display/annotation_storage.js#L323-L342"},
+        {"name": "Save/download, presentation and current-view link controls", "evidence_type": "static-observation", "source_url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/viewer.html#L678-L734"}
+      ],
+      "code_review": {
+        "depth": "targeted-implementation",
+        "files": [
+          {"path": "src/display/api.js", "url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/src/display/api.js#L120-L275", "observations": ["Selected excerpts at 120-170 and 230-275: worker, range transport and image/canvas capability options; not a full API audit."]},
+          {"path": "web/pdf_find_controller.js", "url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/pdf_find_controller.js#L635-L946", "observations": ["Reviewed 635-677, 710-946 and 1195-1235: query invalidation, matching, original-offset mapping, serial extraction and find-close state.", "At 917-925 an extraction error is logged and the page content is replaced with an empty string."]},
+          {"path": "web/pdf_find_bar.js", "url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/pdf_find_bar.js#L99-L152", "observations": ["Found, pending, not-found and wrapped states are handled in the inspected UI switch."]},
+          {"path": "web/struct_tree_layer_builder.js", "url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/struct_tree_layer_builder.js#L330-L674", "observations": ["Reviewed 25-118, 330-460 and 540-674: role mappings, alternative text, header references and MathML.", "DOM semantics do not prove browser accessibility-tree behavior."]},
+          {"path": "web/text_layer_builder.css", "url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/text_layer_builder.css#L59-L74", "observations": ["The inspected .markedContent rule uses display: contents."]},
+          {"path": "src/display/editor/highlight.js", "url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/src/display/editor/highlight.js#L509-L623", "observations": ["Selected deserialization/serialization excerpts; copying highlights returns null by design; comments are serialized."]},
+          {"path": "src/display/annotation_storage.js", "url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/src/display/annotation_storage.js#L323-L342", "observations": ["Selected excerpts at 29-54, 110-158, 174-180 and 323-342: modified-state hooks and frozen print data."]},
+          {"path": "web/viewer.html", "url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/viewer.html#L343-L734", "observations": ["Selected search, editor and document-action markup at 343-385, 588-668 and 678-734."]},
+          {"path": "test/integration/accessibility_spec.mjs", "url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/test/integration/accessibility_spec.mjs#L23-L139", "observations": ["Selected assertions at 23-99 and 121-139 inspect DOM ownership/text relationships; tests were not executed."]},
+          {"path": "test/unit/struct_tree_layer_builder_spec.js", "url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/test/unit/struct_tree_layer_builder_spec.js", "observations": ["Test names and selected assertions scanned for roles, prohibited names, tables and links; no execution."]}
+        ],
+        "limitations": ["Targeted excerpts, not whole-project review.", "Open issue #20790 already has open PR #22558; its reported tests are upstream evidence, not local verification.", "Generic viewer, Firefox integration and embedders can expose different functionality."]
+      },
+      "sources": [
+        {"url": "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/LICENSE", "observed_at": "2026-11-21", "evidence_type": "static-observation"},
+        {"url": "https://mozilla.github.io/pdf.js/getting_started/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/mozilla/pdf.js/releases/tag/v6.5.438", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/mozilla/pdf.js/issues/20790", "observed_at": "2026-11-21", "evidence_type": "upstream-report"},
+        {"url": "https://github.com/mozilla/pdf.js/pull/22558", "observed_at": "2026-11-21", "evidence_type": "upstream-report"}
+      ],
+      "limitations": ["No application or assistive-technology test.", "Stable v6.5.438 was published 2026-11-01; reviewed master is later.", "A rendering library does not establish Android library management or sync parity."]
+    },
+    {
+      "id": "okular",
+      "name": "Okular",
+      "repository": "https://invent.kde.org/graphics/okular",
+      "commit": "110d017ab20368a449a21fcc2566f4ef7baaf3ae",
+      "license": "GPL-2.0-or-later",
+      "platforms": ["Linux", "Windows", "macOS nightly builds, officially untested", "Kirigami mobile/Android source target, release parity unverified"],
+      "formats": ["PDF", "EPUB", "DjVu", "Markdown", "PostScript", "Comic archives", "Images; support depends on generator build"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "Multi-format document, image and comic viewing", "evidence_type": "documented", "source_url": "https://okular.kde.org/"},
+        {"name": "Native PDF notes, highlights, underlines and added text", "evidence_type": "documented", "source_url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/README.md"},
+        {"name": "Text, area and table selection", "evidence_type": "documented", "source_url": "https://okular.kde.org/"},
+        {"name": "Magnifier mode", "evidence_type": "documented", "source_url": "https://okular.kde.org/"},
+        {"name": "Thumbnails and contents navigation", "evidence_type": "documented", "source_url": "https://okular.kde.org/"},
+        {"name": "PDF digital signature inspection, verification and signing", "evidence_type": "documented", "source_url": "https://okular.kde.org/"},
+        {"name": "Optional desktop text-to-speech build integration", "evidence_type": "static-observation", "source_url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/CMakeLists.txt"},
+        {"name": "Asynchronous rendering and text-extraction generator capabilities", "evidence_type": "static-observation", "source_url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/core/generator.h#L184-L206"},
+        {"name": "Undoable annotation add/remove/modify/translate commands", "evidence_type": "static-observation", "source_url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/core/documentcommands.cpp#L56-L280"},
+        {"name": "Mobile swipe, pinch zoom and drag-scrolling component", "evidence_type": "static-observation", "source_url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/mobile/components/DocumentView.qml#L1-L260"}
+      ],
+      "code_review": {
+        "depth": "targeted-implementation",
+        "files": [
+          {"path": "README.md", "url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/README.md", "observations": ["Declares shell, KParts, mobile and format-generator targets, canonical Invent source and Bugzilla reporting route."]},
+          {"path": "CMakeLists.txt", "url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/CMakeLists.txt", "observations": ["Selected build sections: version 27.03.70, Qt6, desktop/mobile selection, Poppler Qt6 and optional speech/format dependencies."]},
+          {"path": "core/generator.h", "url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/core/generator.h#L184-L206", "observations": ["Selected 184-206, 331-339 and 534-575: async generation features and completion boundaries."]},
+          {"path": "core/document.cpp", "url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/core/document.cpp#L1623-L1835", "observations": ["Selected 1623-1662, 1717-1735 and 1827-1835: observer pixmap requests and search dispatch. SPDX header GPL-2.0-or-later."]},
+          {"path": "core/textpage.cpp", "url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/core/textpage.cpp#L549-L553", "observations": ["Search entry guard only; deeper text normalization not reviewed."]},
+          {"path": "generators/poppler/generator_pdf.cpp", "url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/generators/poppler/generator_pdf.cpp#L171-L204", "observations": ["Destination conversion sets page/position and retains TODOs for destination kinds and zoom; final caller behavior untested."]},
+          {"path": "core/document.h", "url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/core/document.h#L1398-L1462", "observations": ["Selected 464-470 and 1398-1462: setZoom method and shared viewport position/auto-fit representation."]},
+          {"path": "core/documentcommands.cpp", "url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/core/documentcommands.cpp#L56-L280", "observations": ["Selected annotation undo/redo and reload-reference refresh paths at 56-178 and 193-280."]},
+          {"path": "mobile/components/DocumentView.qml", "url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/mobile/components/DocumentView.qml#L1-L260", "observations": ["Custom gesture state, height-based pinch constraints, page delegates and fixed 250 ms transitions."]},
+          {"path": "mobile/components/pageitem.h", "url": "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/mobile/components/pageitem.h#L28-L153", "observations": ["QQuickItem adapter exposing page/bookmark state and paint/viewport hooks."]}
+        ],
+        "limitations": ["Source read from KDE's GitHub mirror; canonical issue tracker is bugs.kde.org and contributions use Invent.", "Autotest and mobile test files were located, not executed or fully reviewed.", "Desktop capabilities do not establish mobile parity; no current reproduction of old mobile zoom report."]
+      },
+      "sources": [
+        {"url": "https://okular.kde.org/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://okular.kde.org/download/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://kde.org/announcements/gear/26.08.3/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://download.kde.org/stable/release-service/26.08.3/src/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://bugs.kde.org/show_bug.cgi?id=463787", "observed_at": "2026-11-21", "evidence_type": "upstream-report"}
+      ],
+      "limitations": ["Stable 26.08.3 was announced 2026-11-05; source pin is development 27.03.70.", "Format availability depends on installed generators and optional dependencies.", "No package, signature, rendering or mobile usability tests."]
+    },
+    {
+      "id": "sioyek",
+      "name": "Sioyek",
+      "repository": "https://github.com/ahrm/sioyek",
+      "commit": "1e2f8037353724a83ccb10a697e28e295383e017",
+      "license": "GPL-3.0; only/or-later qualifier not established; bundled dependencies have separate terms",
+      "platforms": ["Windows", "macOS", "Linux"],
+      "formats": ["PDF"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "Quick-open search over previously opened files", "evidence_type": "documented", "source_url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md#quick-open"},
+        {"name": "Searchable table of contents", "evidence_type": "documented", "source_url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md#table-of-contents"},
+        {"name": "Heuristic jumps to references and figures without explicit PDF links", "evidence_type": "documented", "source_url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md#smart-jump"},
+        {"name": "Temporary overview of figures, references and tables", "evidence_type": "documented", "source_url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md#overview"},
+        {"name": "Local and global single-character marks", "evidence_type": "documented", "source_url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md#mark"},
+        {"name": "Global text-named bookmarks", "evidence_type": "documented", "source_url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md#bookmarks"},
+        {"name": "Multiple highlight types and highlight search", "evidence_type": "documented", "source_url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md#highlights"},
+        {"name": "Portals linking reading locations to helper-window destinations", "evidence_type": "documented", "source_url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md"},
+        {"name": "Configurable keys and preferences", "evidence_type": "documented", "source_url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md#configuration"},
+        {"name": "Development search worker with page ranges, regex and case/smart-case options", "evidence_type": "static-observation", "source_url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/pdf_viewer/pdf_renderer.cpp#L342-L449"}
+      ],
+      "code_review": {
+        "depth": "targeted-implementation",
+        "files": [
+          {"path": "pdf_viewer/pdf_renderer.cpp", "url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/pdf_viewer/pdf_renderer.cpp#L342-L449", "observations": ["Reviewed 342-449 and worker construction at 48-55: search range, progress, interruption and MuPDF resource handling.", "The local fz_page loaded at 394 is unused in this loop; structured text is loaded by page number and dropped at 426. A full ownership/lifetime audit and memory test were not performed."]},
+          {"path": "pdf_viewer/database.cpp", "url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/pdf_viewer/database.cpp#L833-L889", "observations": ["Reviewed 502-534 and 833-889: local/shared SQLite opening and highlight inserts with escaped strings plus streamed numeric coordinates."]},
+          {"path": "pdf_viewer/document.cpp", "url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/pdf_viewer/document.cpp#L158-L390", "observations": ["Selected 158-184 and 322-390: checksum-associated annotation loading and highlight/portal insertion."]},
+          {"path": "pdf_viewer/document_view.h", "url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/pdf_viewer/document_view.h#L29-L110", "observations": ["Selected 29-33 and 89-110: separate reading-view state and nearest-portal/bookmark navigation API."]},
+          {"path": "pdf_viewer_build_config.pro", "url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/pdf_viewer_build_config.pro", "observations": ["Initial build sections declare C++20, Qt/OpenGL modules and VERSION=2.0.0; that version does not establish release parity."]},
+          {"path": ".gitmodules", "url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/.gitmodules#L1-L8", "observations": ["MuPDF and zlib dependency repositories identified; dependency internals not deeply reviewed."]},
+          {"path": "README.md", "url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md", "observations": ["Development FAQ requires Qt6.7/6.8 while Linux/Windows recipes still mention Qt5; documented feature sections read."]},
+          {"path": "build_windows.bat", "url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/build_windows.bat#L1-L34", "observations": ["Build, deploy and external file-tool commands read; no clean build verification."]}
+        ],
+        "limitations": ["Development code differs substantially from stable 2.0.0.", "The resource-ownership candidate is untested, not a proven memory leak.", "Issue #1616 maintainer says UUID-based deletion is fixed on development; no re-report of that stable defect."]
+      },
+      "sources": [
+        {"url": "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/LICENSE", "observed_at": "2026-11-21", "evidence_type": "static-observation"},
+        {"url": "https://github.com/ahrm/sioyek/releases/tag/v2.0.0", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/ahrm/sioyek/releases.atom", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/ahrm/sioyek/issues/1371", "observed_at": "2026-11-21", "evidence_type": "upstream-report"},
+        {"url": "https://github.com/ahrm/sioyek/issues/1401", "observed_at": "2026-11-21", "evidence_type": "upstream-report"},
+        {"url": "https://github.com/ahrm/sioyek/issues/1616", "observed_at": "2026-11-21", "evidence_type": "upstream-report"}
+      ],
+      "limitations": ["Stable v2.0.0 published 2022-12-16; alpha feed entry updated 2024-09-12; development pushed 2026-11-04.", "No current runtime, packaging, migration or mobile release validation.", "Heuristic navigation is not guaranteed on arbitrary PDFs; keyboard/multi-monitor workflows need separate phone evaluation."]
+    },
+    {
+      "id": "zotero-reader",
+      "name": "Zotero PDF/EPUB/HTML Reader",
+      "repository": "https://github.com/zotero/reader",
+      "commit": "09af7187f0b219cec3e32f5fec56f77269a44b67",
+      "license": "AGPL-3.0; explicit version-3 grant in COPYING, third-party notices apply",
+      "platforms": ["Windows desktop host", "macOS desktop host", "Linux desktop host", "Web integration", "iOS/Android source adapters; parity unverified"],
+      "formats": ["PDF", "EPUB", "HTML snapshots"],
+      "evidence_type": "static-observation",
+      "features": [
+        {"name": "PDF, EPUB and HTML reader/annotator", "evidence_type": "documented", "source_url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/README.md"},
+        {"name": "Locked and unlocked highlighting/underlining modes", "evidence_type": "documented", "source_url": "https://www.zotero.org/support/pdf_reader"},
+        {"name": "Annotations to notes with page backlinks and citations", "evidence_type": "documented", "source_url": "https://www.zotero.org/support/pdf_reader"},
+        {"name": "Create notes from one or multiple annotated library items", "evidence_type": "documented", "source_url": "https://www.zotero.org/support/pdf_reader"},
+        {"name": "Show on Page navigation and annotation note templates", "evidence_type": "documented", "source_url": "https://www.zotero.org/support/pdf_reader"},
+        {"name": "Database annotations with embedded-annotation PDF export", "evidence_type": "documented", "source_url": "https://www.zotero.org/support/pdf_reader"},
+        {"name": "Zotero 10 PDF Reading Mode with reflow and shared positions/annotations", "evidence_type": "documented", "source_url": "https://www.zotero.org/support/changelog"},
+        {"name": "Read Aloud across columns/pages with structural skipping and highlighting", "evidence_type": "documented", "source_url": "https://www.zotero.org/support/changelog"},
+        {"name": "Annotation filtering by query, colors, tags, authors and types", "evidence_type": "static-observation", "source_url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/annotation-manager.js#L459-L478"},
+        {"name": "Host-visible undo/redo with restored annotation ID remapping", "evidence_type": "static-observation", "source_url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/annotation-manager.js#L598-L722"},
+        {"name": "Generation-scoped native/semantic PDF search and fallback", "evidence_type": "static-observation", "source_url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/pdf/pdf-search-controller.mjs#L219-L445"}
+      ],
+      "code_review": {
+        "depth": "targeted-implementation",
+        "files": [
+          {"path": "src/common/reader.js", "url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/reader.js#L1-L38", "observations": ["Reviewed 1-38, 100-132 and 352-368: view/UI composition and forwarding of host annotation callbacks."]},
+          {"path": "src/common/annotation-manager.js", "url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/annotation-manager.js#L243-L478", "observations": ["Reviewed 80-118, 243-453, 459-478 and 598-722: operations, merge metadata, save batching, filters and undo.", "Merge at 282-284 subtracts sortIndex and ISO date strings. A separate exact-expression JavaScript check yielded NaN comparators and selection-order-dependent results; full method/UI was not run.", "Inspected save method awaits host callback after clearing pending entries; complete host rejection policy was not reviewed."]},
+          {"path": "src/pdf/selection.js", "url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/pdf/selection.js#L403-L414", "observations": ["formatSortIndex returns a padded pipe-separated string."]},
+          {"path": "src/pdf/pdf-search-controller.mjs", "url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/pdf/pdf-search-controller.mjs#L219-L445", "observations": ["Selected 1-37, 219-242, 307-355 and 393-445: generations, revision checks, abort and semantic fallback."]},
+          {"path": "src/common/view.js", "url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/view.js#L80-L100", "observations": ["Mobile wrapper requests immediate first annotation delivery so later callbacks can resolve IDs."]},
+          {"path": "src/index.android.js", "url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/index.android.js#L1-L93", "observations": ["Selected 1-22 and 59-93: message-port adapter, view creation and save callbacks; no Android application inspection."]},
+          {"path": "src/index.ios.js", "url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/index.ios.js#L1-L54", "observations": ["Selected 1-26 and 53-54: WebKit message handlers and similar view initialization."]},
+          {"path": "src/index.view-dev.js", "url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/index.view-dev.js#L1-L140", "observations": ["Development callback harness and page-region image rendering for semantic view."]},
+          {"path": "test/common/annotation-manager.test.mjs", "url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/test/common/annotation-manager.test.mjs", "observations": ["Scanned test names at 38, 51, 66, 85, 99 and 114 for immediate saves, debounce, undo and ID behavior; not executed."]},
+          {"path": "test/pdf/search-session.test.mjs", "url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/test/pdf/search-session.test.mjs#L1-L77", "observations": ["Selected 1-19 and 65-72 include current-session-only fallback; not executed."]}
+        ],
+        "limitations": ["Host database/sync/error adapters and semantic-text producer were not audited.", "structured-document-text submodule pin 7963c11faac4595be3bbe86b7574704a22c67bed was observed in a tree, not inspected internally.", "Exact sortIndex/dateCreated issue-search payloads were inconclusive, not verified zero results.", "Existing issue #234 requests bridge consolidation; #52 records historical save-error UI work."]
+      },
+      "sources": [
+        {"url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/COPYING#L1-L11", "observed_at": "2026-11-21", "evidence_type": "static-observation"},
+        {"url": "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/package.json", "observed_at": "2026-11-21", "evidence_type": "static-observation"},
+        {"url": "https://www.zotero.org/support/system_requirements", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://www.zotero.org/support/changelog", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/zotero/reader/issues/234", "observed_at": "2026-11-21", "evidence_type": "upstream-report"},
+        {"url": "https://github.com/zotero/reader/issues/52", "observed_at": "2026-11-21", "evidence_type": "upstream-report"}
+      ],
+      "limitations": ["Zotero host 10.0.9 is Mac-only, dated 2026-11-10; reader package version 2.0.0 is not the host version.", "Annotations are database-backed and require export for external-reader visibility.", "No application, actual merge method, semantic reading or synchronization test was run."]
+    },
+    {
+      "id": "sumatrapdf",
+      "name": "SumatraPDF",
+      "repository": "https://github.com/sumatrapdfreader/sumatrapdf",
+      "commit": "e6519ebc6b239330d9d0c4d9778e0e68762d3e78",
+      "license": "GPL-3.0 for most source; BSD portions; AUTHORS states AGPL-3.0 section 13 applies via MuPDF",
+      "platforms": ["Windows"],
+      "formats": ["PDF", "EPUB", "MOBI", "FB2", "CBZ/CBR", "CHM", "XPS", "DjVu", "Additional rolling-documentation formats have version-specific limits"],
+      "evidence_type": "documented",
+      "features": [
+        {"name": "Multi-format PDF, ebook and comic viewing", "evidence_type": "documented", "source_url": "https://github.com/sumatrapdfreader/sumatrapdf/blob/e6519ebc6b239330d9d0c4d9778e0e68762d3e78/readme.md"},
+        {"name": "Portable operation and configurable data location", "evidence_type": "documented", "source_url": "https://www.sumatrapdfreader.org/docs/SumatraPDF-portable.md"},
+        {"name": "PDF annotation creation, editing and embedded saving", "evidence_type": "documented", "source_url": "https://www.sumatrapdfreader.org/docs/Editing-annotations.md"},
+        {"name": "Annotation copy/cut/paste and gesture-grouped undo in current docs", "evidence_type": "documented", "source_url": "https://www.sumatrapdfreader.org/docs/Editing-annotations.md"},
+        {"name": "Text search and find-selection navigation", "evidence_type": "documented", "source_url": "https://www.sumatrapdfreader.org/docs/Finding-text.md"},
+        {"name": "Floating search results, snippets and ranges in current docs", "evidence_type": "documented", "source_url": "https://www.sumatrapdfreader.org/docs/Finding-text.md"},
+        {"name": "Searchable command palette and evolving navigation modes", "evidence_type": "documented", "source_url": "https://www.sumatrapdfreader.org/docs/Command-Palette.md"},
+        {"name": "Themes and document color inversion", "evidence_type": "documented", "source_url": "https://github.com/sumatrapdfreader/sumatrapdf/releases.atom"},
+        {"name": "Tabs, drag-out windows and reopen-last-closed", "evidence_type": "documented", "source_url": "https://github.com/sumatrapdfreader/sumatrapdf/releases.atom"},
+        {"name": "Command-line and DDE search integration", "evidence_type": "documented", "source_url": "https://www.sumatrapdfreader.org/docs/Finding-text.md"}
+      ],
+      "code_review": {
+        "depth": "metadata-license-documentation",
+        "files": [
+          {"path": "readme.md", "url": "https://github.com/sumatrapdfreader/sumatrapdf/blob/e6519ebc6b239330d9d0c4d9778e0e68762d3e78/readme.md", "observations": ["Windows multi-format scope and (A)GPL/BSD qualification."]},
+          {"path": "COPYING", "url": "https://github.com/sumatrapdfreader/sumatrapdf/blob/e6519ebc6b239330d9d0c4d9778e0e68762d3e78/COPYING", "observations": ["GPL v3 license text header read."]},
+          {"path": "AUTHORS", "url": "https://github.com/sumatrapdfreader/sumatrapdf/blob/e6519ebc6b239330d9d0c4d9778e0e68762d3e78/AUTHORS#L23-L59", "observations": ["Lines 23-26 qualify project licensing; dependency-license table scanned. No implementation review."]}
+        ],
+        "limitations": ["Not counted as a deep code comparator.", "No systematic issue search, implementation test or benchmark."]
+      },
+      "sources": [
+        {"url": "https://github.com/sumatrapdfreader/sumatrapdf/releases/tag/3.6.1rel", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://www.sumatrapdfreader.org/docs/Supported-document-formats.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://www.sumatrapdfreader.org/docs/SumatraPDF-portable.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/sumatrapdfreader/sumatrapdf/blob/e6519ebc6b239330d9d0c4d9778e0e68762d3e78/AUTHORS#L23-L26", "observed_at": "2026-11-21", "evidence_type": "static-observation"}
+      ],
+      "limitations": ["Latest observed stable release 3.6.1 was published 2026-04-06; rolling docs include 3.7/pre-release features.", "Do not assign every current command, format or annotation control to 3.6.1.", "No Windows or Android feature-parity test."]
+    },
+    {
+      "id": "papers",
+      "name": "GNOME Papers / Document Viewer",
+      "repository": "https://gitlab.gnome.org/GNOME/papers",
+      "commit": "fe4bc08d1a5427a33abc9bead467150e3531c4c8",
+      "license": "GPL-2.0-or-later",
+      "platforms": ["GNOME/Linux", "Adaptive mobile-friendly Linux UI; Android support not established"],
+      "formats": ["PDF", "DjVu", "TIFF", "CBR", "CBT", "CBZ", "CB7"],
+      "evidence_type": "documented",
+      "features": [
+        {"name": "PDF, DjVu, TIFF and comic viewing", "evidence_type": "documented", "source_url": "https://apps.gnome.org/Papers/"},
+        {"name": "Full-text search in a sidebar", "evidence_type": "documented", "source_url": "https://apps.gnome.org/Papers/"},
+        {"name": "Colored annotation list and sidebar editing", "evidence_type": "documented", "source_url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/data/org.gnome.Papers.metainfo.xml.in.in#L127-L138"},
+        {"name": "Ink and free-text annotations, documented in 50.0", "evidence_type": "documented", "source_url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/data/org.gnome.Papers.metainfo.xml.in.in#L127-L138"},
+        {"name": "Underline, strikethrough and wavy markup", "evidence_type": "documented", "source_url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/data/org.gnome.Papers.metainfo.xml.in.in#L171-L201"},
+        {"name": "Digital signing and signature verification", "evidence_type": "documented", "source_url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/data/org.gnome.Papers.metainfo.xml.in.in#L171-L201"},
+        {"name": "Visual signature insertion, documented in 51.0", "evidence_type": "documented", "source_url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/data/org.gnome.Papers.metainfo.xml.in.in#L100-L123"},
+        {"name": "Hue-preserving night mode across windows/documents", "evidence_type": "documented", "source_url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/data/org.gnome.Papers.metainfo.xml.in.in#L171-L201"},
+        {"name": "Large thumbnails and adaptive keyboard/touch UI", "evidence_type": "documented", "source_url": "https://apps.gnome.org/Papers/"},
+        {"name": "Screen-reader search announcements, documented in 50.0", "evidence_type": "documented", "source_url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/data/org.gnome.Papers.metainfo.xml.in.in#L127-L161"}
+      ],
+      "code_review": {
+        "depth": "metadata-license-documentation",
+        "files": [
+          {"path": "README.md", "url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/README.md", "observations": ["Canonical project, Poppler and optional document backends, library-documentation links."]},
+          {"path": "COPYING", "url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/COPYING", "observations": ["GPL v2 license text header read; project metadata provides or-later grant."]},
+          {"path": "data/org.gnome.Papers.metainfo.xml.in.in", "url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/data/org.gnome.Papers.metainfo.xml.in.in#L100-L208", "observations": ["Project license, description and release capabilities read; lines 100-208 include 51.0/50.0/49.0/48.0 changes.", "Papers joined GNOME core in 49.0; this is not an in-place rename of Evince's repository."]}
+        ],
+        "limitations": ["No rendering, annotation, signing or accessibility implementation review.", "GitHub mirror used for source; canonical project is GNOME GitLab."]
+      },
+      "sources": [
+        {"url": "https://apps.gnome.org/Papers/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://download.gnome.org/sources/papers/51/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/GNOME/papers/blob/fe4bc08d1a5427a33abc9bead467150e3531c4c8/data/org.gnome.Papers.metainfo.xml.in.in", "observed_at": "2026-11-21", "evidence_type": "static-observation"}
+      ],
+      "limitations": ["App page identifies 51.1 dated 2026-10-09; source server upload is 2026-10-12; main metadata stops at 51.0.", "Preliminary screen-reader support and announced improvements are not certification or local AT results.", "No systematic issue search or application runtime test."]
+    },
+    {
+      "id": "evince",
+      "name": "Evince",
+      "repository": "https://gitlab.gnome.org/GNOME/evince",
+      "commit": "e822030005f22231052667d51398a84327004924",
+      "license": "GPL-2.0-or-later",
+      "platforms": ["GNOME/Linux; historical ports not verified"],
+      "formats": ["PDF", "PS/EPS", "XPS", "DjVu", "TIFF", "DVI", "CBR/CBT/CBZ/CB7"],
+      "evidence_type": "documented",
+      "features": [
+        {"name": "Broad document backends including PS, XPS and DVI", "evidence_type": "documented", "source_url": "https://github.com/GNOME/evince/blob/e822030005f22231052667d51398a84327004924/README.md"},
+        {"name": "Document text search", "evidence_type": "documented", "source_url": "https://help.gnome.org/users/evince/stable/"},
+        {"name": "Thumbnails, outline, page jumps and keyboard navigation", "evidence_type": "documented", "source_url": "https://help.gnome.org/evince/movingaround.html"},
+        {"name": "Fit-page and fit-width zoom", "evidence_type": "documented", "source_url": "https://help.gnome.org/evince/movingaround.html"},
+        {"name": "Dual-page, continuous and full-screen viewing", "evidence_type": "documented", "source_url": "https://help.gnome.org/evince/movingaround.html"},
+        {"name": "Pointer autoscroll and drag panning", "evidence_type": "documented", "source_url": "https://help.gnome.org/evince/movingaround.html"},
+        {"name": "Annotations, annotation navigation and annotated-copy saving", "evidence_type": "documented", "source_url": "https://help.gnome.org/users/evince/stable/"},
+        {"name": "Interactive forms and form saving", "evidence_type": "documented", "source_url": "https://help.gnome.org/users/evince/stable/"},
+        {"name": "Printing and booklet workflows", "evidence_type": "documented", "source_url": "https://help.gnome.org/users/evince/stable/"},
+        {"name": "SyncTeX workflows and inverted page colors", "evidence_type": "documented", "source_url": "https://help.gnome.org/users/evince/stable/"}
+      ],
+      "code_review": {
+        "depth": "metadata-license-documentation",
+        "files": [
+          {"path": "README.md", "url": "https://github.com/GNOME/evince/blob/e822030005f22231052667d51398a84327004924/README.md", "observations": ["Document backends and canonical GNOME repository read."]},
+          {"path": "COPYING", "url": "https://github.com/GNOME/evince/blob/e822030005f22231052667d51398a84327004924/COPYING", "observations": ["GPL v2 text header read; project metadata supplies or-later qualifier."]},
+          {"path": "data/org.gnome.Evince.metainfo.xml.in.in", "url": "https://github.com/GNOME/evince/blob/e822030005f22231052667d51398a84327004924/data/org.gnome.Evince.metainfo.xml.in.in", "observations": ["Project GPL-2.0-or-later, formats and development release metadata read."]},
+          {"path": "NEWS", "url": "https://github.com/GNOME/evince/blob/e822030005f22231052667d51398a84327004924/NEWS", "observations": ["Leading 49.alpha.1/49.alpha.0/48.alpha sections examined; not the complete historical file or stable release index."]}
+        ],
+        "limitations": ["No backend or accessibility implementation audit.", "GitHub mirror source and development NEWS cannot establish latest stable release without the separate source-server check."]
+      },
+      "sources": [
+        {"url": "https://download.gnome.org/sources/evince/48/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://download.gnome.org/sources/evince/48/evince-48.5.news", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://help.gnome.org/users/evince/stable/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://help.gnome.org/evince/movingaround.html", "observed_at": "2026-11-21", "evidence_type": "documented"}
+      ],
+      "limitations": ["Stable source 48.5 uploaded 2026-11-16; main metadata describes 49.alpha.1.", "Not abandoned on the evidence checked; Papers is a separate project.", "Help-index-supported capabilities were not all followed into implementation or individual detailed help pages.", "No runtime or systematic issue/PR search."]
+    },
+    {
+      "id": "calibre",
+      "name": "calibre",
+      "repository": "https://github.com/kovidgoyal/calibre",
+      "commit": "d69ad111794cf2032264d2b02b3f9b9adfb139a2",
+      "license": "GPL-3.0 with per-file exceptions in COPYRIGHT",
+      "platforms": ["Windows", "macOS", "Linux", "Content server browser viewer"],
+      "formats": ["EPUB/KEPUB", "AZW/AZW3/AZW4", "MOBI", "FB2", "HTML", "TXT", "DOCX/ODT/RTF conversion", "PDF input/output conversion", "Additional formats listed in the official conversion FAQ"],
+      "evidence_type": "documented",
+      "features": [
+        {"name": "Library cataloging, conversion/editing, metadata, device and news workflows", "evidence_type": "documented", "source_url": "https://github.com/kovidgoyal/calibre/blob/d69ad111794cf2032264d2b02b3f9b9adfb139a2/README.md"},
+        {"name": "Paged/flow layouts with touch and keyboard navigation", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#navigating-around-an-e-book"},
+        {"name": "Last-read position and optionally EPUB-embedded bookmarks", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#bookmarks"},
+        {"name": "Contents navigation and precise-location URLs", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#navigating-by-location"},
+        {"name": "Paragraph-number reference mode", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#reference-mode"},
+        {"name": "Highlights, notes and library-wide annotation browsing", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#highlighting-text"},
+        {"name": "Annotation synchronization with Content server browser viewer", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#highlighting-text"},
+        {"name": "Read Aloud with word/sentence highlighting", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#read-aloud"},
+        {"name": "Contains, whole-word, nearby-word, regex and chapter-scoped search", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#searching-the-text"},
+        {"name": "Custom language-scoped dictionary URL sources", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#custom-lookup-sources"},
+        {"name": "Text/image copy and enlarged image viewing", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#zooming-in-on-images"},
+        {"name": "Fonts, margins, headers/footers, colors and custom CSS", "evidence_type": "documented", "source_url": "https://manual.calibre-ebook.com/viewer.html#customizing-the-look-and-feel-of-your-reading-experience"}
+      ],
+      "code_review": {
+        "depth": "metadata-license-documentation",
+        "files": [
+          {"path": "README.md", "url": "https://github.com/kovidgoyal/calibre/blob/d69ad111794cf2032264d2b02b3f9b9adfb139a2/README.md", "observations": ["Scope, platforms and Launchpad issue route read."]},
+          {"path": "LICENSE", "url": "https://github.com/kovidgoyal/calibre/blob/d69ad111794cf2032264d2b02b3f9b9adfb139a2/LICENSE", "observations": ["GPL v3 text header read."]},
+          {"path": "COPYRIGHT", "url": "https://github.com/kovidgoyal/calibre/blob/d69ad111794cf2032264d2b02b3f9b9adfb139a2/COPYRIGHT", "observations": ["Default GPL-3 declaration and selected per-file exceptions read; no exhaustive dependency-license review."]}
+        ],
+        "limitations": ["Viewer/converter implementation not inspected.", "PDF conversion manual limitations and new 9.19 column-detection claims require version-specific reconciliation."]
+      },
+      "sources": [
+        {"url": "https://calibre-ebook.com/whats-new", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://manual.calibre-ebook.com/viewer.html", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://manual.calibre-ebook.com/faq.html#what-formats-does-calibre-support-conversion-to-from", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://manual.calibre-ebook.com/conversion.html#convert-pdf-documents", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/kovidgoyal/calibre/info/refs?service=git-upload-pack", "observed_at": "2026-11-21", "evidence_type": "static-observation"}
+      ],
+      "limitations": ["9.19 dated 2026-11-21; peeled v9.19.0 equals this source pin.", "Conversion support is not native PDF fidelity or embedded PDF annotation parity.", "Manual says complex/multi-column PDF inputs are unsupported while 9.19 changelog claims improved column/paragraph detection; neither universal failure nor solved fidelity is established.", "No runtime or systematic issue search."]
+    },
+    {
+      "id": "foliate",
+      "name": "Foliate",
+      "repository": "https://github.com/johnfactotum/foliate",
+      "commit": "67b6676d3f936c5edea91d4d903385ef39dd25c0",
+      "license": "GPL-3.0-or-later; bundled libraries retain MIT/BSD/Apache terms",
+      "platforms": ["GNOME/Linux", "GTK4/libadwaita/WebKitGTK"],
+      "formats": ["EPUB", "Mobipocket/Kindle", "FB2", "CBZ", "PDF"],
+      "evidence_type": "documented",
+      "features": [
+        {"name": "EPUB, Mobipocket/Kindle, FB2, CBZ and PDF opening", "evidence_type": "documented", "source_url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in"},
+        {"name": "Paginated and scrolled modes", "evidence_type": "documented", "source_url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in"},
+        {"name": "Font and line-spacing customization", "evidence_type": "documented", "source_url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in"},
+        {"name": "Light, sepia, dark and invert modes", "evidence_type": "documented", "source_url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in"},
+        {"name": "Progress slider with chapter marks", "evidence_type": "documented", "source_url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in"},
+        {"name": "Bookmarks and annotations", "evidence_type": "documented", "source_url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in"},
+        {"name": "Find in book", "evidence_type": "documented", "source_url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in"},
+        {"name": "Quick dictionary lookup", "evidence_type": "documented", "source_url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in"},
+        {"name": "Optional speech-dispatcher TTS", "evidence_type": "documented", "source_url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/README.md"},
+        {"name": "OPDS catalogs including OPDS 2.0", "evidence_type": "documented", "source_url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in"}
+      ],
+      "code_review": {
+        "depth": "metadata-license-documentation",
+        "files": [
+          {"path": "README.md", "url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/README.md", "observations": ["Runtime dependencies, optional TTS and explicit GPL v3-or-later grant with bundled-library notices."]},
+          {"path": "COPYING", "url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/COPYING", "observations": ["GPL v3 license text header read."]},
+          {"path": "data/com.github.johnfactotum.Foliate.metainfo.xml.in", "url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in", "observations": ["Feature list includes PDF; releases include 3.3.0 and OPDS 2.0 addition in 3.1.0."]}
+        ],
+        "limitations": ["No application rendering, persistence or PDF-specific implementation audit.", "Bundled PDF.js does not establish generic PDF.js viewer feature parity."]
+      },
+      "sources": [
+        {"url": "https://github.com/johnfactotum/foliate/releases/tag/3.3.0", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/README.md", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/johnfactotum/foliate/blob/67b6676d3f936c5edea91d4d903385ef39dd25c0/data/com.github.johnfactotum.Foliate.metainfo.xml.in", "observed_at": "2026-11-21", "evidence_type": "documented"}
+      ],
+      "limitations": ["Latest observed stable 3.3.0 published 2025-04-01; source pushed 2026-04-08. Release age does not prove abandonment.", "Per-format annotation/TTS behavior and application runtime are untested.", "No systematic issue/PR search."]
+    },
+    {
+      "id": "thorium",
+      "name": "Thorium Reader Desktop",
+      "repository": "https://github.com/edrlab/thorium-reader",
+      "commit": "f603ca2848eb567b1d32cdfd6728362d73f8f557",
+      "license": "BSD-3-Clause; production LCP component is not included in the public repository",
+      "platforms": ["Windows desktop", "macOS desktop", "Linux desktop"],
+      "formats": ["EPUB 2/3", "Fixed-layout EPUB", "PDF", "DAISY 2.02/3", "W3C/Readium audiobooks", "Divina", "CBZ documented by current product site"],
+      "evidence_type": "documented",
+      "features": [
+        {"name": "Ebook, PDF, DAISY, audiobook and visual-publication support", "evidence_type": "documented", "source_url": "https://www.edrlab.org/software/thorium-reader/"},
+        {"name": "Typography, spacing, columns, brightness and color schemes", "evidence_type": "documented", "source_url": "https://www.edrlab.org/software/thorium-reader/"},
+        {"name": "Keyboard navigation and NVDA/JAWS/Narrator/VoiceOver support claims", "evidence_type": "documented", "source_url": "https://www.thoriumreader.com/en/"},
+        {"name": "OPDS 1/2 catalogs and authentication", "evidence_type": "documented", "source_url": "https://www.edrlab.org/software/thorium-reader/"},
+        {"name": "Bookmarks, EPUB page lists and position lists", "evidence_type": "documented", "source_url": "https://www.edrlab.org/software/thorium-reader/"},
+        {"name": "Stored reading position", "evidence_type": "documented", "source_url": "https://www.edrlab.org/software/thorium-reader/"},
+        {"name": "Full-text search within publications", "evidence_type": "documented", "source_url": "https://www.edrlab.org/software/thorium-reader/"},
+        {"name": "Media overlays", "evidence_type": "documented", "source_url": "https://www.edrlab.org/software/thorium-reader/"},
+        {"name": "Read Aloud", "evidence_type": "documented", "source_url": "https://www.edrlab.org/software/thorium-reader/"},
+        {"name": "Shareable annotations", "evidence_type": "documented", "source_url": "https://www.edrlab.org/software/thorium-reader/"},
+        {"name": "Accessibility metadata", "evidence_type": "documented", "source_url": "https://www.edrlab.org/software/thorium-reader/"},
+        {"name": "LCP publications in distributed product; public source limited to Basic Encryption Profile", "evidence_type": "documented", "source_url": "https://github.com/edrlab/thorium-reader/blob/f603ca2848eb567b1d32cdfd6728362d73f8f557/README.md#lcp-support-in-thorium-reader"}
+      ],
+      "code_review": {
+        "depth": "metadata-license-documentation",
+        "files": [
+          {"path": "README.md", "url": "https://github.com/edrlab/thorium-reader/blob/f603ca2848eb567b1d32cdfd6728362d73f8f557/README.md", "observations": ["Desktop scope, reading workflow and explicit production LCP/public-source boundary read."]},
+          {"path": "LICENSE", "url": "https://github.com/edrlab/thorium-reader/blob/f603ca2848eb567b1d32cdfd6728362d73f8f557/LICENSE", "observations": ["BSD 3-Clause license read."]},
+          {"path": "package.json", "url": "https://github.com/edrlab/thorium-reader/blob/f603ca2848eb567b1d32cdfd6728362d73f8f557/package.json", "observations": ["Version 3.6.0-beta.1 and selected build/test declarations read; declared PDF-annotation harness was not inspected or executed."]}
+        ],
+        "limitations": ["No application, PDF annotation or LCP implementation review.", "Public product site also advertises iOS/iPadOS; that separate product is not assigned to this desktop pin."]
+      },
+      "sources": [
+        {"url": "https://github.com/edrlab/thorium-reader/releases/tag/v3.5.1", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://www.edrlab.org/software/thorium-reader/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://www.thoriumreader.com/en/", "observed_at": "2026-11-21", "evidence_type": "documented"},
+        {"url": "https://github.com/edrlab/thorium-reader/blob/f603ca2848eb567b1d32cdfd6728362d73f8f557/LICENSE", "observed_at": "2026-11-21", "evidence_type": "static-observation"}
+      ],
+      "limitations": ["Stable Desktop 3.5.1 published 2026-09-02; reviewed develop is 3.6.0-beta.1; automated builds are not stable releases.", "Production LCP functionality is not wholly reproducible from public BSD source alone.", "Help service returned 403; per-format TTS/annotation/AT parity and runtime are untested.", "No systematic issue/PR search."]
+    }
+  ]
+}

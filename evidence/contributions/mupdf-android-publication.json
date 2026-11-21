@@ -1,0 +1,76 @@
+{
+  "id": "mupdf-android-first-page-link-publication",
+  "observed_at": "2026-11-21T15:51:06.5129979Z",
+  "evidence_type": "git-publication-verification",
+  "upstream_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer",
+  "upstream_revision": "f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0",
+  "fork_url": "https://github.com/chirag127/mupdf-android-viewer",
+  "branch": "fix/internal-links-first-page",
+  "commit": "523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+  "commit_subject": "fix: follow internal links to the first page",
+  "status": "pushed-to-fork",
+  "push_attempts": [
+    {
+      "observed_at": "2026-11-21T15:49:42.2519325Z",
+      "command": "git push --porcelain --set-upstream origin HEAD:refs/heads/fix/internal-links-first-page",
+      "exit_code": 0,
+      "output_excerpt": "*\tHEAD:refs/heads/fix/internal-links-first-page\t[new branch]"
+    },
+    {
+      "observed_at": "2026-11-21T15:49:42.7775960Z",
+      "command": "git push --porcelain --set-upstream origin HEAD:refs/heads/fix/internal-links-first-page",
+      "exit_code": 1,
+      "output_excerpt": "!\tHEAD:refs/heads/fix/internal-links-first-page\t[remote rejected] (cannot lock ref 'refs/heads/fix/internal-links-first-page': reference already exists)",
+      "note": "An overlapping duplicate push from the interrupted recovery was rejected after the first created the branch. Both outcomes are preserved; the later readback establishes the published revision."
+    }
+  ],
+  "remote_readback": {
+    "command": "git ls-remote origin refs/heads/fix/internal-links-first-page",
+    "remote_url": "https://github.com/chirag127/mupdf-android-viewer.git",
+    "exit_code": 0,
+    "output": "523ad7cb3083fc4af91c4d00e89e0c1f20859d93\trefs/heads/fix/internal-links-first-page"
+  },
+  "local_status": {
+    "command": "git status --porcelain=v1",
+    "output": [],
+    "head": "523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+    "branch": "fix/internal-links-first-page"
+  },
+  "source_identity_verification": {
+    "observed_at": "2026-11-21T15:49:39.812500Z",
+    "method": "SHA-256 over bytes returned by git show <commit>:<path>, compared with the retained tested-source LF hashes.",
+    "sources": [
+      {
+        "path": "lib/build.gradle",
+        "sha256_git_blob": "d0bdc927b7fd484bd94f63aac64039497e7bfa0c600f0d66fa019399d032b184",
+        "matches_retained_tested_source": true
+      },
+      {
+        "path": "lib/src/main/java/com/artifex/mupdf/viewer/PageView.java",
+        "sha256_git_blob": "345f297b2980dc4ef47e20af95efaf40fef65ee977cb829b78d82a5a0711c504",
+        "matches_retained_tested_source": true
+      },
+      {
+        "path": "lib/src/main/java/com/artifex/mupdf/viewer/ReaderView.java",
+        "sha256_git_blob": "abc6598d68b2f3a6159a06ad0472623a8900b32e766524ffbb034eccc2e33cbd",
+        "matches_retained_tested_source": true
+      },
+      {
+        "path": "lib/src/test/java/com/artifex/mupdf/viewer/LinkNavigationTest.java",
+        "sha256_git_blob": "7f2e971a31751b888761f19d0d3a5e943baab2656ecada9308bc8a755f962603",
+        "matches_retained_tested_source": true
+      }
+    ],
+    "diff_check_command": "git diff --check f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0 523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+    "diff_check_exit_code": 0,
+    "license_and_readme_command": "git diff --exit-code f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0 523ad7cb3083fc4af91c4d00e89e0c1f20859d93 -- COPYING README",
+    "license_and_readme_preservation_exit_code": 0
+  },
+  "upstream_submission": "not-submitted",
+  "limitations": [
+    "This verifies a contribution branch in the user's fork, not an upstream submission, acceptance, merge, app release, or device result.",
+    "The raw successful and rejected push receipts were recovered separately because the two shell commands targeted the same local log filename. Sanitized excerpts above preserve their distinct outcomes.",
+    "Clean status applies to the MuPDF fork at the recorded observation, not to the concurrently edited Reader Improvement Lab or umbrella workspace.",
+    "Only the contribution branch was pushed. No upstream issue, PR, comment, or developer message was submitted; lab and umbrella publication remain assigned to the parent investigator."
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "mupdf-android-first-page-link-green",
+  "observed_at": "2026-11-21",
+  "evidence_type": "host-unit-test",
+  "upstream_url": "https://github.com/ArtifexSoftware/mupdf-android-viewer",
+  "upstream_revision": "f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0",
+  "contribution_commit": "523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+  "contribution_url": "https://github.com/chirag127/mupdf-android-viewer/commit/523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+  "test_source": "lib/src/test/java/com/artifex/mupdf/viewer/LinkNavigationTest.java",
+  "test_source_sha256_lf": "7f2e971a31751b888761f19d0d3a5e943baab2656ecada9308bc8a755f962603",
+  "same_test_source_as_red": true,
+  "verification": {
+    "reproduction_command_windows": ".\\gradlew.bat :lib:testDebugUnitTest --tests com.artifex.mupdf.viewer.LinkNavigationTest :app:assembleDebug --console=plain --no-daemon --max-workers=4",
+    "recorded_tasks": [":lib:testDebugUnitTest", ":app:assembleDebug"],
+    "original_full_invocation_retained": false,
+    "process_exit_code": null,
+    "gradle_summary": "BUILD SUCCESSFUL in 1m 58s",
+    "command_note": "The retained console log records task execution and Gradle's successful summary, but not the original full invocation or process exit code. The command above is a normalized reproduction command, not a recovered shell transcript.",
+    "gradle": "8.7",
+    "android_gradle_plugin": "8.5.2",
+    "java": "Temurin 17.0.21.1+2",
+    "os": "Windows 11 amd64",
+    "junit": "4.13.2",
+    "robolectric": "4.13",
+    "simulated_android_api": 33,
+    "viewer_version": "1.28.5a",
+    "fitz_version": "1.28.5"
+  },
+  "retained_report": {
+    "path_in_fork": "lib/build/test-results/testDebugUnitTest/TEST-com.artifex.mupdf.viewer.LinkNavigationTest.xml",
+    "sha256": "254fc018843b50fd9c93444392712f5a6b1eb363de7fdf0c8124745dafd17ece",
+    "junit_timestamp_without_timezone": "2026-11-21T15:15:45",
+    "modified_utc": "2026-11-21T15:16:11.0239113Z",
+    "duration_seconds": 25.097,
+    "recovered_at": "2026-11-21T15:47:07.1199528Z",
+    "publication_note": "The raw report remains local because it includes a host name. Counts, test names, timing, and its exact hash are transcribed here. The timestamp in the XML has no timezone offset."
+  },
+  "counts": {
+    "tests": 15,
+    "passed": 15,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0
+  },
+  "passed_tests": [
+    "laterPageLinkStillNavigatesAndRecordsHistory",
+    "missedLinkStillTapsMainAreaWithoutHistory",
+    "externalLinkHasNoInternalDestination",
+    "disabledLinksStillTapMainAreaWithoutResolving",
+    "firstPageLinkNavigatesAndCanReturnThroughHistory",
+    "disabledLinksPreserveMarginNavigation",
+    "missingLinkInformationHasNoDestination",
+    "emptyLinksHaveNoDestination",
+    "tapOutsideLinkHasNoDestination",
+    "unresolvedLinkStillTapsMainAreaWithoutHistory",
+    "externalLinkStillLaunchesAndTapsMainAreaWithoutHistory",
+    "failedExternalLaunchDoesNotNavigateOrRecordHistory",
+    "scalingDisablesExternalLinkTaps",
+    "scalingDisablesInternalLinkTaps",
+    "firstPageHasZeroBasedDestination"
+  ],
+  "red_evidence_path": "evidence/contributions/mupdf-android-red-tests.json",
+  "build_evidence_path": "evidence/contributions/mupdf-android-build.json",
+  "source_identity_evidence_path": "evidence/contributions/mupdf-android-publication.json",
+  "limitations": [
+    "This is the retained pre-interruption execution, not a new test run. The committed test/build/production files match the recorded LF source hashes.",
+    "Robolectric simulates Android API 33 on the host. Production MuPDFCore resolution, PageView hit testing, ReaderView tap dispatch/history, and fitz Java link classification/location conversion execute.",
+    "Native initialization and JNI document/link operations are substituted. A test PageAdapter supplies laid-out pages without rendering, and ReaderView tap/margin callbacks are observation spies.",
+    "No Android device, emulator, actual PDF parsing/rendering, DocumentActivity UI, or external application was exercised. The host setup is a synthetic three-page document, not a PDF fixture.",
+    "This is the focused LinkNavigationTest suite, not full application CI, Android instrumentation, or verification of an official released build."
+  ]
+}

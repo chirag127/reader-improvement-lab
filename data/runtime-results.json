@@ -1,0 +1,1719 @@
+{
+  "schema_version": 1,
+  "id": "moonreader-supplied-10.8-runtime-20261121",
+  "observed_at": "2026-11-21",
+  "evidence_type": "runtime-observation",
+  "artifact_id": "moonreader-supplied-10.8",
+  "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "artifact": {
+    "package": "com.flyersoft.moonreaderp",
+    "version_name": "10.8",
+    "version_code": 1008000,
+    "size_bytes": 57787496,
+    "acquisition": "User-supplied local APK; acquisition URL unknown",
+    "source_url": null,
+    "unmodified_input": true,
+    "publisher_authenticated": false,
+    "default_apksigner_result": "DOES NOT VERIFY; v1 digest mismatches in classes3.dex and classes5.dex",
+    "installed_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+    "identity_record": "data/artifact.json"
+  },
+  "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+  "test_plan": "knowledge/testing-plan.md",
+  "test_plan_sha256_at_curation": "d39c52089e4d79907406e517a96a5af81e603da44570d0be3858ea9a065f15ef",
+  "environment": {
+    "id": "aosp-api36-x86_64-audit",
+    "observed_at": "2026-11-21T15:45:13.492901+00:00",
+    "android_release": "16",
+    "api_level": 36,
+    "abi": "x86_64",
+    "build_fingerprint": "Android/sdk_phone64_x86_64/emu64x:16/BE2A.250530.026.D1/13818094:userdebug/test-keys",
+    "security_patch": "2025-07-05",
+    "system_image_revision": 2,
+    "page_size_bytes": 4096,
+    "serial": "emulator-5596",
+    "avd": "reader_audit_api36_20261121_c375e7e3",
+    "private_adb_host": "localhost",
+    "private_adb_port": 5049,
+    "viewport_pixels": [
+      1080,
+      2400
+    ],
+    "density_dpi": 420,
+    "font_scale": 1.0,
+    "locale": null,
+    "locale_limit": "persist.sys.locale was empty; English UI and en_US activity configuration were observed.",
+    "accounts_at_readiness": 0,
+    "wifi_on_at_readiness": 0,
+    "mobile_data_at_readiness": 0,
+    "ipv4_routes_at_readiness": [],
+    "emulator_network_backends": "restrict=on,ipv6=off",
+    "audio": "emulator -no-audio",
+    "gpu": "swiftshader",
+    "memory_mib": 4096,
+    "cores": 4,
+    "permissions": {
+      "MANAGE_EXTERNAL_STORAGE": "allow in the disposable guest"
+    },
+    "reading_mode": "Original PDF page view; OpenGL explicitly selected where the engine-choice dialog appeared.",
+    "installed_target": {
+      "installed_apk_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "ro.product.cpu.abilist": "x86_64",
+      "ro.build.version.security_patch": "2025-07-05",
+      "page_size": "4096",
+      "tts_default_synth": "null",
+      "accessibility_enabled": "0",
+      "enabled_accessibility_services": "null",
+      "tts_services": "No services found",
+      "third_party_packages": "package:com.flyersoft.moonreaderp"
+    },
+    "limitations": [
+      "Readiness values are historical observations, not a current live-state claim.",
+      "UIAutomator is not TalkBack; no speech or assistive-technology task was completed.",
+      "Only this account-free, network-restricted emulator was used."
+    ]
+  },
+  "summary": {
+    "pass": 3,
+    "partial": 6,
+    "fail": 1,
+    "blocked": 7,
+    "not-run": 19,
+    "total": 36,
+    "count_unit": "One canonical RT-01..RT-36 matrix case; auxiliary observations are excluded.",
+    "executed_at_least_in_part": 10,
+    "canonical_files_opened": 9,
+    "canonical_files_copied": 11,
+    "scenario_files_copied": 7,
+    "scenario_application_cases_executed": 0,
+    "auxiliary_observation_records": 7,
+    "mupdf_android_ab_cases_executed": 0
+  },
+  "status_definitions": {
+    "pass": "The specified acceptance checks were observed; limitations and incidental findings remain explicit.",
+    "partial": "Some actions were observed, with named specification steps still unexecuted.",
+    "fail": "An exercised acceptance check failed; unexecuted companion steps remain explicit.",
+    "blocked": "Required environment/backend/engine was unavailable; not an application failure.",
+    "not-run": "No execution of the specified workflow; copying inputs, writing scripts or host validation does not count."
+  },
+  "cases": [
+    {
+      "id": "RT-01",
+      "title": "Install and launch the unchanged artifact",
+      "status": "pass",
+      "evidence_type": "runtime-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [
+        {
+          "number": 1,
+          "action": "Install the original APK through adb install --no-streaming on emulator-5596."
+        },
+        {
+          "number": 2,
+          "action": "Launch the declared ActivityMain and capture its UI."
+        },
+        {
+          "number": 3,
+          "action": "Read back installed base.apk SHA-256 and the package/version evidence."
+        }
+      ],
+      "expected": "The unchanged input is accepted, identified and launched.",
+      "actual": "Install returned Success / exit 0. ActivityMain launched cold with Status: ok. Installed APK SHA-256 matches the supplied input.",
+      "subchecks": [
+        {
+          "id": "install",
+          "status": "pass",
+          "actual": "One original-APK installation accepted.",
+          "evidence": []
+        },
+        {
+          "id": "launch",
+          "status": "pass",
+          "actual": "Initial UI reached the LITEAPKS promotion.",
+          "evidence": []
+        },
+        {
+          "id": "installed-identity",
+          "status": "pass",
+          "actual": "Installed bytes matched the supplied SHA-256.",
+          "evidence": []
+        }
+      ],
+      "evidence": [
+        "evidence/runtime/01-install-result.json",
+        "evidence/runtime/02-initial-launch.txt",
+        "evidence/runtime/02-initial-launch.png",
+        "evidence/runtime/04-storage-permission-choice.xml",
+        "evidence/runtime/environment.json"
+      ],
+      "limitations": [
+        "Acceptance is not publisher authentication. The observed promotion belongs to this unknown-origin artifact.",
+        "TotalTime 2619 ms and WaitTime 2628 ms are activity-launch timings, not first-readable-page measurements."
+      ],
+      "execution_window": {
+        "start_utc": "2026-11-21T14:40:58.409108Z",
+        "end_utc": "2026-11-21T15:04:25.368590Z",
+        "basis": "Host command timestamps; not pixel exposure or page-ready latency."
+      }
+    },
+    {
+      "id": "RT-02",
+      "title": "In-app open, library return and reopen",
+      "status": "partial",
+      "evidence_type": "runtime-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "plain-text",
+          "path": "fixtures/documents/plain-text.pdf",
+          "sha256": "1f0e404c0afd4db0d555da4a33d691a32bada0ddddcdb12a2f8b0591813aabf8"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "action": "Dismiss the initial promotion using CLOSE."
+        },
+        {
+          "number": 2,
+          "action": "Accept all-files access only in the disposable AVD; read back appops."
+        },
+        {
+          "number": 3,
+          "action": "Open canonical plain-text.pdf using an explicit ACTION_VIEW file URI."
+        }
+      ],
+      "expected": "In-app open, return to the library, and reopen with known content and usable controls.",
+      "actual": "The expected plain PDF rendered and search controls worked. The exact in-app/library/reopen route was not performed.",
+      "subchecks": [
+        {
+          "id": "permission-flow",
+          "status": "pass",
+          "actual": "UI described system-Files viewing without all-files permission; actual audit granted all-files access.",
+          "evidence": []
+        },
+        {
+          "id": "file-intent-render",
+          "status": "pass",
+          "actual": "PLAIN-TEXT-ALPHA, lighthouse-427 and PLAIN-END-903 visible.",
+          "evidence": []
+        },
+        {
+          "id": "in-app-library-cycle",
+          "status": "not-run",
+          "actual": "ACTION_VIEW is not the prescribed in-app library cycle.",
+          "evidence": []
+        }
+      ],
+      "evidence": [
+        "evidence/runtime/03-after-promotion.xml",
+        "evidence/runtime/05-storage-appop.txt",
+        "evidence/runtime/70-plain-first-open.png"
+      ],
+      "limitations": [
+        "The permission-free system-Files route was described by UI, not exercised.",
+        "No canonical RT-03 content-URI lifecycle claim."
+      ],
+      "execution_window": {
+        "start_utc": "2026-11-21T14:43:31.100386Z",
+        "end_utc": "2026-11-21T16:17:18.718388Z",
+        "basis": "Host command timestamps; not pixel exposure or page-ready latency."
+      }
+    },
+    {
+      "id": "RT-03",
+      "title": "Document-provider URI lifecycle",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "plain-text",
+          "path": "fixtures/documents/plain-text.pdf",
+          "sha256": "1f0e404c0afd4db0d555da4a33d691a32bada0ddddcdb12a2f8b0591813aabf8"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No document-provider content URI with a temporary grant was exercised. File-URI opens do not satisfy this case.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No document-provider content URI with a temporary grant was exercised. File-URI opens do not satisfy this case."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-04",
+      "title": "Internal links, outline and history",
+      "status": "partial",
+      "evidence_type": "runtime-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "navigation",
+          "path": "fixtures/documents/navigation.pdf",
+          "sha256": "246db3dac24ecbf13691f0b599be85e0c151b5a7445ccf591ad5c0ffcd13ffc2"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "action": "Start at NAVIGATION-START on page 1."
+        },
+        {
+          "number": 2,
+          "action": "Tap the page-1 internal link to page 3."
+        },
+        {
+          "number": 3,
+          "action": "Tap the page-3 return link to page 1."
+        },
+        {
+          "number": 4,
+          "action": "Use the page-down zone to page 2."
+        }
+      ],
+      "expected": "Both links, outline and available history action reach their intended destinations.",
+      "actual": "One controlled 1→3→1 link cycle and one page-down reached the expected headings and indicators.",
+      "subchecks": [
+        {
+          "id": "forward-link",
+          "status": "pass",
+          "actual": "NAVIGATION-END at 3/3.",
+          "evidence": []
+        },
+        {
+          "id": "return-link",
+          "status": "pass",
+          "actual": "NAVIGATION-START at 1/3.",
+          "evidence": []
+        },
+        {
+          "id": "page-down",
+          "status": "pass",
+          "actual": "NAVIGATION-MIDDLE at 2/3.",
+          "evidence": []
+        },
+        {
+          "id": "outline",
+          "status": "not-run",
+          "actual": "No outline selection.",
+          "evidence": []
+        },
+        {
+          "id": "history",
+          "status": "not-run",
+          "actual": "Return link is not a history action.",
+          "evidence": []
+        }
+      ],
+      "evidence": [
+        "evidence/runtime/canonical-navigation-controlled-result.json",
+        "evidence/runtime/34-navigation-start-controlled.png",
+        "evidence/runtime/35-navigation-link-forward-controlled.png",
+        "evidence/runtime/36-navigation-link-return-controlled.png",
+        "evidence/runtime/37-navigation-page-down-controlled.png"
+      ],
+      "limitations": [
+        "Earlier overlapping commands and exit-137 dump were excluded. The retained private PASS is a subcheck verdict."
+      ],
+      "execution_window": {
+        "start_utc": "2026-11-21T15:18:24.656604Z",
+        "end_utc": "2026-11-21T15:18:57.884972Z",
+        "basis": "Host command timestamps; not pixel exposure or page-ready latency."
+      }
+    },
+    {
+      "id": "RT-05",
+      "title": "Mixed geometry and device rotation",
+      "status": "partial",
+      "evidence_type": "runtime-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "mixed-geometry",
+          "path": "fixtures/documents/mixed-geometry.pdf",
+          "sha256": "82c24aa55cbcf4cc2d4762cb63100017eb94f7aa022d2e35770f9c463f073659"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "action": "Open mixed-geometry.pdf in portrait."
+        },
+        {
+          "number": 2,
+          "action": "Advance through all four pages and inspect each saved appearance."
+        }
+      ],
+      "expected": "All page geometries, device rotation and fit modes remain usable.",
+      "actual": "Four pages with PDF rotations 0/90/180/270 displayed expected geometry markers, borders and page indicators.",
+      "subchecks": [
+        {
+          "id": "four-portrait-appearances",
+          "status": "pass",
+          "actual": "All four media boxes and PDF quarter-turn rotations visibly rendered.",
+          "evidence": []
+        },
+        {
+          "id": "device-rotation",
+          "status": "not-run",
+          "actual": "No device rotation action.",
+          "evidence": []
+        },
+        {
+          "id": "fit-mode-workflow",
+          "status": "not-run",
+          "actual": "No systematic fit-mode changes.",
+          "evidence": []
+        }
+      ],
+      "evidence": [
+        "evidence/runtime/40-geometry-page1.png",
+        "evidence/runtime/40-geometry-page2.png",
+        "evidence/runtime/40-geometry-page3.png",
+        "evidence/runtime/40-geometry-page4.png"
+      ],
+      "limitations": [
+        "PDF /Rotate is not device rotation. No pixel-perfect comparison."
+      ],
+      "execution_window": {
+        "start_utc": "2026-11-21T15:21:16.226773Z",
+        "end_utc": "2026-11-21T15:21:44.225782Z",
+        "basis": "Host command timestamps; not pixel exposure or page-ready latency."
+      }
+    },
+    {
+      "id": "RT-06",
+      "title": "Double-tap zoom and pan",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "plain-text",
+          "path": "fixtures/documents/plain-text.pdf",
+          "sha256": "1f0e404c0afd4db0d555da4a33d691a32bada0ddddcdb12a2f8b0591813aabf8"
+        },
+        {
+          "id": "scanned-image-only",
+          "path": "fixtures/documents/scanned-image-only.pdf",
+          "sha256": "2034a2e94933bea0a9484a4dcca83276c5dd67a2ea48af784900ff61aa46b67b"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "The option toggle, double-tap, pan and toggle-off sequence was not exercised.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "The option toggle, double-tap, pan and toggle-off sequence was not exercised."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-07",
+      "title": "Distant page navigation and restored position",
+      "status": "partial",
+      "evidence_type": "runtime-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "long-document",
+          "path": "fixtures/documents/long-document.pdf",
+          "sha256": "1e8b4d672f56b1dd1be570aeaedec4620168bb1361d9c178fb70cc8eff119bcb"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "action": "Open long-document.pdf on page 1."
+        },
+        {
+          "number": 2,
+          "action": "Search LONG-DOC-PAGE-100 and select its page-100 result."
+        },
+        {
+          "number": 3,
+          "action": "Use the toolbar page field to jump from 100 to 50."
+        },
+        {
+          "number": 4,
+          "action": "Close with Back → Exit, force-stop, and reopen the same unchanged document."
+        }
+      ],
+      "expected": "Jump to 1, 50 and 100; marker/position agreement and restored location.",
+      "actual": "Pages 1, 100 and 50 rendered; reopening restored page 50. Page 1 was reached by initial open, not an explicit page-1 jump.",
+      "subchecks": [
+        {
+          "id": "initial-page1",
+          "status": "pass",
+          "actual": "LONG-DOC-PAGE-001 at 1/100.",
+          "evidence": []
+        },
+        {
+          "id": "page100",
+          "status": "pass",
+          "actual": "LONG-DOC-PAGE-100 at 100/100.",
+          "evidence": []
+        },
+        {
+          "id": "jump50",
+          "status": "pass",
+          "actual": "LONG-DOC-PAGE-050 at 50/100.",
+          "evidence": []
+        },
+        {
+          "id": "restore50",
+          "status": "pass",
+          "actual": "Reopened at LONG-DOC-PAGE-050 and 50/100.",
+          "evidence": []
+        },
+        {
+          "id": "explicit-jump1",
+          "status": "not-run",
+          "actual": "Initial opening does not exercise a jump back to page 1.",
+          "evidence": []
+        }
+      ],
+      "evidence": [
+        "evidence/runtime/76-long-page1.png",
+        "evidence/runtime/79-long-page100-selected.png",
+        "evidence/runtime/83-long-page50.png",
+        "evidence/runtime/85-long-position-reopened.png",
+        "evidence/runtime/long-jump50-result.json",
+        "evidence/runtime/long-position-result.json"
+      ],
+      "limitations": [
+        "One close/force-stop/reopen cycle; no general process-death or performance conclusion."
+      ],
+      "execution_window": {
+        "start_utc": "2026-11-21T16:18:29.151135Z",
+        "end_utc": "2026-11-21T16:24:59.737290Z",
+        "basis": "Host command timestamps; not pixel exposure or page-ready latency."
+      }
+    },
+    {
+      "id": "RT-08",
+      "title": "Two-column PDF reading/reflow modes",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "two-columns",
+          "path": "fixtures/documents/two-columns.pdf",
+          "sha256": "85589a24cf116339dafaf9fa42fd76c7c2dc52496932a73d0af6908d5aff1482"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "two-columns.pdf was copied and hash-verified but not opened. The authored reflow phase was never executed.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "two-columns.pdf was copied and hash-verified but not opened. The authored reflow phase was never executed."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-09",
+      "title": "Image-only PDF operations",
+      "status": "partial",
+      "evidence_type": "runtime-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "scanned-image-only",
+          "path": "fixtures/documents/scanned-image-only.pdf",
+          "sha256": "2034a2e94933bea0a9484a4dcca83276c5dd67a2ea48af784900ff61aa46b67b"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "action": "Open scanned-image-only.pdf."
+        },
+        {
+          "number": 2,
+          "action": "Confirm the OpenGL engine and inspect the page."
+        }
+      ],
+      "expected": "Render and try selection, search, speech/reflow where available.",
+      "actual": "The raster square, triangle and SCAN-ANCHOR-846 were visible at 1/1.",
+      "subchecks": [
+        {
+          "id": "raster-appearance",
+          "status": "pass",
+          "actual": "Expected synthetic raster visible.",
+          "evidence": []
+        },
+        {
+          "id": "selection",
+          "status": "not-run",
+          "actual": "Not attempted.",
+          "evidence": []
+        },
+        {
+          "id": "search",
+          "status": "not-run",
+          "actual": "Not attempted.",
+          "evidence": []
+        },
+        {
+          "id": "speech-reflow",
+          "status": "not-run",
+          "actual": "Not attempted on this page; TTS prerequisite unavailable.",
+          "evidence": []
+        }
+      ],
+      "evidence": [
+        "evidence/runtime/44-image-only-rendered-opengl.png"
+      ],
+      "limitations": [
+        "No OCR, text extraction, selection or speech conclusion."
+      ],
+      "execution_window": {
+        "start_utc": "2026-11-21T15:25:41.409071Z",
+        "end_utc": "2026-11-21T15:25:49.557313Z",
+        "basis": "Host command timestamps; not pixel exposure or page-ready latency."
+      }
+    },
+    {
+      "id": "RT-10",
+      "title": "EPUB chapters, font size and reopen",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "tiny-original",
+          "path": "fixtures/documents/tiny-original.epub",
+          "sha256": "e17b0a451015fa15e9c82f524027153ae4945025a680b4f51351ad658fc68c4b"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "The EPUB was copied and hash-verified but neither chapter nor font-size/reopen workflow was executed.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "The EPUB was copied and hash-verified but neither chapter nor font-size/reopen workflow was executed."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-11",
+      "title": "Embedded-text search and result activation",
+      "status": "pass",
+      "evidence_type": "runtime-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "plain-text",
+          "path": "fixtures/documents/plain-text.pdf",
+          "sha256": "1f0e404c0afd4db0d555da4a33d691a32bada0ddddcdb12a2f8b0591813aabf8"
+        },
+        {
+          "id": "long-document",
+          "path": "fixtures/documents/long-document.pdf",
+          "sha256": "1e8b4d672f56b1dd1be570aeaedec4620168bb1361d9c178fb70cc8eff119bcb"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "action": "Inspect Search Options: backward-only, forward-only, case-sensitive and whole-word were unchecked; UI also advertised regex search."
+        },
+        {
+          "number": 2,
+          "action": "Search lighthouse-427 in plain-text.pdf and activate the sole result."
+        },
+        {
+          "number": 3,
+          "action": "Search LONG-DOC-PAGE-100 in long-document.pdf and activate the sole result."
+        }
+      ],
+      "expected": "Each known query produces the matching result and activating it shows the target text; record settings.",
+      "actual": "Each query returned one matching snippet and selected the visible target text. Plain-text search also produced a separately recorded anomalous 101/1 indicator.",
+      "subchecks": [
+        {
+          "id": "plain-query-and-activation",
+          "status": "pass",
+          "actual": "One result and visibly highlighted lighthouse-427.",
+          "evidence": []
+        },
+        {
+          "id": "long-query-and-activation",
+          "status": "pass",
+          "actual": "One result and visibly highlighted LONG-DOC-PAGE-100 at 100/100.",
+          "evidence": []
+        },
+        {
+          "id": "settings-recorded",
+          "status": "pass",
+          "actual": "All four checkboxes unchecked at capture 72; no settings were changed for these queries.",
+          "evidence": []
+        }
+      ],
+      "evidence": [
+        "evidence/runtime/72-search-options.xml",
+        "evidence/runtime/plain-search-result.json",
+        "evidence/runtime/74-plain-lighthouse-results.png",
+        "evidence/runtime/75-plain-lighthouse-selected.png",
+        "evidence/runtime/long-search-result.json",
+        "evidence/runtime/78-long-page100-results.png",
+        "evidence/runtime/79-long-page100-selected.png"
+      ],
+      "limitations": [
+        "PASS is limited to the specified matching/target-activation checks, not page-indicator correctness or regex behavior.",
+        "The 101/1 indicator on a one-page document was observed once and not repeated; see AUX-STATUS-001."
+      ],
+      "execution_window": {
+        "start_utc": "2026-11-21T16:12:28.842020Z",
+        "end_utc": "2026-11-21T16:19:40.123789Z",
+        "basis": "Host command timestamps; not pixel exposure or page-ready latency."
+      }
+    },
+    {
+      "id": "RT-12",
+      "title": "Literal and invalid-pattern search recovery",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "rt12-literal-search-text",
+          "path": "fixtures/scenarios/rt12-literal-search.txt",
+          "sha256": "8b28e45b31d7b992a6242c27eb5942404d511ff0c49e7d06828af534f58a4373"
+        },
+        {
+          "id": "rt12-literal-search-pdf",
+          "path": "fixtures/scenarios/rt12-literal-search.pdf",
+          "sha256": "a9eebca731ef0e4d0a35947986ff6d89904eca55a641d214525fcc52f3685690"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "Both literal-search fixtures were copied; no literal or invalid-pattern query was submitted. The regex-support label alone is not this test.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "Both literal-search fixtures were copied; no literal or invalid-pattern query was submitted. The regex-support label alone is not this test."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-13",
+      "title": "Search cancellation",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "long-document",
+          "path": "fixtures/documents/long-document.pdf",
+          "sha256": "1e8b4d672f56b1dd1be570aeaedec4620168bb1361d9c178fb70cc8eff119bcb"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "Search completed normally; no cancellation/next-action timing experiment was performed.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "Search completed normally; no cancellation/next-action timing experiment was performed."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-14",
+      "title": "Canonical annotation CRUD and portability",
+      "status": "partial",
+      "evidence_type": "runtime-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "annotations",
+          "path": "fixtures/documents/annotations.pdf",
+          "sha256": "00ff37fc54d7277f9f3fa63c9abda19068523ac01f6818ab62ad3bfec9a0325a"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "action": "Open canonical annotations.pdf."
+        },
+        {
+          "number": 2,
+          "action": "Confirm OpenGL and inspect six existing annotation appearances."
+        }
+      ],
+      "expected": "Open note; create, edit and delete markup; save/reopen; independently compare objects and geometry.",
+      "actual": "Highlight, Underline, StrikeOut, Text icon, Ink and Square appearances were visible. Canonical note popup and CRUD/portability checks were not run.",
+      "subchecks": [
+        {
+          "id": "six-existing-appearances",
+          "status": "pass",
+          "actual": "Six appearance types visible.",
+          "evidence": []
+        },
+        {
+          "id": "canonical-note-popup",
+          "status": "not-run",
+          "actual": "Icon visibility is not a popup read.",
+          "evidence": []
+        },
+        {
+          "id": "canonical-crud",
+          "status": "not-run",
+          "actual": "No create/edit/delete on this canonical input.",
+          "evidence": []
+        },
+        {
+          "id": "canonical-portability",
+          "status": "not-run",
+          "actual": "No edited canonical output exists.",
+          "evidence": []
+        }
+      ],
+      "evidence": [
+        "evidence/runtime/45-annotations-rendered-opengl.png"
+      ],
+      "limitations": [
+        "Legacy-core note persistence is separately evidenced on a different synthetic input and cannot complete RT-14."
+      ],
+      "execution_window": {
+        "start_utc": "2026-11-21T15:25:49.565500Z",
+        "end_utc": "2026-11-21T15:25:58.978304Z",
+        "basis": "Host command timestamps; not pixel exposure or page-ready latency."
+      }
+    },
+    {
+      "id": "RT-15",
+      "title": "Rotated-page markup portability",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "annotations",
+          "path": "fixtures/documents/annotations.pdf",
+          "sha256": "00ff37fc54d7277f9f3fa63c9abda19068523ac01f6818ab62ad3bfec9a0325a"
+        },
+        {
+          "id": "mixed-geometry",
+          "path": "fixtures/documents/mixed-geometry.pdf",
+          "sha256": "82c24aa55cbcf4cc2d4762cb63100017eb94f7aa022d2e35770f9c463f073659"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No rotated-page annotation was created or independently checked.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No rotated-page annotation was created or independently checked."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-16",
+      "title": "AcroForm editing, saving and independent readback",
+      "status": "fail",
+      "evidence_type": "runtime-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "acroform",
+          "path": "fixtures/documents/acroform.pdf",
+          "sha256": "3a7b514b4a6c01640bd27436857826bc258cf10b6f7ac4e58ce1c3f7af842402"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "action": "On the writable device copy of acroform.pdf, change Test Reader to LAB_FORM_20261121, clear subscribe and select Green."
+        },
+        {
+          "number": 2,
+          "action": "Close with Android Back; pull the saved bytes and retain their hash."
+        },
+        {
+          "number": 3,
+          "action": "Read with PyMuPDF 1.28.0 and pypdf 6.15.0; force-stop/reopen in the reader and inspect the name dialog."
+        },
+        {
+          "number": 4,
+          "action": "On a fresh canonical copy, change only the name to LAB_FORM_REPEAT_20261121, close with Back, pull and independently inspect; reopen in the reader."
+        }
+      ],
+      "expected": "Durable field edits survive saving/reopening and independent readback.",
+      "actual": "Both saved outputs preserve intended edits, but append /Prev -1. PyMuPDF opens with repair; pypdf raises negative seek value -1. Both reader reopen screenshots retain their changes.",
+      "subchecks": [
+        {
+          "id": "three-field-edit",
+          "status": "pass",
+          "actual": "First run: name LAB_FORM_20261121, subscribe Off, color Green.",
+          "evidence": []
+        },
+        {
+          "id": "close-triggered-durable-values",
+          "status": "pass",
+          "actual": "Values recovered from saved PDF bytes; recovery required for the malformed trailer.",
+          "evidence": []
+        },
+        {
+          "id": "reader-reopen",
+          "status": "pass",
+          "actual": "First name read back exactly; all first values and second name visually retained.",
+          "evidence": []
+        },
+        {
+          "id": "independent-interoperability",
+          "status": "fail",
+          "actual": "Two outputs contain /Prev -1; pypdf fails and PyMuPDF reports repaired=True.",
+          "evidence": []
+        },
+        {
+          "id": "separate-explicit-save-command",
+          "status": "not-run",
+          "actual": "Actual tested saving route was close-triggered Android Back.",
+          "evidence": []
+        }
+      ],
+      "evidence": [
+        "evidence/runtime/56-form-all-values-edited.png",
+        "evidence/runtime/60-form-output-reopened.png",
+        "evidence/runtime/61-form-output-name-readback.xml",
+        "evidence/runtime/67-form-repeat-text-only-reopened.png",
+        "evidence/runtime/form-preserved-output-inspection.json",
+        "evidence/runtime/form-repeat-text-only-inspection.json",
+        "evidence/runtime/form-preserved-reopen.json",
+        "evidence/runtime/outputs/acroform.pdf",
+        "evidence/runtime/outputs/acroform-repeat.pdf"
+      ],
+      "limitations": [
+        "Two malformed outputs, not two complete three-field RT-16 repetitions. Rapid second-run checkbox/choice taps did not take effect; the retained repeat was text-only.",
+        "No demonstrated loss of these field values, universal reader incompatibility or exact implementation root cause.",
+        "This is an artifact-specific interoperability finding, not an authenticated official-release defect. PyMuPDF repair means recovery during open, not a rewritten file."
+      ],
+      "execution_window": {
+        "start_utc": "2026-11-21T15:26:15.436263Z",
+        "end_utc": "2026-11-21T16:06:24.777466Z",
+        "basis": "Host command timestamps; not pixel exposure or page-ready latency."
+      }
+    },
+    {
+      "id": "RT-17",
+      "title": "Password rejection, cancellation and acceptance",
+      "status": "pass",
+      "evidence_type": "runtime-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "password-protected",
+          "path": "fixtures/documents/password-protected.pdf",
+          "sha256": "fba7029282c372aeeba6e994ef95b5f2db6a82b7ab5c5abd77481418b9ed12e4"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "action": "Open password-protected.pdf and submit the empty field with Save password unchecked."
+        },
+        {
+          "number": 2,
+          "action": "Dismiss Invalidated password.; reopen and submit incorrect-reader-lab."
+        },
+        {
+          "number": 3,
+          "action": "Dismiss the same error, reopen and cancel the password prompt."
+        },
+        {
+          "number": 4,
+          "action": "Reopen, submit the public fixture password reader-lab, and inspect the protected page."
+        }
+      ],
+      "expected": "Empty/wrong attempts do not reveal content; cancellation works; reader-lab reveals PASSWORD-OPEN-271.",
+      "actual": "Empty and incorrect attempts returned Invalidated password.; cancellation returned to the launcher; correct entry displayed PASSWORD-OPEN-271 at 1/1.",
+      "subchecks": [
+        {
+          "id": "empty-rejected",
+          "status": "pass",
+          "actual": "Invalidated password. displayed.",
+          "evidence": []
+        },
+        {
+          "id": "wrong-rejected",
+          "status": "pass",
+          "actual": "Invalidated password. displayed.",
+          "evidence": []
+        },
+        {
+          "id": "cancel",
+          "status": "pass",
+          "actual": "Prompt closed without protected content.",
+          "evidence": []
+        },
+        {
+          "id": "correct-accepted",
+          "status": "pass",
+          "actual": "Protected marker visibly rendered.",
+          "evidence": []
+        }
+      ],
+      "evidence": [
+        "evidence/runtime/90-password-prompt.xml",
+        "evidence/runtime/91-password-empty-result.png",
+        "evidence/runtime/94-password-wrong-result.png",
+        "evidence/runtime/96-password-cancelled.xml",
+        "evidence/runtime/99-password-correct-open.png",
+        "evidence/runtime/password-complete-result.json"
+      ],
+      "limitations": [
+        "One legacy RC4-128 revision-3 fixture. Password saving, AES variants and security strength were not tested."
+      ],
+      "execution_window": {
+        "start_utc": "2026-11-21T16:29:56.297459Z",
+        "end_utc": "2026-11-21T16:40:58.275522Z",
+        "basis": "Host command timestamps; not pixel exposure or page-ready latency."
+      }
+    },
+    {
+      "id": "RT-18",
+      "title": "Controlled PDF write failure",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No controlled unwritable destination or write-failure injection was established.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No controlled unwritable destination or write-failure injection was established."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-19",
+      "title": "EPUB note export and reimport",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "tiny-original",
+          "path": "fixtures/documents/tiny-original.epub",
+          "sha256": "e17b0a451015fa15e9c82f524027153ae4945025a680b4f51351ad658fc68c4b"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No EPUB note export/import or duplicate-policy test was performed.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No EPUB note export/import or duplicate-policy test was performed."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-20",
+      "title": "Controlled note-export failure",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "Neither normal note export nor a controlled failing export destination was exercised.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "Neither normal note export nor a controlled failing export destination was exercised."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-21",
+      "title": "Image sharing encoding/MIME contract",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No controlled share receiver or encoded-byte/MIME readback was used.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No controlled share receiver or encoded-byte/MIME readback was used."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-22",
+      "title": "Long text-sharing fallback",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "The additional export exceeding 80,000 characters was not supplied or created for this runtime run.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "The additional export exceeding 80,000 characters was not supplied or created for this runtime run."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-23",
+      "title": "Relink renamed or moved book",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "tiny-original",
+          "path": "fixtures/documents/tiny-original.epub",
+          "sha256": "e17b0a451015fa15e9c82f524027153ae4945025a680b4f51351ad658fc68c4b"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No rename/move/relink or same-name different-content workflow was exercised.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No rename/move/relink or same-name different-content workflow was exercised."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-24",
+      "title": "Library backup and restore",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No backup-and-clean-restore workflow was executed.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No backup-and-clean-restore workflow was executed."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-25",
+      "title": "Two-installation cloud conflict handling",
+      "status": "blocked",
+      "evidence_type": "blocked",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "A second installation and disposable cloud namespace were unavailable in this offline account-free setup.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "A second installation and disposable cloud namespace were unavailable in this offline account-free setup."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-26",
+      "title": "Equal-length cloud revision transfer",
+      "status": "blocked",
+      "evidence_type": "blocked",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No controlled cloud backend or transfer instrumentation was provisioned; no cover/book freshness conclusion is made.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No controlled cloud backend or transfer instrumentation was provisioned; no cover/book freshness conclusion is made."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-27",
+      "title": "Cloud failure retry and durability",
+      "status": "blocked",
+      "evidence_type": "blocked",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No controlled cloud backend with failure injection was available.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No controlled cloud backend with failure injection was available."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-28",
+      "title": "Speech baseline",
+      "status": "blocked",
+      "evidence_type": "blocked",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "plain-text",
+          "path": "fixtures/documents/plain-text.pdf",
+          "sha256": "1f0e404c0afd4db0d555da4a33d691a32bada0ddddcdb12a2f8b0591813aabf8"
+        },
+        {
+          "id": "two-columns",
+          "path": "fixtures/documents/two-columns.pdf",
+          "sha256": "85589a24cf116339dafaf9fa42fd76c7c2dc52496932a73d0af6908d5aff1482"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "Package-manager query returned no TTS service; default synth was null. The emulator also used -no-audio.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "Package-manager query returned no TTS service; default synth was null. The emulator also used -no-audio."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-29",
+      "title": "Long-paragraph speech segmentation",
+      "status": "blocked",
+      "evidence_type": "blocked",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "rt29-long-paragraph",
+          "path": "fixtures/scenarios/rt29-long-paragraph.txt",
+          "sha256": "7b4e7c3aff12c40cfcf4923bca80e8a7093a86046e43391b3a23677e26ab08de"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "The scenario was copied, but no controlled TTS engine or measured utterance limit was available.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "The scenario was copied, but no controlled TTS engine or measured utterance limit was available."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-30",
+      "title": "Speech lifecycle and audio focus",
+      "status": "blocked",
+      "evidence_type": "blocked",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No working TTS baseline was available for lifecycle/audio-focus checks.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No working TTS baseline was available for lifecycle/audio-focus checks."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-31",
+      "title": "TalkBack task completion",
+      "status": "blocked",
+      "evidence_type": "blocked",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "plain-text",
+          "path": "fixtures/documents/plain-text.pdf",
+          "sha256": "1f0e404c0afd4db0d555da4a33d691a32bada0ddddcdb12a2f8b0591813aabf8"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No TalkBack task was provisioned/enabled. The captured accessibility trees cannot establish TalkBack usability.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No TalkBack task was provisioned/enabled. The captured accessibility trees cannot establish TalkBack usability."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-32",
+      "title": "Large-scale layout accessibility",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "plain-text",
+          "path": "fixtures/documents/plain-text.pdf",
+          "sha256": "1f0e404c0afd4db0d555da4a33d691a32bada0ddddcdb12a2f8b0591813aabf8"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "The full baseline/enlarged layout workflow was not run; the recorded font scale remained 1.0.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "The full baseline/enlarged layout workflow was not run; the recorded font scale remained 1.0."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-33",
+      "title": "Keyboard-only operation",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "ADB key events supplemented touch automation; the prescribed keyboard-only workflow was not run.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "ADB key events supplemented touch automation; the prescribed keyboard-only workflow was not run."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-34",
+      "title": "Cold/warm first-readable-page latency",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "plain-text",
+          "path": "fixtures/documents/plain-text.pdf",
+          "sha256": "1f0e404c0afd4db0d555da4a33d691a32bada0ddddcdb12a2f8b0591813aabf8"
+        },
+        {
+          "id": "long-document",
+          "path": "fixtures/documents/long-document.pdf",
+          "sha256": "1e8b4d672f56b1dd1be570aeaedec4620168bb1361d9c178fb70cc8eff119bcb"
+        },
+        {
+          "id": "scanned-image-only",
+          "path": "fixtures/documents/scanned-image-only.pdf",
+          "sha256": "2034a2e94933bea0a9484a4dcca83276c5dd67a2ea48af784900ff61aa46b67b"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "Only individual activity-launch timings were retained, not the required five cold/five warm first-readable-page samples.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "Only individual activity-launch timings were retained, not the required five cold/five warm first-readable-page samples."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-35",
+      "title": "Repeated-workload memory",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "No fixed-workload memory sampling series was collected.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "No fixed-workload memory sampling series was collected."
+      ],
+      "execution_window": null
+    },
+    {
+      "id": "RT-36",
+      "title": "Malformed-file rejection and recovery",
+      "status": "not-run",
+      "evidence_type": "unknown",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "environment_id": "aosp-api36-x86_64-audit",
+      "observed_at": "2026-11-21",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json",
+      "inputs": [
+        {
+          "id": "rt36-empty",
+          "path": "fixtures/scenarios/rt36-empty.pdf",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "id": "rt36-truncated",
+          "path": "fixtures/scenarios/rt36-truncated.pdf",
+          "sha256": "730b494fb87894df60bff156c4f04dbb5c32614976607132c031657707695f15"
+        },
+        {
+          "id": "rt36-invalid-header",
+          "path": "fixtures/scenarios/rt36-invalid-header.pdf",
+          "sha256": "b355b03cd5f9528f4bf7e5223f5fd3aa8dd5a22823b37524780c5d191b086b8f"
+        },
+        {
+          "id": "rt36-healthy-control",
+          "path": "fixtures/scenarios/rt36-healthy-control.pdf",
+          "sha256": "f7070328a6b5bb3f2be271b06f2b4e3ff9c4224eb229ff50bf9a6d3f27c06ab5"
+        }
+      ],
+      "steps": [],
+      "expected": "Complete the exact workflow in knowledge/testing-plan.md for this ID.",
+      "actual": "All four robustness fixtures were copied and hash-verified, but the malformed/recovery phase was never executed.",
+      "subchecks": [],
+      "evidence": [],
+      "limitations": [
+        "All four robustness fixtures were copied and hash-verified, but the malformed/recovery phase was never executed."
+      ],
+      "execution_window": null
+    }
+  ],
+  "auxiliary_observations": [
+    {
+      "id": "AUX-LEGACY-001",
+      "status": "pass",
+      "actual": "The separate legacy-core PDF visibly rendered page 1, its internal link reached THIRD_PAGE_MARKER on page 3, and searching ORANGEQUARTZ returned one page-1 hit whose activation visibly highlighted the word.",
+      "input_sha256": "78a6ff18fee13374e2b0a7d23badeb9e4a2d2d19935ab4d367b5346367e2d818",
+      "evidence": [
+        "evidence/runtime/09-core-first-page.png",
+        "evidence/runtime/10-core-internal-link.png",
+        "evidence/runtime/15-search-results.png",
+        "evidence/runtime/15-search-results.xml",
+        "evidence/runtime/16-search-hit-page-one.png",
+        "evidence/runtime/inputs/legacy-core.pdf"
+      ],
+      "limitations": [
+        "Different input from every canonical fixture. These early subchecks do not add full canonical RT case passes; page 2 and external link behavior were not established."
+      ],
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "observed_at": "2026-11-21",
+      "evidence_type": "runtime-observation",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json"
+    },
+    {
+      "id": "AUX-PROVENANCE-001",
+      "status": "observed",
+      "actual": "LITEAPKS promotion appeared at initial launch and again during the final main-screen inspection. Initial CLOSE dismissal is evidenced; no promotion download action was requested.",
+      "evidence": [
+        "evidence/runtime/02-initial-launch.png",
+        "evidence/runtime/151-reporting-main.png"
+      ],
+      "limitations": [
+        "Applies only to this unknown-origin artifact. No network contact, malicious behavior or official-app promotion is established."
+      ],
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "observed_at": "2026-11-21",
+      "evidence_type": "runtime-observation",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json"
+    },
+    {
+      "id": "AUX-NOTE-001",
+      "status": "pass",
+      "actual": "One exact AUDIT_NOTE_PERSIST_20261121 note persisted in PDF bytes and reopened in the reader on the separate legacy-core synthetic fixture.",
+      "input_sha256": "78a6ff18fee13374e2b0a7d23badeb9e4a2d2d19935ab4d367b5346367e2d818",
+      "output_sha256": "7e203e424dc989ec8d2aed970fb7cbf4203c5ff89b94878cf8db8946d3defacc",
+      "evidence": [
+        "evidence/runtime/23-note-entered-once.xml",
+        "evidence/runtime/28-note-open-after-restart.png",
+        "evidence/runtime/28-note-open-after-restart.xml",
+        "evidence/runtime/27-note-pdf-persistence.json",
+        "evidence/runtime/inputs/legacy-core.pdf",
+        "evidence/runtime/outputs/legacy-core-notes.pdf"
+      ],
+      "limitations": [
+        "A second concatenated marker was caused by overlapping harness inputs. The exact standalone annotation, not the substring boolean alone, supports persistence. Not a canonical RT-14 pass."
+      ],
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "observed_at": "2026-11-21",
+      "evidence_type": "runtime-observation",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json"
+    },
+    {
+      "id": "AUX-UNICODE-001",
+      "status": "pass",
+      "actual": "Precomposed Latin café naïve façade Straße Ångström € and Symbols: Ω ∑ — € visibly rendered.",
+      "input_sha256": "0a1f2a0d62e20a58aff7101275850403e460df8c58fe4bda261228acefbea49f",
+      "evidence": [
+        "evidence/runtime/46-unicode-rendered-opengl.png"
+      ],
+      "limitations": [
+        "Appearance only; no normalization, shaping, RTL, CJK, search or selection claim."
+      ],
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "observed_at": "2026-11-21",
+      "evidence_type": "runtime-observation",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json"
+    },
+    {
+      "id": "AUX-A11Y-001",
+      "status": "observed",
+      "actual": "PDF page text was absent from the page UI tree; toolbar image controls had empty text/content descriptions.",
+      "evidence": [
+        "evidence/runtime/09-core-first-page.xml",
+        "evidence/runtime/11-core-reader-menu.xml"
+      ],
+      "limitations": [
+        "UIAutomator observation, not TalkBack task completion, WCAG certification or a full accessibility audit."
+      ],
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "observed_at": "2026-11-21",
+      "evidence_type": "runtime-observation",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json"
+    },
+    {
+      "id": "AUX-LAUNCH-001",
+      "status": "observed",
+      "actual": "One form ACTION_VIEW returned Status: timeout and WaitTime 11247 ms; activity log subsequently recorded +13s707ms and the form rendered.",
+      "input_sha256": "3a7b514b4a6c01640bd27436857826bc258cf10b6f7ac4e58ce1c3f7af842402",
+      "evidence": [
+        "evidence/runtime/47-form-open-intent.txt",
+        "evidence/runtime/48-form-transition-diagnostic.log",
+        "evidence/runtime/49-form-rendered.png"
+      ],
+      "limitations": [
+        "Single emulator observation, not a repeated performance regression, crash, or first-readable-page benchmark."
+      ],
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "observed_at": "2026-11-21",
+      "evidence_type": "runtime-observation",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json"
+    },
+    {
+      "id": "AUX-STATUS-001",
+      "status": "observed",
+      "actual": "After activating the correct lighthouse-427 result, a one-page document visibly displayed the page indicator 101/1 while showing the correct text.",
+      "input_sha256": "1f0e404c0afd4db0d555da4a33d691a32bada0ddddcdb12a2f8b0591813aabf8",
+      "evidence": [
+        "evidence/runtime/75-plain-lighthouse-selected.png",
+        "evidence/runtime/75-plain-lighthouse-selected.xml"
+      ],
+      "limitations": [
+        "Observed once, not repeated. No general navigation failure or exact root cause is established."
+      ],
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "observed_at": "2026-11-21",
+      "evidence_type": "runtime-observation",
+      "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/data/runtime-results.json"
+    }
+  ],
+  "form_save_finding": {
+    "id": "RUNTIME-PDF-PREV-001",
+    "evidence_type": "runtime-observation",
+    "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+    "observed_at": "2026-11-21",
+    "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/evidence/runtime/form-preserved-output-inspection.json",
+    "input": {
+      "id": "acroform",
+      "path": "fixtures/documents/acroform.pdf",
+      "sha256": "3a7b514b4a6c01640bd27436857826bc258cf10b6f7ac4e58ce1c3f7af842402"
+    },
+    "outputs": [
+      {
+        "path": "evidence/runtime/outputs/acroform.pdf",
+        "sha256": "af860b1720c51d4f2ebaca787c80e9230d201ababbc9599f41c1b12e2de0067a"
+      },
+      {
+        "path": "evidence/runtime/outputs/acroform-repeat.pdf",
+        "sha256": "4f189a85b395615b8ae6726f333bb7e4805ae52b4d7cb5621e7f6d718425d9d9"
+      }
+    ],
+    "observed_repetitions": 2,
+    "actual": "Saved incremental trailers contain /Prev -1; pypdf 6.15.0 rejects both and PyMuPDF 1.28.0 opens with repair.",
+    "limitations": [
+      "Second repetition is text-only. Close-triggered save route, not a separate Save command. No official-build reproduction or exact code root cause."
+    ]
+  },
+  "reporting_ui": {
+    "status": "blocked",
+    "observed_path": [
+      "Reader closed",
+      "ActivityMain launched",
+      "LITEAPKS promotion displayed"
+    ],
+    "feedback_entry": null,
+    "recipient": null,
+    "sent_any_message": false,
+    "evidence": [
+      "evidence/runtime/151-reporting-main.png",
+      "evidence/runtime/151-reporting-main.xml"
+    ],
+    "limitation": "The bounded script expected a navigation-drawer control but stopped at the promotion. No subsequent About/Feedback capture exists; no in-app feedback path is verified."
+  },
+  "comparative_followup": {
+    "application": "MuPDF simplified Android viewer",
+    "status": "not-run",
+    "application_runtime_executed": false,
+    "baseline_commit": "f2f75636fb9d5508f7d366bc55bac7fbdf5a38a0",
+    "fixed_commit": "523ad7cb3083fc4af91c4d00e89e0c1f20859d93",
+    "baseline_apk_sha256": "27b7930e66e334e90a02a70203d7ba554cfb48809eff42b5f0e2aae3a791ea9b",
+    "fixed_apk_sha256": "c0866838dcf88cc7d1d637b9a5b5c2083a3d77a4e108b650066660639d3aa198",
+    "build_record": "evidence/contributions/mupdf-android-build.json",
+    "reason": "Artifacts were available, but no installation or A/B runtime action was recorded before bounded closeout. Host tests/builds add zero Android-runtime passes."
+  },
+  "historical_id_mapping": {
+    "private-RT-01": "canonical RT-01",
+    "private-RT-02": "legacy-core rendering/navigation auxiliary; different fixture from canonical RT-02",
+    "private-RT-03": "legacy-core search auxiliary to canonical RT-11, not canonical RT-03",
+    "private-RT-04": "legacy-core note persistence auxiliary to canonical RT-14",
+    "private-RT-05": "different rotated input; canonical RT-05 uses mixed-geometry",
+    "private-RT-06": "different password input; canonical RT-17 evidence uses password-protected",
+    "private-RT-07": "different form input; canonical RT-16 evidence uses acroform",
+    "private-RT-08": "different preannotated input; canonical RT-14 evidence uses annotations",
+    "private-RT-09": "different image-only input; canonical RT-09 evidence uses scanned-image-only",
+    "private-RT-10": "external-link plan only; not executed",
+    "private-RT-11": "UI-tree and prerequisite observations; not canonical RT-11 search or completed RT-31 TalkBack",
+    "private-RT-12": "old reliability/cleanup plan; not canonical RT-12 literal search"
+  },
+  "exclusions": [
+    "Early private RT-03 denotes legacy ORANGEQUARTZ search, related to canonical RT-11; it does not exercise canonical RT-03 URI grants.",
+    "Early private RT-04 note persistence is auxiliary to canonical RT-14, not canonical RT-04 navigation. Map by actual input/action, not number.",
+    "Overlapping early note input created an additional concatenated marker; this is harness contamination, not app duplication.",
+    "Concurrent early UIAutomator exit-137 failures and overlapping navigation attempts are excluded from application-failure and clean-cycle counts.",
+    "Capture 42 has a black PNG and stale annotation XML after null-root failure; captures 41/43/45/46 without the -opengl suffix are setup dialogs, not rendering passes.",
+    "The acroform row in the early canonical-visible result still named unicode.pdf. Later form captures and independently inspected outputs supply the actual form evidence.",
+    "Capture 04/05 PNG and XML straddle onboarding transitions; no synchronized-frame or clipping-defect claim.",
+    "A Python 3.11 missing-pymupdf import and a password phase-dispatch KeyError occurred before any corresponding app command; they are host-tool failures.",
+    "The first form parser exception interrupted the script after a successful pull. Recovery preserved those bytes and resumed only unexecuted readback.",
+    "The repeat form phase could not find Green after rapid taps; screenshot 65 showed the text-only edit. The text-only save/reopen was completed separately.",
+    "Repeated shell transport interruptions during final curation do not invalidate saved app results or establish emulator termination."
+  ],
+  "cleanup": {
+    "status": "stopped",
+    "receipt": "evidence/runtime/cleanup.json",
+    "ended_at_utc": "2026-11-21T17:59:07.894071Z",
+    "owned_processes_remaining_at_cleanup": 0,
+    "owned_listeners_remaining_at_cleanup": 0
+  },
+  "evidence_manifest": "evidence/runtime/manifest.json",
+  "report_path": "knowledge/runtime-results.md",
+  "limitations": [
+    "One unknown-origin build in one AOSP API36 x86_64 portrait emulator; no authenticated Play-build, physical-device, ARM or 16-KiB-page validation.",
+    "No cloud sign-in, network transfer, speech engine, TalkBack task, EPUB/reflow, literal/invalid-pattern or malformed-file app execution.",
+    "Screenshots and XML trees are sequential captures, not synchronized frames. Command times are not page-ready timings.",
+    "Repository/fixture checks, copying files and offline curation do not count as application tests."
+  ]
+}

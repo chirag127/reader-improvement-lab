@@ -1,0 +1,32 @@
+{
+  "observed_at": "2026-11-21",
+  "reviewer": "read-only child session; retained evidence only",
+  "early_curation_source_sha256": "b9a923dccf053db9869d2eadf8436687626c198e168ffc359ea91bef97e8d739",
+  "scope": [
+    "RT-01 installation, identity, onboarding and promotion",
+    "canonical RT-04 link-cycle subset",
+    "canonical RT-05 four-page geometry subset",
+    "canonical RT-14 existing annotation appearances",
+    "early private-fixture note persistence auxiliary",
+    "Unicode appearance",
+    "scanned-page appearance"
+  ],
+  "early_records": 7,
+  "conclusion": "Early full RT-01 pass; RT-04/05/09/14 are partial. Independent form review supports two /Prev -1 outputs and text-only repeat boundary.",
+  "exclusions_and_limits": [
+    "Early private RT-03 denotes legacy ORANGEQUARTZ search, related to canonical RT-11; it does not exercise canonical RT-03 URI grants.",
+    "Early private RT-04 note persistence is auxiliary to canonical RT-14, not canonical RT-04 navigation. Map by actual input/action, not number.",
+    "Overlapping early note input created an additional concatenated marker; this is harness contamination, not app duplication.",
+    "Concurrent early UIAutomator exit-137 failures and overlapping navigation attempts are excluded from application-failure and clean-cycle counts.",
+    "Capture 42 has a black PNG and stale annotation XML after null-root failure; captures 41/43/45/46 without the -opengl suffix are setup dialogs, not rendering passes.",
+    "The acroform row in the early canonical-visible result still named unicode.pdf. Later form captures and independently inspected outputs supply the actual form evidence.",
+    "Capture 04/05 PNG and XML straddle onboarding transitions; no synchronized-frame or clipping-defect claim.",
+    "A Python 3.11 missing-pymupdf import and a password phase-dispatch KeyError occurred before any corresponding app command; they are host-tool failures.",
+    "The first form parser exception interrupted the script after a successful pull. Recovery preserved those bytes and resumed only unexecuted readback.",
+    "The repeat form phase could not find Green after rapid taps; screenshot 65 showed the text-only edit. The text-only save/reopen was completed separately.",
+    "Repeated shell transport interruptions during final curation do not invalidate saved app results or establish emulator termination."
+  ],
+  "limitations": [
+    "The reviewer did not execute new app tests or repeat parser runs. Later search/password coverage is integrated by the runtime owner."
+  ]
+}

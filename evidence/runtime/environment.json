@@ -1,0 +1,52 @@
+{
+  "id": "aosp-api36-x86_64-audit",
+  "observed_at": "2026-11-21T15:45:13.492901+00:00",
+  "android_release": "16",
+  "api_level": 36,
+  "abi": "x86_64",
+  "build_fingerprint": "Android/sdk_phone64_x86_64/emu64x:16/BE2A.250530.026.D1/13818094:userdebug/test-keys",
+  "security_patch": "2025-07-05",
+  "system_image_revision": 2,
+  "page_size_bytes": 4096,
+  "serial": "emulator-5596",
+  "avd": "reader_audit_api36_20261121_c375e7e3",
+  "private_adb_host": "localhost",
+  "private_adb_port": 5049,
+  "viewport_pixels": [
+    1080,
+    2400
+  ],
+  "density_dpi": 420,
+  "font_scale": 1.0,
+  "locale": null,
+  "locale_limit": "persist.sys.locale was empty; English UI and en_US activity configuration were observed.",
+  "accounts_at_readiness": 0,
+  "wifi_on_at_readiness": 0,
+  "mobile_data_at_readiness": 0,
+  "ipv4_routes_at_readiness": [],
+  "emulator_network_backends": "restrict=on,ipv6=off",
+  "audio": "emulator -no-audio",
+  "gpu": "swiftshader",
+  "memory_mib": 4096,
+  "cores": 4,
+  "permissions": {
+    "MANAGE_EXTERNAL_STORAGE": "allow in the disposable guest"
+  },
+  "reading_mode": "Original PDF page view; OpenGL explicitly selected where the engine-choice dialog appeared.",
+  "installed_target": {
+    "installed_apk_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+    "ro.product.cpu.abilist": "x86_64",
+    "ro.build.version.security_patch": "2025-07-05",
+    "page_size": "4096",
+    "tts_default_synth": "null",
+    "accessibility_enabled": "0",
+    "enabled_accessibility_services": "null",
+    "tts_services": "No services found",
+    "third_party_packages": "package:com.flyersoft.moonreaderp"
+  },
+  "limitations": [
+    "Readiness values are historical observations, not a current live-state claim.",
+    "UIAutomator is not TalkBack; no speech or assistive-technology task was completed.",
+    "Only this account-free, network-restricted emulator was used."
+  ]
+}

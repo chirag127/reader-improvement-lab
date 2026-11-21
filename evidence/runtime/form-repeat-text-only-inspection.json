@@ -1,0 +1,33 @@
+{
+  "filename": "acroform-repeat.pdf",
+  "sha256": "4f189a85b395615b8ae6726f333bb7e4805ae52b4d7cb5621e7f6d718425d9d9",
+  "size_bytes": 10962,
+  "pymupdf_version": "1.28.0",
+  "pypdf_version": "6.15.0",
+  "prev_offsets": [
+    -1
+  ],
+  "startxref_offsets": [
+    7523,
+    10235
+  ],
+  "pages": 1,
+  "repaired": true,
+  "widgets": {
+    "reader_name": "LAB_FORM_REPEAT_20261121",
+    "subscribe": "Yes",
+    "color": "Blue"
+  },
+  "annotations": [],
+  "pypdf_error": "ValueError('negative seek value -1')",
+  "at": "2026-11-21T16:06:00.658535+00:00",
+  "input_sha256": "3a7b514b4a6c01640bd27436857826bc258cf10b6f7ac4e58ce1c3f7af842402",
+  "remote_sha256": "4f189a85b395615b8ae6726f333bb7e4805ae52b4d7cb5621e7f6d718425d9d9",
+  "steps": [
+    "Set name LAB_FORM_REPEAT_20261121 (retained phase)",
+    "Screenshot 65 confirms checkbox Yes and choice Blue were unchanged",
+    "Android Back closes the reader"
+  ],
+  "original_prefix_retained": true,
+  "repeat_scope": "Fresh canonical copy; text-only edit isolates the saved-trailer observation."
+}

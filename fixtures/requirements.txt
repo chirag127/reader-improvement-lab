@@ -1,0 +1,8 @@
+# Reference toolchain used for the committed corpus and host checks.
+# Python 3.13.14 on Windows AMD64; pin direct dependencies, not the host environment.
+reportlab==5.0.0
+PyMuPDF==1.28.0
+pypdf==6.15.0
+pikepdf==10.11.0
+pypdfium2==5.12.1
+Pillow==12.3.0

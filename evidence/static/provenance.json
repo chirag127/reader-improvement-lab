@@ -1,0 +1,2851 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-21",
+  "artifact_id": "moonreader-supplied-10.8",
+  "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "evidence_type": "static-observation",
+  "producer": "Static-analysis lane",
+  "tools": {
+    "rea": {
+      "version": "6.10.1",
+      "source": "https://www.npmjs.com/package/rea-agents/v/6.10.1",
+      "bridge_version": "11",
+      "bridge_sha256": "08de17c12c68adf077aaccba84c6d53b6c9ac86ff2d2e581e35b9b03618003f2",
+      "source_inspection": [
+        "dist/android/AndroidTargetSnapshot.js",
+        "dist/filesystem/RegularFile.js",
+        "dist/filesystem/StableFileHash.js",
+        "dist/filesystem/ChangeTimeBaseline.js",
+        "dist/config/windowsChangeTimeSettle.js"
+      ],
+      "installed_package_modified": false
+    },
+    "jadx_headless_mcp": {
+      "version": "0.7.1",
+      "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+      "jar_size_bytes": 42619858,
+      "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+      "source": "https://github.com/1013503897/jadx-headless-mcp/tree/5844800a486d2248fa949b74c9896285f5b54de2",
+      "release": "https://github.com/1013503897/jadx-headless-mcp/releases/download/v0.7.1/jadx-headless-mcp-0.7.1-all.jar",
+      "protocol_version": "2025-06-18",
+      "server_info": {
+        "name": "jadx-headless-mcp",
+        "version": "0.7.1"
+      }
+    },
+    "java": {
+      "distribution": "Eclipse Temurin OpenJDK",
+      "version": "27.0.1.0.2+1",
+      "full_jdk": true
+    },
+    "node": {
+      "version": "v26.13.0",
+      "platform": "Windows x64"
+    },
+    "android_sdk": {
+      "build_tools": "36.0.0",
+      "tools": [
+        "aapt",
+        "apksigner"
+      ],
+      "evidence_owner": "Parent artifact lane; not rerun here",
+      "record": "data/artifact.json"
+    }
+  },
+  "admission_diagnosis": {
+    "original_error": "Parent reported REA_JADX_MCP_JAR bytes changed during admission.",
+    "single_probe": {
+      "hash_matches": true,
+      "extent_matches": true,
+      "descriptor_state_matches": true,
+      "path_state_matches": true,
+      "snapshot_readback_matches": true,
+      "evidence": {
+        "private_evidence_ref": "admission-diagnosis.json",
+        "size_bytes": 1690,
+        "sha256": "20a2f2289a528a5c07a7d221abaf375e2f9c29c6891531ddf6e3d941b26431b7",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    "outcome": "Did not reproduce. Subsequent isolated REA CLI package inspection succeeded.",
+    "historical_root_cause": "unknown",
+    "hypothesis": "Windows ChangeTime drift is possible but unconfirmed.",
+    "long_lived_mcp_recovery": "not established",
+    "shared_config_changed": false,
+    "integrity_guards_relaxed": false,
+    "shared_ledger_reset": false,
+    "services_restarted": false
+  },
+  "rea_package_run": {
+    "evidence_id": "ev_2197257034924089fcc7e23e8721f63b439afeae495f011eaad051297f1c3679",
+    "exit_code": 0,
+    "stderr_bytes": 0,
+    "completed_at": "2026-11-21T14:15:44.4548159Z",
+    "command_template": "rea inspect-android-package <APK> --detail summary --evidence_output <NEW_PRIVATE_BUNDLE> --json",
+    "shell_scoped_environment": {
+      "REA_JADX_MCP_JAR": "<JAR>",
+      "JAVA_HOME": "<FULL_JDK>",
+      "TEMP": "<PRIVATE_OUT>",
+      "TMP": "<PRIVATE_OUT>",
+      "REA_JADX_HEAP_MIB": "3072",
+      "REA_JADX_OPERATION_TIMEOUT_MS": "300000"
+    },
+    "evidence": {
+      "private_evidence_ref": "rea-package-bundle.json",
+      "size_bytes": 70971,
+      "sha256": "1728a32da91247c2533d1ebfca832566a27ce14c9c587f6a4a76d1e679b45c43",
+      "publication": "raw evidence retained privately; digest only"
+    },
+    "signature_verification": "not_performed"
+  },
+  "ordinary_static_runs": [
+    {
+      "id": "mcp-discovery",
+      "evidence_kind": "ordinary local static evidence; not REA ledger",
+      "started_at": "2026-11-21T14:14:46.025Z",
+      "completed_at": "2026-11-21T14:15:01.905Z",
+      "client_runtime": "v26.13.0",
+      "command_template": "node <PRIVATE_CLIENT>/jadx-batch.mjs <PRIVATE_CLIENT>/discovery-plan.json",
+      "java_arguments_template": [
+        "-Xmx3g",
+        "-XX:ActiveProcessorCount=4",
+        "-Djava.io.tmpdir=<PRIVATE_OUT>/java-tmp",
+        "-jar",
+        "<JAR>",
+        "--max-source-bytes",
+        "1000000",
+        "--decompile-timeout-ms",
+        "90000",
+        "--threads",
+        "4"
+      ],
+      "call_count": 0,
+      "calls": [],
+      "input_hashes_before": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_hashes_after": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_bytes_unchanged": true,
+      "diagnostics": {
+        "error_log_lines": 0,
+        "warning_log_lines": 0,
+        "scope": "Log lines, including repeated and dependency diagnostics; not distinct defects or failed selected methods",
+        "evidence": {
+          "private_evidence_ref": "mcp-discovery/java.stderr.log",
+          "size_bytes": 6946,
+          "sha256": "8d772190f7c744dbcc111ca14b8aa97a45d8bf78e6720a80973ef3b96cc1008a",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      "shutdown": {
+        "unload_acknowledged": false,
+        "eof_allowance_ms": 15000,
+        "owned_jvm_termination_required": true,
+        "child_exit": {
+          "code": null,
+          "signal": "SIGTERM"
+        }
+      },
+      "run_receipt": {
+        "private_evidence_ref": "mcp-discovery/run.json",
+        "size_bytes": 2032,
+        "sha256": "2ad7c5cc05c8ed74245bae7578ca6d9e0c2d5432c56e9a16b71f689b07e3b5b9",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "plan_receipt": {
+        "private_evidence_ref": "discovery-plan.json",
+        "size_bytes": 44,
+        "sha256": "0a65925f507550b22882e742458961ed6d090cc2ca83c70232fc36f167516b0e",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    {
+      "id": "mcp-inventory",
+      "evidence_kind": "ordinary local static evidence; not REA ledger",
+      "started_at": "2026-11-21T14:17:43.664Z",
+      "completed_at": "2026-11-21T14:18:23.309Z",
+      "client_runtime": "v26.13.0",
+      "command_template": "node <PRIVATE_CLIENT>/jadx-batch.mjs <PRIVATE_CLIENT>/inventory-plan.json",
+      "java_arguments_template": [
+        "-Xmx3g",
+        "-XX:ActiveProcessorCount=4",
+        "-Djava.io.tmpdir=<PRIVATE_OUT>/java-tmp",
+        "-jar",
+        "<JAR>",
+        "--max-source-bytes",
+        "1000000",
+        "--decompile-timeout-ms",
+        "90000",
+        "--threads",
+        "4"
+      ],
+      "call_count": 3,
+      "calls": [
+        {
+          "tool": "load_apk",
+          "arguments": {
+            "path": "<APK>",
+            "threads": 4,
+            "resources": "lite"
+          },
+          "duration_ms": 8507,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-inventory/load.json",
+            "size_bytes": 756,
+            "sha256": "6c5ada578d5670d0a5905851f7a9b3b7cebbdd22a988a44033c16d2afc70e7ca",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "list_classes",
+          "arguments": {
+            "offset": 0,
+            "limit": 20000
+          },
+          "duration_ms": 73,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-inventory/classes.json",
+            "size_bytes": 676249,
+            "sha256": "2ead47460ffcc2a6c8fe86a610a1ce13a5cea5957fece8ee3b1a0efd55aa3ab7",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "unload_apk",
+          "arguments": {},
+          "duration_ms": 13,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-inventory/unload.json",
+            "size_bytes": 370,
+            "sha256": "168a2d99fcb7eaa15540c5b99c967ddee1a3a601100f83cd9a734114863bd5d8",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        }
+      ],
+      "input_hashes_before": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_hashes_after": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_bytes_unchanged": true,
+      "diagnostics": {
+        "error_log_lines": 0,
+        "warning_log_lines": 0,
+        "scope": "Log lines, including repeated and dependency diagnostics; not distinct defects or failed selected methods",
+        "evidence": {
+          "private_evidence_ref": "mcp-inventory/java.stderr.log",
+          "size_bytes": 7805,
+          "sha256": "90426eca970fcbdd94de8b8029743ae7a34a3cbd228ec7ae06c8c8dc4ef5de94",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      "shutdown": {
+        "unload_acknowledged": true,
+        "eof_allowance_ms": 15000,
+        "owned_jvm_termination_required": true,
+        "child_exit": {
+          "code": null,
+          "signal": "SIGTERM"
+        }
+      },
+      "run_receipt": {
+        "private_evidence_ref": "mcp-inventory/run.json",
+        "size_bytes": 2434,
+        "sha256": "f3abb719bdce1f938a3fe787c9d68c90dac8d4873545777e688c37db3da7ed0d",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "plan_receipt": {
+        "private_evidence_ref": "inventory-plan.json",
+        "size_bytes": 475,
+        "sha256": "441663f3eeddbdcc0e6fcb0812871d14f595ad81c761f4c4244bcd5e640c3b69",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    {
+      "id": "mcp-focused-summaries",
+      "evidence_kind": "ordinary local static evidence; not REA ledger",
+      "started_at": "2026-11-21T14:23:27.535Z",
+      "completed_at": "2026-11-21T14:24:59.153Z",
+      "client_runtime": "v26.13.0",
+      "command_template": "node <PRIVATE_CLIENT>/jadx-batch.mjs <PRIVATE_CLIENT>/focused-summaries-plan.json",
+      "java_arguments_template": [
+        "-Xmx3g",
+        "-XX:ActiveProcessorCount=4",
+        "-Djava.io.tmpdir=<PRIVATE_OUT>/java-tmp",
+        "-jar",
+        "<JAR>",
+        "--max-source-bytes",
+        "1000000",
+        "--decompile-timeout-ms",
+        "90000",
+        "--threads",
+        "4"
+      ],
+      "call_count": 19,
+      "calls": [
+        {
+          "tool": "load_apk",
+          "arguments": {
+            "path": "<APK>",
+            "threads": 4,
+            "resources": "lite"
+          },
+          "duration_ms": 23257,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/load.json",
+            "size_bytes": 756,
+            "sha256": "7197ed1e9940694086c5d451e8393f0efa8d5e3d37282fe70524d063848a6d36",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.books.PDFReader"
+          },
+          "duration_ms": 49666,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/pdf-reader.json",
+            "size_bytes": 15027,
+            "sha256": "dc2d135ff72db0f4f4150851dfa4c232a53594d974c413625c8dcbc4332455e2",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.radaee.pdf.Document"
+          },
+          "duration_ms": 15,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/pdf-document.json",
+            "size_bytes": 23036,
+            "sha256": "c5a884d96173fbdcf3d87beff830dba4374e94eafdbe0e35fec6bf0e52486c67",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.radaee.pdf.Page"
+          },
+          "duration_ms": 17,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/pdf-page.json",
+            "size_bytes": 52542,
+            "sha256": "1362970bac875467d2a69eecf628c772d3220890230fbf7d6e637a4198084670",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt"
+          },
+          "duration_ms": 32,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/reader-activity.json",
+            "size_bytes": 172224,
+            "sha256": "c66c37f605609a4e374876e9fc84081a4cd1b1ddafd57bed96434bbf2c23ebba",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.BookDb"
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/book-db.json",
+            "size_bytes": 13925,
+            "sha256": "5f46c34ae38484499ae9e500ba606555624eb3aca2125ea91795590002d95b49",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefEditNote"
+          },
+          "duration_ms": 4,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/edit-note.json",
+            "size_bytes": 2876,
+            "sha256": "038186130e4e53f102f03b72089c137c956d743475a9e0f744cfee145266fb7a",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefShareText"
+          },
+          "duration_ms": 10,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/share-text.json",
+            "size_bytes": 5576,
+            "sha256": "ec0891d0d5202b1a1f0790fd85d277490ef7178c9cab186ce839019fd1a386ba",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.staticlayout.BookmarkItem"
+          },
+          "duration_ms": 4,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/bookmarks.json",
+            "size_bytes": 1220,
+            "sha256": "43fd5692c1901e3d219ae1ce7d8db01f94e94fbcb6a39595d5ac3c702ea35fa4",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.components.Readwise"
+          },
+          "duration_ms": 4,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/readwise.json",
+            "size_bytes": 1547,
+            "sha256": "cdafde6266c943af03668e7d9d952a810fe8d8537969d21d92d9f654c682ab67",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefSearch"
+          },
+          "duration_ms": 5,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/search.json",
+            "size_bytes": 5595,
+            "sha256": "931d454c55d2d494473a337dfab06d34604d77328a813b43fcebf0784e6e4a03",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.misc.FuncSearch"
+          },
+          "duration_ms": 4,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/function-search.json",
+            "size_bytes": 2316,
+            "sha256": "082762471b27e248d078cf8a8625d35e491a0cf02b66250ab3db75987dfbe02c",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync"
+          },
+          "duration_ms": 5,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/sync.json",
+            "size_bytes": 15964,
+            "sha256": "ae92c49a5b071107d46d85ebd4f2e5f04485aa94918cc274b7fd7a2976127a48",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Cloud"
+          },
+          "duration_ms": 4,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/cloud.json",
+            "size_bytes": 7295,
+            "sha256": "3f67eb975402a438f86ef9f85d481e93f73c47728bef1f00eb8ecf6c45c4b311",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Dropbox"
+          },
+          "duration_ms": 4,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/dropbox.json",
+            "size_bytes": 5885,
+            "sha256": "22329bcfdf89604531a601c1968165dbe12648bc495955cd7ef57ab24b74621a",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Gdrive"
+          },
+          "duration_ms": 4,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/gdrive.json",
+            "size_bytes": 7898,
+            "sha256": "bd030efb93571f17537e3aaa06d50d5d3d60a3d625e698e6ae157184fa5f42fd",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.WebDav"
+          },
+          "duration_ms": 4,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/webdav.json",
+            "size_bytes": 5690,
+            "sha256": "9d549b5d1387000296ea615019235ebeaf0e003bffcd9fefbb19a2e36f6b449e",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.BookTtsService"
+          },
+          "duration_ms": 4,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/tts-service.json",
+            "size_bytes": 1351,
+            "sha256": "0e9feaeadf0c9c024c91d1465ca5e559c405579da4ebe0955c92bbae1247d792",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "unload_apk",
+          "arguments": {},
+          "duration_ms": 26,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-summaries/unload.json",
+            "size_bytes": 372,
+            "sha256": "6a5bf97318a116aa2e2fe82849f7f0650a51a32a7690d9b7b5353ca89bf77012",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        }
+      ],
+      "input_hashes_before": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_hashes_after": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_bytes_unchanged": true,
+      "diagnostics": {
+        "error_log_lines": 100,
+        "warning_log_lines": 756,
+        "scope": "Log lines, including repeated and dependency diagnostics; not distinct defects or failed selected methods",
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-summaries/java.stderr.log",
+          "size_bytes": 443101,
+          "sha256": "6bae5dabba40bd3e7db63f1caddecc7d3f393443cb0b0977dbf519d39b08bbef",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      "shutdown": {
+        "unload_acknowledged": true,
+        "eof_allowance_ms": 15000,
+        "owned_jvm_termination_required": true,
+        "child_exit": {
+          "code": null,
+          "signal": "SIGTERM"
+        }
+      },
+      "run_receipt": {
+        "private_evidence_ref": "mcp-focused-summaries/run.json",
+        "size_bytes": 4732,
+        "sha256": "d6d47fe604c9e5146e851af22dc8aa6cb28386031e29ec13d288cfc49787f62f",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "plan_receipt": {
+        "private_evidence_ref": "focused-summaries-plan.json",
+        "size_bytes": 2449,
+        "sha256": "dc29519b894a0edf911566f7b0392f9e722696f91dbf1b653434be5476091639",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    {
+      "id": "mcp-focused-methods",
+      "evidence_kind": "ordinary local static evidence; not REA ledger",
+      "started_at": "2026-11-21T14:30:18.029Z",
+      "completed_at": "2026-11-21T14:31:36.571Z",
+      "client_runtime": "v26.13.0",
+      "command_template": "node <PRIVATE_CLIENT>/jadx-batch.mjs <PRIVATE_CLIENT>/focused-methods-plan.json",
+      "java_arguments_template": [
+        "-Xmx3g",
+        "-XX:ActiveProcessorCount=4",
+        "-Djava.io.tmpdir=<PRIVATE_OUT>/java-tmp",
+        "-jar",
+        "<JAR>",
+        "--max-source-bytes",
+        "1000000",
+        "--decompile-timeout-ms",
+        "90000",
+        "--threads",
+        "4"
+      ],
+      "call_count": 37,
+      "calls": [
+        {
+          "tool": "load_apk",
+          "arguments": {
+            "path": "<APK>",
+            "threads": 4,
+            "resources": "lite"
+          },
+          "duration_ms": 8372,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/load.json",
+            "size_bytes": 756,
+            "sha256": "76b725a5762bdc3ffea8219d1912eab32db2bb6e1419916540967afb76ebfd12",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.books.PDFReader",
+            "method_name": "open",
+            "overload_index": 0,
+            "max_bytes": 80000
+          },
+          "duration_ms": 48648,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/pdf-open.json",
+            "size_bytes": 1259,
+            "sha256": "b02cc8ad1633b7a1df886c54bd78fbc8b021509d2d28f46ba00692b5ab6f325f",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.books.PDFReader",
+            "method_name": "getPageText",
+            "max_bytes": 60000
+          },
+          "duration_ms": 7,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/pdf-text.json",
+            "size_bytes": 1551,
+            "sha256": "ebd3989b81f21610ce966a0dd97abb394b64796b5cd4fa4137a267286f1f79cd",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.books.PDFReader",
+            "method_name": "setView",
+            "max_bytes": 80000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/pdf-view-mode.json",
+            "size_bytes": 1544,
+            "sha256": "a4dfa97dcd7e58d42925af2e8ace235ed905b32a9466472210caf7ea250860f7",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.books.PDFReader",
+            "method_name": "save",
+            "max_bytes": 60000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/pdf-save.json",
+            "size_bytes": 826,
+            "sha256": "3b2df2b038f753f5a21bff782dd5a92b8f6561e0d3b95a0c1bad3e606f8ef574",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.books.PDFReader",
+            "method_name": "pdfUpdateNotesToFile",
+            "max_bytes": 120000
+          },
+          "duration_ms": 11,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/pdf-update-notes.json",
+            "size_bytes": 9466,
+            "sha256": "84825da5bf14124e8648304510c765d803f8b463cc62163524371d6948fcb82a",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.books.PDFReader",
+            "method_name": "pdfCreateTextFromNotes",
+            "max_bytes": 60000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/pdf-notes-text.json",
+            "size_bytes": 2605,
+            "sha256": "283a7f50eb81416946d2cfb55e3600ef6391c3e75c57acd185cba53e7d123a0d",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.radaee.pdf.Document",
+            "method_name": "Open",
+            "overload_index": 0,
+            "max_bytes": 20000
+          },
+          "duration_ms": 8,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/pdf-native-open.json",
+            "size_bytes": 1242,
+            "sha256": "bdfed5fa051aa152cc0935f13fec5d491702ee297631788aeda79432bdd5e490",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.radaee.pdf.Page",
+            "method_name": "ObjsGetString",
+            "max_bytes": 20000
+          },
+          "duration_ms": 16,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/pdf-native-text.json",
+            "size_bytes": 808,
+            "sha256": "e69f0dd4cbd5c141225a4070640c693574457eeed251b0a2e33d0479b1bb1da1",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.BookDb.NoteInfo"
+          },
+          "duration_ms": 7,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/note-model.json",
+            "size_bytes": 2019,
+            "sha256": "93ecd3447559169b0f668eded34c1636c2dae98e41bcca8011043820fe60f8fa",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefChapters"
+          },
+          "duration_ms": 10,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/chapters-summary.json",
+            "size_bytes": 15283,
+            "sha256": "5e5c8aba2963f9d7a9750a9f3b028add810f42c3a15679fb896b767539b72f5e",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.BookDb",
+            "method_name": "exportNotesToText",
+            "max_bytes": 100000
+          },
+          "duration_ms": 117,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/notes-export-text.json",
+            "size_bytes": 3787,
+            "sha256": "b60a3e7f26f751ce8ebc8e5551d30cc595048bfe931d5e3c27b9b8f8e836be0b",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.BookDb",
+            "method_name": "exportNotesToFile",
+            "max_bytes": 30000
+          },
+          "duration_ms": 7,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/notes-export-file.json",
+            "size_bytes": 1111,
+            "sha256": "cdbafe303b15c3f41e620ffebc6bf539fb489ceaa18e0047e9111d9d6546eb79",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.BookDb",
+            "method_name": "importNotesFromText",
+            "max_bytes": 120000
+          },
+          "duration_ms": 7,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/notes-import-text.json",
+            "size_bytes": 7854,
+            "sha256": "4f391571f9f8284cc6a2521345935181c65ad10a17a7c2178fa9594844161529",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefEditNote",
+            "method_name": "onClick",
+            "max_bytes": 60000
+          },
+          "duration_ms": 11,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/notes-edit.json",
+            "size_bytes": 2856,
+            "sha256": "ed433bb37295546ec1954df43a67092f7d354a8805b0f5ad905645ccbf8dd571",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefShareText",
+            "method_name": "shareContent",
+            "max_bytes": 30000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/share-image.json",
+            "size_bytes": 1830,
+            "sha256": "b433352876da868a92d862c2322f0b833ecaf4a7eee62ae9f720e7701d1ce855",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.Readwise",
+            "method_name": "addHighlights",
+            "max_bytes": 60000
+          },
+          "duration_ms": 9,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/readwise-upload.json",
+            "size_bytes": 5345,
+            "sha256": "df7ccc2843fb8f61ba0c2c2d139ce98724c455e95bc37563cf8c51cca09a9cb6",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.components.Readwise.WiseItem"
+          },
+          "duration_ms": 7,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/readwise-model.json",
+            "size_bytes": 1124,
+            "sha256": "d0826cb486795ced267e16fec5e86933271e0ca32c84bfcc07fc525311e8e537",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+            "method_name": "startSearch",
+            "max_bytes": 100000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/search-start.json",
+            "size_bytes": 13583,
+            "sha256": "8809b50e490ffe9814e50f9229e355d0c978776a2423dc79b97e7aa9eec635a6",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+            "method_name": "getResultFromHtml",
+            "max_bytes": 80000
+          },
+          "duration_ms": 8,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/search-html.json",
+            "size_bytes": 6537,
+            "sha256": "22ffa6562a9a5f3259ec4ed375d7e2fdd6980ec3c3c038858c7d93a4b3a7c51b",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+            "method_name": "stopSearch",
+            "max_bytes": 30000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/search-stop.json",
+            "size_bytes": 813,
+            "sha256": "20c64716d15e70d46c5cc1155b8e9cf8ec918c1100660e685b315b5a0b98c23e",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.misc.FuncSearch",
+            "method_name": "getSearchResults",
+            "max_bytes": 30000
+          },
+          "duration_ms": 64,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/search-functions.json",
+            "size_bytes": 2068,
+            "sha256": "716651282e340eea88cc3b4f7c00bc6b1bdaa43570883bdac8cbe71b2ec3c02f",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "uploadCloudPositionFile",
+            "max_bytes": 100000
+          },
+          "duration_ms": 82,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/sync-upload-position.json",
+            "size_bytes": 3028,
+            "sha256": "5b53880a03a392badc9ca4c5a7cc10cc54456510ad734943f97d2423719be909",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "dealDownloadedCloudPosition",
+            "max_bytes": 100000
+          },
+          "duration_ms": 8,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/sync-receive-position.json",
+            "size_bytes": 1911,
+            "sha256": "8eae1c8e293e6569db54759f1cecc5b3f5d13e369f15260bba21c79bfac32e62",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "uploadCloudNoteFile",
+            "max_bytes": 80000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/sync-upload-notes.json",
+            "size_bytes": 1570,
+            "sha256": "63c47a0f97a921de17bf6ce55a1b2ff5639c49dc72b8ec01aff2a76e8e5d3f02",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "dealDownloadedCloudNote",
+            "max_bytes": 80000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/sync-receive-notes.json",
+            "size_bytes": 1507,
+            "sha256": "6424cf8ab565f941e48e88fea2bad4d40116ecc61fd5d453bac6364ef3765996",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "extractSyncNotes",
+            "max_bytes": 80000
+          },
+          "duration_ms": 11,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/sync-extract-notes.json",
+            "size_bytes": 1347,
+            "sha256": "296cf4a1342174b0f1ca4adf1d452cfb0a8c5b2e3cbbfe48842418786ec6022b",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "cloudFileIsNewer",
+            "max_bytes": 30000
+          },
+          "duration_ms": 5,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/sync-cloud-newer.json",
+            "size_bytes": 1420,
+            "sha256": "91ec5951a6b33a979bde508f69d3675c4c8fb8e27648fd9f62caff4a62c7e966",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "localFileIsNewer",
+            "max_bytes": 30000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/sync-local-newer.json",
+            "size_bytes": 1400,
+            "sha256": "b7a26baaf22c86b7ec35783d12897b1130ddf4aba099f8478ae79221bfe1859c",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Cloud",
+            "method_name": "instance",
+            "overload_index": 1,
+            "max_bytes": 30000
+          },
+          "duration_ms": 65,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/cloud-dispatch.json",
+            "size_bytes": 1019,
+            "sha256": "3fb6214804bf48ca3ef63f6a65f4be093c9317acdc9a53a0efc7ad8e5df2a70a",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "initTTS",
+            "max_bytes": 80000
+          },
+          "duration_ms": 517,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/tts-init.json",
+            "size_bytes": 883,
+            "sha256": "6b80ac855618faea5305af4f4baaf73a77dc96909d9231ffc9b35db7b53995a4",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "setSpeakQueue",
+            "max_bytes": 100000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/tts-queue.json",
+            "size_bytes": 3040,
+            "sha256": "042d4002173ba22c8ce984a54d8c1bd70a96e33c8ec7a1c3bfb4c82f31dee333",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "pdfGetTtsLines",
+            "max_bytes": 80000
+          },
+          "duration_ms": 9,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/tts-pdf-text.json",
+            "size_bytes": 2775,
+            "sha256": "dbc5e07731d3d7f4439012c695c49eb75f99670dc457814bde3709bfdd381290",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "speakPdfNoFlowText",
+            "max_bytes": 80000
+          },
+          "duration_ms": 5,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/tts-pdf-speak.json",
+            "size_bytes": 1877,
+            "sha256": "e8217dde2f53b6e33eefcd8eb391e2fda32c48fc13ba904c48cd5286c621f17f",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "setSpeakOnUtteranceComplete",
+            "max_bytes": 80000
+          },
+          "duration_ms": 6,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/tts-progress.json",
+            "size_bytes": 4650,
+            "sha256": "8f690cf3a8867ae5a7e1dfb833184f32c1bf7f54e75cf6a86cf360beb7e88c1c",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.BookTtsService",
+            "method_name": "onStartCommand",
+            "max_bytes": 30000
+          },
+          "duration_ms": 5,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/tts-service-start.json",
+            "size_bytes": 1498,
+            "sha256": "747ed17153204846ca27150ab54f382f03e7f3073d80c4a8c7de5d56e7d91985",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "unload_apk",
+          "arguments": {},
+          "duration_ms": 20,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-focused-methods/unload.json",
+            "size_bytes": 372,
+            "sha256": "512221e4e07ed5acaaee2c81712028f42b87a71099d9570f23978e2fc9f6720c",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        }
+      ],
+      "input_hashes_before": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_hashes_after": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_bytes_unchanged": true,
+      "diagnostics": {
+        "error_log_lines": 100,
+        "warning_log_lines": 763,
+        "scope": "Log lines, including repeated and dependency diagnostics; not distinct defects or failed selected methods",
+        "evidence": {
+          "private_evidence_ref": "mcp-focused-methods/java.stderr.log",
+          "size_bytes": 449692,
+          "sha256": "7741ddb553e76a061f479dd82e511840a56e971e2b3a6e09dd08155ac5a59dde",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      "shutdown": {
+        "unload_acknowledged": true,
+        "eof_allowance_ms": 15000,
+        "owned_jvm_termination_required": true,
+        "child_exit": {
+          "code": null,
+          "signal": "SIGTERM"
+        }
+      },
+      "run_receipt": {
+        "private_evidence_ref": "mcp-focused-methods/run.json",
+        "size_bytes": 7402,
+        "sha256": "accc68a3a96dd5ed7d7403192eb17aac1ca4458166d43e8012c1c0b4e4336517",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "plan_receipt": {
+        "private_evidence_ref": "focused-methods-plan.json",
+        "size_bytes": 6606,
+        "sha256": "79a51e6cfbcc5c96bc0ae17dfe12611693f8f9d73d6b8b539276b1d3fc69ed3f",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    {
+      "id": "mcp-followup",
+      "evidence_kind": "ordinary local static evidence; not REA ledger",
+      "started_at": "2026-11-21T14:37:17.207Z",
+      "completed_at": "2026-11-21T14:39:40.137Z",
+      "client_runtime": "v26.13.0",
+      "command_template": "node <PRIVATE_CLIENT>/jadx-batch.mjs <PRIVATE_CLIENT>/followup-plan.json",
+      "java_arguments_template": [
+        "-Xmx3g",
+        "-XX:ActiveProcessorCount=4",
+        "-Djava.io.tmpdir=<PRIVATE_OUT>/java-tmp",
+        "-jar",
+        "<JAR>",
+        "--max-source-bytes",
+        "1000000",
+        "--decompile-timeout-ms",
+        "90000",
+        "--threads",
+        "4"
+      ],
+      "call_count": 24,
+      "calls": [
+        {
+          "tool": "load_apk",
+          "arguments": {
+            "path": "<APK>",
+            "threads": 4,
+            "resources": "lite"
+          },
+          "duration_ms": 19154,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/load.json",
+            "size_bytes": 756,
+            "sha256": "2cd6c5b53fbd0b7cdcd708169b96655ed8662841ebc0cf9dc9687e3fa02e565e",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "pdfOpen2",
+            "max_bytes": 100000
+          },
+          "duration_ms": 84656,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/pdf-file-open.json",
+            "size_bytes": 2593,
+            "sha256": "7eca91cab97daf635ef8eac031aadb4050d1309ac6146ecc9311cfee1ac227b5",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "pdfCreateReflowText",
+            "max_bytes": 100000
+          },
+          "duration_ms": 50,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/pdf-reflow-text.json",
+            "size_bytes": 1706,
+            "sha256": "e5e348e51195c1a5cf65788e878f7d45435076caff35146ef225cf61b4e48f42",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "pdfSaveChanges",
+            "max_bytes": 60000
+          },
+          "duration_ms": 37,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/pdf-save-changes.json",
+            "size_bytes": 1097,
+            "sha256": "5020c5b515da5e42c6d5d0f9f348bede475d54066e3ce4c87397fcc2c1cba937",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.books.PDFReader",
+            "method_name": "pdfCreateNotesFromText",
+            "max_bytes": 100000
+          },
+          "duration_ms": 4688,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/pdf-import-notes.json",
+            "size_bytes": 12445,
+            "sha256": "61c0aa93ec677d5e1424f96925207dc2ef89a1f66e2ed55c688dac228d461631",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefChapters",
+            "method_name": "doShare",
+            "max_bytes": 100000
+          },
+          "duration_ms": 247,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/notes-share-dispatch.json",
+            "size_bytes": 10207,
+            "sha256": "135494b28201f06293e85953811e505f72be4c4018311ec97c263a9f2bce0f75",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefChapters",
+            "method_name": "createShareContent",
+            "max_bytes": 100000
+          },
+          "duration_ms": 22,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/notes-share-content.json",
+            "size_bytes": 3721,
+            "sha256": "6aafa85220275c66dc5399bb641ec1df4ef7a8febfaf8c9f3ae627c11a1f8a95",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefChapters",
+            "method_name": "shareContent",
+            "max_bytes": 100000
+          },
+          "duration_ms": 66,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/notes-share-output.json",
+            "size_bytes": 5202,
+            "sha256": "52cdb2e8feddbaa739829881f34c0d6dda79ddb35cd265aadac5263061d6d46b",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_class_summary",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.BookDb.BookDBHelper"
+          },
+          "duration_ms": 27,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/notes-db-helper.json",
+            "size_bytes": 948,
+            "sha256": "63292fb306f70b4b19f027572b01e7bf2af6acf1ad0e60a3dd7e1937df1e3042",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_methods_of_class",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.T",
+            "filter": "saveFileText",
+            "limit": 30
+          },
+          "duration_ms": 101,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/notes-save-helper-methods.json",
+            "size_bytes": 1107,
+            "sha256": "5fd183af2907b321d9b6d7c42d082572cb9e8e6eaef573806c9816ec81cb4556",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "notifyNewCloudPosition",
+            "max_bytes": 100000
+          },
+          "duration_ms": 135,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/sync-notify-position.json",
+            "size_bytes": 2179,
+            "sha256": "d777f8bdb612f86067028497e40837025b66e025e3658beba68326a311d948f7",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "dealUploadedCloudPosition",
+            "max_bytes": 40000
+          },
+          "duration_ms": 41,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/sync-position-callback.json",
+            "size_bytes": 1391,
+            "sha256": "0e1c311a6af37eaeceafce3b8fedb63a94d3aa05e5402f19759cf8efe1e61dff",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "downloadCloudNoteFile",
+            "max_bytes": 40000
+          },
+          "duration_ms": 27,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/sync-download-notes.json",
+            "size_bytes": 1398,
+            "sha256": "e73e9430c9e37b71ebff2754a274dbd04a84286c5666022f3c527a51ee77eb0e",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "getSpeakText",
+            "max_bytes": 100000
+          },
+          "duration_ms": 17,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/tts-text-source.json",
+            "size_bytes": 4704,
+            "sha256": "ab4bacbb6844049e763ba525c855a05f628d615e49df5bf4220010193eb5aa07",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "doAfterAllUtteranceFinished",
+            "max_bytes": 80000
+          },
+          "duration_ms": 49,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/tts-after-page.json",
+            "size_bytes": 1936,
+            "sha256": "2469f81d62c6b5be549d153a97134ba63bd462d10ca3fedc5d25dc63d039abf6",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_methods_of_class",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.A",
+            "filter": "getTtsLines",
+            "limit": 30
+          },
+          "duration_ms": 62,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/tts-line-methods.json",
+            "size_bytes": 752,
+            "sha256": "58f7fdf570e6e68f45d6953a04d56c89453c8fb1745ddda1a61d91fa445f14d1",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_smali",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.ActivityTxt",
+            "method_name": "setSpeakQueue",
+            "max_bytes": 100000
+          },
+          "duration_ms": 814,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/tts-queue-smali.json",
+            "size_bytes": 7223,
+            "sha256": "2233e924868bacbd47e794afba995af2a555c9772c0ed2389547b5e1456137a9",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_smali",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "cloudFileIsNewer",
+            "max_bytes": 30000
+          },
+          "duration_ms": 107,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/sync-cloud-newer-smali.json",
+            "size_bytes": 3082,
+            "sha256": "d9bbe882be111328df6cd048d4c837aa19ac21264bf5e5f5918efc5afc259447",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_smali",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "localFileIsNewer",
+            "max_bytes": 30000
+          },
+          "duration_ms": 119,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/sync-local-newer-smali.json",
+            "size_bytes": 2876,
+            "sha256": "90a3aa20dd1c51e8f39de69ffc11432348d576229515dbb9c21cafabb9ed4ab1",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_smali",
+          "arguments": {
+            "class_name": "com.flyersoft.moonreaderp.PrefSearch.AnonymousClass4",
+            "method_name": "run",
+            "max_bytes": 180000
+          },
+          "duration_ms": 53,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/search-worker-smali.json",
+            "size_bytes": 38744,
+            "sha256": "aecdfa6d9260c445e206d14d8a5429f994ddca7c076440f66d19c7931f1786a0",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_smali",
+          "arguments": {
+            "class_name": "com.flyersoft.books.PDFReader",
+            "method_name": "pdfUpdateNotesToFile",
+            "max_bytes": 120000
+          },
+          "duration_ms": 106,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/pdf-update-notes-smali.json",
+            "size_bytes": 11744,
+            "sha256": "74f0b830706aabc76afef06c8811afa67b1c03b99021b6015de0ac73374e76f0",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_smali",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.BookDb",
+            "method_name": "exportNotesToFile",
+            "max_bytes": 30000
+          },
+          "duration_ms": 58,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/notes-export-file-smali.json",
+            "size_bytes": 1633,
+            "sha256": "94bce067185bca3ecc9cc55cc70fe2c7aeaf38164e30ab8009890a3fde65a3a4",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_xrefs_to_method",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.BookDb",
+            "method_name": "exportNotesToText",
+            "limit": 100,
+            "resolve_line": false
+          },
+          "duration_ms": 30,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/export-callers.json",
+            "size_bytes": 1104,
+            "sha256": "3eee94cb9b5a6f6923d488970e0086f5fe792d950df346dfc95b5e5e93d8a912",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "unload_apk",
+          "arguments": {},
+          "duration_ms": 11627,
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-followup/unload.json",
+            "size_bytes": 372,
+            "sha256": "73d2997f40e554110d57d85935b7dfdeb925dc91ae1318a93967e3fcbc4a2850",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        }
+      ],
+      "input_hashes_before": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_hashes_after": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_bytes_unchanged": true,
+      "diagnostics": {
+        "error_log_lines": 100,
+        "warning_log_lines": 762,
+        "scope": "Log lines, including repeated and dependency diagnostics; not distinct defects or failed selected methods",
+        "evidence": {
+          "private_evidence_ref": "mcp-followup/java.stderr.log",
+          "size_bytes": 447453,
+          "sha256": "4081951f22463e13ade38151b81abe00fddec4fe3ea4280232974d9e5ab572da",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      "shutdown": {
+        "unload_acknowledged": true,
+        "eof_allowance_ms": 15000,
+        "owned_jvm_termination_required": true,
+        "child_exit": {
+          "code": null,
+          "signal": "SIGTERM"
+        }
+      },
+      "run_receipt": {
+        "private_evidence_ref": "mcp-followup/run.json",
+        "size_bytes": 5638,
+        "sha256": "9fdef13739b70de4b73d74d1a7d064b403298db13c095fc314bfa6e585923ccb",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "plan_receipt": {
+        "private_evidence_ref": "followup-plan.json",
+        "size_bytes": 4435,
+        "sha256": "d39c1207b31fb2fb67eb3814596500327675d131f8921925b7bd45d7e354c3b0",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    {
+      "id": "mcp-bounded-followup-a",
+      "evidence_kind": "ordinary local static evidence; not REA ledger",
+      "started_at": "2026-11-21T15:07:36.937Z",
+      "completed_at": "2026-11-21T15:09:08.508Z",
+      "lifecycle_status": "finalized receipt with post-run hashes and child exit",
+      "client_runtime": "v26.13.0",
+      "command_template": "node <PRIVATE_CLIENT>/jadx-batch.mjs <PRIVATE_CLIENT>/bounded-followup-a-plan.json",
+      "java_arguments_template": [
+        "-Xmx3g",
+        "-XX:ActiveProcessorCount=4",
+        "-Djava.io.tmpdir=<PRIVATE_OUT>/java-tmp",
+        "-jar",
+        "<JAR>",
+        "--max-source-bytes",
+        "1000000",
+        "--decompile-timeout-ms",
+        "90000",
+        "--threads",
+        "4"
+      ],
+      "planned_call_count": 5,
+      "run_receipt_call_count": 5,
+      "call_count": 5,
+      "recovered_response_count": 0,
+      "calls": [
+        {
+          "tool": "load_apk",
+          "arguments": {
+            "path": "<APK>",
+            "threads": 4,
+            "resources": "lite"
+          },
+          "request_id": 3,
+          "response_id": 3,
+          "duration_ms": 12129,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-a/load.json",
+            "size_bytes": 757,
+            "sha256": "f62214ddc93b6ff087cfc3e7d0610716d85e85f35edbc99bbdbaa8dee4d47327",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.T",
+            "method_name": "saveFileText",
+            "overload_index": 0,
+            "max_bytes": 80000
+          },
+          "request_id": 4,
+          "response_id": 4,
+          "duration_ms": 62995,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-a/export-write-helper.json",
+            "size_bytes": 1787,
+            "sha256": "9fa5c2d0ca7030b3b208a7b0763f06b614a95e31d540b7fe4fed7aebd00403f5",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_xrefs_to_method",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "cloudFileIsNewer",
+            "limit": 100,
+            "resolve_line": false
+          },
+          "request_id": 5,
+          "response_id": 5,
+          "duration_ms": 17,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-a/cloud-newer-callers.json",
+            "size_bytes": 1159,
+            "sha256": "282c7c4189efe954a5e458a1e415ce35285041556491b0aef53cf978b6b0a083",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_xrefs_to_method",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "localFileIsNewer",
+            "limit": 100,
+            "resolve_line": false
+          },
+          "request_id": 6,
+          "response_id": 6,
+          "duration_ms": 20,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-a/local-newer-callers.json",
+            "size_bytes": 1155,
+            "sha256": "a307730a64aad75752cdd8d04b8510e752fb1190df5320ccde46bf6267885874",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "unload_apk",
+          "arguments": {},
+          "request_id": 7,
+          "response_id": 7,
+          "duration_ms": 39,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-a/unload.json",
+            "size_bytes": 370,
+            "sha256": "29c1f6369942e410cb12ef7c090a525f0852ca272ec47daa00f713dbd6b63e74",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        }
+      ],
+      "call_count_basis": "Retained request/response artifacts; run_receipt_call_count separately reports the original run.json array.",
+      "outcome": "completed",
+      "unexecuted_calls": [],
+      "unaccounted_planned_calls": [],
+      "input_hashes_before": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_hashes_after": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_bytes_unchanged": true,
+      "diagnostics": {
+        "error_log_lines": 100,
+        "warning_log_lines": 758,
+        "scope": "Retained log lines, including repeated and dependency diagnostics; not distinct defects or failed selected methods",
+        "completeness": "retained through recorded child exit",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-a/java.stderr.log",
+          "size_bytes": 443086,
+          "sha256": "c512efdcad7f9254954fc15a15f6d5632d0f2676653153f4ed3d0a63a7d78614",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      "shutdown": {
+        "unload_acknowledged": true,
+        "eof_allowance_ms": 15000,
+        "owned_jvm_termination_required": true,
+        "child_exit": {
+          "code": null,
+          "signal": "SIGTERM"
+        }
+      },
+      "run_receipt": {
+        "private_evidence_ref": "mcp-bounded-followup-a/run.json",
+        "size_bytes": 2781,
+        "sha256": "9de54c0567b87900b143a8ff56497647709a7ae5b7730fe9f14e80ca26a6aef9",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "plan_receipt": {
+        "private_evidence_ref": "bounded-followup-a-plan.json",
+        "size_bytes": 909,
+        "sha256": "9a472d4612134edca22e52da7816c8d3be565c257d5e80a469f8a160d1aa4724",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    {
+      "id": "mcp-bounded-followup-b",
+      "evidence_kind": "ordinary local static evidence; not REA ledger",
+      "started_at": "2026-11-21T15:11:44.787Z",
+      "completed_at": "2026-11-21T15:13:01.803Z",
+      "lifecycle_status": "finalized receipt with post-run hashes and child exit",
+      "client_runtime": "v26.13.0",
+      "command_template": "node <PRIVATE_CLIENT>/jadx-batch.mjs <PRIVATE_CLIENT>/bounded-followup-b-plan.json",
+      "java_arguments_template": [
+        "-Xmx3g",
+        "-XX:ActiveProcessorCount=4",
+        "-Djava.io.tmpdir=<PRIVATE_OUT>/java-tmp",
+        "-jar",
+        "<JAR>",
+        "--max-source-bytes",
+        "1000000",
+        "--decompile-timeout-ms",
+        "90000",
+        "--threads",
+        "4"
+      ],
+      "planned_call_count": 10,
+      "run_receipt_call_count": 3,
+      "call_count": 3,
+      "recovered_response_count": 0,
+      "calls": [
+        {
+          "tool": "load_apk",
+          "arguments": {
+            "path": "<APK>",
+            "threads": 4,
+            "resources": "lite"
+          },
+          "request_id": 3,
+          "response_id": 3,
+          "duration_ms": 9957,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-b/load.json",
+            "size_bytes": 756,
+            "sha256": "ada8b1a78ecaeed156f1f30ba1f4e1695b5948ea1cab15200ce0f84eef24e2af",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_methods_of_class",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.T",
+            "filter": "saveNormalFileText",
+            "limit": 30
+          },
+          "request_id": 4,
+          "response_id": 4,
+          "duration_ms": 50546,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-b/normal-writer-signatures.json",
+            "size_bytes": 760,
+            "sha256": "f33b6055b4bdac2ead8bf7d8e7ac16457a503d354b31b89c000541b96530151d",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync.AnonymousClass7.AnonymousClass1",
+            "method_name": "run",
+            "max_bytes": 100000
+          },
+          "request_id": 5,
+          "response_id": 5,
+          "duration_ms": 132,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": true,
+          "error_summary": "JADX class selector did not resolve; no method body was obtained.",
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-b/sync-shared-worker.json",
+            "size_bytes": 1166,
+            "sha256": "49d7146ac00952bdd99df4f8a0e29f4b4793aa3ca1d0de27b5aa98e28e5170dd",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        }
+      ],
+      "call_count_basis": "Retained request/response artifacts; run_receipt_call_count separately reports the original run.json array.",
+      "outcome": "stopped after an unresolved class selector; partial evidence retained",
+      "unexecuted_calls": [
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "verifyDownloadBookCovers",
+            "max_bytes": 80000
+          },
+          "disposition": "not executed in this run"
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "verifyUploadBookCovers",
+            "max_bytes": 80000
+          },
+          "disposition": "not executed in this run"
+        },
+        {
+          "tool": "get_xrefs_to_class",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync.AnonymousClass7.AnonymousClass1",
+            "limit": 50,
+            "resolve_line": false
+          },
+          "disposition": "not executed in this run"
+        },
+        {
+          "tool": "get_xrefs_to_method",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "verifyDownloadBookCovers",
+            "limit": 50,
+            "resolve_line": false
+          },
+          "disposition": "not executed in this run"
+        },
+        {
+          "tool": "get_xrefs_to_method",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "verifyUploadBookCovers",
+            "limit": 50,
+            "resolve_line": false
+          },
+          "disposition": "not executed in this run"
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.A",
+            "method_name": "getTtsLines",
+            "max_bytes": 100000
+          },
+          "disposition": "not executed in this run"
+        },
+        {
+          "tool": "unload_apk",
+          "arguments": {},
+          "disposition": "not executed in this run"
+        }
+      ],
+      "unaccounted_planned_calls": [],
+      "input_hashes_before": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_hashes_after": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_bytes_unchanged": true,
+      "diagnostics": {
+        "error_log_lines": 100,
+        "warning_log_lines": 756,
+        "scope": "Retained log lines, including repeated and dependency diagnostics; not distinct defects or failed selected methods",
+        "completeness": "retained through recorded child exit",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-b/java.stderr.log",
+          "size_bytes": 440469,
+          "sha256": "14e913680af503ca5d8fcf89328b3135c2bc90c3b3d36b62e969e421eabf51d9",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      "shutdown": {
+        "unload_acknowledged": false,
+        "eof_allowance_ms": 15000,
+        "owned_jvm_termination_required": true,
+        "child_exit": {
+          "code": null,
+          "signal": "SIGTERM"
+        }
+      },
+      "run_receipt": {
+        "private_evidence_ref": "mcp-bounded-followup-b/run.json",
+        "size_bytes": 2679,
+        "sha256": "63e4eb1461da4cc3f2254a292b1e60933f0bdf0163e6cc850cfe428d592ad2ac",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "plan_receipt": {
+        "private_evidence_ref": "bounded-followup-b-plan.json",
+        "size_bytes": 1897,
+        "sha256": "6086bda1886bda25ea41f51283e250be1d3dd856bcb90e270cd09c4eddaf9e0f",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    {
+      "id": "mcp-bounded-followup-c",
+      "evidence_kind": "ordinary local static evidence; not REA ledger",
+      "started_at": "2026-11-21T15:17:05.476Z",
+      "completed_at": "2026-11-21T15:18:51.553Z",
+      "lifecycle_status": "finalized receipt with post-run hashes and child exit",
+      "client_runtime": "v26.13.0",
+      "command_template": "node <PRIVATE_CLIENT>/jadx-batch.mjs <PRIVATE_CLIENT>/bounded-followup-c-plan.json",
+      "java_arguments_template": [
+        "-Xmx3g",
+        "-XX:ActiveProcessorCount=4",
+        "-Djava.io.tmpdir=<PRIVATE_OUT>/java-tmp",
+        "-jar",
+        "<JAR>",
+        "--max-source-bytes",
+        "1000000",
+        "--decompile-timeout-ms",
+        "90000",
+        "--threads",
+        "4"
+      ],
+      "planned_call_count": 10,
+      "run_receipt_call_count": 10,
+      "call_count": 10,
+      "recovered_response_count": 0,
+      "calls": [
+        {
+          "tool": "load_apk",
+          "arguments": {
+            "path": "<APK>",
+            "threads": 4,
+            "resources": "lite"
+          },
+          "request_id": 3,
+          "response_id": 3,
+          "duration_ms": 30365,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-c/load.json",
+            "size_bytes": 757,
+            "sha256": "5503431dad694e48cf3df1d633bc418a0f5acaf3f880cb2c298a4a34f70cc194",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.T",
+            "method_name": "saveNormalFileText",
+            "max_bytes": 80000
+          },
+          "request_id": 4,
+          "response_id": 4,
+          "duration_ms": 50068,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-c/normal-write-helper.json",
+            "size_bytes": 3859,
+            "sha256": "5a914a919cc8502630007dd713603ddf640cb61143a07b56d7fa83e5a6daa9c4",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "verifyDownloadBookCovers",
+            "max_bytes": 80000
+          },
+          "request_id": 5,
+          "response_id": 5,
+          "duration_ms": 4731,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-c/verify-download-covers.json",
+            "size_bytes": 1889,
+            "sha256": "3f1bc21cd3491fb77441fe595e5f85a2d33a53a8ca59103bf75d3cd5952c7767",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "verifyUploadBookCovers",
+            "max_bytes": 80000
+          },
+          "request_id": 6,
+          "response_id": 6,
+          "duration_ms": 14,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-c/verify-upload-covers.json",
+            "size_bytes": 1889,
+            "sha256": "d454410aa8846068597f3397b3fa27df27e08cb888f56ead5bd7770293ada3f4",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_inner_classes",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync"
+          },
+          "request_id": 7,
+          "response_id": 7,
+          "duration_ms": 15,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-c/sync-inner-identities.json",
+            "size_bytes": 849,
+            "sha256": "8c794dd536cb29a501c9d3a203d9974491e1fd3a38e3168c73a2dff7412ab7e9",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "resolve_class",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync.7.1"
+          },
+          "request_id": 8,
+          "response_id": 8,
+          "duration_ms": 97,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-c/sync-worker-resolution.json",
+            "size_bytes": 4047,
+            "sha256": "ace003f4d0810db69294037528b0fce5e0389612acf90e24ff32f4e4194da11c",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_xrefs_to_method",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "verifyDownloadBookCovers",
+            "limit": 50,
+            "resolve_line": false
+          },
+          "request_id": 9,
+          "response_id": 9,
+          "duration_ms": 49,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-c/download-covers-callers.json",
+            "size_bytes": 914,
+            "sha256": "1c82d65b9304b96fc2581862f5c6527d3928472921dff5994f27d1a06097991f",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_xrefs_to_method",
+          "arguments": {
+            "class_name": "com.flyersoft.components.cloud.Sync",
+            "method_name": "verifyUploadBookCovers",
+            "limit": 50,
+            "resolve_line": false
+          },
+          "request_id": 10,
+          "response_id": 10,
+          "duration_ms": 8,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-c/upload-covers-callers.json",
+            "size_bytes": 912,
+            "sha256": "645e9fb234735c1ae46ba17aaed6b49c8fe69ccfd743b3bed8de9ab685121a30",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.A",
+            "method_name": "getTtsLines",
+            "max_bytes": 100000
+          },
+          "request_id": 11,
+          "response_id": 11,
+          "duration_ms": 297,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-c/tts-segmentation.json",
+            "size_bytes": 11285,
+            "sha256": "1de4d4f261a763801589d84bc61b7651723ced3d2a03ae70f5217ef9c40975e8",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "unload_apk",
+          "arguments": {},
+          "request_id": 12,
+          "response_id": 12,
+          "duration_ms": 27,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-c/unload.json",
+            "size_bytes": 372,
+            "sha256": "a3a0019d987b315bf4757b358b470877071f2a3e09221dde9eef7a17e4337989",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        }
+      ],
+      "call_count_basis": "Retained request/response artifacts; run_receipt_call_count separately reports the original run.json array.",
+      "outcome": "completed",
+      "unexecuted_calls": [],
+      "unaccounted_planned_calls": [],
+      "input_hashes_before": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_hashes_after": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_bytes_unchanged": true,
+      "diagnostics": {
+        "error_log_lines": 100,
+        "warning_log_lines": 765,
+        "scope": "Retained log lines, including repeated and dependency diagnostics; not distinct defects or failed selected methods",
+        "completeness": "retained through recorded child exit",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-c/java.stderr.log",
+          "size_bytes": 445146,
+          "sha256": "1a2e355f48e66b7c863f127571abba98b3131666c38114c8fc2ce98c4c2db1c3",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      "shutdown": {
+        "unload_acknowledged": true,
+        "eof_allowance_ms": 15000,
+        "owned_jvm_termination_required": true,
+        "child_exit": {
+          "code": null,
+          "signal": "SIGTERM"
+        }
+      },
+      "run_receipt": {
+        "private_evidence_ref": "mcp-bounded-followup-c/run.json",
+        "size_bytes": 3550,
+        "sha256": "b0636c1dfb9a6ca34a5c0f1b774f9449d7a8f8e4b36c8b82f2e2c9f4aaab0dbf",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "plan_receipt": {
+        "private_evidence_ref": "bounded-followup-c-plan.json",
+        "size_bytes": 1782,
+        "sha256": "2381255faab29d85e73752682fdb9f50dd174f17109edbc73a8dc99f8ce7bb06",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    {
+      "id": "mcp-bounded-followup-d",
+      "evidence_kind": "ordinary local static evidence; not REA ledger",
+      "started_at": "2026-11-21T15:26:01.842Z",
+      "completed_at": "2026-11-21T15:28:02.028Z",
+      "lifecycle_status": "finalized receipt with post-run hashes and child exit",
+      "client_runtime": "v26.13.0",
+      "command_template": "node <PRIVATE_CLIENT>/jadx-batch.mjs <PRIVATE_CLIENT>/bounded-followup-d-plan.json",
+      "java_arguments_template": [
+        "-Xmx3g",
+        "-XX:ActiveProcessorCount=4",
+        "-Djava.io.tmpdir=<PRIVATE_OUT>/java-tmp",
+        "-jar",
+        "<JAR>",
+        "--max-source-bytes",
+        "1000000",
+        "--decompile-timeout-ms",
+        "90000",
+        "--threads",
+        "4"
+      ],
+      "planned_call_count": 4,
+      "run_receipt_call_count": 4,
+      "call_count": 4,
+      "recovered_response_count": 0,
+      "calls": [
+        {
+          "tool": "load_apk",
+          "arguments": {
+            "path": "<APK>",
+            "threads": 4,
+            "resources": "lite"
+          },
+          "request_id": 3,
+          "response_id": 3,
+          "duration_ms": 9671,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-d/load.json",
+            "size_bytes": 756,
+            "sha256": "7a7b14e51800a88ea170cd49dfbd8dae1122a004945d6369c7aa86053be69d43",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_methods_of_class",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.A",
+            "filter": "addTtsLine",
+            "limit": 20
+          },
+          "request_id": 4,
+          "response_id": 4,
+          "duration_ms": 85944,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-d/tts-line-adder-signatures.json",
+            "size_bytes": 732,
+            "sha256": "98ae121ef4a092ba470abe42d44ffd5f02a804c274eea1729e951e700efb335c",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_methods_of_class",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.A.TtsLine",
+            "filter": "<init>",
+            "limit": 20
+          },
+          "request_id": 5,
+          "response_id": 5,
+          "duration_ms": 9,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-d/tts-line-constructor-signatures.json",
+            "size_bytes": 756,
+            "sha256": "7e80db4553aa46ee1ad2971b643fc33637b3f2f27632181fcf6e08a796a15885",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "unload_apk",
+          "arguments": {},
+          "request_id": 6,
+          "response_id": 6,
+          "duration_ms": 20,
+          "recorded_in_run_receipt": true,
+          "evidence_status": "response-recorded-in-finalized-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-d/unload.json",
+            "size_bytes": 370,
+            "sha256": "c425b44f890aa4056213e9dc627a930b6e46dcb1a2b13ff3b42c65eea1ff5cb0",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        }
+      ],
+      "call_count_basis": "Retained request/response artifacts; run_receipt_call_count separately reports the original run.json array.",
+      "outcome": "completed",
+      "unexecuted_calls": [],
+      "unaccounted_planned_calls": [],
+      "input_hashes_before": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_hashes_after": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_bytes_unchanged": true,
+      "diagnostics": {
+        "error_log_lines": 100,
+        "warning_log_lines": 756,
+        "scope": "Retained log lines, including repeated and dependency diagnostics; not distinct defects or failed selected methods",
+        "completeness": "retained through recorded child exit",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-d/java.stderr.log",
+          "size_bytes": 440647,
+          "sha256": "2934cc5358e71fe22d20b39d85710b3e88060bcb2ce1291b0f689b4c047278f8",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      "shutdown": {
+        "unload_acknowledged": true,
+        "eof_allowance_ms": 15000,
+        "owned_jvm_termination_required": true,
+        "child_exit": {
+          "code": null,
+          "signal": "SIGTERM"
+        }
+      },
+      "run_receipt": {
+        "private_evidence_ref": "mcp-bounded-followup-d/run.json",
+        "size_bytes": 2648,
+        "sha256": "86a316703005881d4f018ecaea0e8992b76286e27692e35223f149b28d5c3c55",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "plan_receipt": {
+        "private_evidence_ref": "bounded-followup-d-plan.json",
+        "size_bytes": 641,
+        "sha256": "a4c48d1f9578da94d4ce5c99bfb22070fcb3eb040aecf2d56e83d1ba84c5f3ab",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    },
+    {
+      "id": "mcp-bounded-followup-e",
+      "evidence_kind": "ordinary local static evidence; not REA ledger",
+      "started_at": "2026-11-21T15:31:06.599Z",
+      "completed_at": null,
+      "lifecycle_status": "interrupted; final receipt unavailable",
+      "client_runtime": "v26.13.0",
+      "command_template": "node <PRIVATE_CLIENT>/jadx-batch.mjs <PRIVATE_CLIENT>/bounded-followup-e-plan.json",
+      "java_arguments_template": [
+        "-Xmx3g",
+        "-XX:ActiveProcessorCount=4",
+        "-Djava.io.tmpdir=<PRIVATE_OUT>/java-tmp",
+        "-jar",
+        "<JAR>",
+        "--max-source-bytes",
+        "1000000",
+        "--decompile-timeout-ms",
+        "90000",
+        "--threads",
+        "4"
+      ],
+      "planned_call_count": 4,
+      "run_receipt_call_count": 0,
+      "call_count": 3,
+      "recovered_response_count": 3,
+      "calls": [
+        {
+          "tool": "load_apk",
+          "arguments": {
+            "path": "<APK>",
+            "threads": 4,
+            "resources": "lite"
+          },
+          "request_id": 3,
+          "response_id": 3,
+          "duration_ms": null,
+          "recorded_in_run_receipt": false,
+          "evidence_status": "recovered-response-from-interrupted-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-e/load.json",
+            "size_bytes": 757,
+            "sha256": "8e7de291525037c17049059f624d61d87a1be47398af877c7b81c4e7b324d8e0",
+            "publication": "raw evidence retained privately; digest only"
+          },
+          "decoded_evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-e/load.decoded.json",
+            "size_bytes": 305,
+            "sha256": "167847b7b08372656a900ca8a332c58b5c059edb7030fe5c3e1786a19394a2f3",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.A",
+            "method_name": "addTtsLine",
+            "max_bytes": 80000
+          },
+          "request_id": 4,
+          "response_id": 4,
+          "duration_ms": null,
+          "recorded_in_run_receipt": false,
+          "evidence_status": "recovered-response-from-interrupted-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-e/tts-line-adder.json",
+            "size_bytes": 877,
+            "sha256": "0cab2db8e9554e710f2df3ef59a6cf4b52fdcb2932c341854f71bbf4d08435b3",
+            "publication": "raw evidence retained privately; digest only"
+          },
+          "decoded_evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-e/tts-line-adder.decoded.json",
+            "size_bytes": 426,
+            "sha256": "cc57cf95d58b4c3fcaf197b65ee3e724477a98df4cbed194adffe645dedf8612",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        },
+        {
+          "tool": "get_method_body",
+          "arguments": {
+            "class_name": "com.flyersoft.tools.A.TtsLine",
+            "method_name": "<init>",
+            "overload_index": 0,
+            "max_bytes": 80000
+          },
+          "request_id": 5,
+          "response_id": 5,
+          "duration_ms": null,
+          "recorded_in_run_receipt": false,
+          "evidence_status": "recovered-response-from-interrupted-run",
+          "transport_error": false,
+          "tool_error": false,
+          "evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-e/tts-line-constructor.json",
+            "size_bytes": 6957,
+            "sha256": "44a57f60cf71523c4930908a01709aecaa24ab570667ee2b50781c35fea080a2",
+            "publication": "raw evidence retained privately; digest only"
+          },
+          "decoded_evidence": {
+            "private_evidence_ref": "mcp-bounded-followup-e/tts-line-constructor.decoded.json",
+            "size_bytes": 6147,
+            "sha256": "fc16f0789bb7b9c7dd8d3b90ae6099cb06b0e2917ca4037d295ec153de0591eb",
+            "publication": "raw evidence retained privately; digest only"
+          }
+        }
+      ],
+      "call_count_basis": "Retained request/response artifacts; run_receipt_call_count separately reports the original run.json array.",
+      "outcome": "interrupted; three response artifacts recovered; finalization unknown",
+      "unexecuted_calls": [],
+      "unaccounted_planned_calls": [
+        {
+          "tool": "unload_apk",
+          "arguments": {},
+          "disposition": "no saved exchange; request execution and response receipt unknown"
+        }
+      ],
+      "input_hashes_before": {
+        "jar": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+        "apk": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc"
+      },
+      "input_hashes_after": null,
+      "input_bytes_unchanged": null,
+      "diagnostics": {
+        "error_log_lines": 100,
+        "warning_log_lines": 764,
+        "scope": "Retained log lines, including repeated and dependency diagnostics; not distinct defects or failed selected methods",
+        "completeness": "unknown after interruption",
+        "evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-e/java.stderr.log",
+          "size_bytes": 443035,
+          "sha256": "b6334588b63215bcb9e4829ac5421eba4c2ce33a950a8c9125bac8bc4ed47cb9",
+          "publication": "raw evidence retained privately; digest only"
+        }
+      },
+      "shutdown": {
+        "unload_acknowledged": null,
+        "eof_allowance_ms": null,
+        "owned_jvm_termination_required": null,
+        "child_exit": null
+      },
+      "recovery": {
+        "recovered_at": "2026-11-21T16:14:18.789Z",
+        "basis": "Individual request/response pairs and decoded sidecars survived. The original initial-only run receipt is retained byte-for-byte; its empty calls array is not rewritten.",
+        "initialization_evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-e/initialize.json",
+          "size_bytes": 532,
+          "sha256": "f915330c7a27a24207558fc62ece13fa924514b5bb751c7574b55057f56d650c",
+          "publication": "raw evidence retained privately; digest only"
+        },
+        "catalog_evidence": {
+          "private_evidence_ref": "mcp-bounded-followup-e/tools.json",
+          "size_bytes": 21103,
+          "sha256": "07e154821df6e6e207fc8957293d91081f626538b3f1f7261c3d3ca8f5382230",
+          "publication": "raw evidence retained privately; digest only"
+        },
+        "limitations": [
+          "Responses establish receipt of the three exchanges, not finalization of the run.",
+          "Per-call duration, post-run input hashes, unload acknowledgment, child exit and cleanup are unknown.",
+          "No saved unload exchange exists; whether that request was sent is unknown."
+        ]
+      },
+      "run_receipt": {
+        "private_evidence_ref": "mcp-bounded-followup-e/run.json",
+        "size_bytes": 1046,
+        "sha256": "f9585c8d7338da7c39166c08183adc923f656d588356921d74bf5cedb64ce9ab",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "plan_receipt": {
+        "private_evidence_ref": "bounded-followup-e-plan.json",
+        "size_bytes": 654,
+        "sha256": "ef071ae69ee064ada823e1e90647b555a690239078b42d3833f065b08893ca2c",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    }
+  ],
+  "client_implementation_receipt": {
+    "private_evidence_ref": "jadx-batch.mjs",
+    "size_bytes": 6063,
+    "sha256": "7527c870ae0e6c0bcd9852f9720a5d5ae53b6367d696f62fb2070c0945776dc3",
+    "publication": "raw evidence retained privately; digest only"
+  },
+  "publication_boundary": {
+    "proprietary_apk_included": false,
+    "decompiled_or_disassembled_bodies_included": false,
+    "credentials_included": false,
+    "host_paths_included": false,
+    "raw_evidence_retained_privately": true
+  },
+  "limitations": [
+    "Successful calls and unchanged hashes establish saved evidence provenance, not source reconstruction correctness or runtime correctness.",
+    "Raw evidence is withheld; hash receipts identify retained bytes but cannot independently reproduce analysis without access to the selected APK and tools.",
+    "All shell jobs used the harness background mode; no shared REA session was used or reset by this lane.",
+    "Run E has pre-run identity and three recovered responses only. No final run receipt, post-run identity, unload acknowledgment, child exit or cleanup result is available. Current verification-time hashes do not reconstruct those missing events."
+  ],
+  "updated_at": "2026-11-21T16:14:18.789Z",
+  "bounded_followup": {
+    "observed_at": "2026-11-21T16:14:18.789Z",
+    "authorization": "One bounded follow-up: export write-failure return, freshness callers, and TTS segmentation if needed.",
+    "maximum_new_method_bodies": 8,
+    "attempted_new_method_bodies": 8,
+    "selected_new_method_bodies": 7,
+    "unresolved_method_requests": 1,
+    "method_response_artifacts": 8,
+    "successful_bodies_in_finalized_runs": 5,
+    "recovered_bodies_from_interrupted_run": 2,
+    "method_requests_in_finalized_run_receipts": 6,
+    "planned_method_body_slots": 11,
+    "planned_call_slots": 33,
+    "recorded_calls_in_finalized_run_receipts": 22,
+    "retained_response_artifacts": 25,
+    "recovered_response_artifacts": 3,
+    "successful_response_artifacts": 24,
+    "failed_response_artifacts": 1,
+    "unexecuted_call_slots": 7,
+    "execution_unknown_call_slots": 1,
+    "finalized_run_receipts": 4,
+    "all_planned_calls_succeeded_runs": 3,
+    "stopped_after_selector_failure_runs": 1,
+    "interrupted_runs": 1,
+    "count_convention": "Requests are evidenced by retained exchanges, including one tool-error response. Successful body responses include two recovered from an interrupted run; their presence does not establish run completion. Planned but unexecuted/unknown slots are excluded from request counts.",
+    "reference_queries": 4,
+    "signature_queries": 3,
+    "identity_resolution_queries": 2,
+    "run_ids": [
+      "mcp-bounded-followup-a",
+      "mcp-bounded-followup-b",
+      "mcp-bounded-followup-c",
+      "mcp-bounded-followup-d",
+      "mcp-bounded-followup-e"
+    ],
+    "old_finding_ids_preserved": true,
+    "original_inventory_reused": true,
+    "application_executed": false,
+    "baseline_evidence": {
+      "private_evidence_ref": "bounded-followup-baseline/baseline.json",
+      "size_bytes": 2021,
+      "sha256": "0d8218ed55d4661abedf4b00f1d6daa18c2e17aaa110274059fe99c7592818e0",
+      "publication": "raw evidence retained privately; digest only"
+    },
+    "integration": {
+      "command_template": "node <PRIVATE_STATIC_ANALYSIS_DIR>/apply-bounded-followup.mjs",
+      "scope": "Saved-evidence integration only; no new APK analysis requests.",
+      "implementation": {
+        "private_evidence_ref": "apply-bounded-followup.mjs",
+        "size_bytes": 21405,
+        "sha256": "96f87bbdcd08360ac95827b4887d75b1a066a402ca0fc3ee2cf568789382d555",
+        "publication": "raw evidence retained privately; digest only"
+      },
+      "finding_updates": {
+        "private_evidence_ref": "bounded-followup-update.json",
+        "size_bytes": 9330,
+        "sha256": "8cd8361371cf123b2d1c21dc324cf6149f50c875bcaf1329b04398b3b343998c",
+        "publication": "raw evidence retained privately; digest only"
+      }
+    }
+  }
+}

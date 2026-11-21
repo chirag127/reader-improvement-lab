@@ -1,0 +1,29 @@
+{
+  "id": "runtime-claims-independent-review",
+  "observed_at": "2026-11-21",
+  "evidence_type": "independent-evidence-review",
+  "application_tests_executed": false,
+  "reviewer": "Separate read-only reviewer, using retained runtime records and selected supporting evidence",
+  "verdict": "No material inconsistencies found in the inspected runtime claims",
+  "inputs": [
+    {"path": "data/runtime-results.json", "sha256": "a56b72015ae29846e6cd2a364b5d2279227e44be85bc5a6fb468d2f55637613e"},
+    {"path": "knowledge/runtime-results.md", "sha256": "38ca0ca4332340804de52bdf1327cec8393924b741cf50f74811cf486bd7ef05"},
+    {"path": "evidence/runtime/manifest.json", "sha256": "2e977ed2edf780a31fe571ffd3c07f4186bccea28de10468c8c43e0769e61176"},
+    {"path": "knowledge/testing-plan.md", "sha256": "d39c52089e4d79907406e517a96a5af81e603da44570d0be3858ea9a065f15ef"},
+    {"path": "evidence/runtime/form-preserved-output-inspection.json", "sha256": "c365199fd6788f90f120bda5434ac3c032576e2defa6dcf8d21d479a876a9887"},
+    {"path": "evidence/runtime/form-repeat-text-only-inspection.json", "sha256": "ce303c792879cdb19055fea32a94a6886dcbf59c7b931e8544b456eeabb96764"},
+    {"path": "evidence/runtime/outputs/acroform.pdf", "sha256": "af860b1720c51d4f2ebaca787c80e9230d201ababbc9599f41c1b12e2de0067a"},
+    {"path": "evidence/runtime/outputs/acroform-repeat.pdf", "sha256": "4f189a85b395615b8ae6726f333bb7e4805ae52b4d7cb5621e7f6d718425d9d9"}
+  ],
+  "scope": [
+    "Canonical counts and separation of complete, partial, failed, blocked and unexecuted cases",
+    "Saved-form trailer identities, text-only repeat boundary, close-triggered saving and independent-parser outcomes",
+    "Fixture identities, auxiliary observations, and unknown-origin artifact attribution",
+    "Selected text, metadata and captures for publication-sensitive content"
+  ],
+  "limitations": [
+    "Snapshot-bound review; no new application execution or parser run.",
+    "Delivery totals of 105 manifest files, 123 distinct hashes and 213 command records remain the runtime owner's verification result, not a repeated full verification by this reviewer.",
+    "Publication-content inspection was selective. Later changes require focused reassessment."
+  ]
+}

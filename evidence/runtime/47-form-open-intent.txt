@@ -1,0 +1,11 @@
+Starting: Intent { act=android.intent.action.VIEW dat=file:///... typ=application/pdf pkg=com.flyersoft.moonreaderp }
+
+Status: timeout
+
+LaunchState: UNKNOWN (-1)
+
+Activity: com.flyersoft.moonreaderp/.ActivityTxt
+
+WaitTime: 11247
+
+Complete

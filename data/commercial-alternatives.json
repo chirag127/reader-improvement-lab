@@ -1,0 +1,569 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-21",
+  "scope": "Seven commercial or legacy Android reader product families, using the official sources already reviewed. Free and paid editions are grouped with entitlement limitations. Features are publisher documentation, not runtime results. Format lists are bounded reading-format inventories, not exhaustive conversion matrices.",
+  "report_path": "knowledge/moon-baseline.md#commercial-and-legacy-android-comparators",
+  "identity_disambiguation_path": "knowledge/moon-baseline.md#resolving-the-name-reader-pro",
+  "alternatives": [
+    {
+      "id": "adobe-acrobat-android",
+      "name": "Adobe Acrobat Reader for Android",
+      "repository": null,
+      "license": "Commercial application; a full-app open-source license was not established in reviewed official material.",
+      "source_availability": "Full current Android app source unavailable in reviewed official material.",
+      "platforms": ["Android"],
+      "packages": ["com.adobe.reader"],
+      "formats": ["PDF"],
+      "evidence_type": "documented",
+      "features": [
+        {
+          "name": "PDF reading, highlights, comments, and sticky notes",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?feature=nav_result&id=com.adobe.reader",
+          "entitlement": "Advertised as free."
+        },
+        {
+          "name": "Fill PDF forms and add handwritten signatures",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?feature=nav_result&id=com.adobe.reader",
+          "entitlement": "Advertised as free."
+        },
+        {
+          "name": "Liquid Mode for a screen-fitting reading layout",
+          "evidence_type": "documented",
+          "source_url": "https://www.adobe.com/devnet-docs/acrobat/android/en/lmode.html",
+          "limitations": ["The detailed help is visibly dated 2025-08-07; its server-processing description and compatibility limits were not retested on the current app."]
+        },
+        {
+          "name": "File access from the device, Google Drive, OneDrive, and Dropbox",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?feature=nav_result&id=com.adobe.reader"
+        },
+        {
+          "name": "PDF editing, conversion, OCR, compression, and page operations",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?feature=nav_result&id=com.adobe.reader",
+          "entitlement": "Listed under Acrobat Premium."
+        },
+        {
+          "name": "Read-aloud with higher-quality voice options",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?feature=nav_result&id=com.adobe.reader",
+          "entitlement": "Higher-quality voices are listed under Premium; all voice and mode combinations were not established."
+        }
+      ],
+      "sources": [
+        {
+          "id": "A01",
+          "url": "https://play.google.com/store/apps/details?feature=nav_result&id=com.adobe.reader",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:04:51Z",
+          "evidence_type": "documented",
+          "scope": "Android package and advertised free/Premium capabilities."
+        },
+        {
+          "id": "A02",
+          "url": "https://www.adobe.com/acrobat/mobile/acrobat-reader.html",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T13:59:57Z",
+          "evidence_type": "documented",
+          "scope": "Official mobile product description; successful parsed fetch, although a separate direct fetch returned 403."
+        },
+        {
+          "id": "A03",
+          "url": "https://helpx.adobe.com/ee/acrobat/mobile/get-started/overview.html",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:02:32Z",
+          "evidence_type": "documented",
+          "scope": "Official mobile overview, including reading, cloud, audio, and support topics."
+        },
+        {
+          "id": "A04",
+          "url": "https://www.adobe.com/devnet-docs/acrobat/android/en/lmode.html",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:08:25Z",
+          "evidence_type": "documented",
+          "scope": "Android Liquid Mode help; visible last update 2025-08-07 12:37."
+        }
+      ],
+      "limitations": [
+        "No application installation, execution, or decompilation was performed for this documentation review.",
+        "Mobile Reader and desktop Acrobat Pro are distinct comparison targets.",
+        "The dated Liquid Mode page describes server processing and deletion after layout generation, possible limits above 200 pages or 10 MB, and restrictions involving scans, encryption, languages, and complex layouts. It documents TalkBack support and says Dark Mode is not supported; current runtime restrictions remain unverified.",
+        "A source-code repository for the complete current Android product was not established; this does not classify every Adobe library as closed-source.",
+        "No exact installed version, performance result, or successful cloud/voice workflow was established."
+      ]
+    },
+    {
+      "id": "xodo-android",
+      "name": "Xodo PDF Reader and Editor for Android",
+      "repository": null,
+      "license": "Commercial application; the reviewed website terms explicitly distinguish the mobile-app terms.",
+      "source_availability": "Full current Android app source unavailable in reviewed official material.",
+      "platforms": ["Android"],
+      "packages": ["com.xodo.pdf.reader"],
+      "formats": ["PDF"],
+      "evidence_type": "documented",
+      "features": [
+        {
+          "name": "PDF viewing and annotations including highlights, underlines, drawing, and added text",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?hl=en_US&id=com.xodo.pdf.reader"
+        },
+        {
+          "name": "Form filling, field detection, and signatures",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?hl=en_US&id=com.xodo.pdf.reader"
+        },
+        {
+          "name": "Scanning and OCR for searchable PDFs",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?hl=en_US&id=com.xodo.pdf.reader"
+        },
+        {
+          "name": "Conversion, merge/split, crop, compression, flattening, and redaction tools",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?hl=en_US&id=com.xodo.pdf.reader"
+        },
+        {
+          "name": "Reading Mode/Reflow with adjustable text size",
+          "evidence_type": "documented",
+          "source_url": "https://feedback.xodo.com/support/solutions/articles/35000202857-reading-mode-reflow-",
+          "limitations": ["Older help describes a no-reflowable-text message when text cannot be extracted, including scanned-image pages; exact current UI and entitlements were not tested."]
+        },
+        {
+          "name": "Cloud file synchronization and access",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?hl=en_US&id=com.xodo.pdf.reader"
+        }
+      ],
+      "sources": [
+        {
+          "id": "X01",
+          "url": "https://xodo.com/mobile-apps",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:01:12Z",
+          "evidence_type": "documented",
+          "scope": "Combined iOS/Android mobile product page; iOS-specific services are not attributed to Android."
+        },
+        {
+          "id": "X02",
+          "url": "https://feedback.xodo.com/support/solutions/articles/35000202857-reading-mode-reflow-",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:01:06Z",
+          "evidence_type": "documented",
+          "scope": "Reading Mode/Reflow and extraction failure explanation; fetch metadata dates the article 2022-07-07."
+        },
+        {
+          "id": "X03",
+          "url": "https://play.google.com/store/apps/details?hl=en_US&id=com.xodo.pdf.reader",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:02:31Z",
+          "evidence_type": "documented",
+          "scope": "Android package and advertised PDF tool set."
+        },
+        {
+          "id": "X04",
+          "url": "https://xodo.com/legal",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:04:51Z",
+          "evidence_type": "documented",
+          "scope": "Website terms, visibly last modified 2025-07-17; explicitly distinguishes separate mobile-app terms."
+        }
+      ],
+      "limitations": [
+        "No current Android app source, installed version, runtime behavior, or decompilation was examined.",
+        "The exact Android plan required for each advertised tool was not verified.",
+        "The older Reading Mode help documents a workflow, not proof that the current UI or restrictions are identical.",
+        "Website-service terms and combined mobile pages cannot establish every Android-specific entitlement or behavior."
+      ]
+    },
+    {
+      "id": "foxit-pdf-editor-android",
+      "name": "Foxit PDF Editor for Android",
+      "repository": null,
+      "license": "Proprietary product licensing.",
+      "source_availability": "Full current Android app source not obtained or published by the inspected sources.",
+      "platforms": ["Android"],
+      "packages": ["com.foxit.mobile.pdf.lite"],
+      "formats": ["PDF"],
+      "evidence_type": "documented",
+      "features": [
+        {
+          "name": "Text reflow with copying and annotation of selected text",
+          "evidence_type": "documented",
+          "source_url": "https://help.foxit.com/manuals/pdf-editor/mobile/en_us/2026.4.0/Adjust_PDF_Views.html",
+          "limitations": ["The mobile manual is versioned 2026.4.0; this is a documented mode combination, not an installed-app verification."]
+        },
+        {
+          "name": "PDF read-aloud",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?id=com.foxit.mobile.pdf.lite&hl=en"
+        },
+        {
+          "name": "Bookmarks, text search, and tablet-only document tabs",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?id=com.foxit.mobile.pdf.lite&hl=en"
+        },
+        {
+          "name": "Annotations, stamps, form filling, and handwritten signatures",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?id=com.foxit.mobile.pdf.lite&hl=en",
+          "limitations": ["The listing separately marks XFA forms and digital-certificate signing as advanced subscription features."]
+        },
+        {
+          "name": "Cloud file saving, synchronization, and access",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?id=com.foxit.mobile.pdf.lite&hl=en"
+        },
+        {
+          "name": "OCR, text/image editing, conversion, redaction, and certificate signing",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?id=com.foxit.mobile.pdf.lite&hl=en",
+          "entitlement": "The listing marks these advanced tools as subscription-based."
+        }
+      ],
+      "sources": [
+        {
+          "id": "F01",
+          "url": "https://help.foxit.com/manuals/pdf-editor/mobile/en_us/2026.4.0/Adjust_PDF_Views.html",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:01:06Z",
+          "evidence_type": "documented",
+          "scope": "Versioned 2026.4.0 mobile manual: reflow, annotation in reflow, image visibility, zoom, crop, and page display."
+        },
+        {
+          "id": "F02",
+          "url": "https://play.google.com/store/apps/details?id=com.foxit.mobile.pdf.lite&hl=en",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:01:06Z",
+          "evidence_type": "documented",
+          "scope": "Android package, advertised features, subscription markers, and developer support-ticket link."
+        },
+        {
+          "id": "F03",
+          "url": "https://appstore.foxitsoftware.com/appstore/license",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:04:32Z",
+          "evidence_type": "documented",
+          "scope": "Product/service license linked from the Android listing; proprietary rights and license grants."
+        }
+      ],
+      "limitations": [
+        "No installation, runtime, source-code review, or decompilation was performed for this comparator.",
+        "Manual version 2026.4.0 does not establish an installed or globally rolled-out Android version.",
+        "Publisher statements about speed, reliability, or resource use are not independent performance measurements.",
+        "Annotations inside reflow are documented, but round-trip fidelity and interactions with every PDF type remain untested."
+      ]
+    },
+    {
+      "id": "readera",
+      "name": "ReadEra and ReadEra Premium",
+      "repository": null,
+      "license": "Proprietary ReadEra application; separate GPL OpenReadEra renderer programs.",
+      "source_availability": "Full-app source unavailable in reviewed material. Source for the separate EraPDF, EraEPUB, EraDjVu, EraComic, and EraMOBI programs is offered by email on the official OpenReadEra page.",
+      "platforms": ["Android"],
+      "packages": ["org.readera", "org.readera.premium"],
+      "formats": ["PDF", "EPUB", "DOC", "DOCX", "RTF", "MOBI", "AZW3", "CBZ", "CBR", "DJVU", "FB2", "TXT", "ODT", "CHM", "Markdown"],
+      "evidence_type": "documented",
+      "features": [
+        {
+          "name": "Broad-format local library with authors, series, collections, folders, and file management",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?id=org.readera.premium&hl=en"
+        },
+        {
+          "name": "Quotes, notes, bookmarks, and dictionary/translation integration",
+          "evidence_type": "documented",
+          "source_url": "https://readera.org/"
+        },
+        {
+          "name": "PDF margin cropping",
+          "evidence_type": "documented",
+          "source_url": "https://readera.org/"
+        },
+        {
+          "name": "Duplicate detection and retention of reading state after files move or are deleted",
+          "evidence_type": "documented",
+          "source_url": "https://readera.org/",
+          "limitations": ["This is a publisher claim, not a verified content-identity algorithm or recovery test."]
+        },
+        {
+          "name": "Multiple documents using Android multi-window and task switching",
+          "evidence_type": "documented",
+          "source_url": "https://readera.org/",
+          "limitations": ["Do not equate the documented Android two-window workflow with an in-app desktop-style tab interface."]
+        },
+        {
+          "name": "Google Drive book/state sync and background TTS",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?id=org.readera.premium&hl=en",
+          "entitlement": "Listed as Premium features."
+        },
+        {
+          "name": "Cross-book quotes/notes/dictionary, custom fonts, page thumbnails, and library layouts",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?id=org.readera.premium&hl=en",
+          "entitlement": "Listed as Premium features."
+        },
+        {
+          "name": "Markdown reading with search, TTS, and formatting styles",
+          "evidence_type": "documented",
+          "source_url": "https://play.google.com/store/apps/details?id=org.readera.premium&hl=en",
+          "limitations": ["Recorded from the Premium listing's What's new section, whose visible update date was 2026-11-07; no exact installed version was examined."]
+        }
+      ],
+      "sources": [
+        {
+          "id": "R01",
+          "url": "https://readera.org/",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T13:59:58Z",
+          "evidence_type": "documented",
+          "scope": "Official homepage and fuller page read: formats, library, cropping, duplicate detection, persistent state, multi-window, and free/no-ads/no-registration claims."
+        },
+        {
+          "id": "R02",
+          "url": "https://readera.org/premium",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T13:59:57Z",
+          "evidence_type": "documented",
+          "scope": "Premium capabilities and one-payment statement."
+        },
+        {
+          "id": "R03",
+          "url": "https://play.google.com/store/apps/details?id=org.readera.premium&hl=en",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:01:05Z",
+          "evidence_type": "documented",
+          "scope": "Premium Android package/features; visible Updated on 2026-11-07 and Markdown/backup changes."
+        },
+        {
+          "id": "R04",
+          "url": "https://readera.org/terms",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:01:06Z",
+          "evidence_type": "documented",
+          "scope": "Proprietary app license and explicit separation of GPL helper programs."
+        },
+        {
+          "id": "R05",
+          "url": "https://readera.org/open-readera",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:01:06Z",
+          "evidence_type": "documented",
+          "scope": "Five independent GPL renderer programs; source-request address support@readera.org. No source was requested or received."
+        }
+      ],
+      "limitations": [
+        "OpenReadEra renderer licensing is not a public-source license for the complete ReadEra app.",
+        "The homepage's claimed test with more than 500,000 documents was not independently measured.",
+        "Free and Premium capabilities must be distinguished; the paid product is named Premium, not Pro.",
+        "No app installation, runtime test, decompilation, or helper-source request was performed.",
+        "This product is a plausible Reader Pro name-confusion candidate, not a resolved identity."
+      ]
+    },
+    {
+      "id": "fbreader-android",
+      "name": "FBReader Free and Premium for Android",
+      "repository": null,
+      "license": "Proprietary current application; GPL source exists for legacy version 2.6.15.",
+      "source_availability": "The official Android page explicitly says current source is closed. The legacy repository is not source for the current Premium app.",
+      "platforms": ["Android"],
+      "packages": ["org.geometerplus.zlibrary.ui.android", "com.fbreader"],
+      "formats": ["EPUB", "FB2", "PDF", "DjVu", "comics"],
+      "evidence_type": "documented",
+      "features": [
+        {
+          "name": "EPUB and other text formats, including Readium LCP EPUB support since 3.7",
+          "evidence_type": "documented",
+          "source_url": "https://fbreader.org/en/android"
+        },
+        {
+          "name": "PDF support embedded in Premium or supplied by a plugin for Free",
+          "evidence_type": "documented",
+          "source_url": "https://fbreader.org/en/android"
+        },
+        {
+          "name": "DjVu support through a separate plugin for both editions",
+          "evidence_type": "documented",
+          "source_url": "https://fbreader.org/en/android"
+        },
+        {
+          "name": "Reading aloud for text formats",
+          "evidence_type": "documented",
+          "source_url": "https://fbreader.org/en/android",
+          "entitlement": "Premium.",
+          "limitations": ["The official page explicitly excludes PDF and DjVu from this read-aloud feature."]
+        },
+        {
+          "name": "Google Translate and DeepL integration",
+          "evidence_type": "documented",
+          "source_url": "https://fbreader.org/en/android",
+          "entitlement": "Premium; the page describes a one-time purchase."
+        }
+      ],
+      "sources": [
+        {
+          "id": "B01",
+          "url": "https://fbreader.org/en/android",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T13:59:58Z",
+          "evidence_type": "documented",
+          "scope": "Packages, free/Premium/plugin boundaries, one-payment claim, stable 3.8.32 published 2026-08-03, experimental 4.0 branch, and current/legacy source status."
+        }
+      ],
+      "limitations": [
+        "The observed stable release and experimental branch are publisher statements, not installed version checks.",
+        "Current source is explicitly closed; historical GPL code cannot establish current feature implementations or release parity.",
+        "Plugin-dependent formats and text-only TTS have different support boundaries.",
+        "No application runtime, source checkout, or decompilation was performed for this review."
+      ]
+    },
+    {
+      "id": "ebookdroid",
+      "name": "EBookDroid (legacy comparator)",
+      "repository": null,
+      "license": "Historical: GPLv3 through 1.6.x; proprietary/closed-source since 2.0.0, with separate third-party helper programs.",
+      "source_availability": "Official historical metadata states the source transition. Current complete matching app source and distribution status are unresolved.",
+      "platforms": ["Android"],
+      "packages": ["org.ebookdroid"],
+      "formats": ["PDF", "DjVu", "XPS", "OpenXPS", "EPUB", "RTF", "FB2", "FB2.ZIP", "CBZ", "CBR"],
+      "evidence_type": "documented",
+      "features": [
+        {
+          "name": "Multi-format document viewing for PDF, DjVu, XPS, EPUB, RTF, FB2, and comics",
+          "evidence_type": "documented",
+          "source_url": "https://storage.googleapis.com/google-code-archive/v2/code.google.com/ebookdroid/project.json",
+          "limitations": ["These are historical official project declarations, not verified capabilities of a currently distributed build."]
+        }
+      ],
+      "sources": [
+        {
+          "id": "E01",
+          "url": "https://code.google.com/archive/p/ebookdroid",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:01:06Z",
+          "evidence_type": "unknown",
+          "scope": "Official archive landing page returned only a JavaScript shell; project details came from E02."
+        },
+        {
+          "id": "E02",
+          "url": "https://storage.googleapis.com/google-code-archive/v2/code.google.com/ebookdroid/project.json",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:03:56Z",
+          "evidence_type": "documented",
+          "scope": "Historical official project metadata: package/formats, closed-source transition, separate helpers, free-of-charge proprietary use, and in-app Feedback instruction after Google Code closure."
+        },
+        {
+          "id": "E03",
+          "url": "https://play.google.com/store/apps/details?id=org.ebookdroid&hl=en",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:04:32Z",
+          "evidence_type": "unknown",
+          "scope": "Store link referenced by the official archive; returned HTTP 404 in this unauthenticated fetch context."
+        }
+      ],
+      "limitations": [
+        "A single Play 404 does not establish permanent worldwide delisting, discontinuation, or absence of another official distribution.",
+        "Archive hasSource metadata and third-party mirrors do not override the explicit post-2.0 proprietary-source boundary.",
+        "This is a legacy freeware comparator, not a verified current paid product.",
+        "No installation, application runtime, source extraction, or decompilation was performed."
+      ]
+    },
+    {
+      "id": "pdf-reader-pro-android",
+      "name": "PDF Reader Pro for Android (PDF Technologies)",
+      "repository": null,
+      "license": "Commercial application; official terms describe a limited free license and paid plans.",
+      "source_availability": "Full current Android app source unavailable in reviewed official material. ComPDF developer links do not establish publication of this product's source.",
+      "platforms": ["Android"],
+      "packages": ["com.pdftechnologies.pdfreaderpro"],
+      "formats": ["PDF"],
+      "evidence_type": "documented",
+      "features": [
+        {
+          "name": "PDF reading modes including full-screen, auto-rotate, and dark mode",
+          "evidence_type": "documented",
+          "source_url": "https://www.pdfreaderpro.com/android/features"
+        },
+        {
+          "name": "PDF annotation tools",
+          "evidence_type": "documented",
+          "source_url": "https://www.pdfreaderpro.com/android"
+        },
+        {
+          "name": "PDF text and image editing",
+          "evidence_type": "documented",
+          "source_url": "https://www.pdfreaderpro.com/android/features"
+        },
+        {
+          "name": "Page organization, extraction, rotation, deletion, and combination",
+          "evidence_type": "documented",
+          "source_url": "https://www.pdfreaderpro.com/android/features"
+        },
+        {
+          "name": "PDF conversion to Office/text/image formats and PDF creation from images",
+          "evidence_type": "documented",
+          "source_url": "https://www.pdfreaderpro.com/android/features"
+        },
+        {
+          "name": "Interactive form filling and handwritten/image signatures",
+          "evidence_type": "documented",
+          "source_url": "https://www.pdfreaderpro.com/android/features"
+        },
+        {
+          "name": "Wi-Fi transfer and access to device, SD-card, and USB files",
+          "evidence_type": "documented",
+          "source_url": "https://www.pdfreaderpro.com/android/features"
+        },
+        {
+          "name": "Additional viewing of Office documents, images, comics, and text",
+          "evidence_type": "documented",
+          "source_url": "https://www.pdfreaderpro.com/android/features",
+          "limitations": ["The page uses format-family names; exact extensions and rendering fidelity were not enumerated or tested. The formats array therefore lists only PDF."]
+        }
+      ],
+      "sources": [
+        {
+          "id": "P01",
+          "url": "https://www.pdfreaderpro.com/android",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21",
+          "evidence_type": "documented",
+          "scope": "Full official Android product page, including package link and annotation/editor claims; date-only retrieval precision."
+        },
+        {
+          "id": "P02",
+          "url": "https://www.pdfreaderpro.com/android/features",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T13:59:57Z",
+          "evidence_type": "documented",
+          "scope": "Android-specific reading, editing, conversion, forms/signing, file access, transfer, and additional viewing formats."
+        },
+        {
+          "id": "P03",
+          "url": "https://www.pdfreaderpro.com/terms_of_service",
+          "observed_at": "2026-11-21",
+          "retrieved_at": "2026-11-21T14:04:32Z",
+          "evidence_type": "documented",
+          "scope": "PDF Technologies service identity and limited-free/paid licensing language; visible last update/effective date 2026-03-18."
+        }
+      ],
+      "limitations": [
+        "This product is distinct from Librera PRO, whose official listing names PDF Reader PRO as a former title; the ambiguous Reader Pro identity remains unresolved.",
+        "Android-specific pages support these claims; desktop or cross-platform tools are not automatically assigned to Android.",
+        "Shared terms do not establish the exact current Android entitlement for each advertised tool.",
+        "No application installation, runtime, decompilation, or complete current source review was performed."
+      ]
+    }
+  ],
+  "limitations": [
+    "This is a bounded documented comparison, not an exhaustive market inventory or a ranking.",
+    "Repository null means no repository for the complete current app was established; legacy code and independently licensed helpers are qualified in each record.",
+    "Readest and Librera identity evidence and commit-pinned README/license observations remain in the linked Markdown dossier; they are not duplicated as commercial product-family entries here.",
+    "Official feature claims, source availability, source inspection, and runtime success are different evidence categories.",
+    "Source retrieval dates do not imply document publication dates, current-version checks, or working features.",
+    "No emails, source requests, upstream issues, or upstream pull requests were submitted for this documentation work."
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-21",
+  "scope": "Official documentation baseline for Moon+ Reader Pro. MF-01 through MF-21 describe advertised capabilities and one documented compatibility limitation, not application test results.",
+  "report_path": "knowledge/moon-baseline.md",
+  "product": {
+    "name": "Moon+ Reader Pro",
+    "publisher": "Moon+",
+    "package": "com.flyersoft.moonreaderp",
+    "free_package": "com.flyersoft.moonreader",
+    "evidence_type": "documented",
+    "sources": [
+      "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en",
+      "https://www.moondownload.com/download.html"
+    ],
+    "limitations": [
+      "Public package identity does not authenticate a supplied APK or establish its signing certificate, version code, or runtime behavior."
+    ]
+  },
+  "release_notes": {
+    "version": "10.8",
+    "listing_updated_at": "2026-10-16",
+    "observed_at": "2026-11-21",
+    "evidence_type": "documented",
+    "changes": [
+      "New Double-Tap To Zoom option for PDF, DjVu, and comic books.",
+      "New Show my rating on book cover option.",
+      "Optimized CSS rendering for embedded font styles.",
+      "Customize mini status bar text with only color or font.",
+      "Bookmarks-tab management allows associating a missing book file with a new file."
+    ],
+    "sources": ["https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+    "limitations": [
+      "The date is the visible Play listing update date, not a verified first-release timestamp.",
+      "These five observed release notes are not a complete version history or a test of the listed changes."
+    ]
+  },
+  "features": [
+    {
+      "id": "MF-01",
+      "title": "Broad ebook/document formats",
+      "description": "Play lists EPUB, PDF, DjVu, AZW3, MOBI, FB2, PRC, CHM, CBZ, CBR, UMD, DOCX, ODT, RTF, TXT, HTML, MHT/MHTML, Markdown, WEBP, RAR, ZIP, and OPDS.",
+      "evidence_type": "documented",
+      "sources": ["https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["OPDS is catalog access. Listed formats do not establish identical speech, selection, or annotation behavior across formats."]
+    },
+    {
+      "id": "MF-02",
+      "title": "Pro text-to-speech",
+      "description": "Pro advertises shake-to-speak and support for TTS engines.",
+      "evidence_type": "documented",
+      "sources": ["https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/faq.html"],
+      "limitations": ["Engine availability and document text extraction are separate dependencies. The claim does not establish OCR for scanned pages."]
+    },
+    {
+      "id": "MF-03",
+      "title": "Background speech",
+      "description": "FAQ covers TTS stopping with the screen off and battery restrictions affecting both the reader and TTS engine.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/faq.html"],
+      "limitations": ["This is an existing documented workflow, not a successful background-playback test on every Android device."]
+    },
+    {
+      "id": "MF-04",
+      "title": "Gestures, hardware keys, hands-free controls",
+      "description": "Headset/Bluetooth keys, tilt actions, customizable taps/swipes/keys, five auto-scroll modes, brightness gestures, and page animations are advertised.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Exact audio-focus, lock-screen, Bluetooth-reconnect, and accessibility interactions were not tested."]
+    },
+    {
+      "id": "MF-05",
+      "title": "PDF forms, annotations, handwriting",
+      "description": "The Pro PDF feature list includes form filling, highlighting, annotations, and handwriting.",
+      "evidence_type": "documented",
+      "sources": ["https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Individual form types, annotation save semantics, and interoperability with other viewers require separate fixture tests."]
+    },
+    {
+      "id": "MF-06",
+      "title": "PDF reading controls",
+      "description": "PDF speech, auto-scroll, smart scroll lock, night mode, six additional PDF themes, landscape dual-page mode, statistics, sync, and flip animation are advertised.",
+      "evidence_type": "documented",
+      "sources": ["https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Native PDF text reflow is not settled by the reviewed official documentation. Separate supplied-artifact static evidence APK-PDF-001 records a text-reflow code path; official-build runtime behavior remains unverified. Zoom, extraction, and reflow are not interchangeable."]
+    },
+    {
+      "id": "MF-07",
+      "title": "Ebook annotations, lookup, and sharing",
+      "description": "Highlights, notes/bookmarks, offline/online dictionary integration, translation, and sharing are documented.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Dictionary integration does not establish a complete bundled offline dictionary or identical behavior for every format."]
+    },
+    {
+      "id": "MF-08",
+      "title": "Themes and typography",
+      "description": "Ten-plus embedded themes, day/night switching, font scaling/styles, line spacing, colors, justification, hyphenation, and paragraph/whitespace controls are documented.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Eye-care language is a publisher claim, not an independently measured health outcome or layout-conformance test."]
+    },
+    {
+      "id": "MF-09",
+      "title": "Custom fonts/backgrounds",
+      "description": "FAQ names TTF, OTF, and TTC fonts and the Visual Options > Font Name/Background Images controls.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/faq.html"],
+      "limitations": ["FAQ folder guidance reflects older Android conventions. Current import, picker, and storage behavior is untested."]
+    },
+    {
+      "id": "MF-10",
+      "title": "Publisher-formatting preview",
+      "description": "FAQ recommends Preview mode with publisher formattings in Misc Options for table content.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/faq.html"],
+      "limitations": ["An existing fallback is documented; table fidelity and setting persistence still require a named fixture and active mode."]
+    },
+    {
+      "id": "MF-11",
+      "title": "EPUB3 media and footnotes",
+      "description": "Play advertises EPUB3 audio/video content and popup footnotes.",
+      "evidence_type": "documented",
+      "sources": ["https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["This does not establish full EPUB3 conformance or every media-overlay behavior."]
+    },
+    {
+      "id": "MF-12",
+      "title": "Reading-state/annotation sync",
+      "description": "Dropbox/WebDAV position sync and backup are documented. FAQ describes position upload on Pause, checking on Resume, then background highlights/notes/bookmarks sync.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/faq.html"],
+      "limitations": ["Position arrival does not establish annotation-sync completion. Conflict handling, retries, and completion visibility were not tested."]
+    },
+    {
+      "id": "MF-13",
+      "title": "Google Drive and cloud shelf/files",
+      "description": "Pro policy explicitly describes Google Drive, Dropbox, and WebDAV access plus reading-state, annotation, and shelf-file synchronization.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/privacymrp.html"],
+      "limitations": ["Omission of Drive from shorter feature lists is not evidence of absence. Authentication, retention, and encryption behavior were not verified."]
+    },
+    {
+      "id": "MF-14",
+      "title": "Backup, restore, annotation export",
+      "description": "FAQ documents Options > Backup for all books/settings, Bookmarks dialog > Export > Export to file for the current book, and Backup/Restore migration from Free to Pro.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/faq.html"],
+      "limitations": ["Export formats, completeness, merging, restore fidelity, and cross-reader portability require independent tests."]
+    },
+    {
+      "id": "MF-15",
+      "title": "Library/file management",
+      "description": "Shelves, favorites, downloads, authors/tags, custom covers, import/search, file management, widgets, and book shortcuts are advertised.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Automatic deduplication and content-based book identity are not established. The v10.8 notes already document missing-file relinking."]
+    },
+    {
+      "id": "MF-16",
+      "title": "Cover-cache repair",
+      "description": "FAQ provides My Shelf > Rebuild book covers and discusses external cleaning tools removing cover caches.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/faq.html"],
+      "limitations": ["Current cover-cache location, repair behavior, and interaction with external cleaners were not tested."]
+    },
+    {
+      "id": "MF-17",
+      "title": "OPDS/calibre",
+      "description": "Play advertises online libraries and personal calibre servers; FAQ explains adding a server through Online Library > Add new catalog.",
+      "evidence_type": "documented",
+      "sources": ["https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/faq.html"],
+      "limitations": ["Authentication methods, pagination, protocol variants, and server compatibility were not tested."]
+    },
+    {
+      "id": "MF-18",
+      "title": "Statistics and focus aids",
+      "description": "Per-book reading time/speed, a six-style reading ruler, and a blue-light filter up to 95% are advertised.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/", "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["These describe advertised options, not measured health, cognitive, battery, or performance benefits."]
+    },
+    {
+      "id": "MF-19",
+      "title": "Orientation, dual-page layout, startup lock",
+      "description": "Play lists four screen orientations, landscape dual-page reading, and startup password protection with fingerprint recognition.",
+      "evidence_type": "documented",
+      "sources": ["https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"],
+      "limitations": ["Two pages of one book do not establish simultaneous two-document reading. Startup locking does not establish file, backup, or cloud encryption."]
+    },
+    {
+      "id": "MF-20",
+      "title": "Localization",
+      "description": "English homepage/download page state 46 languages; the older Chinese page states 40.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/", "https://www.moondownload.com/download.html", "https://www.moondownload.com/chinese.html"],
+      "limitations": ["Counts are page-specific claims. Translation completeness and the exact language set of a v10.8 build were not tested."]
+    },
+    {
+      "id": "MF-21",
+      "title": "DRM compatibility limitation",
+      "description": "FAQ explicitly states that DRM-protected books are unsupported.",
+      "evidence_type": "documented",
+      "sources": ["https://www.moondownload.com/faq.html"],
+      "limitations": ["This entry records a documented limitation, not a supported capability or reproduced defect. No DRM-removal workflow was performed."]
+    }
+  ],
+  "unknowns": [
+    {
+      "id": "MU-01",
+      "title": "Official PDF text-reflow documentation and runtime behavior",
+      "description": "Reviewed official sources do not settle the PDF reflow interface or combinations with speech, selection, and annotations. Separate static findings establish a text-reflow code path only in the supplied artifact.",
+      "evidence_type": "unknown",
+      "sources": ["https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/faq.html"],
+      "limitations": ["A bounded documentation search does not justify an absence claim. APK-PDF-001 does not authenticate the artifact or verify official-release runtime behavior; inspect the actual workflow before requesting a refinement."]
+    }
+  ],
+  "related_evidence": [
+    {
+      "report_path": "knowledge/apk-analysis.md#implementation-map",
+      "evidence_path": "evidence/static/observations.json",
+      "observed_at": "2026-11-21",
+      "evidence_type": "static-observation",
+      "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+      "finding_ids": ["APK-PDF-001", "APK-SEARCH-002", "APK-NOTE-003"],
+      "scope": "Separate supplied-artifact evidence of PDF text-reflow, settings-search, and Readwise-upload paths; not additional documented MF capabilities or application tests.",
+      "limitations": ["Official provenance is unverified. Static code presence does not establish runtime success, usability, feature parity with an official distribution, or successful Readwise delivery."]
+    }
+  ],
+  "documentation_findings": [
+    {
+      "id": "MD-01",
+      "title": "Pro privacy-policy wording needs clarification",
+      "description": "Play and later Pro-policy sections deny collection/sharing, while earlier Pro-policy sections describe third-party services and error Log Data that may include IP/device details.",
+      "evidence_type": "documented",
+      "sources": ["https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en", "https://www.moondownload.com/privacymrp.html", "https://www.moondownload.com/privacy.html"],
+      "report_path": "knowledge/moon-baseline.md#policy-wording-inquiry",
+      "draft_path": "knowledge/reporting.md#privacy-policy-clarification-draft",
+      "limitations": ["This is a wording inquiry, not evidence of undisclosed transmission or a legal violation. The combined policy's AdMob reference does not establish AdMob in Pro."]
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "url": "https://www.moondownload.com/",
+      "observed_at": "2026-11-21",
+      "retrieved_at": "2026-11-21T13:56:54Z",
+      "evidence_type": "documented",
+      "scope": "Official homepage: features, contact, regional distribution notice.",
+      "limitations": ["Unversioned page; no reliable visible revision date established."]
+    },
+    {
+      "id": "M02",
+      "url": "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en",
+      "observed_at": "2026-11-21",
+      "retrieved_at": "2026-11-21T13:58:02Z",
+      "evidence_type": "documented",
+      "scope": "Pro Play listing: package, advertised features, App support, Data safety, v10.8 notes; visible update date 2026-10-16.",
+      "limitations": ["A fuller page read also recovered support and Data safety fields. Listing metadata does not authenticate an APK or establish first-release timing."]
+    },
+    {
+      "id": "M03",
+      "url": "https://www.moondownload.com/faq.html",
+      "observed_at": "2026-11-21",
+      "retrieved_at": "2026-11-21T13:58:32Z",
+      "evidence_type": "documented",
+      "scope": "Official FAQ: Pro benefits, background TTS, backup/export, fonts, table preview, sync sequence, calibre, covers, and DRM limitation.",
+      "limitations": ["A fuller read recovered sections omitted by initial reader-mode extraction. Unversioned FAQ contains older Android examples."]
+    },
+    {
+      "id": "M04",
+      "url": "https://www.moondownload.com/download.html",
+      "observed_at": "2026-11-21",
+      "retrieved_at": "2026-11-21T13:58:33Z",
+      "evidence_type": "documented",
+      "scope": "Official package links, one-payment/lifetime-upgrade statement, localization count, PDFViewer SDK attribution, and qualified regional downloads.",
+      "limitations": ["Regional notice expiry 2027-10-10 is not a global app-expiry rule. No exact PDF SDK version was established."]
+    },
+    {
+      "id": "M05",
+      "url": "https://www.moondownload.com/privacymrp.html",
+      "observed_at": "2026-11-21",
+      "retrieved_at": "2026-11-21",
+      "evidence_type": "documented",
+      "scope": "Pro-specific privacy policy linked by Play: collection language, cloud access/sync/storage descriptions, permissions, and privacy contact.",
+      "limitations": ["Full read has date-only retrieval precision. No explicit policy revision date or actual network behavior established."]
+    },
+    {
+      "id": "M06",
+      "url": "https://www.moondownload.com/privacy.html",
+      "observed_at": "2026-11-21",
+      "retrieved_at": "2026-11-21T13:58:32Z",
+      "evidence_type": "documented",
+      "scope": "Combined free/Pro policy linked by homepage; third-party list includes AdMob; privacy contact.",
+      "limitations": ["Combined policy must not be used alone to attribute an SDK or collection behavior to Pro."]
+    },
+    {
+      "id": "M07",
+      "url": "https://www.moondownload.com/chinese.html",
+      "observed_at": "2026-11-21",
+      "retrieved_at": "2026-11-21T14:02:31Z",
+      "evidence_type": "documented",
+      "scope": "Chinese Moon page, including its page-specific 40-language statement.",
+      "limitations": ["Older page content is not an authoritative build-specific language inventory; copyright footer is not a revision date."]
+    },
+    {
+      "id": "M08",
+      "url": "https://www.moondownload.com/press.html",
+      "observed_at": "2026-11-21",
+      "retrieved_at": "2026-11-21T14:05:35Z",
+      "evidence_type": "documented",
+      "scope": "Official site's collection of historical third-party press excerpts, inspected for version-history context.",
+      "limitations": ["Returned content was truncated. Reprinted coverage is not a primary feature specification or a complete release history."]
+    }
+  ],
+  "limitations": [
+    "All MF entries are documented claims, not runtime-observation records; MF-21 is a compatibility limitation.",
+    "Official pages are a dated snapshot; unversioned documentation cannot certify every v10.8 interaction.",
+    "Complete release history, a mandatory report format, a verified in-app reporting path, an official public tracker, and a support SLA were not established.",
+    "Performance, accessibility conformance, encryption, and privacy behavior were not measured in this documentation review.",
+    "The supplied APK's separate artifact record must retain its own provenance limits; these sources do not authenticate that artifact.",
+    "The unresolved Reader Pro identity, comparator qualifications, and source-pinned README/license evidence are explained in knowledge/moon-baseline.md.",
+    "No emails, upstream issues, or upstream pull requests were submitted for this work. Drafts live in knowledge/reporting.md."
+  ]
+}

@@ -1,0 +1,369 @@
+{
+  "observed_at": "2026-11-21",
+  "proposals": [
+    {
+      "id": "ALT-DW-001",
+      "title": "Extend verification of the existing marked-content accessibility fix",
+      "application_id": "pdfjs",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "At mozilla/pdf.js 57dead10694ead8fb21b97f7812fc95311a38ea1, web/text_layer_builder.css:72-74 uses display: contents for marked content while the structure builder creates aria-owns relationships. Issue #20790 reports browser/screen-reader failures. Open PR #22558 already proposes the CSS change and an actual Chromium accessibility-tree test. Its author reports NVDA and geometry/copy checks and later manual Safari selection checks. The contribution opportunity is additional compatibility evidence around existing work, not a duplicate implementation.",
+      "acceptance_criteria": [
+        "On versioned browser and assistive-technology pairs, tagged headings, lists, table headers and cells expose their text through the actual accessibility tree and semantic navigation.",
+        "Record VoiceOver/Safari behavior separately from manual Safari mouse-selection behavior.",
+        "Evaluate the older Chromium selection-workaround boundary with an explicitly identified supported version, or document why it is outside the support policy.",
+        "Before/after comparison preserves selected/copied text and span geometry on the same tagged fixtures.",
+        "Assess NVDA browse-mode line grouping separately from restored heading navigation, and coordinate findings with the existing PR."
+      ],
+      "sources": [
+        "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/text_layer_builder.css#L59-L74",
+        "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/struct_tree_layer_builder.js#L330-L674",
+        "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/test/integration/accessibility_spec.mjs#L23-L139",
+        "https://github.com/mozilla/pdf.js/issues/20790",
+        "https://github.com/mozilla/pdf.js/pull/22558"
+      ],
+      "status": "draft",
+      "limitations": [
+        "No local application, browser or screen-reader test was run; PR author measurements remain upstream-report evidence.",
+        "Issue search examined the first 12 summaries of 22 table/accessibility results; the is:pr 20790 search returned one result whose discussion was read.",
+        "The open PR already includes a real accessibility-tree test and later Safari selection evidence; do not describe those as missing work.",
+        "Priority describes evaluation value, not independently established severity or ownership of the existing fix."
+      ]
+    },
+    {
+      "id": "ALT-DW-002",
+      "title": "Expose incomplete search coverage after text-extraction errors",
+      "application_id": "pdfjs",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "At mozilla/pdf.js 57dead10694ead8fb21b97f7812fc95311a38ea1, web/pdf_find_controller.js:917-925 logs a page extraction failure and stores empty searchable content. The inspected web/pdf_find_bar.js:112-145 switch handles found, pending, not-found and wrapped states. Carrying extraction-coverage metadata through this boundary could distinguish incomplete results from a completed zero-match search. Closed issue #21557 describes a Safari extraction failure and is a duplicate of #20973; it does not prove the proposed coverage UI exists or is absent.",
+      "acceptance_criteria": [
+        "In a three-page fixture with a deliberately rejected text-extraction call on the middle page, matches from both healthy pages remain available.",
+        "The result state distinguishes incomplete coverage from a completed search with zero matches.",
+        "A localized, accessible status identifies incomplete coverage without replacing usable results.",
+        "Document replacement clears the failed-page state, and an explicit retry has deterministic coverage and count behavior.",
+        "Implement the coverage distinction at the extraction/controller/UI boundary without changing unrelated parser recovery behavior."
+      ],
+      "sources": [
+        "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/pdf_find_controller.js#L880-L930",
+        "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/pdf_find_bar.js#L112-L152",
+        "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/viewer.html#L382-L385",
+        "https://github.com/mozilla/pdf.js/issues/21557",
+        "https://github.com/mozilla/pdf.js/issues?q=is%3Aissue%20%22text%20extraction%22%20error"
+      ],
+      "status": "draft",
+      "limitations": [
+        "This is a source-backed information-loss seam, not a reproduced false no-results response in the running viewer.",
+        "Twelve extraction/error issue summaries and the #21557 discussion were read; other issue wording, related PRs and host-specific error handling were not exhausted.",
+        "No failure-injection fixture or upstream suite was executed."
+      ]
+    },
+    {
+      "id": "ALT-DW-003",
+      "title": "Benchmark a current-page-first, cancellable search-extraction strategy",
+      "application_id": "pdfjs",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "At mozilla/pdf.js 57dead10694ead8fb21b97f7812fc95311a38ea1, web/pdf_find_controller.js:880-930 builds a serial page-text extraction chain starting at page zero and retains normalized text. Document identity guards and find-close handling already exist. A measured scheduling experiment could reduce first-result latency near the current page while preserving matching, cache reuse and cancellation semantics.",
+      "acceptance_criteria": [
+        "Compare the unchanged baseline with one current-page-first scheduling variant on fixed long, scanned and mixed-text PDFs.",
+        "Record first-match latency near the current page, final match count, peak retained memory and warm repeat-query latency.",
+        "Rapid query replacement, find-bar close and document replacement produce no stale match navigation or result publication.",
+        "Case, diacritic, punctuation and whole-word match positions remain equivalent to the baseline.",
+        "Promote a variant only when measurements show an improvement and its cache/cancellation trade-offs meet explicit limits."
+      ],
+      "sources": [
+        "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/pdf_find_controller.js#L772-L930",
+        "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/web/pdf_find_controller.js#L1195-L1235",
+        "https://github.com/mozilla/pdf.js/issues?q=is%3Aissue%20%22search%22%20%22slow%22"
+      ],
+      "status": "draft",
+      "limitations": [
+        "No search performance defect or speedup was measured at the examined pin.",
+        "The slow-search query returned 43 reported results across two pages; only the first 15 summaries were examined, with additional historical summaries from an earlier related query.",
+        "Closed historical reports such as #13962 and #11208 do not establish current performance; their full histories and all related PRs were not reviewed.",
+        "Extraction scheduling and cache lifetime require deeper caller analysis before implementation."
+      ]
+    },
+    {
+      "id": "ALT-DW-004",
+      "title": "Re-evaluate mobile fit-page zoom against the existing Okular report",
+      "application_id": "okular",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "At KDE/okular mirror 110d017ab20368a449a21fcc2566f4ef7baaf3ae, mobile/components/DocumentView.qml:65-90 constrains pinch zoom by viewport height and clamps resized content. Bug 463787 reports failure to return to whole-page view on PinePhone with Okular 22.12 and Qt 5.15. This supplies a relevant current source seam and a historical reproduction recipe, not evidence that the old defect persists on the reviewed build.",
+      "acceptance_criteria": [
+        "First reproduce or explicitly retire the historical report on an identified current Kirigami build and disposable test environment.",
+        "Portrait, landscape and mixed-aspect pages can return to the documented fit-page state after pinch zoom.",
+        "Orientation and viewport-size changes preserve the intended reading anchor.",
+        "Panning, pinch zoom and page swiping remain distinguishable, including canceled gestures and first/last pages.",
+        "Record actual and expected viewport dimensions and page state with the fixture and build identity."
+      ],
+      "sources": [
+        "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/mobile/components/DocumentView.qml#L58-L170",
+        "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/mobile/components/pageitem.h#L28-L153",
+        "https://bugs.kde.org/show_bug.cgi?id=463787",
+        "https://bugs.kde.org/rest/bug?product=okular&summary=mobile&include_fields=id,summary,status,resolution,component&limit=30"
+      ],
+      "status": "draft",
+      "limitations": [
+        "No current mobile build or touch runtime was exercised; the upstream report concerns 2023 software.",
+        "The mobile summary query returned five entries and Bug 463787 was read; broader zoom queries were limited to 30 entries each.",
+        "Source was inspected through KDE's GitHub mirror; changes belong on KDE Invent and issue coordination on Bugzilla.",
+        "This component review does not establish released Android packaging or desktop/mobile feature parity."
+      ]
+    },
+    {
+      "id": "ALT-DW-005",
+      "title": "Make mobile page-transition motion explicitly configurable",
+      "application_id": "okular",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "At KDE/okular mirror 110d017ab20368a449a21fcc2566f4ef7baaf3ae, mobile/components/DocumentView.qml:228-247 hardcodes two 250 ms animations and notes that this component cannot depend on Kirigami units. A shell-supplied duration or reduced-motion policy could retain that boundary. Desktop Bug 420755 is already resolved fixed and Bug 421039 is its duplicate; this proposal is scoped to the mobile component.",
+      "acceptance_criteria": [
+        "Inspect existing shell preference wiring before deciding whether any new setting is necessary.",
+        "The document component accepts a shell-supplied motion policy without an unnecessary Kirigami dependency.",
+        "Reduced-motion page changes complete immediately with the same final page and viewport as ordinary transitions.",
+        "Ordinary motion preserves the existing interaction contract and sensible default duration.",
+        "Touch, keyboard, canceled drags and document replacement remain correct in both motion modes."
+      ],
+      "sources": [
+        "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/mobile/components/DocumentView.qml#L228-L260",
+        "https://bugs.kde.org/rest/bug/420755",
+        "https://bugs.kde.org/rest/bug/421039",
+        "https://bugs.kde.org/rest/bug?product=okular&summary=animation&include_fields=id,summary,status,resolution,component&limit=30"
+      ],
+      "status": "draft",
+      "limitations": [
+        "The full mobile preference path was not inspected; a hardcoded component duration is not proof that the application lacks all motion settings.",
+        "The animation query returned eight entries and the duplicate/target records were read; Invent merge requests were not exhaustively searched.",
+        "No motion, keyboard or touch tests were executed, and no missing desktop feature is claimed."
+      ]
+    },
+    {
+      "id": "ALT-DW-006",
+      "title": "Trace and extend PDF link-destination fit and zoom policy",
+      "application_id": "okular",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "At KDE/okular mirror 110d017ab20368a449a21fcc2566f4ef7baaf3ae, generators/poppler/generator_pdf.cpp:171-204 maps destination page and normalized position while retaining TODOs for additional destination kinds and zoom. core/document.h exposes viewport position/auto-fit state and a separate setZoom method. This suggests a focused destination-conversion and policy seam; other callers or settings may already implement part of the desired behavior.",
+      "acceptance_criteria": [
+        "Trace callers and viewport consumers before asserting an application-wide gap.",
+        "Synthetic /XYZ, /Fit, /FitH and /FitV links demonstrate an explicitly documented destination policy.",
+        "Null destination coordinates preserve the state required by the chosen PDF interpretation.",
+        "Rotated pages navigate to the intended location and an enabled preserve-zoom preference takes precedence.",
+        "Back/forward navigation restores the prior position and zoom; focused generator/view tests retain those results."
+      ],
+      "sources": [
+        "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/generators/poppler/generator_pdf.cpp#L171-L204",
+        "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/core/document.h#L464-L470",
+        "https://github.com/KDE/okular/blob/110d017ab20368a449a21fcc2566f4ef7baaf3ae/core/document.h#L1398-L1462",
+        "https://bugs.kde.org/rest/bug?product=okular&summary=destination&include_fields=id,summary,status,resolution,component&limit=30"
+      ],
+      "status": "draft",
+      "limitations": [
+        "Only the conversion helper and selected viewport declarations were inspected, not every consumer or preference path.",
+        "The destination search returned three summaries; general and PDF-backend zoom searches each had a 30-result limit. Originality remains unresolved.",
+        "No synthetic destination PDF was run in Okular and no current navigation defect was reproduced."
+      ]
+    },
+    {
+      "id": "ALT-DW-007",
+      "title": "Reconcile development build documentation and toolchain preflight",
+      "application_id": "sioyek",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "At ahrm/sioyek 1e2f8037353724a83ccb10a697e28e295383e017, the development FAQ requires Qt 6.7/6.8 while Linux and Windows README recipes still say Qt5. The Windows recipe mentions VS2019, and build_windows.bat mixes build commands with external file tools. Issue #1371 records MinGW/MSVC kit confusion and the maintainer's VS2022/Qt6.8 setup. This is a concrete documentation/toolchain consistency opportunity.",
+      "acceptance_criteria": [
+        "Stable and development prerequisites are separated and agree with their build configuration.",
+        "Windows instructions identify the compatible Qt/MSVC kit, CPU architecture, shell and required external file tools.",
+        "A preflight prints the selected qmake, Qt and compiler identities and reports a mismatched kit before compilation.",
+        "Validate one clean Windows build and one Linux build using the declared branch and dependency revisions.",
+        "Document any remaining packaging prerequisites instead of claiming every historic failure in #1371 is fixed."
+      ],
+      "sources": [
+        "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/README.md",
+        "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/pdf_viewer_build_config.pro",
+        "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/build_windows.bat#L1-L34",
+        "https://github.com/ahrm/sioyek/issues/1371",
+        "https://github.com/ahrm/sioyek/issues?q=is%3Aissue%20Qt6%20README"
+      ],
+      "status": "draft",
+      "limitations": [
+        "No build or toolchain installation was attempted in this lane.",
+        "The Qt6 README query yielded five summaries and the #1371 discussion was read; a complete PR/build-system audit was not performed.",
+        "Historical build failures can have different causes and are not automatically current defects at the pin."
+      ]
+    },
+    {
+      "id": "ALT-DW-008",
+      "title": "Verify and simplify search-worker MuPDF resource ownership",
+      "application_id": "sioyek",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "At ahrm/sioyek 1e2f8037353724a83ccb10a697e28e295383e017, pdf_viewer/pdf_renderer.cpp:394-396 loads an fz_page pointer and separately creates structured text by page number. The local page is unused in the inspected loop, which drops structured text at line 426 but has no corresponding fz_drop_page. Worker/context lifetime requires further tracing. This is an untested ownership suspicion, not a measured memory leak or a reproduced crash.",
+      "acceptance_criteria": [
+        "Trace ownership of the loaded page, structured-text page, document and context through normal completion, cancellation and worker shutdown.",
+        "Remove a redundant page load or pair every retained reference with the correct MuPDF release operation.",
+        "Repeated whole-document searches show bounded retained memory after the documented cleanup point.",
+        "Malformed-page and canceled-search paths release resources while preserving usable results and error reporting.",
+        "Literal/regex, page-range and empty-result behavior remains equivalent, with bundled and supported system-MuPDF configurations identified separately."
+      ],
+      "sources": [
+        "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/pdf_viewer/pdf_renderer.cpp#L342-L449",
+        "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/.gitmodules#L1-L8",
+        "https://github.com/ahrm/sioyek/issues/1401",
+        "https://github.com/ahrm/sioyek/issues?q=is%3Aissue%20search%20memory"
+      ],
+      "status": "draft",
+      "limitations": [
+        "No memory benchmark, sanitizer run, full ownership audit or application reproduction was performed.",
+        "Issue #1401 concerns stable 2.0.0 using system MuPDF; the maintainer discusses packaging/version mismatch and the thread includes success after rebuilding. It is not proof of this development-loop suspicion.",
+        "The search/memory query yielded 22 reported results, with the first 12 summaries inspected; #1401 body/comments were read. No complete PR search.",
+        "This lane proposes a Sioyek consumer-side investigation and does not implement or duplicate the parent's MuPDF contribution work."
+      ]
+    },
+    {
+      "id": "ALT-DW-009",
+      "title": "Use locale-independent typed SQLite writes for annotation geometry",
+      "application_id": "sioyek",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "At ahrm/sioyek 1e2f8037353724a83ccb10a697e28e295383e017, pdf_viewer/database.cpp:833-889 assembles highlight insertion SQL using escaped text and streamed numeric coordinates. Typed bindings could reduce dependence on locale-sensitive formatting and ad hoc query assembly. Issue #1616 concerns stable coordinate-based deletion; the maintainer explicitly states that development's UUID deletion fixes that problem. No SQL-injection finding or current insertion failure is established here.",
+      "acceptance_criteria": [
+        "Inspect actual application C++ locale initialization before asserting any existing formatting failure.",
+        "Highlight and portal save/reload/edit/delete round-trips preserve geometry under C, German and Brazilian-Portuguese numeric locales.",
+        "Cover negative and fractional coordinates, apostrophes and non-ASCII annotation text with semantic stored-value assertions.",
+        "Typed statement parameters preserve existing schema, error handling, migration behavior and UUID-based deletion.",
+        "Keep any stable-branch reproduction and development-branch enhancement clearly versioned and distinct."
+      ],
+      "sources": [
+        "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/pdf_viewer/database.cpp#L833-L889",
+        "https://github.com/ahrm/sioyek/blob/1e2f8037353724a83ccb10a697e28e295383e017/pdf_viewer/document.cpp#L322-L390",
+        "https://github.com/ahrm/sioyek/issues/1616",
+        "https://github.com/ahrm/sioyek/issues?q=is%3Aissue%20sqlite"
+      ],
+      "status": "draft",
+      "limitations": [
+        "The application's effective locale and complete persistence/migration paths were not audited or tested.",
+        "The sqlite search returned 11 summaries and #1616's maintainer reply was read; related PR coverage is incomplete.",
+        "Do not re-report the stable deletion issue against current development or label escaped SQL assembly as a proven injection vulnerability."
+      ]
+    },
+    {
+      "id": "ALT-DW-010",
+      "title": "Correct ink-merge ordering for string metadata",
+      "application_id": "zotero-reader",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "At zotero/reader 09af7187f0b219cec3e32f5fec56f77269a44b67, src/common/annotation-manager.js:282-284 subtracts sortIndex and dateCreated values to select minima. src/pdf/selection.js:408-414 returns padded pipe-separated sortIndex strings; addAnnotation at 105-107 uses ISO timestamp strings. A narrow JavaScript evaluation at 2026-11-21T14:27:06.471Z showed both exact subtraction comparators returning NaN and selecting the first synthetic record rather than the earlier one. The actual merge method and application were not executed.",
+      "acceptance_criteria": [
+        "Invoke the actual AnnotationManager merge operation on valid same-page, same-color ink annotations in both selection orders.",
+        "Merged sortIndex and dateCreated are the intended minima regardless of input order, using schema-appropriate comparison rather than numeric coercion.",
+        "Preserve combined paths, deduplicated tags, width selection, author handling, undo history and save callbacks.",
+        "Explicitly define and test invalid or legacy metadata handling before changing comparison rules.",
+        "Search current reader and host issues/PRs again with the concrete actual-method reproducer before treating the contribution as novel."
+      ],
+      "sources": [
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/annotation-manager.js#L243-L322",
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/annotation-manager.js#L86-L117",
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/pdf/selection.js#L403-L414",
+        "https://github.com/zotero/reader/issues?q=is%3Aissue%20%22sortIndex%22",
+        "https://github.com/zotero/reader/issues?q=is%3Aissue%20%22dateCreated%22",
+        "https://github.com/zotero/reader/issues?q=is%3Apr%20merge%20ink"
+      ],
+      "status": "draft",
+      "limitations": [
+        "Only the two exact comparator expressions were evaluated; the reproduction is not a running Zotero or full mergeAnnotations test.",
+        "sortIndex/dateCreated issue queries returned incomplete result metadata, not verified zero matches.",
+        "The merge ink PR query returned three summaries, including open #264 and merged #138/#128; the open PR's implementation and the complete host tracker/forums were not reviewed.",
+        "Novelty and released-build impact remain unresolved; no issue or PR was submitted."
+      ]
+    },
+    {
+      "id": "ALT-DW-011",
+      "title": "Consolidate shared mobile initialization with explicit transport adapters",
+      "application_id": "zotero-reader",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "Open zotero/reader issue #234 requests consolidation of index.ios.js, index.android.js and index.view-dev.js because similar initialization and callbacks drift. At 09af7187f0b219cec3e32f5fec56f77269a44b67, the inspected entries all use the common View surface, with distinct message-port, WebKit and development transports. common/view.js:80-100 already enforces immediate first annotation delivery to the host.",
+      "acceptance_criteria": [
+        "A shared initialization/capability contract drives all three entries while keeping transport serialization explicit.",
+        "Existing host callback names and payloads remain backward compatible.",
+        "Annotation-save-before-selection ordering and Android history metadata survive consolidation.",
+        "Table-driven adapter tests expose capabilities added on one platform without an explicit decision for the others.",
+        "Coordinate design and implementation with existing issue #234 rather than filing another request."
+      ],
+      "sources": [
+        "https://github.com/zotero/reader/issues/234",
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/index.android.js#L1-L93",
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/index.ios.js#L1-L54",
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/index.view-dev.js#L1-L140",
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/view.js#L80-L100"
+      ],
+      "status": "draft",
+      "limitations": [
+        "This is reader bridge-source inspection, not another lane's Android application or emulator investigation.",
+        "The merge issue query returned two summaries and #234's body was read; complete refactor PR history was not searched.",
+        "No host integration or adapter tests were run, and complete cross-platform parity is not claimed."
+      ]
+    },
+    {
+      "id": "ALT-DW-012",
+      "title": "Define and test the annotation-save rejection contract",
+      "application_id": "zotero-reader",
+      "priority": "high",
+      "evidence_type": "proposal",
+      "basis": "At zotero/reader 09af7187f0b219cec3e32f5fec56f77269a44b67, src/common/annotation-manager.js:425-452 marks saving in progress, clears pending entries, invokes deletion, awaits the host save callback, then resets the flag. There is no local rejection handler in that inspected method. reader.js and view.js forward host callbacks, whose complete failure policy was not audited. Closed issue #52 records earlier save-error UI work, so a claim that Zotero never reports save failures would be incorrect.",
+      "acceptance_criteria": [
+        "Document whether the host save callback retries, rejects, blocks editing or delegates recovery, including desktop and mobile adapter differences.",
+        "Inject a rejected save while subsequent edits and deletions arrive.",
+        "The specified policy either safely retains/retries the unsaved batch or exposes a blocked/error state with recoverable content; it never reports a silent successful save.",
+        "Undo and remapped annotation IDs do not resurrect deleted data or lose later edits during recovery.",
+        "Exercise recovery and document close at the host adapter as well as at the manager, preserving existing immediate/debounced save tests."
+      ],
+      "sources": [
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/annotation-manager.js#L393-L453",
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/reader.js#L352-L368",
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/common/view.js#L80-L100",
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/test/common/annotation-manager.test.mjs",
+        "https://github.com/zotero/reader/issues/52",
+        "https://github.com/zotero/reader/issues?q=is%3Aissue%20%22annotation%22%20save"
+      ],
+      "status": "draft",
+      "limitations": [
+        "This is a callback-contract investigation, not a reproduced annotation-loss or permanently stuck-save defect.",
+        "Host database, retry, close and error-UI implementation remain outside the reviewed subset.",
+        "Four save-related issue summaries and the #52 discussion were read; existing closed work is not evidence that every current host failure case is covered.",
+        "No failure-injection test or application session was executed."
+      ]
+    },
+    {
+      "id": "ALT-DW-013",
+      "title": "Add controller-level native and semantic search transition checks",
+      "application_id": "zotero-reader",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "basis": "At zotero/reader 09af7187f0b219cec3e32f5fec56f77269a44b67, src/pdf/pdf-search-controller.mjs already includes generation/revision guards, abort handling and semantic-to-native fallback. test/pdf/search-session.test.mjs covers current-session-only fallback at the state-owner layer. Additional controller-level checks can exercise delayed page/mapping callbacks and visible results without reimplementing these existing guards.",
+      "acceptance_criteria": [
+        "Delayed semantic results for query A cannot overwrite the visible result state for query B.",
+        "A semantic failure falls back only for the current query and publishes coherent native results.",
+        "Destroyed views and closed find sessions cause no late navigation or result publication.",
+        "Match geometry and page labels remain coherent between Reading Mode and the standard PDF view.",
+        "Native and semantic searches on the same fixture have explicitly documented equivalent results or justified differences, tested through the real semantic producer and controller integration."
+      ],
+      "sources": [
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/src/pdf/pdf-search-controller.mjs#L219-L445",
+        "https://github.com/zotero/reader/blob/09af7187f0b219cec3e32f5fec56f77269a44b67/test/pdf/search-session.test.mjs#L1-L77",
+        "https://www.zotero.org/support/changelog",
+        "https://github.com/zotero/reader/issues?q=is%3Aissue%20%22search%22"
+      ],
+      "status": "draft",
+      "limitations": [
+        "No stale-result or navigation defect was reproduced; relevant protections already exist in the inspected controller.",
+        "The search query returned ten issue summaries; tests elsewhere, host issues/forums and PR history were not exhausted.",
+        "The structured-document-text producer was observed as a pinned submodule but not reviewed internally, and no semantic/UI integration tests were run."
+      ]
+    }
+  ]
+}
