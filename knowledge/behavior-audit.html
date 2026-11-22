@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reader Behavior Audit</title>
+<style>
+/* A readable research brief with an evidence register and grouped test specifications. */
+:root{--bg:#f5f8fc;--paper:#fff;--fg:#182b43;--muted:#4a6078;--accent:#175b91;--line:#ccd8e6;--display:Georgia,'Times New Roman',serif;--body:system-ui,-apple-system,'Segoe UI',sans-serif;--mono:ui-monospace,Consolas,monospace;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111e2c;--paper:#182a3c;--fg:#e5edf7;--muted:#b6c8dc;--accent:#91c9f5;--line:#3b516a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111e2c;--paper:#182a3c;--fg:#e5edf7;--muted:#b6c8dc;--accent:#91c9f5;--line:#3b516a;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:1rem/1.65 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:2rem}main{max-width:72rem;margin-inline:auto;display:grid;gap:2.5rem}header,section,footer{min-width:0}h1,h2,h3,p{margin:0}h1,h2{font-family:var(--display);text-wrap:balance;line-height:1.15}h1{font-size:clamp(2.2rem,5vw,3.6rem);max-width:20ch}h2{font-size:1.9rem}h3{font-size:1.08rem;line-height:1.4}p{max-width:72ch}a{color:var(--accent);text-underline-offset:.18em}a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px}header,section{display:grid;gap:1rem}.label{color:var(--muted);font-size:.8rem;letter-spacing:.09em;text-transform:uppercase}.lead{font-size:1.2rem;max-width:65ch}.notice{background:var(--paper);border:1px solid var(--line);padding:1.2rem;display:grid;gap:.6rem}.muted,small{color:var(--muted)}nav{display:flex;gap:1rem;flex-wrap:wrap}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.95rem}th,td{text-align:left;vertical-align:top;padding:.7rem .8rem;border-bottom:1px solid var(--line)}th{background:var(--paper)}td:first-child{font-weight:600}code{font-family:var(--mono);font-size:.9em;overflow-wrap:anywhere}ul,ol{margin:0;padding-left:1.5rem}li+li{margin-top:.5rem}.columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}.columns>article{min-width:0;display:grid;gap:.5rem;align-content:start}.corrections{display:grid;gap:1.3rem}.correction{border-top:1px solid var(--line);padding-top:1rem;display:grid;gap:.35rem}.refs{font-family:var(--mono);font-size:.82rem;color:var(--muted)}footer{border-top:1px solid var(--line);padding-top:1.3rem;display:grid;gap:.65rem}footer p{overflow-wrap:anywhere}@media(max-width:650px){.columns{grid-template-columns:1fr}th,td{padding:.6rem .4rem}body{padding-block:1.2rem}}
+.report{max-width:72rem;margin-inline:auto;display:grid;gap:2.5rem}main{width:100%;scroll-margin-top:1rem}section[id]{scroll-margin-top:1rem}main:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.skip-link{position:absolute;top:1rem;left:1rem;z-index:1;max-width:calc(100% - 2rem);background:var(--paper);padding:.6rem 1rem}
+.skip-link:not(:focus){width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to audit findings</a>
+<div class="report">
+<header>
+<p class="label">Independent reader research · Review snapshot 22 November 2026</p>
+<h1>Reader Behavior Audit</h1>
+<p class="lead">What Moon+ Reader already offers, which improvements need testing, and what the retained evidence actually proves.</p>
+<p>Twenty-four reviewers examined disjoint groups of the 74 existing proposals, followed by one consolidation reviewer. Eight feature-area inventories and their coverage review mapped 176 workflow records. The same agent corrected and checked the five inventory issues identified by the independent coverage review.</p>
+<div class="notice"><strong>Review complete; expanded application testing pending.</strong><p>The proposal review found no new runtime bugs. It retained one previously reproduced, sample-specific PDF-save interoperability failure. The separate emulator audit has not supplied a completed result for this snapshot. Workflow records and proposed acceptance tests are not application passes.</p></div>
+<nav aria-label="Report sections"><a href="#evidence">Observed behavior</a><a href="#features">Feature coverage</a><a href="#gaps">Possible gaps</a><a href="#corrections">Test corrections</a><a href="#next-tests">Next tests</a><a href="#sources">Sources</a></nav>
+</header>
+<main id="main-content" tabindex="-1" aria-label="Audit findings">
+<section id="evidence">
+<h2>What is established</h2>
+<div class="columns">
+<article><h3>One retained interoperability failure</h3><p><code>RUNTIME-PDF-PREV-001 / RT-16</code>: two edited AcroForm outputs contain an incremental trailer with <code>/Prev -1</code>. pypdf 6.15.0 rejected both with <code>ValueError('negative seek value -1')</code>; PyMuPDF 1.28.0 opened with repair and recovered the edits. Moon reopened the files with the values visible.</p><p>The second repetition changed only the text field. Saving occurred when closing with Android Back, not through a separately verified Save command. This establishes malformed-output interoperability, not demonstrated loss of the field values.</p></article>
+<article><h3>Two concerns needing confirmation</h3><p><code>AUX-STATUS-001</code>: a one-page PDF once showed <code>101/1</code> after correctly finding and highlighting the requested text. The anomaly was not repeated; the successful search remains a successful search.</p><p><code>AUX-A11Y-001</code>: some captured controls lacked UIAutomator labels. No TalkBack task established whether the controls were announced or usable. This is an accessibility-testing lead, not a reproduced TalkBack failure.</p></article>
+</div>
+<p><strong>Evidence boundary:</strong> these observations are from 21 November 2026 on the supplied APK declaring 10.8 / 1008000, in an account-free Android 16/API 36 x86-64 emulator. The publisher of those bytes was not authenticated. They cannot establish a defect in the official Play release. No proprietary-code inspection was performed for this behavior-review expansion.</p>
+<p>Sample SHA-256: <code>e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc</code>.</p>
+<p>The historical 36-case matrix remains <strong>3 pass, 6 partial, 1 fail, 7 blocked and 19 not run</strong>. Ten cases were exercised at least in part. Copying fixtures, checking JSON, or reviewing a proposal does not change these totals.</p>
+<p><a href="https://github.com/chirag127/reader-improvement-lab/blob/1f1964564a952a09d9bf549c80e58b7a0d8ec765/knowledge/runtime-results.md">Read the historical observations and their exact limits</a>.</p>
+</section>
+<section id="features">
+<h2>Feature coverage</h2>
+<p>All 21 documented baseline groups are represented. All 36 existing runtime cases have an owner: 33 map to feature records; installation, latency and memory are shared checks. The 176 records overlap at domain boundaries and include unestablished workflows. They are not 176 unique shipping features.</p>
+<div class="table-wrap"><table><thead><tr><th>Area</th><th>Workflow records</th><th>What the review covers</th></tr></thead><tbody>
+<tr><td>Formats and content</td><td>25</td><td>Named format families, publisher formatting, EPUB3 media and footnotes, documented DRM exclusion.</td></tr>
+<tr><td>PDF workflows</td><td>30</td><td>Forms, handwriting, annotations, zoom, reflow probes, themes, spreads and portable saved files.</td></tr>
+<tr><td>Navigation and input</td><td>22</td><td>Search, gestures, hardware keys, auto-scroll, orientation, separate documents and startup locks.</td></tr>
+<tr><td>Typography and localization</td><td>19</td><td>Fonts, styles, paragraph controls, themes, language behavior and enlarged layouts.</td></tr>
+<tr><td>Ebook annotations and export</td><td>20</td><td>Highlights, notes, bookmarks, lookup, translation, sharing and selected exports.</td></tr>
+<tr><td>Library and catalogs</td><td>27</td><td>Shelves, tags, import, identity, relinking, covers, widgets, OPDS and calibre.</td></tr>
+<tr><td>Cloud and backup</td><td>16</td><td>Position versus annotation sync, provider boundaries, retry, conflict handling and restore.</td></tr>
+<tr><td>Speech, accessibility and focus</td><td>17</td><td>TTS dependencies, background playback, assistive tasks, statistics and focus aids.</td></tr>
+</tbody></table></div>
+<p>Moon already documents PDF annotations and forms, TTS, background-speech guidance, export, backup/restore, cloud sync including Drive in its policy, custom fonts, publisher-formatting preview, OPDS, double-tap zoom and missing-file association. Re-requesting these as wholly absent would misstate the baseline.</p>
+<p><a href="https://github.com/chirag127/reader-improvement-lab/blob/1f1964564a952a09d9bf549c80e58b7a0d8ec765/knowledge/moon-baseline.md">Existing capability baseline and dated sources</a>.</p>
+</section>
+<section id="gaps">
+<h2>Possible missing workflows</h2>
+<p>The 74 proposal reviews classify <strong>63 as refinement hypotheses, nine as gap hypotheses, one as a retained sample-specific bug, and one as unresolved</strong>. A hypothesis is not proof that Moon lacks the capability. The nine candidates below require checking actual settings, fallbacks and complete workflows.</p>
+<div class="table-wrap"><table><thead><tr><th>Proposal</th><th>Workflow to investigate</th><th>What would distinguish it</th></tr></thead><tbody>
+<tr><td>MOON-006</td><td>Recovery of an unconfirmed note draft</td><td>Restore the draft after a defined lifecycle event without replacing an already committed note.</td></tr>
+<tr><td>MOON-016</td><td>Independent two-document reading</td><td>Two books with independent positions and edits; two pages of one book do not meet this outcome.</td></tr>
+<tr><td>MOON-022</td><td>Offline full-text search across a selected shelf</td><td>Find content-only sentinels absent from titles and metadata; activate the correct passages.</td></tr>
+<tr><td>MOON-033</td><td>Citations and external passage backlinks</td><td>Return to the exact quoted occurrence, including after explicit safe relinking.</td></tr>
+<tr><td>MOON-049</td><td>Semantic navigation with TalkBack</td><td>Complete heading, link, table and annotation tasks using a verified assistive setup.</td></tr>
+<tr><td>MOON-067</td><td>EPUB3 authored-audio media overlays</td><td>Publication audio maps to passages and resumes correctly; ordinary audio/video support is separate.</td></tr>
+<tr><td>MOON-071</td><td>Contextual vocabulary recall</td><td>Review saved words and resume an acknowledged review session with correct progress.</td></tr>
+<tr><td>MOON-073</td><td>Temporary reading without named history records</td><td>Verify defined local records and controlled-backend behavior, including reconnect and no backfill.</td></tr>
+<tr><td>MOON-074</td><td>Selected-page printing</td><td>Dispatch the chosen pages from a coherent preview revision to a controlled destination.</td></tr>
+</tbody></table></div>
+<p><code>MOON-058</code>, backup/sync package protection, remains unresolved. Startup locking is not package encryption; failure to find plaintext would not prove encryption either.</p>
+<p>Useful open-source comparisons include Readest's documented parallel reading and shelf search, KOReader's export workflows, and Thorium's documented accessibility and authored-audio support. These are retained comparison sources, not fresh head-to-head runtime tests or guarantees of Android parity.</p>
+</section>
+<section id="corrections">
+<h2>Make the tests decisive</h2>
+<p>Reviewers recommended 197 editorial or acceptance-test changes across 72 proposals, consolidated into 38 groups. These are review recommendations, not 197 software defects. The original proposal files have not been rewritten. <code>MOON-056</code> and <code>MOON-065</code> required no material correction in this review.</p>
+<div class="notice"><strong>Common test contract</strong><p>First establish a working supported route and independently validated synthetic input. Observe the failure at the actual boundary. Compare complete saved content, not only a success toast or count. Credit an existing fallback when it meets the requested outcome. Record setup failures, partial tests and unobservable branches separately. Never infer data loss when the original values remain recoverable.</p></div>
+<div class="corrections">
+<article class="correction"><h3>EC-01 · Save and export failure</h3><p class="refs">MOON-001, 002</p><p>Replace internal return-value assumptions with a proven failure at the real destination after a healthy control. Verify recoverable edits, truthful feedback, full output and safe replacement separately.</p></article>
+<article class="correction"><h3>EC-02 · Sync retry and completion</h3><p class="refs">MOON-003, 041</p><p>Test logical delivery through supported lifecycle/retry routes, without prescribing an outbox or button. Separate server commit, acknowledgement and receiver application; duplicate transport attempts are not duplicate notes.</p></article>
+<article class="correction"><h3>EC-03 · Equal-size covers</h3><p class="refs">MOON-004</p><p>Prove cover synchronization first. Measure the objects after import because images may be re-encoded. Distinguish failed transfer from correct bytes displayed through a stale cache.</p></article>
+<article class="correction"><h3>EC-04 · Speech completeness and exclusions</h3><p class="refs">MOON-005, 066</p><p>Measure the effective engine limit and compare the complete ordered text stream. Submission, audible output and cursor position are separate. Intentional excluded regions are not truncation.</p></article>
+<article class="correction"><h3>EC-05 · Uncommitted drafts</h3><p class="refs">MOON-006</p><p>Seed a committed note and a separate unconfirmed draft. Distinguish activity recreation, rotation and background process death. Explicit Discard and source export require independent checks.</p></article>
+<article class="correction"><h3>EC-06 · Reflow and no-text pages</h3><p class="refs">MOON-007–009</p><p>Use independent visual, tag and stream-order oracles. Test saved occurrence anchors separately from selection. A correct zero-match result on an image-only page is not an OCR defect.</p></article>
+<article class="correction"><h3>EC-07 · Portable annotation geometry</h3><p class="refs">MOON-010</p><p>Separate page crop, display crop, PDF rotation and device orientation. Record the initial saved mark and a declared tolerance so imprecise drawing is not mistaken for later drift.</p></article>
+<article class="correction"><h3>EC-08 · Form interoperability</h3><p class="refs">MOON-011</p><p>Preserve the one historical save-output failure. Test extra field types with new validated inputs; parser acceptance, visual appearance and value recovery are distinct outcomes.</p></article>
+<article class="correction"><h3>EC-09 · Undo history</h3><p class="refs">MOON-012</p><p>Define exact user transactions and document-switch/history lifetime. Editor undo differs from a committed annotation edit. Disabled Undo on a pristine document may be correct.</p></article>
+<article class="correction"><h3>EC-10 · Rendering backend recovery</h3><p class="refs">MOON-013</p><p>Establish two genuinely selectable paths before A/B testing. Allow supported close/reopen recovery; define fonts, geometry and selection oracles rather than requiring an assumed hot switch.</p></article>
+<article class="correction"><h3>EC-11 · Night colors</h3><p class="refs">MOON-014</p><p>Respect alternative outcomes: figure preservation or a page-original-color exception. Original RGB and preserved hue are different promises. Verify reversible comparison and unchanged source bytes.</p></article>
+<article class="correction"><h3>EC-12 · View profiles and comics</h3><p class="refs">MOON-015, 068</p><p>Define source page/image identities, crop precedence and LTR/RTL half order. Rotating to display both halves does not prove loss of the selected half; check again after returning.</p></article>
+<article class="correction"><h3>EC-13 · Two-document isolation</h3><p class="refs">MOON-016</p><p>Test independent edits under each pane's actual save model. Correct autosave may satisfy isolation without a new Save/Discard dialog.</p></article>
+<article class="correction"><h3>EC-14 · Search semantics and cancellation</h3><p class="refs">MOON-017–021</p><p>Declare literal/regex, case, direction and span oracles. Separate Unicode equivalence from accent folding. Test a bounded pending search and subsequent valid query, not private callback injection or pathological workloads.</p></article>
+<article class="correction"><h3>EC-15 · Shelf search</h3><p class="refs">MOON-022</p><p>Use content-only positives and metadata-only negatives. Replace the actual app-visible edition. Correct results or fast timing cannot prove the app avoided rescanning content.</p></article>
+<article class="correction"><h3>EC-16 · Filtered annotation export</h3><p class="refs">MOON-023</p><p>Define exact record identities, AND filters, selection scope and stable order. Compare exported text and book associations as well as counts.</p></article>
+<article class="correction"><h3>EC-17 · Settings discovery</h3><p class="refs">MOON-024</p><p>Find the manual control and exact-label route before testing aliases. An unpromised alias is not a regression; visual, keyboard and accessibility focus need separate observations.</p></article>
+<article class="correction"><h3>EC-18 · Annotation interchange</h3><p class="refs">MOON-025, 026, 028</p><p>Distinguish book, edition and annotation identity. Use a clean import target, exact Unicode policy and named consumer. Safe atomic rejection of malformed exports is not data loss.</p></article>
+<article class="correction"><h3>EC-19 · Batch study exports</h3><p class="refs">MOON-027</p><p>Specify selected annotations rather than complete-book conversion. Define CSV dialect, Markdown rendering and per-book versus combined transactions, including literal-safe spreadsheet handling.</p></article>
+<article class="correction"><h3>EC-20 · Highlight and share delivery</h3><p class="refs">MOON-029–031</p><p>Identify supported provider acknowledgements. Inspect receiver-visible MIME, bytes and URI lifetime. Compare full long-text content with explicit units and preserve an honest uncertain state after lost acknowledgement.</p></article>
+<article class="correction"><h3>EC-21 · Export versus printing</h3><p class="refs">MOON-032, 074</p><p>Visible markup does not prove editable export. Modal print preview can correctly prevent a race. Separate canceled dispatch from internal preview creation and normal autosave.</p></article>
+<article class="correction"><h3>EC-22 · Citation backlinks</h3><p class="refs">MOON-033</p><p>Credit existing relinking. Define physical, embedded and printed page labels separately. Use repeated quote occurrences and a controlled external receiver; do not invent a link scheme.</p></article>
+<article class="correction"><h3>EC-23 · Whole-library restore</h3><p class="refs">MOON-034</p><p>Inventory included and referenced assets. Prove clean restore before collision, cancellation and interruption tests. Preflight validation alone does not prove transaction safety.</p></article>
+<article class="correction"><h3>EC-24 · EPUB styles and languages</h3><p class="refs">MOON-035–038</p><p>Check publisher-formatting preview first. Declare relative layout, glyph, whitespace and language oracles. Separate doubled app text size from OS scaling and visual tables from assistive semantics.</p></article>
+<article class="correction"><h3>EC-25 · Reading position</h3><p class="refs">MOON-039, 043</p><p>Require the same visible source fragment rather than unchanged pagination. Local relayout and remote undo are separate. Existing history can satisfy recovery without a new control.</p></article>
+<article class="correction"><h3>EC-26 · Footnote return</h3><p class="refs">MOON-040</p><p>Use validated footnote markup, multiple reference occurrences and explicit return actions. Test keyboard and TalkBack focus separately; require the outcome, not a particular stack implementation.</p></article>
+<article class="correction"><h3>EC-27 · Conflicting replicas</h3><p class="refs">MOON-042</p><p>Start from a healthy common note. Reverse arrival order in independent trials. A resolved replica is no longer stale: use a separately held replica for resurrection tests.</p></article>
+<article class="correction"><h3>EC-28 · Interrupted downloads</h3><p class="refs">MOON-044</p><p>Interrupt a measured payload after a healthy control. Preserve the prior usable edition. Hidden staging and a safe full restart can satisfy integrity even without resumable downloads.</p></article>
+<article class="correction"><h3>EC-29 · Identity and storage recovery</h3><p class="refs">MOON-045, 048, 057</p><p>Credit documented relinking and the explained selected-file route. Distinguish provider outage, grant denial, missing source and imported copies; hidden shelf entries are not evidence of deleted notes.</p></article>
+<article class="correction"><h3>EC-30 · Bulk catalog operations</h3><p class="refs">MOON-046</p><p>Seed distinct prior values and a later unrelated edit before undo. A read-only book is not a fault in a catalog-only update. Report accurate partial completion or atomic rollback separately.</p></article>
+<article class="correction"><h3>EC-31 · OPDS boundaries</h3><p class="refs">MOON-047</p><p>Name actual protocol and authentication profiles. Separate discovery, download and opening. Fix MIME aliases and feed bytes before testing; incompatible authentication is not a regression.</p></article>
+<article class="correction"><h3>EC-32 · Assistive and scaled UI</h3><p class="refs">MOON-049–052</p><p>Establish working TalkBack, keyboard and Switch Access controls separately. Measure tasks, roles, focus and error announcements rather than XML alone; preserve escape routes and actual viewport/scaling values.</p></article>
+<article class="correction"><h3>EC-33 · Narration and authored audio</h3><p class="refs">MOON-053–055, 067</p><p>Prove audio and actual focus interruption. Voice availability is not interface-language coverage. Distinguish queued text from playback, and TTS from publication-authored media overlays.</p></article>
+<article class="correction"><h3>EC-34 · Backup protection</h3><p class="refs">MOON-058</p><p>Prove correct-secret restore before wrong-secret or tamper checks. Compression is not encryption; arbitrary damaged headers do not test authentication. Key rotation cannot revoke copies of old keys.</p></article>
+<article class="correction"><h3>EC-35 · Performance and e-ink</h3><p class="refs">MOON-059–061</p><p>Measure readable and interactive events, not the splash screen. Use a fixed-state memory series and whole-trend analysis. Emulator images cannot establish physical ghosting, refresh or energy.</p></article>
+<article class="correction"><h3>EC-36 · Diagnostics and capability reporting</h3><p class="refs">MOON-062–064</p><p>Use inert canaries and controlled receivers for draft/cancel tests. Separate support, evidence basis and test outcome. Do not invent release versions or call copied fixtures executed coverage.</p></article>
+<article class="correction"><h3>EC-37 · Dictionary and translation</h3><p class="refs">MOON-069, 070</p><p>Respect the actual provider contract. Handoff without a returned result is unknown. Use repeated text at distinct locations, prove controllable replies, and credit correct serialized scheduling.</p></article>
+<article class="correction"><h3>EC-38 · Review, statistics and temporary sessions</h3><p class="refs">MOON-071–073</p><p>Verify review restart after acknowledged answers. Define overlapping reading-time accounting and measurement precision. Offline silence cannot prove there is no queued history upload.</p></article>
+</div>
+</section>
+<section id="next-tests">
+<h2>Execution priorities</h2>
+<ol>
+<li><strong>Establish the test environment.</strong> One operator owns the disposable emulator. Verify build identity, network restriction, fixture hashes and cleanup. Official-release attribution requires an authenticated official build.</li>
+<li><strong>Complete EPUB and search foundations.</strong> RT-10 covers chapters, contents, font-size changes and reopening. RT-12/13 cover explicit search modes, malformed-query recovery, cancellation and the next successful action.</li>
+<li><strong>Check durable edits and round trips.</strong> Complete annotation CRUD, rotated geometry, export/import, relinking and clean backup/restore before controlled failure tests.</li>
+<li><strong>Exercise recovery.</strong> Confirm the fault reaches the selected destination; preserve original outputs. Open a healthy document after each benign malformed-input case.</li>
+<li><strong>Provision dependent tests separately.</strong> Cloud needs controlled test accounts/backends; speech needs an identified engine and output oracle; accessibility needs actual assistive services. Missing prerequisites stay blocked.</li>
+<li><strong>Measure quality rather than infer it.</strong> Keep raw timing trials and memory series. Use named hardware for physical-device and e-ink conclusions.</li>
+</ol>
+<p>The separate runtime workflow remains pending for this snapshot. This report does not predict its installation, test or cleanup results. The 38 correction groups are available to guide execution without rewriting historical results.</p>
+</section>
+<section id="sources">
+<h2>Sources and reproducibility</h2>
+<p>Primary-source information in this review was retained from 21 November 2026. The Google Play listing reported an update on 16 October 2026; that is not publisher authentication of the supplied file. The configured search service failed to connect, so no fresh web-search coverage is claimed.</p>
+<ul>
+<li><a href="https://www.moondownload.com/">Moon+ Reader official homepage</a> and <a href="https://www.moondownload.com/faq.html">FAQ</a>.</li>
+<li><a href="https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp">Official Pro listing</a>.</li>
+<li><a href="https://github.com/chirag127/reader-improvement-lab/blob/1f1964564a952a09d9bf549c80e58b7a0d8ec765/knowledge/testing-plan.md">36-case application test specification</a> and <a href="https://github.com/chirag127/reader-improvement-lab/blob/1f1964564a952a09d9bf549c80e58b7a0d8ec765/knowledge/runtime-results.md">historical results</a>.</li>
+<li><a href="https://github.com/chirag127/reader-improvement-lab/blob/1f1964564a952a09d9bf549c80e58b7a0d8ec765/data/moon-improvements.json">Original 64 proposals</a> and <a href="https://github.com/chirag127/reader-improvement-lab/blob/1f1964564a952a09d9bf549c80e58b7a0d8ec765/data/moon-followup-proposals.json">ten-proposal supplement</a>.</li>
+<li><a href="https://github.com/chirag127/reader-improvement-lab/blob/1f1964564a952a09d9bf549c80e58b7a0d8ec765/knowledge/alternatives-android.md">Android comparison dossiers</a> and <a href="https://github.com/chirag127/reader-improvement-lab/blob/1f1964564a952a09d9bf549c80e58b7a0d8ec765/knowledge/alternatives-desktop-web.md">desktop/web dossiers</a>.</li>
+</ul>
+<p>Review accounting is based on the completed 24-lane consolidation and eight corrected domain inventories. Their local receipts retain input hashes and per-proposal reasoning; those working files are not part of the pinned public research commit. The inventory correction receipt is identified by SHA-256 <code>eb6c01c7948f06f145b66020f59ddd336ac7c2d684bd114ce11abc3f7040d476</code>. The linked historical documents support application claims; review counts describe the analysis process only.</p>
+<p><strong>Remaining work:</strong> finish and reconcile the emulator run, apply selected acceptance-contract corrections to the canonical backlog, refresh sources where needed, and reproduce candidate gaps on the appropriate build. No review here establishes complete absence of bugs, superiority over every alternative, or that every proposed feature is missing.</p>
+</section>
+</main>
+<footer class="hire-me">
+<h3>Hire me</h3>
+<p>Chirag Singhal — building free, open APIs and tools.</p>
+<p><a href="mailto:chirag@oriz.in">chirag@oriz.in</a> · <a href="https://github.com/chirag127">GitHub</a> · <a href="https://www.linkedin.com/in/chirag127/">LinkedIn</a> · <a href="https://x.com/singhal127">X</a> · <a href="https://www.youtube.com/@ChiragSinghal127">YouTube</a> · <a href="https://www.instagram.com/chiragsinghal127/">Instagram</a> · <a href="https://www.reddit.com/user/Far_Macaron_9910/">Reddit</a> · <a href="https://buymeacoffee.com/chirag127">Buy me a coffee</a></p>
+<small>Independent research. Product names identify the subjects of comparison and do not imply endorsement.</small>
+</footer>
+</div>
+</body>
+</html>

@@ -16,6 +16,7 @@ This is the canonical navigation for the public investigation. Markdown notes ex
 |---|---|---|
 | [Methodology](methodology.md) | Claim types, defect threshold, scope, quality attributes | [Investigation design](design.md) |
 | [Coverage and remaining evidence](coverage.md) | Question-by-question boundaries and evidence still needed | [Execution plan](plan.md) |
+| [Behavior audit synthesis](behavior-audit.html) | Completed 24-lane proposal review and eight-domain inventory; expanded runtime evidence remains separate | 74 reviewed proposals, 176 overlapping workflow records, and 38 recommended test-contract corrections |
 | [Moon official baseline](moon-baseline.md) | Existing features, v10.8 notes, commercial/legacy comparisons, name disambiguation | [Moon baseline](../data/moon-baseline.json) |
 | [64 Moon improvement proposals](moon-improvements.md) | Prioritized extensions, conditional reliability candidates and new-workflow ideas | [Detailed backlog and acceptance criteria](../data/moon-improvements.json) |
 | [Ten additional Moon workflows](moon-followup-proposals.md) | MOON-065–074; 30 prospective criteria and explicit distinctions from the original 64 | [Supplement records](../data/moon-followup-proposals.json), [independent review](../evidence/reviews/moon-followup-proposals.json) |
@@ -30,6 +31,7 @@ This is the canonical navigation for the public investigation. Markdown notes ex
 | [Application test matrix](testing-plan.md) | 36 specified workflows and the evidence needed to record an application result | Specifications; actual execution is recorded in [runtime results](runtime-results.md) |
 | [Android runtime results](runtime-results.md) | 3 pass, 6 partial, 1 fail, 7 blocked, 19 not-run; sample-specific saved-form failure | [Case records](../data/runtime-results.json), [evidence manifest](../evidence/runtime/manifest.json), [cleanup](../evidence/runtime/cleanup.json) |
 | [Reporting guide](reporting.md) | Verified contacts, duplicate checks, and unsent templates | [Repository issue forms](../.github/ISSUE_TEMPLATE/) |
+| [Private outgoing report tracking](mail-tracking.md) | Frozen messages, UTC attempt records, SMTP outcomes, and duplicate-send protection | [Tracker](../scripts/mail_tracking.py), [synthetic tests](../tests/test_mail_tracking.py) |
 | [Corpus validation](validation.md) | Offline record, citation, hash and publication checks | [Validator](../scripts/validate_repository.py), [regression tests](../tests/test_repository_validation.py) |
 
 ## Implemented contributions
@@ -46,6 +48,8 @@ This is the canonical navigation for the public investigation. Markdown notes ex
 - [Fixture integration tests](../tests/test_fixtures.py), [generator](../scripts/generate_fixtures.py), and [reference checker](../scripts/check_fixtures.py).
 - [Historical combined host-suite receipt](../evidence/host-suite-verification.json): 68 passing tests on 21 November, with input identities and the retained execution outcome.
 - [Supplement validator verification](../evidence/validator-supplement-verification.json): 50 focused validator tests passed on 22 November; unchanged fixture-group evidence is reused separately.
+- [Mail-tracker verification](../evidence/mail-tracker-verification.json): 25 synthetic tests passed using temporary SQLite databases and substituted SMTP; no email was sent by the tests.
+- [Behavior report UI verification](../evidence/report-ui-verification.json): 31 assertions across each of three Chromium configurations, two source checks, a separate REA capture, and independent review of the three report repairs. Selected original screenshots are included; these are report checks, not Android tests.
 - [Independent validator review and resolutions](../evidence/reviews/repository-validator.json): malformed records, filesystem boundaries, contribution references, and runtime evidence binding.
 - [Runtime delivery verification](../evidence/runtime/verification.json) and [independent runtime-claim review](../evidence/reviews/runtime-claims.json). These verify retained evidence; they add no application executions.
 - [Execution plan](plan.md): the work ledger distinguishes completed deliverables from remaining validation and publication steps.

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "id": "mail-tracker-focused-verification-20261122",
+  "evidence_type": "host-tooling-verification",
+  "source_url": "https://github.com/chirag127/reader-improvement-lab",
+  "observed_at": "2026-11-22T16:07:57.476528+00:00",
+  "status": "pass",
+  "application_tests_executed": false,
+  "projection": {
+    "kind": "sanitized-public-projection-of-completed-evidence",
+    "new_test_executions_during_packaging": 0,
+    "original_receipts": [
+      {
+        "label": "mail-implementation-review.json",
+        "original_receipt_sha256": "fc528cf688c87dcc5e2d72a38ba330a35a660601888d6efdd48b0c4dbc60826e",
+        "size_bytes": 32500,
+        "availability": "Withheld private original; preserved unchanged. This label is not a public file link."
+      }
+    ],
+    "hash_meaning": "Original receipt and stream digests identify the unmodified retained inputs, not this derived JSON file. The public file has its own digest in the packaging inventory.",
+    "transformations": "Select the completed synthetic run and its limitations; replace host-specific command roots with portable aliases; omit operational correspondence, execution identities and private paths."
+  },
+  "inputs": [
+    {
+      "path": "scripts/mail_tracking.py",
+      "sha256": "822d232a89d1c127dbf783a35704542c4d97c5193b17c0be60e74269188e89e8",
+      "size_bytes": 13679,
+      "before_sha256": "822d232a89d1c127dbf783a35704542c4d97c5193b17c0be60e74269188e89e8",
+      "after_sha256": "822d232a89d1c127dbf783a35704542c4d97c5193b17c0be60e74269188e89e8"
+    },
+    {
+      "path": "tests/test_mail_tracking.py",
+      "sha256": "07b7f7a0e8652b6fbe871a6455e418ec8eef6451c3d1558a17a5b2d39cce8488",
+      "size_bytes": 21542,
+      "before_sha256": "07b7f7a0e8652b6fbe871a6455e418ec8eef6451c3d1558a17a5b2d39cce8488",
+      "after_sha256": "07b7f7a0e8652b6fbe871a6455e418ec8eef6451c3d1558a17a5b2d39cce8488"
+    }
+  ],
+  "command": "python -X utf8 -B -m unittest discover -s tests -p test_mail_tracking.py -v",
+  "working_directory": ".",
+  "command_normalization": "python represents the recorded Python 3.13 executable and . the repository root; test arguments are unchanged.",
+  "environment": {"python": "3.13.14", "platform": "Windows AMD64"},
+  "started_at": "2026-11-22T16:07:41.754792+00:00",
+  "completed_at": "2026-11-22T16:07:57.476528+00:00",
+  "input_hashes_before_at": "2026-11-22T16:07:41.753564+00:00",
+  "input_hashes_after_at": "2026-11-22T16:07:57.477533+00:00",
+  "inputs_unchanged_during_run": true,
+  "completed_run_count": 1,
+  "exit_code": 0,
+  "tests": 25,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "unittest_duration_seconds": 15.343,
+  "wall_duration_seconds": 15.721869,
+  "result": "OK",
+  "output_tail": "Ran 25 tests in 15.343s\n\nOK",
+  "output_tail_note": "LF-normalized excerpt. unittest wrote verbose results to stderr; stdout was empty. Digests below bind the original captured streams, including CRLF.",
+  "original_streams": {
+    "stdout": {"size_bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+    "stderr": {"size_bytes": 4302, "sha256": "a2f6a700b08653b911276b4212fcbee1c1aed7e7c275db42f5880e335f3b09a5"},
+    "retention": "The full streams remain inside the unchanged private original receipt; this public record contains a result projection."
+  },
+  "scope": "Existing unittest suite with synthetic reports, real temporary SQLite databases, FakeSMTP submission boundaries and offline CLI subprocesses using explicit temporary database arguments.",
+  "coverage": [
+    "Durable preparation, UTC metadata, body and frozen-message hashes, unique attempt and Message-ID identities",
+    "Idempotent identical preparation, conflicts on changed envelope or content, and input validation",
+    "Exact persisted-byte submission after a committed attempt claim",
+    "Accepted, recognized rejected, ambiguous and interrupted outcomes",
+    "Concurrent preparation and submission; database lock released before transport",
+    "Claim and outcome write/commit failures, immutable identities and replay blocking",
+    "Metadata privacy, refusal of SMTP debug mode, and offline init/prepare/list CLI"
+  ],
+  "failure_history": {
+    "current_run": "All 25 selected tests completed successfully. No behavioral red run is claimed.",
+    "historical_receipt_gap": "Bounded recovery did not locate independently inspectable output for an earlier reported 25-test focused and 100-test full-host run. A relinquished lane recorded no execution; an older 68-test receipt does not substitute for the 100-test run."
+  },
+  "historical_full_host_result": {
+    "status": "reported-only",
+    "reported_tests": 100,
+    "reported_duration_seconds": 59.204,
+    "reported_exit_code": 0,
+    "reported_result": "OK",
+    "underlying_output_independently_recovered": false,
+    "new_full_host_runs": 0,
+    "qualification": "The completed 25-test run above is new focused evidence, not reconstruction or independent verification of the historical full-host claim."
+  },
+  "limitations": [
+    "Passing the synthetic suite establishes the covered tracker behavior at these file hashes, not production database integrity or live authentication, submission, delivery or reading.",
+    "SMTP is substituted. Caller-supplied transports must obey the documented smtplib contract; real server behavior was not tested.",
+    "The documented path is one recipient with frozen plain-text content. Attachments and cross-tool or cross-database deduplication are not supported by this verification.",
+    "No reader application, Android device, helper setup or mailbox operation was executed by this run or this packaging step.",
+    "File hashes bind working inputs; this record does not establish a published Git revision. Relevant changed inputs require reassessment rather than reuse as current evidence."
+  ]
+}

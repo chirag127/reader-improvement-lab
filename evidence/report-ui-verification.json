@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "id": "reader-report-ui-verification-20261122",
+  "evidence_type": "host-tooling-verification",
+  "source_url": "https://github.com/chirag127/reader-improvement-lab",
+  "observed_at": "2026-11-22T16:41:41.687Z",
+  "status": "pass",
+  "application_tests_executed": false,
+  "report_path": "knowledge/behavior-audit.html",
+  "projection": {
+    "kind": "sanitized-public-projection-of-settled-execution-and-review",
+    "new_test_executions_during_packaging": 0,
+    "new_browser_or_rea_operations_during_packaging": 0,
+    "original_receipts": [
+      {"label": "behavior-repair-verification.json", "original_receipt_sha256": "c68e7e8599385c4feb35fe5d9c931cbb338f12ad95845810e070c5dd9c1838a5", "size_bytes": 188763, "role": "Repair-author execution, failed delivery attempt, screenshots and cleanup"},
+      {"label": "reader-repair-final-review.json", "original_receipt_sha256": "a8db3e9f5821ae3fd9d700b44246d154b6f5052a85caafd73a66fd062250b928", "size_bytes": 25918, "role": "Independent read-only final repair evidence review"},
+      {"label": "behavior-synthesis-review.json", "original_receipt_sha256": "d6eac08fc7a63a8bf4d05ba396c2064faf0c43660fbdbba7220cbdb6b7b1a052", "size_bytes": 12846, "role": "Earlier source-only review and original BS-01/02/03 findings"},
+      {"label": "behavior-rea-evidence.json", "original_receipt_sha256": "2d5b7bef93a662e9f34014aad0ca912581f733aedcd3ac1caef7060a18ba6f2e", "size_bytes": 316213, "role": "Complete original REA Evidence object"}
+    ],
+    "original_availability": "Private originals are withheld and preserved unchanged. Labels are identifiers, not public links.",
+    "hash_meaning": "Original receipt, verifier and embedded-artifact hashes bind retained original bytes. This public JSON has a separate file digest in the packaging inventory. Screenshot public-file hashes equal their original capture hashes because bytes were copied without transformation.",
+    "transformations": "Project exact result counts, input bindings, commands with portable aliases, failure history and review limits. Omit private operational paths, execution identities and controller transcripts."
+  },
+  "inputs": [
+    {"path": "knowledge/behavior-audit.html", "sha256": "78755b470f3a5d7b2f4394766155d690f28577c2a2bc8ff95a8bf3e765d0ff2f", "size_bytes": 29082}
+  ],
+  "repair_history": {
+    "original_review_observed_at": "2026-11-22T15:55:55.330Z",
+    "original_review_scope": "Source review only; its planned rendered check was not launched. The original verdict remained partial with three open findings.",
+    "before": {"sha256": "ea94b1494a59c8c89713f45fc279549efe29b15105a57bab63efe62152edde59", "size_bytes": 28302},
+    "repaired_input_observed_at": "2026-11-22T16:11:52.801Z",
+    "repairs": [
+      {"id": "BS-01", "status": "resolved-verified", "change": "Standalone HTML5 shell, English language, UTF-8 and a scalable device-width viewport"},
+      {"id": "BS-02", "status": "resolved-verified", "change": "Attribute inventory-issue discovery to independent review and correction/checking to the same agent"},
+      {"id": "BS-03", "status": "resolved-verified", "change": "Visible first-Tab skip link, focusable named main landmark and keyboard focus styling"}
+    ],
+    "preservation": "The independent reviewer reversed ten exact repair hunks in memory, each occurring once, and recovered the original 28302-byte SHA-256 above. This supports preservation of the remaining report, not a new corpus-wide audit."
+  },
+  "playwright": {
+    "status": "pass",
+    "command": "node <withheld-verifier>",
+    "working_directory": ".",
+    "command_normalization": "Portable projection of the recorded Node invocation. The executable root is replaced by node; the private script argument is represented by <withheld-verifier>. The original script is hash-bound below and is not shipped as a public runnable harness.",
+    "withheld_verifier": {"label": "behavior-verify.cjs", "sha256": "91ff759d9051484515e10f73c116d9845d82427a40dac32403602b4b6d5b7239", "size_bytes": 19517},
+    "tools": {"node": "v26.13.0", "playwright_test_api": "1.65.1", "playwright": "1.65.1", "browser": "Chromium 159.0.8154.6"},
+    "execution_style": "Direct Node script using the stable installed Playwright API and node:assert/strict, not the CLI's alpha dependency or 93 separate Playwright Test cases.",
+    "started_at": "2026-11-22T16:24:14.242Z",
+    "completed_at": "2026-11-22T16:24:30.887Z",
+    "exit_code": 0,
+    "source_checks_passed": 2,
+    "browser_assertions_passed": 93,
+    "failed_browser_assertions": 0,
+    "assertions_per_configuration": 31,
+    "counting_limit": "The same 31 named composite assertions were repeated across three configurations. These are not 93 unique workflows, independent reproductions or Android tests.",
+    "source_checks": [
+      {"name": "only-three-reviewed-repairs-change-original-bytes", "passed": true, "reconstructed_sha256": "ea94b1494a59c8c89713f45fc279549efe29b15105a57bab63efe62152edde59"},
+      {"name": "explicit-document-shell", "passed": true}
+    ],
+    "assertion_names_per_configuration": [
+      "standards-mode-English-UTF8-document", "standard-scalable-mobile-viewport", "meaningful-document-and-main-landmark", "six-report-sections-retained",
+      "accurate-correction-independence-wording", "38-ordered-correction-summaries-retained", "nine-gap-IDs-retained", "workflow-and-historical-counts-retained",
+      "viewport-width-and-no-page-horizontal-overflow", "responsive-column-layout", "first-Tab-exposes-visible-skip-link", "skip-Enter-focuses-and-reveals-main-findings", "Tab-after-skip-continues-inside-main",
+      "keyboard-select-evidence", "keyboard-activate-evidence", "keyboard-select-features", "keyboard-activate-features", "keyboard-select-gaps", "keyboard-activate-gaps",
+      "keyboard-select-corrections", "keyboard-activate-corrections", "keyboard-select-next-tests", "keyboard-activate-next-tests", "keyboard-select-sources", "keyboard-activate-sources",
+      "exact-contact-destinations-and-order", "contact-links-visible-unclipped", "one-contact-block", "no-overflow-at-footer", "no-page-or-console-errors", "no-external-page-requests"
+    ],
+    "configurations": [
+      {"name": "desktop", "viewport": {"width": 1440, "height": 900}, "mobile_emulation": false, "color_scheme": "light", "assertions": 31, "status": "pass", "columns": 2, "page_client_and_scroll_width": 1440, "table_client_and_scroll_widths": [1152, 1152]},
+      {"name": "narrow", "viewport": {"width": 390, "height": 844}, "mobile_emulation": true, "color_scheme": "light", "assertions": 31, "status": "pass", "columns": 1, "page_client_and_scroll_width": 390, "table_client_and_scroll_widths": [358, 358]},
+      {"name": "narrow-dark", "viewport": {"width": 320, "height": 800}, "mobile_emulation": true, "color_scheme": "dark", "assertions": 31, "status": "pass", "columns": 1, "page_client_and_scroll_width": 320, "table_client_and_scroll_widths": [288, 288]}
+    ],
+    "errors": {"page_errors": 0, "console_errors": 0, "external_page_requests": 0},
+    "network_accounting": {"local_requests_at_assertion_per_configuration": 7, "final_retained_local_requests_per_configuration": 8, "explanation": "The final full-page screenshot reload added one local GET after the network assertion."},
+    "isolation": "New nonpersistent offline headless Chromium contexts; service workers and downloads blocked. Exact HTML bytes fulfilled by routing at a synthetic loopback URL; other requests aborted. This was not an OS-wide network audit.",
+    "input_unchanged": true,
+    "final_input_sha256": "78755b470f3a5d7b2f4394766155d690f28577c2a2bc8ff95a8bf3e765d0ff2f",
+    "cleanup": {"contexts_closed": 3, "browser_closed": true, "browser_closed_at": "2026-11-22T16:24:30.781Z"}
+  },
+  "failure_history": [
+    {
+      "operation": "initial-file-delivery-verification",
+      "command": "node <withheld-verifier>",
+      "working_directory": ".",
+      "verifier_sha256": "1cfd36ebbb94df745ca45a8bdeb672c03818d3d9fe42b6e4f48d619555fc33f5",
+      "html_sha256": "78755b470f3a5d7b2f4394766155d690f28577c2a2bc8ff95a8bf3e765d0ff2f",
+      "started_at": "2026-11-22T16:22:07.594Z",
+      "completed_at": "2026-11-22T16:22:10.933Z",
+      "exit_code": 1,
+      "failed_configurations": 3,
+      "browser_assertions_executed": 0,
+      "source_checks_passed": 2,
+      "screenshots": 0,
+      "observed_error": "file:// navigation returned net::ERR_FAILED before page assertions",
+      "root_cause": "unknown",
+      "cleanup": "All three contexts and the owned browser closed.",
+      "recovery": "The subsequent completed run changed the verifier's delivery method to route.fulfill, preserving the repaired HTML bytes and offline contexts.",
+      "qualification": "This is a failed page-delivery attempt, not a reproduced HTML behavior failure or Android defect. Direct file:// opening remains unverified."
+    }
+  ],
+  "rea": {
+    "status": "complete-for-selected-capture",
+    "tool": "tools.rea.capture_browser_scenario",
+    "evidence_id": "ev_c31732818812bffa7b800298fe7b6b136f57c68cd229528c7e6dda4c5b4eb584",
+    "original_evidence_sha256": "2d5b7bef93a662e9f34014aad0ca912581f733aedcd3ac1caef7060a18ba6f2e",
+    "original_evidence_size_bytes": 316213,
+    "original_scenario_sha256": "ed743f72f01417cbb4fd407fd99790f41dd8b2bc9a4a44ee17a8987b478ae445",
+    "representation": "Derived summary only. Complete original parameters and normalized Evidence remain private; raw_result in that original is null. The scenario hash does not identify these projected parameters.",
+    "provider": {"id": "rea-playwright-browser-scenario", "version": "1"},
+    "installed_package_version": "6.10.1",
+    "package_version_limit": "Installed package observation, not a separately queried connected-server version.",
+    "browser": {"mode": "launch", "headless": true, "product": "Chromium", "version": "159.0.8154.6", "cleanup": "terminated-owned-process"},
+    "parameters_projection": {
+      "start_url_alias": "<ephemeral-loopback-origin>/behavior-audit.html",
+      "environment": {"viewport": {"width": 390, "height": 844, "device_scale_factor": 1}, "locale": "en-US", "timezone": "UTC", "color_scheme": "light", "reduced_motion": "reduce", "service_workers": "block"},
+      "command_timeout_ms": 20000,
+      "action_timeout_ms": 3000,
+      "captures_after_each_step": ["accessibility", "url"],
+      "captures_at_end": ["dom", "accessibility", "screenshot", "url"],
+      "event_families": ["console", "page-errors", "network"],
+      "network_content_selected": {"request_body": false, "response_body": false, "header_values": false}
+    },
+    "initial_navigation_completed": true,
+    "declared_actions": [
+      {"label": "report-ready", "action": "wait_for", "target": "#main-content visible", "status": "completed"},
+      {"label": "first-keyboard-stop", "action": "press", "target": "body", "key": "Tab", "status": "completed"},
+      {"label": "skip-visible-focus", "action": "wait_for", "target": ".skip-link:focus-visible visible", "status": "completed"},
+      {"label": "skip-activate", "action": "press", "target": ".skip-link", "key": "Enter", "status": "completed"},
+      {"label": "main-receives-focus", "action": "wait_for", "target": "#main-content:focus visible", "status": "completed"},
+      {"label": "sources-navigation", "action": "click", "target": "link named Sources", "status": "completed"},
+      {"label": "sources-target", "action": "wait_for", "target": "#sources:target visible", "status": "completed"}
+    ],
+    "action_count": 7,
+    "steps_including_initial_navigation": 8,
+    "duration_ms": 3149,
+    "errors": 0,
+    "counting_limit": "Seven actions comprise three UI interactions and four waits after initial navigation, not seven Android tests. Sources was clicked; all-six-section keyboard coverage comes from direct Playwright.",
+    "events": {"retained": 3, "dropped": 0, "requests": 1, "responses": 1, "request_finished": 1, "response_status": 200, "console_or_page_errors": 0},
+    "completeness": {"status": "complete", "equality_eligible": true, "missing_sections": [], "truncated_sections": []},
+    "retained_binding_at": "2026-11-22T16:27:39.260Z",
+    "served_html_sha256": "78755b470f3a5d7b2f4394766155d690f28577c2a2bc8ff95a8bf3e765d0ff2f",
+    "server_lifetime": {"started_at": "2026-11-22T16:25:53.457Z", "closed_at": "2026-11-22T16:27:04.882Z", "closed": true, "close_reason": "explicit-owned-shutdown", "exit_code": null, "qualification": "Server lifetime is not the scenario's wall-clock interval. The consumed shutdown event supplied no numeric exit code."},
+    "withheld_embedded_artifacts": {
+      "final_dom": {"size_bytes": 29080, "sha256": "b50fab193b838696959b79342f25e247fce7a2e3d01d4b2ffd6145e8909bf789", "qualification": "Independent review matched the source after doctype-case and tag-boundary-whitespace normalization; serialized DOM bytes differ from source bytes."},
+      "final_screenshot": {"size_bytes": 16368, "sha256": "8c9d38f636e1b1a020567e8d0620841ad7ffb17d489aa81698f2af1634f06ef0", "width": 390, "height": 844, "included_as_public_copy": false},
+      "accessibility": {"count": 8, "size_bytes_each": 30443, "sha256_each": "b3b94f11e292d0030a7d7f3b9c9467c4777289b8a5e3fc3bba49622fbc75f5e8", "qualification": "Identical snapshots corroborate retained structure, not eight independent focus observations."}
+    }
+  },
+  "independent_review": {
+    "evidence_type": "independent-evidence-review",
+    "status": "pass",
+    "observed_at": "2026-11-22T16:41:41.687Z",
+    "original_receipt_sha256": "a8db3e9f5821ae3fd9d700b44246d154b6f5052a85caafd73a66fd062250b928",
+    "resolved_repairs": ["BS-01", "BS-02", "BS-03"],
+    "open_material_findings": 0,
+    "method": "Independent read-only source/verifier and retained execution review, inverse repair-hunk hashing, inspection of six existing PNG files and integrity checks on embedded REA artifacts. No new browser, REA or application execution.",
+    "receipt_inspection_failure_history": "One read-only summarization probe failed with TypeError on null raw_result. A corrected null-aware inspection completed; this was not a browser or behavior-test failure.",
+    "independence_limit": "This final review independently checks the repair evidence. It does not turn the earlier inventory correction into independently executed checks or supply independent Android observations."
+  },
+  "screenshots": [
+    {
+      "path": "evidence/report-ui/desktop-top.png",
+      "sha256": "03b11fafe1157a0d4713367fa184c3b67576b5223c5d0d88db3b84a6383c084a",
+      "original_capture_sha256": "03b11fafe1157a0d4713367fa184c3b67576b5223c5d0d88db3b84a6383c084a",
+      "size_bytes": 30112,
+      "captured_at": "2026-11-22T16:24:18.068Z",
+      "viewport": {"width": 1440, "height": 900},
+      "color_scheme": "light",
+      "full_page": false,
+      "copy_kind": "original-byte-copy",
+      "source_receipt_sha256": "c68e7e8599385c4feb35fe5d9c931cbb338f12ad95845810e070c5dd9c1838a5",
+      "html_sha256": "78755b470f3a5d7b2f4394766155d690f28577c2a2bc8ff95a8bf3e765d0ff2f",
+      "purpose": "Report top, corrected attribution and retained pending-application-testing notice"
+    },
+    {
+      "path": "evidence/report-ui/narrow-skip.png",
+      "sha256": "6a6426a5cae73cda8b5076d59cfd3f987997e9dc554e03ad6e9c2181349c8d24",
+      "original_capture_sha256": "6a6426a5cae73cda8b5076d59cfd3f987997e9dc554e03ad6e9c2181349c8d24",
+      "size_bytes": 15129,
+      "captured_at": "2026-11-22T16:24:23.166Z",
+      "viewport": {"width": 390, "height": 844},
+      "color_scheme": "light",
+      "full_page": false,
+      "copy_kind": "original-byte-copy",
+      "source_receipt_sha256": "c68e7e8599385c4feb35fe5d9c931cbb338f12ad95845810e070c5dd9c1838a5",
+      "html_sha256": "78755b470f3a5d7b2f4394766155d690f28577c2a2bc8ff95a8bf3e765d0ff2f",
+      "purpose": "Visible focus on the first keyboard stop at the narrow viewport"
+    },
+    {
+      "path": "evidence/report-ui/narrow-dark-contact.png",
+      "sha256": "501e943173ed69f39fc0bf9c5c741ebfeab652127634c7536dd81cc581cf5a7d",
+      "original_capture_sha256": "501e943173ed69f39fc0bf9c5c741ebfeab652127634c7536dd81cc581cf5a7d",
+      "size_bytes": 12554,
+      "captured_at": "2026-11-22T16:24:26.578Z",
+      "viewport": {"width": 320, "height": 800},
+      "color_scheme": "dark",
+      "full_page": false,
+      "copy_kind": "original-byte-copy",
+      "source_receipt_sha256": "c68e7e8599385c4feb35fe5d9c931cbb338f12ad95845810e070c5dd9c1838a5",
+      "html_sha256": "78755b470f3a5d7b2f4394766155d690f28577c2a2bc8ff95a8bf3e765d0ff2f",
+      "purpose": "Existing public contact block wrapping inside the dark narrow viewport"
+    }
+  ],
+  "limitations": [
+    "This verifies the local report, not Moon application behavior. No historical runtime result or proposal record is changed or newly executed.",
+    "Chromium desktop and mobile-emulated layouts were tested; other engines, physical devices and real screen-reader announcements were not tested.",
+    "REA used a separate owned process of the same Chromium version and a Playwright-based provider, not a second browser engine or independent-person execution. REA did not observe host platform or architecture.",
+    "Only the selected local document transaction was retained by REA. Bodies and header values were not requested; receipt ordering does not establish causality or OS-wide network isolation.",
+    "Three useful original Playwright captures are published from fifteen retained files; this is not a complete screenshot collection or a new capture. The independent reviewer inspected six original files.",
+    "External sources and contact destinations were not opened. Final corpus validation and remote publication remain separate parent-owned work.",
+    "Relevant HTML or evidence changes invalidate affected bindings. This projection preserves settled results and does not authorize replay of completed operations."
+  ]
+}

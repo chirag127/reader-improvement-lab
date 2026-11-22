@@ -189,6 +189,13 @@ Thank you,
 
 **For this documented work: no emails, upstream issues, or upstream pull requests submitted.**
 
+### Private outgoing-mail tracking
+
+Use the [private outgoing report tracking guide](mail-tracking.md) for preparation
+commands, exact message identities, submission outcomes, and interrupted-attempt
+recovery. It is the canonical operating guide for the reusable tracker. Actual
+correspondence and submission history remain in the ignored local database.
+
 [M01]: https://www.moondownload.com/
 [M02]: https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en
 [M03]: https://www.moondownload.com/faq.html

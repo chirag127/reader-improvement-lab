@@ -19,7 +19,9 @@ An independent, evidence-backed investigation of **Moon+ Reader Pro 10.8** and a
 | What can I reproduce locally? | [Synthetic fixture guide](knowledge/testing-fixtures.md) · [expected properties and hashes](fixtures/manifest.json) |
 | Which application checks are specified? | [36-workflow test matrix](knowledge/testing-plan.md) · [additional search, speech and malformed-file inputs](knowledge/testing-scenarios.md) |
 | What actually happened in the Android app? | [Runtime findings and coverage](knowledge/runtime-results.md) · [36 case records](data/runtime-results.json) · [hashed evidence](evidence/runtime/manifest.json) |
+| What did the behavior-only review establish? | [Behavior audit synthesis](knowledge/behavior-audit.html) · [report UI verification](evidence/report-ui-verification.json) — proposal and workflow review; further Android execution remains pending |
 | How do I report a finding? | [Verified contacts, reporting steps, and draft templates](knowledge/reporting.md) |
+| How are outgoing reports tracked? | [Private message identities, submission outcomes, and duplicate-send protection](knowledge/mail-tracking.md) |
 | How should I interpret the evidence? | [Methodology](knowledge/methodology.md) · [complete knowledge index](knowledge/index.md) |
 | What remains unverified? | [Question-by-question coverage](knowledge/coverage.md) |
 
@@ -76,6 +78,8 @@ python -X utf8 -B scripts/generate_fixtures.py --output .local/rebuilt-fixtures
 ```
 
 The [21 November combined host run](evidence/host-suite-verification.json) passed **68 tests** at its listed inputs. After adding supplement validation, the [22 November focused validator run](evidence/validator-supplement-verification.json) passed **50 validator tests**, including seven new regression methods. The unchanged 17 core-fixture and eight scenario tests retain their earlier evidence; no combined 75-test run is claimed. The [core reference run](evidence/fixture-verification.json) also passed 42 fixture/engine pairs and 590 property comparisons. These are host-tool results; [Android application results](knowledge/runtime-results.md) have their own execution evidence.
+
+The [mail-tracker verification](evidence/mail-tracker-verification.json) records **25 passing synthetic tests** at the recorded source/test hashes. The [behavior report verification](evidence/report-ui-verification.json) records **31 browser assertions in each of three configurations**, two source checks, a separate REA report capture, and independent repair-evidence review. These checks cover the tracker and report UI; they add no Moon application executions or email submissions.
 
 ## Contribute evidence
 
