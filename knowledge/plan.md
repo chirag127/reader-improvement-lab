@@ -91,7 +91,7 @@ timestamp: 2026-11-21T00:00:00Z
 - [x] Validate structured records, links, counts, evidence status, and publication candidates; staged-byte verification is part of publication.
 - [x] Obtain an independent claim/coverage review and address material findings.
 - [x] Commit and push the initial investigation; verify the public remote content at `060fc174671c7e82072db905e4f9f1f1e15e5d60`.
-- [ ] Register the workspace documentation pointer without incorporating unrelated user changes.
+- [x] Publish the workspace registration and documentation pointer on an isolated task branch, preserving the active workspace branch and normal index. This operational workspace is private; the public research is self-contained here.
 
 ## Task 6: Focused REA follow-up — 22 November
 
@@ -99,7 +99,7 @@ timestamp: 2026-11-21T00:00:00Z
 - [x] Inspect unresolved search, speech and Java/native save boundaries; record bounded coverage and unknowns in the [follow-up](rea-followup.md).
 - [x] Add [ten distinct proposals](moon-followup-proposals.md), with 30 prospective criteria and an [independent semantic review](../evidence/reviews/moon-followup-proposals.json).
 - [x] Extend optional-supplement validation and retain the [50-test focused result](../evidence/validator-supplement-verification.json).
-- [ ] Complete follow-up evidence review, validate the integrated corpus and publish the changed deliverables with remote readback.
+- [x] Complete follow-up evidence review, validate the integrated corpus and publish [the changed deliverables](https://github.com/chirag127/reader-improvement-lab/commit/5d64d04c95950f71d5d491bd0632e656b64d6ced) with anonymous remote readback.
 
 ## Execution notes
 
@@ -108,6 +108,8 @@ timestamp: 2026-11-21T00:00:00Z
 2026-11-21: Static analysis delivered 13 original findings with complete package declarations and focused method/smali evidence. The fixture lane delivered 11 synthetic documents, 17 passing tests, and 42 passing fixture/engine pairs. These are separate evidence classes; neither establishes application runtime success. See [coverage](coverage.md), [static verification](../evidence/static/verification.json), and [fixture verification](../evidence/fixture-verification.json).
 
 2026-11-21: Completed research covers 25 alternatives and ten targeted implementation reviews. The Moon backlog contains 64 draft proposals; the alternative backlogs contain 34. Eighteen synthetic inputs are retained. Bounded static follow-up is integrated; both contribution branches are host-tested and pushed to forks. The [runtime ledger](runtime-results.md) records 3 pass, 6 partial, 1 fail, 7 blocked and 19 not-run cases, with owned-resource cleanup completed. The [combined host suite](../evidence/host-suite-verification.json) passed 68 tests, including 43 validator tests after evidence-integrity fixes. Final publication validation passed across 203 candidates, 947 local links and 234 hashes. Initial research commit `060fc174671c7e82072db905e4f9f1f1e15e5d60` was published and anonymously read back: 203 blobs and 18 directories matched, plus six byte-identical selected raw files. Task-only workspace integration remained outstanding.
+
+2026-11-22: The [REA follow-up](rea-followup.md) and [ten additional proposals](moon-followup-proposals.md) were published at `5d64d04c95950f71d5d491bd0632e656b64d6ced`. Anonymous readback matched all 210 public blobs and 18 directories, plus the bytes of all 17 changed files. The corpus contains 74 Moon proposals with 220 prospective criteria. Its validation passed 1,152 local links and 241 hashes with zero errors; the separate focused validator suite passed 50 tests. Eight distinct method selections and four bounded native disassembly captures add static evidence only. The Android execution counts and official-build limitations remain as recorded in [coverage](coverage.md). Workspace registration was published on a separate task branch without merging into or changing the unrelated active branch.
 
 The dated [test matrix](testing-plan.md) is preserved at the exact hash used during runtime curation. Its original outcome list predates the **partial** classification explained in the [runtime result contract](runtime-results.md#evidence-and-counting); no case criteria were changed to improve a result.
 
