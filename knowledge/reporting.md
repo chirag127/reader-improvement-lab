@@ -10,6 +10,8 @@ timestamp: 2026-11-21T13:58:02Z
 
 **Submission status: UNSENT — no emails or upstream issues submitted.** These are preparation instructions and drafts. The [Moon baseline](moon-baseline.md) owns feature, release, comparator, and policy analysis; this guide turns supported findings into focused reports.
 
+The [22 November REA developer digest](rea-followup.md) provides the prioritized saved-form packet, search-error reproduction protocol and native/speech evidence limits. The [ten-workflow supplement](moon-followup-proposals.md) brings the Moon backlog to 74 proposals. These linked packets retain their own observation dates and submission status.
+
 ## Verified official channels
 
 All sources were retrieved on **2026-11-21**; the [baseline ledger](moon-baseline.md#dated-source-ledger) retains their dates and scope.

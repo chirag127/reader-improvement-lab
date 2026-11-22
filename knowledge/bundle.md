@@ -28,7 +28,8 @@ the evidence reusable outside this repository.
 
 - `MF-*` identifies the [official Moon baseline](../data/moon-baseline.json).
 - `APK-*` identifies [supplied-artifact static observations](../evidence/static/observations.json).
-- `MOON-*` identifies the [64 Moon improvement proposals](moon-improvements.md), whose detailed requirements and evidence are canonical in [the JSON backlog](../data/moon-improvements.json).
+- `REA-*` identifies [focused follow-up observations](../evidence/static/rea-followup.json); the [developer digest](rea-followup.md) explains their static and runtime boundaries.
+- `MOON-001`–`MOON-064` identifies the [original proposals](moon-improvements.md), whose detailed requirements are canonical in [the original JSON backlog](../data/moon-improvements.json). `MOON-065`–`MOON-074` identifies [ten additional workflows](moon-followup-proposals.md), with requirements in [the supplement](../data/moon-followup-proposals.json). Together they contain 74 drafts and 220 prospective criteria.
 - `ALT-*` identifies alternative-reader proposals. Each record names its target
   application and supporting sources; proposed acceptance checks are future work.
 - `RT-*` identifies [application test specifications](testing-plan.md). The

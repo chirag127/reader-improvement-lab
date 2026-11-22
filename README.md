@@ -2,7 +2,7 @@
 
 An independent, evidence-backed investigation of **Moon+ Reader Pro 10.8** and alternative PDF/ebook readers. It connects existing features, inspected code, synthetic test inputs, and actionable developer feedback.
 
-**Research snapshot: 21 November 2026.** Source research, static analysis, synthetic checks, and bounded Android observations are recorded below. This repository distinguishes publisher documentation, executed tests, and proposals. It is an independent investigation, not an official support tracker.
+**Research snapshot: 21 November 2026; focused REA follow-up: 22 November 2026.** Source research, static analysis, synthetic checks, and bounded Android observations are recorded below. This repository distinguishes publisher documentation, executed tests, and proposals. It is an independent investigation, not an official support tracker.
 
 ## Start here
 
@@ -10,9 +10,9 @@ An independent, evidence-backed investigation of **Moon+ Reader Pro 10.8** and a
 |---|---|
 | Which open-source readers are relevant? | [Eight Android/cross-platform projects](knowledge/alternatives-android.md) · [ten desktop/web projects](knowledge/alternatives-desktop-web.md) |
 | What does Moon already offer? | [Official feature baseline](knowledge/moon-baseline.md) |
-| Which improvements should I request? | [64 prioritized Moon proposals](knowledge/moon-improvements.md) · [detailed acceptance criteria](data/moon-improvements.json) |
-| What is inside the supplied APK? | [Implementation map and static candidates](knowledge/apk-analysis.md) · [artifact identity](data/artifact.json) |
-| Which possible defects deserve reproduction? | [Six source-grounded bug-report candidates](knowledge/bug-candidates.md) |
+| Which improvements should I request? | **74 proposals:** [original 64](knowledge/moon-improvements.md) · [ten additional workflows](knowledge/moon-followup-proposals.md) · [original criteria](data/moon-improvements.json) · [supplement criteria](data/moon-followup-proposals.json) |
+| What is inside the supplied APK? | [Implementation map](knowledge/apk-analysis.md) · [new REA search, speech and native-save findings](knowledge/rea-followup.md) · [artifact identity](data/artifact.json) |
+| Which possible defects deserve reproduction? | [Prioritized developer packets](knowledge/rea-followup.md#priorities) · [six original source-grounded candidates](knowledge/bug-candidates.md) |
 | How do their capabilities compare? | [Feature comparison](knowledge/feature-matrix.md) |
 | What improvements could help other readers? | [21 Android proposals](data/alternative-proposals-android.json) · [13 desktop/web proposals](data/alternative-proposals-desktop-web.json) |
 | Has any reader been improved? | [KOReader CBR/OPDS fix](knowledge/contributions-koreader.md) · [MuPDF first-page link fix](knowledge/contributions-mupdf-android.md) — both host-tested and pushed to forks; neither submitted upstream |
@@ -28,7 +28,8 @@ An independent, evidence-backed investigation of **Moon+ Reader Pro 10.8** and a
 - Moon already advertises TTS, PDF annotations/forms, backup/export, cloud synchronization, and extensive reading controls. The supplied APK also contains PDF text-reflow, settings-search, and Readwise-upload implementations. Suggestions should refine a specific workflow rather than re-request an existing feature.
 - Readest already has a UI-connected Moon+ `.mrexpt` importer. More useful migration requests concern anchor accuracy, color fidelity, and understandable partial-import results.
 - Current Librera source includes PDFium and foliate/WebView paths. MJ PDF's canonical GitLab source is newer than its GitHub mirror. Old descriptions can produce misleading feature comparisons.
-- The Moon backlog contains 64 distinct proposals across 12 categories, each acknowledging existing capabilities and carrying acceptance criteria, sources and limitations. All remain drafts.
+- The Moon backlog contains **74 proposals and 220 prospective acceptance criteria**: the original 64 plus ten additional workflows. Each acknowledges existing capabilities and carries sources and limitations. All remain drafts; the [supplement review](evidence/reviews/moon-followup-proposals.json) checks distinctions from the original backlog.
+- The [22 November REA follow-up](knowledge/rea-followup.md) examines eight distinct methods, two class inventories and one selected-ABI JNI inventory, supported by four bounded native disassembly captures. Invalid-pattern search can miss normal finalization, with a manual recovery route present; the TTS availability helper has no upper-length guard. These are static findings with runtime checks still required.
 - Eighteen original inputs are available: the eleven-document core corpus and seven additional search, speech and malformed-file scenarios. Their host checks are separately recorded; they do not certify any reader application.
 - The source/documentation inventory covers 18 public-source projects and seven commercial or legacy product families. Ten alternative projects received targeted implementation review; each dossier identifies the exact files examined.
 - The KOReader contribution adds two CBR MIME aliases for suffixless OPDS downloads. Its real registry/OPDS tests changed from four expected failures to 42 passes; the tested commit is published to the fork. Device downloads and rendering were not part of that host run.
@@ -74,7 +75,7 @@ The checker reads the committed corpus and writes a new result. Generate into a 
 python -X utf8 -B scripts/generate_fixtures.py --output .local/rebuilt-fixtures
 ```
 
-The [final combined host run](evidence/host-suite-verification.json) passed **68 tests**: 17 core-fixture, eight scenario, and 43 repository-validator tests. The retained [core reference run](evidence/fixture-verification.json) also passed 42 fixture/engine pairs and 590 property comparisons. These are host-tool results; [Android application results](knowledge/runtime-results.md) have their own execution evidence. See the guides for exact tool versions and reproducibility limits.
+The [21 November combined host run](evidence/host-suite-verification.json) passed **68 tests** at its listed inputs. After adding supplement validation, the [22 November focused validator run](evidence/validator-supplement-verification.json) passed **50 validator tests**, including seven new regression methods. The unchanged 17 core-fixture and eight scenario tests retain their earlier evidence; no combined 75-test run is claimed. The [core reference run](evidence/fixture-verification.json) also passed 42 fixture/engine pairs and 590 property comparisons. These are host-tool results; [Android application results](knowledge/runtime-results.md) have their own execution evidence.
 
 ## Contribute evidence
 

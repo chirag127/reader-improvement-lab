@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "moon-followup-proposals-independent-review",
+  "observed_at": "2026-11-22",
+  "evidence_type": "independent-evidence-review",
+  "source_url": "https://github.com/chirag127/reader-improvement-lab",
+  "application_tests_executed": false,
+  "reviewer": "Separate read-only agent, not the supplement author or integrator",
+  "status": "no-material-findings",
+  "inputs": [
+    {"path": "data/moon-followup-proposals.json", "sha256": "8abcc419e48fd8668e52dfed244bd0e4dab69e2a7135b71fd777c68f59e2e814"},
+    {"path": "knowledge/moon-followup-proposals.md", "sha256": "7f71ad61ad7bec8fb9bae89fa79445305f18c482e494054488f0005eba64a9e5"},
+    {"path": "data/moon-improvements.json", "sha256": "b112d2e54f2225ab02200bdd34503fc575545a09ed2090038f22fa0f02a76d0c"}
+  ],
+  "scope": "All ten additional outcomes compared with all 64 originals, the official baseline, retained comparator dossiers and cited runtime evidence.",
+  "checks": {"proposals": 10, "acceptance_criteria": 30, "local_record_link_targets": 97, "local_record_link_issues": 0, "extensions": 6, "new_capability_candidates": 4},
+  "conclusions": [
+    "IDs MOON-065 through MOON-074 are unique and contiguous; all records are medium-priority draft proposals.",
+    "Each outcome is distinguishable from its nearest original proposal and from the other new workflows.",
+    "Baseline and related-proposal references resolve; external URLs and pinned revisions agree with the retained source dossiers.",
+    "Proposal preparation on 2026-11-22 remains distinct from source observations on 2026-11-21.",
+    "AUX-STATUS-001 remains a single supplied-sample observation. The document-switch scenario is explicitly prospective, not a recorded sequence or established cause."
+  ],
+  "limitations": [
+    "This is an independent agent evidence review, not developer approval or implementation.",
+    "Retained sources were reviewed without fresh network retrieval or an exhaustive web duplicate search.",
+    "No application, REA, device, speech, translation or printing operation was executed by this review.",
+    "Current availability is unknown; comparator documentation and proposed criteria are not runtime results."
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "id": "rea-followup-independent-review-20261122",
+  "observed_at": "2026-11-22T04:54:21Z",
+  "evidence_type": "independent-evidence-review",
+  "source_url": "https://github.com/chirag127/reader-improvement-lab",
+  "application_tests_executed": false,
+  "reviewer": "Separate read-only agent, not the author of the follow-up report or evidence record",
+  "verdict": "No material findings at the reviewed input hashes",
+  "inputs": [
+    {"path": "evidence/static/rea-followup.json", "sha256": "5f8e8416367327ed737f972524582230a278c5e8a73a65d96a15e593794b9fa0"},
+    {"path": "knowledge/rea-followup.md", "sha256": "cea3fcce721d60033aafeb23d4b7b5b8ebd2377a4bab654ee5dfba8d08035b1a"},
+    {"path": "evidence/static/observations.json", "sha256": "c2502f44f008ae5ef4b5149100acfb2d8ed08c371f22398d63565265c3f45cf9"},
+    {"path": "data/runtime-results.json", "sha256": "a56b72015ae29846e6cd2a364b5d2279227e44be85bc5a6fb468d2f55637613e"}
+  ],
+  "scope": [
+    "Compare public selectors, representations, source-text hashes, coverage and conclusions with the privately retained REA bundle",
+    "Check five JNI declaration/export candidates and four ordinary native-disassembly captures, preserving partial coverage",
+    "Trace search finalization and manual recovery, directional-search boundaries, and the TTS availability predicate against retained evidence",
+    "Check historical form-output identities, trailer values, parser receipts, reopen images and runtime counts"
+  ],
+  "checks": {
+    "private_bundle_sha256": "7836e2a9c43fe47e9e60d1b576b7962edf9377982cae99e25756eaa8b6d8fe8e",
+    "private_bundle_bytes": 1853652,
+    "retained_records": 24,
+    "method_observations": 9,
+    "distinct_method_selectors": 8,
+    "distinct_java_bodies": 7,
+    "distinct_smali_bodies": 1,
+    "class_inventories": 2,
+    "jni_inventories": 1,
+    "summary_projections": 12,
+    "selected_jni_candidates": 5,
+    "ordinary_native_captures": 4,
+    "native_receipt_sha256": "8ad298ae51a37ce673ce348fbe2e957d4e12a15d56ef1087c863556d4b183fa3"
+  },
+  "conclusions": [
+    "The duplicate Document.Save observation has identical source text and is counted once, not treated as independent confirmation.",
+    "Missed automatic search finalization is distinguished from the existing progress-control recovery route; no permanent freeze is claimed.",
+    "Directional-search asymmetry is not presented as a proven contradiction of the product contract.",
+    "The speech predicate's lack of an upper bound does not establish end-to-end over-limit reachability or measured speech loss.",
+    "Native save result propagation and the saveAs route's eventual AL=1 are accurately stated; the latter helper's return contract and /Prev -1 causality remain unknown.",
+    "The form report preserves the three-field first run, text-only second run, close-triggered saves and recovered values. Runtime counts are unchanged."
+  ],
+  "additional_review": {
+    "observed_at": "2026-11-22",
+    "reviewer": "A second separate read-only evidence reviewer",
+    "verdict": "No material findings in the same two follow-up report inputs; counts, selectors, JNI candidates, native result flow and historical runtime limits agree with retained evidence.",
+    "scope_limitations": [
+      "The second reviewer did not independently rehash the original APK or extracted ELF; it cross-checked their identities in the retained records.",
+      "REA version and the Windows provider/objdump failure history are integration-owner observations from connected tool results. They are not encoded in the method bundle and were outside that reviewer's independent verification."
+    ]
+  },
+  "limitations": [
+    "Retained-evidence inspection, not new decompilation, application execution or official-build authentication.",
+    "Parser outcomes were checked against historical receipts; PDF identities and trailer values were checked directly. No parser run was repeated.",
+    "Unexamined native internals, callers, runtime search recovery and complete speech-pipeline behavior remain unknown.",
+    "This review does not replace the separate proposal and validator reviews or integrated-corpus and publication checks.",
+    "Changes to the reviewed inputs require reassessment of affected conclusions. Private evidence is withheld rather than published as proprietary source."
+  ]
+}

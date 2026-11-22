@@ -90,8 +90,16 @@ timestamp: 2026-11-21T00:00:00Z
 - [x] Add sourced developer contact instructions and issue templates.
 - [x] Validate structured records, links, counts, evidence status, and publication candidates; staged-byte verification is part of publication.
 - [x] Obtain an independent claim/coverage review and address material findings.
-- [ ] Commit and push the investigation; verify the public remote content.
+- [x] Commit and push the initial investigation; verify the public remote content at `060fc174671c7e82072db905e4f9f1f1e15e5d60`.
 - [ ] Register the workspace documentation pointer without incorporating unrelated user changes.
+
+## Task 6: Focused REA follow-up — 22 November
+
+- [x] Match the relocated APK to the original digest and reuse completed evidence.
+- [x] Inspect unresolved search, speech and Java/native save boundaries; record bounded coverage and unknowns in the [follow-up](rea-followup.md).
+- [x] Add [ten distinct proposals](moon-followup-proposals.md), with 30 prospective criteria and an [independent semantic review](../evidence/reviews/moon-followup-proposals.json).
+- [x] Extend optional-supplement validation and retain the [50-test focused result](../evidence/validator-supplement-verification.json).
+- [ ] Complete follow-up evidence review, validate the integrated corpus and publish the changed deliverables with remote readback.
 
 ## Execution notes
 
@@ -99,7 +107,7 @@ timestamp: 2026-11-21T00:00:00Z
 
 2026-11-21: Static analysis delivered 13 original findings with complete package declarations and focused method/smali evidence. The fixture lane delivered 11 synthetic documents, 17 passing tests, and 42 passing fixture/engine pairs. These are separate evidence classes; neither establishes application runtime success. See [coverage](coverage.md), [static verification](../evidence/static/verification.json), and [fixture verification](../evidence/fixture-verification.json).
 
-2026-11-21: Completed research covers 25 alternatives and ten targeted implementation reviews. The Moon backlog contains 64 draft proposals; the alternative backlogs contain 34. Eighteen synthetic inputs are retained. Bounded static follow-up is integrated; both contribution branches are host-tested and pushed to forks. The [runtime ledger](runtime-results.md) records 3 pass, 6 partial, 1 fail, 7 blocked and 19 not-run cases, with owned-resource cleanup completed. The [final host suite](../evidence/host-suite-verification.json) passed 68 tests, including 43 validator tests after evidence-integrity fixes. Corpus validation at 20:35 UTC passed with zero errors across 202 publication candidates, 944 local links and 232 file-hash checks. Independent review findings are resolved for their recorded scope. Research publication and task-only workspace integration are the remaining delivery steps; a restart alone does not invalidate completed results.
+2026-11-21: Completed research covers 25 alternatives and ten targeted implementation reviews. The Moon backlog contains 64 draft proposals; the alternative backlogs contain 34. Eighteen synthetic inputs are retained. Bounded static follow-up is integrated; both contribution branches are host-tested and pushed to forks. The [runtime ledger](runtime-results.md) records 3 pass, 6 partial, 1 fail, 7 blocked and 19 not-run cases, with owned-resource cleanup completed. The [combined host suite](../evidence/host-suite-verification.json) passed 68 tests, including 43 validator tests after evidence-integrity fixes. Final publication validation passed across 203 candidates, 947 local links and 234 hashes. Initial research commit `060fc174671c7e82072db905e4f9f1f1e15e5d60` was published and anonymously read back: 203 blobs and 18 directories matched, plus six byte-identical selected raw files. Task-only workspace integration remained outstanding.
 
 The dated [test matrix](testing-plan.md) is preserved at the exact hash used during runtime curation. Its original outcome list predates the **partial** classification explained in the [runtime result contract](runtime-results.md#evidence-and-counting); no case criteria were changed to improve a result.
 

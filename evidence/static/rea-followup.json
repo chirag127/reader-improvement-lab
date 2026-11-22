@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "id": "moon-rea-followup-20261122",
+  "observed_at": "2026-11-22",
+  "evidence_type": "static-observation",
+  "artifact_id": "moonreader-supplied-10.8",
+  "artifact_sha256": "e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc",
+  "artifact_bytes": 57787496,
+  "authenticity": "unknown",
+  "artifact_source_url": null,
+  "source_url": "https://github.com/chirag127/reader-improvement-lab/blob/main/evidence/static/rea-followup.json",
+  "source_url_limitation": "This URL publishes the original analysis, not the APK. No authenticated download URL or official-build acquisition was established for the supplied artifact.",
+  "application_tests_executed": false,
+  "report_path": "knowledge/rea-followup.md",
+  "scope": "Focused follow-up using retained REA observations and ordinary WSL objdump output. New evidence clarifies selected search, speech and PDF-save boundaries; it does not repeat or supersede the historical runtime ledger.",
+  "receipt_convention": "Private references are logical labels, not public paths. source_text_sha256 hashes the UTF-8 encoding of the exact retained source text, including its original line endings. Full proprietary bodies and native disassembly are withheld. Summary views are projections, not independent confirmations.",
+  "tools": {
+    "rea_version": "6.10.1",
+    "jadx_headless_mcp_version": "0.7.1",
+    "jadx_jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+    "jadx_source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+    "jadx_recorded_worker_count": 1,
+    "jadx_recorded_heap_limit_mib": 30688,
+    "objdump_version": "GNU objdump (GNU Binutils for Ubuntu) 2.46",
+    "sources": [
+      "https://www.npmjs.com/package/rea-agents/v/6.10.1",
+      "https://github.com/1013503897/jadx-headless-mcp/tree/5844800a486d2248fa949b74c9896285f5b54de2"
+    ],
+    "limitations": [
+      "Tool identity does not authenticate the target publisher or certify decompiler correctness.",
+      "The Windows REA session had no usable deep ELF provider; its objdump route reported a missing command. Native observations below instead used the existing Ubuntu WSL objdump and are not REA Evidence."
+    ]
+  },
+  "coverage": {
+    "distinct_method_selections": 8,
+    "retained_method_producer_records": 9,
+    "class_inventories": 2,
+    "jni_inventories": 1,
+    "retained_producer_records": 12,
+    "retained_summary_records": 12,
+    "retained_bundle_records": 24,
+    "distinct_java_method_bodies": 7,
+    "distinct_smali_method_bodies": 1,
+    "native_wrappers": 2,
+    "native_callee_windows": 2,
+    "duplicate_observation": "Document.Save() has two retained producer records with identical source text; it counts as one selection and provides no independent corroboration.",
+    "count_boundary": "These are retained evidence and unique-selector counts, not a reconstruction of every tool invocation or a count of application tests.",
+    "per_method_execution_times": null
+  },
+  "private_bundle": {
+    "private_evidence_ref": "rea-followup-20261122/rea-save-followup-final.json",
+    "sha256": "7836e2a9c43fe47e9e60d1b576b7962edf9377982cae99e25756eaa8b6d8fe8e",
+    "size_bytes": 1853652,
+    "records": 24,
+    "publication": "Private complete REA bundle; digest and selected original analysis only"
+  },
+  "methods": [
+    {
+      "class_name": "com.flyersoft.tools.A.TtsLine",
+      "method_name": "isAvialable",
+      "dex_descriptor": "()Z",
+      "overload_index": 0,
+      "evidence_id": "ev_e72286d71f917c49490f1e120101353d815fe55cc2d46f7c5ff13b8193c48fdb",
+      "representation": "smali",
+      "fell_back": true,
+      "body_status": "available",
+      "source_status": "complete",
+      "source_text_bytes": 1961,
+      "source_text_sha256": "ad3d3a3fed2c593016984febe45b78e903ca66a48a7c8bf45f17310e90b45312"
+    },
+    {
+      "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+      "method_name": "<init>",
+      "dex_descriptor": "(Landroid/content/Context;Lcom/flyersoft/moonreaderp/PrefSearch$OnClickResult;Ljava/lang/String;)V",
+      "overload_index": 0,
+      "evidence_id": "ev_6acc96361e95ba5d791e717342dc0f7dc672a21800ab0d8ff3c05329fc597009",
+      "representation": "java",
+      "fell_back": false,
+      "body_status": "available",
+      "source_status": "complete",
+      "source_text_bytes": 3877,
+      "source_text_sha256": "234ef396aba7543acc365717c64459902cfb508db601a8ee95285c365c03e87a"
+    },
+    {
+      "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+      "method_name": "showSearchButton",
+      "dex_descriptor": "(Z)V",
+      "overload_index": 0,
+      "evidence_id": "ev_5a32be81cb2c9cebd6768146dd9464f1620fbaf3c615b6c9ae03b233d4bcb12c",
+      "representation": "java",
+      "fell_back": false,
+      "body_status": "available",
+      "source_status": "complete",
+      "source_text_bytes": 355,
+      "source_text_sha256": "bb396ebcf42871915cf0abe4b595dd87d9538d804239132d5664ce532e999fae"
+    },
+    {
+      "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+      "method_name": "onClick",
+      "dex_descriptor": "(Landroid/view/View;)V",
+      "overload_index": 0,
+      "evidence_id": "ev_7457ca705c7aef95049efab91d24822c185629e2a5a5664d5727fe2a28175708",
+      "representation": "java",
+      "fell_back": false,
+      "body_status": "available",
+      "source_status": "complete",
+      "source_text_bytes": 4718,
+      "source_text_sha256": "a96797da535a6441fc7f131f071173058293cc98c0f52e9016f1ce72feb3b3ef"
+    },
+    {
+      "class_name": "com.flyersoft.moonreaderp.PrefSearch",
+      "method_name": "initView",
+      "dex_descriptor": "()V",
+      "overload_index": 0,
+      "evidence_id": "ev_191ad9bed839f66361fbd41b3f2758eeb17be3f085d2943d61a57ac980cd7add",
+      "representation": "java",
+      "fell_back": false,
+      "body_status": "available",
+      "source_status": "complete",
+      "source_text_bytes": 2351,
+      "source_text_sha256": "a67ed26ec391abc73e5eeaed4bec8c762d58370a9defc59f237d5b89ecd3d418"
+    },
+    {
+      "class_name": "com.flyersoft.tools.A",
+      "method_name": "error",
+      "dex_descriptor": "(Ljava/lang/Throwable;)V",
+      "overload_index": 0,
+      "evidence_id": "ev_213290e53d16e0bef4aedc99bb4682c40b1cc16ca73600c702e86a4cbfd8f5f0",
+      "representation": "java",
+      "fell_back": false,
+      "body_status": "available",
+      "source_status": "complete",
+      "source_text_bytes": 77,
+      "source_text_sha256": "3962dbeefaaedeb6982d543bcb8bcfdf3573aec7d3ea049edc858e822b7b0eed"
+    },
+    {
+      "class_name": "com.flyersoft.tools.A",
+      "method_name": "error",
+      "dex_descriptor": "(Ljava/lang/Throwable;Z)V",
+      "overload_index": 1,
+      "evidence_id": "ev_a09bebed88bb2911f3c6bdd6c3ebb6097c7713f374b9b11956339ea173bfe17b",
+      "representation": "java",
+      "fell_back": false,
+      "body_status": "available",
+      "source_status": "complete",
+      "source_text_bytes": 1307,
+      "source_text_sha256": "e1ff660ee438addf496afbbff40841cc9af389496c699bb0836fe36a58305950"
+    },
+    {
+      "class_name": "com.radaee.pdf.Document",
+      "method_name": "Save",
+      "dex_descriptor": "()Z",
+      "overload_index": 0,
+      "evidence_id": "ev_e1200edd84bf1e70aa77120c3d0c810a50dc760aeb3be92d04e3b2eaf3e62644",
+      "duplicate_evidence_id": "ev_efab8961b4feaebbbba11d0be7ce2eb2b3ffa16397814974525cf6095f990710",
+      "representation": "java",
+      "fell_back": false,
+      "body_status": "available",
+      "source_status": "complete",
+      "source_text_bytes": 195,
+      "source_text_sha256": "a2c0f3c7b1feadcb1eaeff1dbcabf470fd0cc9ae7611d1831a2ae0a7cb880924"
+    }
+  ],
+  "class_inventories": [
+    {"class_name": "com.flyersoft.tools.A.TtsLine", "evidence_id": "ev_b0cc6b8724ec8398a090530794afda45b7170daba15870c0ec009ad6e55d1466"},
+    {"class_name": "com.flyersoft.tools.A", "evidence_id": "ev_33258853b16a216bd6e99ffba4483d8efd77485760777c429d0d77629b6006c7"}
+  ],
+  "jni": {
+    "evidence_id": "ev_e0ef59d37a931b3167812b8aeca6f721ab5985f17069ba855721cc098458cccb",
+    "class_name": "com.radaee.pdf.Document",
+    "abi": "x86_64",
+    "library_member": "lib/x86_64/librdpdf.so",
+    "library_sha256": "31bdb8e9516801d87008846bcd20b5d2376c2b90da4a475af25856cd521108a7",
+    "library_bytes": 5962736,
+    "library_source_key": "zip-entry:157",
+    "dex_entry": "classes4.dex",
+    "exports_status": "complete",
+    "relocations_status": "partial",
+    "tables_status": "partial",
+    "unresolved_relocation_destinations": 246,
+    "bindings": [
+      {"method_name": "canSave", "descriptor": "(J)Z", "declaration_id": "jni_method_0275ed066906c975d3af231b5b830aaa60a5fdfcf7b6c4e66ebe2cdb4f672e5e", "candidate_id": "jni_candidate_53635c954d89df5e8c6cefe7632202e56a184ff4c8136424410bd265abba96f4", "export_name": "Java_com_radaee_pdf_Document_canSave", "address": "0x15e170", "file_offset": 1433968, "status": "matched", "coverage": "partial"},
+      {"method_name": "open", "descriptor": "(Ljava/lang/String;Ljava/lang/String;)J", "declaration_id": "jni_method_bdf617b7b09f2a9e9a2daf0ce20d2a6ea9c9536a049532bc354b52021397d733", "candidate_id": "jni_candidate_f51e61773e6cb8eb0676267c2ad38551ff122edf180d04f0778d1c9df5be1dfd", "export_name": "Java_com_radaee_pdf_Document_open", "address": "0x15c500", "file_offset": 1426688, "status": "matched", "coverage": "partial"},
+      {"method_name": "openStream", "descriptor": "(Lcom/radaee/pdf/Document$PDFStream;Ljava/lang/String;)J", "declaration_id": "jni_method_17c2e6a11571f3f4aa14e6f6534ff7dbcced550993f462644c8760fbf1695134", "candidate_id": "jni_candidate_41db1a99b51f55f6de5d25e511d7f841d800cd83c5d02e1afa225480907e7b68", "export_name": "Java_com_radaee_pdf_Document_openStream", "address": "0x15af10", "file_offset": 1421072, "status": "matched", "coverage": "partial"},
+      {"method_name": "save", "descriptor": "(J)Z", "declaration_id": "jni_method_6309f74cefe04dcc2808162849e2c90729ff056f5f9fd5d738aff2d21d22ab62", "candidate_id": "jni_candidate_8d513b09f4eb0a580bc762f1cbee83c844a49111983114039ef314631a09044d", "export_name": "Java_com_radaee_pdf_Document_save", "address": "0x15fb40", "file_offset": 1440576, "status": "matched", "coverage": "partial"},
+      {"method_name": "saveAs", "descriptor": "(JLjava/lang/String;Z)Z", "declaration_id": "jni_method_ad3ebd7a7c139bce6aa2eb270a0eb990efecc10a9cc421d3daa563b738572a2c", "candidate_id": "jni_candidate_5fc43d790e4a28ee7d1940c5d5d9a6aeb7b3f4f910321f1166cbf2027e56311c", "export_name": "Java_com_radaee_pdf_Document_saveAs", "address": "0x15fbc0", "file_offset": 1440704, "status": "matched", "coverage": "partial"}
+    ],
+    "limitations": [
+      "Matched means observed export-name candidate presence, not uniqueness, library loading, RegisterNatives execution or method invocation.",
+      "Runtime-built tables, indirect destinations, overlapping relocation writes and unscanned allocated sections leave native registration coverage partial.",
+      "Addresses are ELF static virtual addresses. Other ABIs and exact Radaee SDK version were not established by this selection."
+    ]
+  },
+  "native_disassembly": {
+    "evidence_type": "static-observation",
+    "producer": "Ordinary Ubuntu WSL GNU objdump 2.46, not REA Evidence",
+    "observed_at": "2026-11-22",
+    "private_receipt_ref": "rea-followup-20261122/native-save-receipt.json",
+    "receipt_sha256": "8ad298ae51a37ce673ce348fbe2e957d4e12a15d56ef1087c863556d4b183fa3",
+    "target_sha256": "31bdb8e9516801d87008846bcd20b5d2376c2b90da4a475af25856cd521108a7",
+    "command_template": "wsl.exe -d Ubuntu -- /usr/bin/objdump -d <selection> --dwarf=no-follow-links -M intel <private-selected-ELF>",
+    "calls": [
+      {"label": "wrapper-save", "selection": "--disassemble=Java_com_radaee_pdf_Document_save", "observed_at": "2026-11-22T04:33:30.885450+00:00", "exit_code": 0, "private_stdout_ref": "rea-followup-20261122/native-save-wrapper-save.stdout.txt", "stdout_bytes": 2836, "stdout_sha256": "628fc650caaac0d7aefb6de6f052a37dc537a9f56d7d5a4873ec67922930eb5d", "stderr_bytes": 0},
+      {"label": "wrapper-saveAs", "selection": "--disassemble=Java_com_radaee_pdf_Document_saveAs", "observed_at": "2026-11-22T04:33:31.315277+00:00", "exit_code": 0, "private_stdout_ref": "rea-followup-20261122/native-save-wrapper-saveAs.stdout.txt", "stdout_bytes": 11540, "stdout_sha256": "cb9be051e7ddb95ca7e180374fb6dbe66711e571bc3b825f45fc3e75b52a51e9", "stderr_bytes": 0},
+      {"label": "callee-1-291730", "selection": "--start-address=0x291730 --stop-address=0x291b30", "observed_at": "2026-11-22T04:34:29.039630+00:00", "exit_code": 0, "private_stdout_ref": "rea-followup-20261122/native-save-callee-1-291730.stdout.txt", "stdout_bytes": 17645, "stdout_sha256": "1508bb2fbb4239aad3f06a41e0c06ff726b2dd21a1104324d03f1e6a4516ec26", "stderr_bytes": 0},
+      {"label": "callee-2-15fe70", "selection": "--start-address=0x15fe70 --stop-address=0x160070", "observed_at": "2026-11-22T04:36:42.844322+00:00", "exit_code": 0, "private_stdout_ref": "rea-followup-20261122/native-save-callee-2-15fe70.stdout.txt", "stdout_bytes": 5708, "stdout_sha256": "fa8ed4f39c0378664fee18787f87da5e8a04e30b787b3c3a037f760506cf0892", "stderr_bytes": 0}
+    ],
+    "limitations": [
+      "Four bounded captures only; a callee window is not an assertion of a complete function boundary.",
+      "Nearest exported-symbol annotations on internal addresses are not recovered function names.",
+      "Internal prototypes, indirect calls, document-field meanings, trailer-writing instructions and actual runtime paths remain unknown.",
+      "The saveAs helper window covers setup and does not reach its result/exit; no meaningful helper return type is established."
+    ]
+  },
+  "reused_private_receipts": [
+    {"private_evidence_ref": "mcp-focused-methods/bodies/search-start.java", "sha256": "156bd71a9a521c6c1c775601908182c5b95b9099f2a4af8c8d5d6d4cc50135e7", "observed_at": "2026-11-21", "selector": "com.flyersoft.moonreaderp.PrefSearch.startSearch()V"},
+    {"private_evidence_ref": "mcp-followup/search-worker-smali.txt", "sha256": "11a81db76335299e43dc64c0c4afa22cc7b9db6d9a87ffcf5357338652e60ec8", "observed_at": "2026-11-21", "selector": "Lcom/flyersoft/moonreaderp/PrefSearch$4;->run()V", "relevant_lines": [[76, 84], [287, 317], [1270, 1299]]},
+    {"private_evidence_ref": "mcp-focused-methods/bodies/pdf-save.java", "sha256": "3a4afb4409c0fe8e730f7f37e6fb8f7781dfb69b6457d9ba93f001315908e56a", "observed_at": "2026-11-21", "selector": "com.flyersoft.books.PDFReader.save()V"}
+  ],
+  "findings": [
+    {
+      "id": "REA-SEARCH-001",
+      "title": "Invalid-pattern worker exit misses normal finalization; a manual recovery control exists",
+      "related_observation_ids": ["APK-SEARCH-001"],
+      "observed_at": "2026-11-22",
+      "evidence_type": "static-observation",
+      "evidence_ids": ["ev_6acc96361e95ba5d791e717342dc0f7dc672a21800ab0d8ff3c05329fc597009", "ev_5a32be81cb2c9cebd6768146dd9464f1620fbaf3c615b6c9ae03b233d4bcb12c", "ev_7457ca705c7aef95049efab91d24822c185629e2a5a5664d5727fe2a28175708", "ev_191ad9bed839f66361fbd41b3f2758eeb17be3f085d2943d61a57ac980cd7add", "ev_213290e53d16e0bef4aedc99bb4682c40b1cc16ca73600c702e86a4cbfd8f5f0", "ev_a09bebed88bb2911f3c6bdd6c3ebb6097c7713f374b9b11956339ea173bfe17b"],
+      "observed": [
+        "Retained startSearch code sets inSearching before worker launch; worker smali puts Pattern.compile within a catch-all range whose exception exit calls A.error(Throwable) without local completion dispatch or flag clearing.",
+        "The constructor's message-2 handler restores idle controls via showSearchButton(true); that helper itself does not clear inSearching.",
+        "The error overloads perform logging/stack-trace and conditional beta-log persistence, with no explicit search completion dispatch.",
+        "initView registers the progress click listener; onClick calls showSearchButton(true) and stopSearch on that control."
+      ],
+      "inferred": ["The inspected invalid-pattern path can miss automatic idle restoration after a normal search-button launch."],
+      "unknown": ["Actual malformed-query UI behavior, any global recovery callbacks and timing are untested. No permanent freeze, crash or unrecoverable state is established."],
+      "sources": ["knowledge/rea-followup.md#2-invalid-pattern-search-finalization-packet", "evidence/static/observations.json", "data/artifact.json"],
+      "related_proposal_ids": ["MOON-018"]
+    },
+    {
+      "id": "REA-SEARCH-002",
+      "title": "PDF backward-only scope excludes the current-page index",
+      "related_observation_ids": ["APK-SEARCH-001"],
+      "observed_at": "2026-11-22",
+      "evidence_type": "static-observation",
+      "evidence_ids": ["ev_7457ca705c7aef95049efab91d24822c185629e2a5a5664d5727fe2a28175708"],
+      "observed": ["Retained worker bytecode uses current page as the exclusive backward-only upper bound, versus an inclusive current-page start for forward-only. New option listeners make those UI choices mutually exclusive."],
+      "inferred": ["Backward-only at page index zero covers no pages; forward-only and backward-only have asymmetric current-page inclusion."],
+      "unknown": ["Intended scope wording and actual directional search results remain unverified. Previous-pages-only semantics could make exclusion intentional."],
+      "sources": ["knowledge/rea-followup.md#3-directional-search-boundary-question", "evidence/static/observations.json", "data/artifact.json"],
+      "related_proposal_ids": ["MOON-020"]
+    },
+    {
+      "id": "REA-TTS-001",
+      "title": "The speech availability helper imposes no maximum string length",
+      "related_observation_ids": ["APK-TTS-002"],
+      "observed_at": "2026-11-22",
+      "evidence_type": "static-observation",
+      "evidence_ids": ["ev_e72286d71f917c49490f1e120101353d815fe55cc2d46f7c5ff13b8193c48fdb"],
+      "observed": ["For end greater than start, the smali accepts strings longer than one character. A single character additionally excludes the object replacement character and listed punctuation. No maximum-length comparison occurs in this predicate."],
+      "inferred": ["This helper does not provide the previously unresolved upper-length guard before the already-observed truncating queue."],
+      "unknown": ["Complete document-to-queue over-limit reachability still depends on upstream segmentation and transformations. No speech omission has been heard or measured."],
+      "sources": ["knowledge/rea-followup.md#4-speech-length-boundary-clarification", "evidence/static/observations.json", "data/artifact.json"],
+      "related_proposal_ids": ["MOON-005"]
+    },
+    {
+      "id": "REA-PDF-001",
+      "title": "The selected save bridge propagates a native result to Document.Save",
+      "related_observation_ids": ["APK-PDF-002", "RUNTIME-PDF-PREV-001"],
+      "observed_at": "2026-11-22",
+      "evidence_type": "static-observation",
+      "evidence_ids": ["ev_e1200edd84bf1e70aa77120c3d0c810a50dc760aeb3be92d04e3b2eaf3e62644", "ev_e0ef59d37a931b3167812b8aeca6f721ab5985f17069ba855721cc098458cccb"],
+      "native_capture_labels": ["wrapper-save", "callee-1-291730"],
+      "observed": [
+        "Document.Save() returns save(hand_val), catching Exception and returning false; the historical PDFReader.save wrapper does not consume this boolean.",
+        "The selected JNI-export wrapper at 0x15fb40 calls 0x291730 and preserves EAX through cleanup to its return; observed guard-failure exits return zero.",
+        "The selected 0x291730 window saves results from direct calls to 0x4ae550 and 0x4afeb0 and restores the selected result after mutex-unlock handling."
+      ],
+      "inferred": ["The result-producing calls at 0x4ae550 and 0x4afeb0 are specific next inspection boundaries for native save semantics."],
+      "unknown": ["Those downstream implementations, previous-xref state, actual return values during the form experiment and exact SDK version remain unknown. This does not identify the cause of /Prev -1 or prove the ignored boolean caused malformed output."],
+      "sources": ["knowledge/rea-followup.md#what-rea-adds", "evidence/static/observations.json", "data/runtime-results.json", "data/artifact.json"],
+      "related_proposal_ids": ["MOON-001", "MOON-011", "MOON-032"]
+    },
+    {
+      "id": "REA-PDF-002",
+      "title": "The selected saveAs wrapper sets its success byte after its helper returns",
+      "related_observation_ids": ["APK-PDF-002"],
+      "observed_at": "2026-11-22",
+      "evidence_type": "static-observation",
+      "evidence_ids": ["ev_e0ef59d37a931b3167812b8aeca6f721ab5985f17069ba855721cc098458cccb"],
+      "native_capture_labels": ["wrapper-saveAs", "callee-2-15fe70"],
+      "observed": ["On the observed file-open-success route the wrapper calls 0x15fe70, performs cleanup and sets BPL to 1 at 0x15fd6c without testing the helper's EAX. The final mov eax,ebp carries AL=1, not necessarily full-width EAX=1."],
+      "inferred": ["This route motivates checking save-as completion and durable output together if the workflow is reachable."],
+      "unknown": ["The helper's return type, result semantics and failure handling are not established. The bounded helper window contains setup only. No discarded boolean failure or association with the recorded close-triggered saves is proved."],
+      "sources": ["knowledge/rea-followup.md#supporting-native-disassembly", "data/artifact.json"],
+      "related_proposal_ids": ["MOON-001", "MOON-032"]
+    }
+  ],
+  "limitations": [
+    "All APK/native observations apply only to the supplied digest with unknown provenance, not an authenticated official Play release.",
+    "Eight unique selected method bodies and one selected-ABI JNI inventory are not whole-app coverage. Source completeness is limited to the returned representation, not proof of faithful reconstruction.",
+    "Runtime-built tables, reflection, dynamic loading, unexamined callers and global handlers remain unknown.",
+    "Historical smali and runtime results were reused. The application ledger receives zero new executions from this follow-up.",
+    "Private hashes and Evidence IDs permit identity checking when the private material is available; they are not publicly readable proprietary source or independent proof of semantic conclusions."
+  ]
+}

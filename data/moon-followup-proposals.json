@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-22",
+  "source_observed_at": "2026-11-21",
+  "application_id": "moonreader",
+  "scope": "Ten additional draft outcomes, MOON-065 through MOON-074, with 30 prospective acceptance criteria, supplementing the retained MOON-001 through MOON-064 backlog without modifying it. Prepared on 2026-11-22 from public records and primary references observed on 2026-11-21; no fresh source retrieval or application execution is represented. Current feature availability remains unknown and must be checked before requesting an addition. Priorities express proposed workflow value, not defect severity. Relative sources are repository-root-relative. The page-indicator observation is limited to the unknown-origin supplied APK with SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc and establishes neither an official-build defect nor the cause of that indicator.",
+  "proposals": [
+    {
+      "id": "MOON-065",
+      "title": "Unify PDF page-label navigation and physical-page status",
+      "application_id": "moonreader",
+      "category": "pdf",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "observed_at": "2026-11-22",
+      "source_observed_at": "2026-11-21",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises PDF reading controls and dual-page layouts. Retained supplied-artifact runtime records also show working internal links, page navigation and search-result activation with a page readout.",
+      "baseline_refs": ["MF-06"],
+      "supporting_observation_ids": ["AUX-STATUS-001"],
+      "related_proposal_ids": ["MOON-020", "MOON-033"],
+      "distinction": "MOON-020 labels numbering within search scopes, and MOON-033 labels exported citations. This outcome governs ordinary go-to-page, current-position indicators and document changes, including ambiguous page labels, independently of searching or exporting.",
+      "rationale": "A reader following a reference to page 1 needs to distinguish a publication label from the first physical PDF page. AUX-STATUS-001 records a one-time 101/1 indicator after activation of a correct search hit in a one-page supplied-artifact document. That observation motivates a consistency check but does not establish whether numbering policy, stale state or another cause produced it.",
+      "requested_change": "Show embedded PDF page labels and one-based physical position as explicitly different values, offer unambiguous navigation by either, and bind all current-position displays to the active document. When labels are missing, explain the physical-page fallback rather than inventing printed numbering. Resolve duplicate labels before navigating.",
+      "acceptance_criteria": [
+        "Open an eight-page synthetic PDF with labels i, ii, iii, iv, 1, 2, 3 and 4: Go to label 3 reaches physical page 7, while Go to physical page 3 reaches label iii. Both the label and one-based physical position are visible, and the slider agrees with the physical position.",
+        "Open a synthetic PDF with two pages labeled A-1: label navigation presents both physical destinations and navigates to the one selected rather than silently choosing the first occurrence.",
+        "In a prospective document-switch scenario, visit physical page 100 of a long PDF, then open a separate one-page PDF and activate its unique search hit: the physical-position display shows 1/1, and the slider and Go To bounds agree with that active document. This sequence is a proposed check, not the recorded reproduction or established cause of AUX-STATUS-001."
+      ],
+      "sources": [
+        "data/moon-baseline.json",
+        "knowledge/moon-baseline.md#existing-capability-baseline",
+        "data/runtime-results.json",
+        "knowledge/runtime-results.md#rendering-navigation-and-search",
+        "evidence/runtime/75-plain-lighthouse-selected.png",
+        "data/artifact.json",
+        "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en"
+      ],
+      "limitations": [
+        "Existing official-build label navigation and indicator semantics are unknown; the proposal does not declare either feature absent.",
+        "AUX-STATUS-001 was observed once on 2026-11-21 in supplied SHA-256 e2c0ef649413b2f6671598ac8b027d582ba220e38738f2e253694289ea20e1fc. Its provenance is unverified, the correct target text was displayed, and no root cause, repeated failure or official-build defect was established.",
+        "The document-switch scenario has not been executed. Embedded page labels are not OCR of numbers printed in scanned page images."
+      ]
+    },
+    {
+      "id": "MOON-066",
+      "title": "Make narration exclusions inspectable and reversible",
+      "application_id": "moonreader",
+      "category": "tts",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "observed_at": "2026-11-22",
+      "source_observed_at": "2026-11-21",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises ebook and PDF speech, configurable reading controls and EPUB3 footnotes. The reviewed Zotero changelog separately documents Read Aloud skipping selected non-prose structures.",
+      "baseline_refs": ["MF-02", "MF-06"],
+      "related_proposal_ids": ["MOON-005", "MOON-055"],
+      "distinction": "MOON-005 prevents unintended truncation of speech text, and MOON-055 tracks the narration cursor. This outcome governs deliberate pre-speech content selection with an inspectable, reversible exclusion policy.",
+      "rationale": "Repeated running headers or an optional footnote can interrupt continuous listening, while the same words in body text may be essential. A visible exclusion policy supports intentional omission without treating a text-matching heuristic as proof that content is disposable.",
+      "requested_change": "Provide per-book narration exclusions for supported structural elements or explicitly selected page regions, with a preview of included and skipped text, an inline-versus-skip footnote policy and a Read everything override. Preserve the source, search and copy text; require explicit selection when structural classification is uncertain.",
+      "acceptance_criteria": [
+        "Narrate a synthetic document with numbered body paragraphs and repeated header/footer sentinels after selecting those structural regions for exclusion: a recording speech engine receives every body paragraph once in authored order and none of the selected header/footer occurrences.",
+        "Place the header phrase inside an ordinary body paragraph: that occurrence remains spoken. Disable the exclusion rule or choose Read everything: the excluded occurrences return to narration, while search results, copied text and the source document hash remain unchanged.",
+        "Switch a synthetic EPUB between inline and skipped footnote policies: the recording engine's sequence matches the inclusion preview in each mode. Reopening retains the chosen policy for that book without changing another book's policy."
+      ],
+      "sources": [
+        "data/moon-baseline.json",
+        "knowledge/moon-baseline.md#existing-capability-baseline",
+        "knowledge/alternatives-desktop-web.md#zotero-reader--annotations-connected-to-research-notes",
+        "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en",
+        "https://www.moondownload.com/faq.html",
+        "https://www.zotero.org/support/changelog"
+      ],
+      "limitations": [
+        "Current Moon speech filters and exclusion controls are unknown. This is a desired control contract, not an allegation of missing filters or unintended omission.",
+        "Zotero's behavior is a documentation reference observed on 2026-11-21, not an executed comparison or evidence that Moon uses the same content model.",
+        "Untagged PDF structure may require manual region selection. No speech engine or narration-exclusion scenario was exercised in this follow-up."
+      ]
+    },
+    {
+      "id": "MOON-067",
+      "title": "Navigate authored EPUB3 audio through its text mapping",
+      "application_id": "moonreader",
+      "category": "epub-media",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "observed_at": "2026-11-22",
+      "source_observed_at": "2026-11-21",
+      "relationship_to_baseline": "new-capability-candidate",
+      "existing_capability": "Moon already advertises EPUB3 audio/video. That claim does not settle media-overlay text mapping. Readest's retained README and Thorium's retained feature documentation describe media overlays as a read-along workflow.",
+      "baseline_refs": ["MF-11"],
+      "related_proposal_ids": ["MOON-055"],
+      "distinction": "MOON-055 concerns the cursor and navigation of generated TTS. This outcome uses publication-authored audio assets and their declared text-to-clip timings, with distinct asset availability and playback-position semantics.",
+      "rationale": "A language course or read-along book may depend on its author's recording, not a synthesized substitute. Text selection, relayout and a missing clip should preserve an understandable relationship between the publication's timed cues and the active playback source.",
+      "requested_change": "Evaluate a read-along workflow that maps EPUB3 text navigation to publication-authored clip intervals, identifies the playback source and restores its mapped segment and offset through relayout. Report unavailable media locally while keeping text and other mapped clips usable; never substitute synthesized speech silently.",
+      "acceptance_criteria": [
+        "Open a local synthetic EPUB3 with three known text/audio mappings and distinguishable clips with declared start/end times: selecting each mapped passage starts its corresponding clip interval and highlights that passage, with no cross-association between the three mappings.",
+        "Pause within the second clip, double the reading font size, rotate and resume: the same cue remains selected and playback resumes within a proposed 250 ms of the saved clip offset. The interface continues to identify authored audio as the playback source.",
+        "Remove the middle referenced clip from a separate synthetic fixture: its mapped segment is marked unavailable while the source text and the other two clips remain usable. The failed segment is not shown as successfully playing, and no silent TTS substitution occurs."
+      ],
+      "sources": [
+        "data/moon-baseline.json",
+        "knowledge/moon-baseline.md#existing-capability-baseline",
+        "knowledge/alternatives-android.md#37-readest--cross-platform-reader-with-an-observed-moon-import-path",
+        "knowledge/alternatives-desktop-web.md#thorium-reader--accessible-publishing-and-library-access",
+        "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md",
+        "https://www.edrlab.org/software/thorium-reader/"
+      ],
+      "limitations": [
+        "Current Moon media-overlay availability, supported markup and cue restoration are unknown; advertised EPUB3 media is acknowledged rather than re-requested as absent.",
+        "Readest's pinned README and Thorium's feature page are documentation evidence observed on 2026-11-21, not executed media-overlay comparisons.",
+        "The timing tolerance is a proposed fixture budget. Automatic alignment of unrelated audiobooks, DRM handling and universal codec support are outside this outcome."
+      ]
+    },
+    {
+      "id": "MOON-068",
+      "title": "Preserve comic cover, spread and within-image reading order",
+      "application_id": "moonreader",
+      "category": "comics",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "observed_at": "2026-11-22",
+      "source_observed_at": "2026-11-21",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises CBZ/CBR and other fixed-page formats, landscape dual-page reading, and v10.8 double-tap zoom for comics. Orion's retained README documents LTR/RTL within-page navigation as a comparison reference.",
+      "baseline_refs": ["MF-01", "MF-19"],
+      "related_proposal_ids": ["MOON-015", "MOON-038"],
+      "distinction": "MOON-015 changes PDF crop/zoom profiles, and MOON-038 handles text shaping and direction. This outcome controls comic-image sequence, cover/spread pairing and ordered traversal of a wide image's halves.",
+      "rationale": "A cover treated as half of the first spread can shift every later pair. Manga direction and double-width scans introduce a separate within-image order that should not require repeated manual zooming or reorder the archive's logical contents.",
+      "requested_change": "Offer a per-comic policy for singleton covers, left-to-right or right-to-left spread placement, and optional wide-image splitting. Keep logical page order separate from screen placement, preview the policy, and restore the exact image and half-image position when reopening or changing orientation.",
+      "acceptance_criteria": [
+        "Open a synthetic CBZ with cover C followed by five numbered pages. With cover-alone mode, display C alone, then pairs (1,2) and (3,4), then page 5 alone. Under both LTR and RTL policies, placement and progression follow the displayed policy, and a complete traversal neither skips nor unintentionally duplicates a source page.",
+        "Use a wide source image with separately marked L and R halves between two ordinary pages. With splitting enabled, Next visits L then R in LTR mode and R then L in RTL mode before reaching the following image; both halves remain reachable and neither is counted as a different source file.",
+        "Stop on the second half of that wide image, rotate, close and reopen: the same source image and half are restored with the chosen cover/spread policy. Reset the policy: the complete wide image is available and another comic's policy and source bytes are unchanged."
+      ],
+      "sources": [
+        "data/moon-baseline.json",
+        "knowledge/moon-baseline.md#observed-v108-release-notes",
+        "knowledge/moon-baseline.md#existing-capability-baseline",
+        "knowledge/alternatives-android.md#34-orion-viewer--fixed-page-and-navigation-specialist",
+        "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en",
+        "https://github.com/max-kammerer/orion-viewer/blob/1adfe2da0791d1e563fd8966fc3107e9ad79fc74/README.md"
+      ],
+      "limitations": [
+        "Current Moon cover parity, comic direction and split-page controls are unknown; the proposal refines the documented comic/dual-page workflow without declaring these controls absent.",
+        "Orion's documented directional navigation does not establish the proposed cover-pairing or splitting behavior in either application.",
+        "No comic fixture was executed. Automatic panel recognition is outside this bounded spread/image-navigation outcome."
+      ]
+    },
+    {
+      "id": "MOON-069",
+      "title": "Route dictionary lookups by language with recoverable local fallback",
+      "application_id": "moonreader",
+      "category": "lookup",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "observed_at": "2026-11-22",
+      "source_observed_at": "2026-11-21",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents offline/online dictionary integration and translation. Calibre's retained viewer documentation describes language-scoped custom dictionary sources as a routing reference.",
+      "baseline_refs": ["MF-07"],
+      "related_proposal_ids": ["MOON-054", "MOON-056"],
+      "distinction": "MOON-054 resolves speech voices, and MOON-056 clarifies disclosures. This outcome governs dictionary invocation and local failure recovery, preserving the edited lookup term and its original reading selection.",
+      "rationale": "A multilingual reader may need different dictionaries within one book and a usable local source while offline. Interface language is not necessarily the word's language, and a missing dictionary should not make a lookup appear successfully empty.",
+      "requested_change": "Expose language-specific preferred dictionary providers with a per-book override and visible resolved language/provider. Preserve an editable lookup term and its original source selection through provider changes or failures, distinguish an unavailable provider from a no-entry response, and offer an installed local fallback without silently making an online lookup.",
+      "acceptance_criteria": [
+        "Configure distinguishable controlled English and German dictionary providers and select words from correspondingly tagged synthetic passages: each lookup reaches its configured provider. Set a provider override for one book: only that book changes its routing, and the interface identifies the provider actually used.",
+        "Select a multiword term containing punctuation, edit the lookup text and change providers: the edited term survives the change exactly. Closing the lookup returns to the original source passage and selection rather than replacing that selection with the edited query.",
+        "While offline, make the preferred local provider unavailable and separately return a no-entry response from a working provider: the two outcomes are distinguishable. An installed alternative is offered with the same lookup term, and no online provider is invoked silently."
+      ],
+      "sources": [
+        "data/moon-baseline.json",
+        "knowledge/moon-baseline.md#existing-capability-baseline",
+        "knowledge/alternatives-desktop-web.md#calibre--library-conversion-and-configurable-ebook-reading",
+        "https://www.moondownload.com/",
+        "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en",
+        "https://manual.calibre-ebook.com/viewer.html"
+      ],
+      "limitations": [
+        "Moon's current routing, fallback and language correction controls are unknown. Dictionary integration does not establish a bundled offline lexicon.",
+        "Calibre's routing description is retained documentation observed on 2026-11-21, not a tested Android handoff. Publication language metadata and provider capabilities need checking for the selected workflow.",
+        "External handlers may not expose distinct no-entry and failure results. The interface must identify an unknown outcome rather than fabricate a successful lookup."
+      ]
+    },
+    {
+      "id": "MOON-070",
+      "title": "Keep translations aligned with their original passages",
+      "application_id": "moonreader",
+      "category": "translation",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "observed_at": "2026-11-22",
+      "source_observed_at": "2026-11-21",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already documents translation and configurable ebook typography. Anx Reader's retained README describes full-book side-by-side translation, and Readest's describes sentence/book translation.",
+      "baseline_refs": ["MF-07"],
+      "related_proposal_ids": ["MOON-016"],
+      "distinction": "MOON-016 supplies two independently navigated documents. This outcome presents one source and its derived translation with stable passage associations and localized result state, including out-of-order replies and partial failure.",
+      "rationale": "A reader comparing a translation with the original needs to know which occurrence produced it, especially when phrases repeat. A translated paragraph is derived content and should not silently replace the original passage or become the wrong annotation target.",
+      "requested_change": "Provide an optional paired source/translation view using the selected provider and stable source anchors. Keep the original readable, identify the corresponding source when a translation is selected, and expose missing, stale or failed results per passage while preserving completed translations during targeted retries.",
+      "acceptance_criteria": [
+        "Translate three synthetic passages, including one whose text spans inline elements, using a controlled provider that returns distinguishable results in the order 3, 1, 2: each result remains paired with its correct source passage rather than callback arrival order or individual text-node boundaries.",
+        "Change font size and orientation, then select each translated passage: its corresponding original passage remains identifiable at the new layout position without depending on stale screen coordinates, and the source document bytes are unchanged.",
+        "Fail the middle passage while the other two translations complete: the original remains readable and the failure is localized to that passage. Retry preserves both completed results and sends only the failed passage again."
+      ],
+      "sources": [
+        "data/moon-baseline.json",
+        "knowledge/moon-baseline.md#existing-capability-baseline",
+        "knowledge/alternatives-android.md#38-anx-reader--additional-cross-platform-alternative",
+        "knowledge/alternatives-android.md#37-readest--cross-platform-reader-with-an-observed-moon-import-path",
+        "https://www.moondownload.com/",
+        "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en",
+        "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"
+      ],
+      "limitations": [
+        "Current Moon translation presentation and alignment behavior are unknown; translation itself is already documented.",
+        "Anx/Readest documentation observed on 2026-11-21 supplies workflow references. It does not establish translation quality, provider cost, whole-book availability, offline capability or Moon's current caching and provider constraints.",
+        "No translation request or application test was performed. Complex source-to-translation mappings may require an explicit unresolved association rather than fabricated sentence-level precision."
+      ]
+    },
+    {
+      "id": "MOON-071",
+      "title": "Turn selected lookups into a context-aware vocabulary review queue",
+      "application_id": "moonreader",
+      "category": "study",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "observed_at": "2026-11-22",
+      "source_observed_at": "2026-11-21",
+      "relationship_to_baseline": "new-capability-candidate",
+      "existing_capability": "Moon already documents dictionary lookup, highlights, notes and bookmarks. Readest's retained README also describes dictionary and annotation foundations; those foundations do not establish a vocabulary recall queue in either reader.",
+      "baseline_refs": ["MF-07"],
+      "related_proposal_ids": ["MOON-023", "MOON-027", "MOON-033"],
+      "distinction": "MOON-023 filters existing annotations, MOON-027 exports study documents, and MOON-033 provides citation backlinks. This outcome adds a reader-operated recall queue with saved word senses, source context and review state; it is not another filter or export format.",
+      "rationale": "A language learner can understand a word during lookup yet forget it before the next occurrence. Saving only a highlighted word loses the chosen sense and the opportunity to test recall in its original context.",
+      "requested_change": "Evaluate an opt-in Save for review action retaining the chosen meaning and source context with independent review state. Provide hide/reveal and Remembered/Revisit actions, resume an interrupted review pass, and permit removal of a vocabulary entry without deleting its source book or an independent annotation.",
+      "acceptance_criteria": [
+        "Save bank from a financial passage and bank from a river passage with two chosen meanings: the queue retains separate meanings and the correct source sentence for each rather than merging solely by spelling.",
+        "Start a five-entry review pass, reveal and answer two entries, then restart: the pass resumes at the next unanswered entry, each recorded answer appears exactly once, and meanings for unrevealed entries remain hidden until Reveal.",
+        "Remove one vocabulary entry and reopen the queue: that review entry and its review state are removed, while its source book and any independently saved highlight or note remain intact."
+      ],
+      "sources": [
+        "data/moon-baseline.json",
+        "knowledge/moon-baseline.md#existing-capability-baseline",
+        "knowledge/alternatives-android.md#37-readest--cross-platform-reader-with-an-observed-moon-import-path",
+        "https://www.moondownload.com/",
+        "https://github.com/readest/readest/blob/0882c8074215edc24e2ee5ac25e99cdccddb7e34/README.md"
+      ],
+      "limitations": [
+        "Current availability of a Moon vocabulary review queue is unknown. This is a new-capability candidate relative to the reviewed baseline, not proof of product absence.",
+        "Moon and Readest sources observed on 2026-11-21 establish dictionary/annotation foundations only. The recall workflow is proposed; no learning-effectiveness result or scheduling algorithm is claimed.",
+        "A provider may not expose a selectable definition or sense. The workflow needs an explicit user-entered alternative and an accurate record of the retained content; no dictionary content was collected here."
+      ]
+    },
+    {
+      "id": "MOON-072",
+      "title": "Explain reading-time totals through inspectable session accounting",
+      "application_id": "moonreader",
+      "category": "reading-statistics",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "observed_at": "2026-11-22",
+      "source_observed_at": "2026-11-21",
+      "relationship_to_baseline": "extension",
+      "existing_capability": "Moon already advertises per-book reading time/speed and background TTS. Anx Reader's retained README advertises day/week/month/year statistics and a heatmap, without establishing its timer-accounting rules.",
+      "baseline_refs": ["MF-18"],
+      "related_proposal_ids": ["MOON-043", "MOON-059"],
+      "distinction": "MOON-043 retains remote position history, and MOON-059 measures application opening latency. This outcome explains a reader's eligible session duration, overlap and reversible accounting corrections without changing reading position.",
+      "rationale": "Leaving a book visible, listening with the screen off and reading while listening are different activities. An understandable accounting policy avoids confusing elapsed time with attention or counting one simultaneous interval twice in the combined total.",
+      "requested_change": "Publish the eligibility policy behind reading-time totals and expose a bounded session breakdown of visual reading, listening, overlap and excluded intervals. Preserve elapsed durations through wall-clock and reporting-time-zone changes, reconcile daily totals, and let the reader exclude and undo exclusion of a session without changing positions, notes or bookmarks.",
+      "acceptance_criteria": [
+        "Under a declared policy counting visual reading or active speech once and excluding paused background time, replay 120 seconds of visual-only reading, 60 seconds of simultaneous visual reading/TTS and 300 seconds paused in the background: the combined eligible total is 180 seconds, with overlap and exclusion explained by the session breakdown.",
+        "Repeat the controlled trace with a wall-clock adjustment and a reporting-time-zone change: elapsed duration remains 180 eligible seconds, and daily buckets reconcile to that total without duplicate sessions. Any redistribution across dates follows the displayed reporting policy.",
+        "Exclude one known session and then undo its exclusion: only the applicable statistical aggregates change and then return to their prior values; notes, bookmarks and reading positions remain unchanged throughout."
+      ],
+      "sources": [
+        "data/moon-baseline.json",
+        "knowledge/moon-baseline.md#existing-capability-baseline",
+        "knowledge/alternatives-android.md#38-anx-reader--additional-cross-platform-alternative",
+        "https://www.moondownload.com/",
+        "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en",
+        "https://www.moondownload.com/faq.html",
+        "https://github.com/Anxcye/anx-reader/blob/0c7fc1ad4551f7dbbeba6a6468f69d830957fa2a/README.md"
+      ],
+      "limitations": [
+        "Current Moon timer policies, session correction and listening attribution are unknown; no overcount was measured.",
+        "The exact timeline is a prospective accounting oracle, not a benchmark result. Input activity or foreground duration cannot establish human attention or comprehension.",
+        "Anx's dated documentation is a presentation reference only. Cross-device session merging and health/productivity claims are outside this outcome."
+      ]
+    },
+    {
+      "id": "MOON-073",
+      "title": "Offer temporary reading with an explicit history-retention boundary",
+      "application_id": "moonreader",
+      "category": "privacy",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "observed_at": "2026-11-22",
+      "source_observed_at": "2026-11-21",
+      "relationship_to_baseline": "new-capability-candidate",
+      "existing_capability": "Moon already documents library records, reading statistics, reading-state synchronization and startup password/fingerprint locking. MJ PDF's retained README advertises incognito and shared-file copy choices; their exact persistence boundary was not tested.",
+      "baseline_refs": ["MF-15", "MF-18", "MF-12", "MF-19"],
+      "related_proposal_ids": ["MOON-058", "MOON-056"],
+      "distinction": "MOON-058 encrypts retained packages, and MOON-056 clarifies disclosures. This outcome controls whether a temporary session produces the named Moon-managed history, position, statistics and position-sync updates, independently of explicitly saved annotations.",
+      "rationale": "A reader may inspect a borrowed, shared or one-off document without adding it to a long-term library or changing their saved reading position. That choice is independent of permission breadth and startup locking.",
+      "requested_change": "Evaluate a visibly indicated temporary-reading mode that names and suppresses its Moon-managed history, saved-position, statistics and position-sync updates. Explain separately how explicitly saved annotations persist. Returning to normal reading resumes ordinary recording without backfilling activity from the temporary session.",
+      "acceptance_criteria": [
+        "Start with known normal history, saved-position and statistics records for a synthetic book, navigate elsewhere in temporary mode, then exit and restart: those named records remain unchanged and no position upload from the temporary session is queued.",
+        "Under the displayed policy that explicitly saved annotations persist, save a synthetic note during temporary reading and restart: the note is available as described while the suppressed history, position and statistics remain unchanged. The interface distinguishes this deliberate save from automatic session recording.",
+        "Exit temporary mode and perform a normal reading session: ordinary history, position and statistics updates resume according to the existing policy, without retroactively recording the temporary session or queuing its position for upload."
+      ],
+      "sources": [
+        "data/moon-baseline.json",
+        "knowledge/moon-baseline.md#existing-capability-baseline",
+        "data/alternatives-android.json",
+        "knowledge/alternatives-android.md#33-mj-pdf--pdf-focused-alternative",
+        "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en",
+        "https://www.moondownload.com/faq.html",
+        "https://gitlab.com/mudlej_android/mj_pdf_reader/-/blob/aef93faaa4c7fa7df373d415e1c874412cba2db5/README.md"
+      ],
+      "limitations": [
+        "Current availability and boundaries of Moon temporary/incognito reading are unknown. This is a candidate workflow, not a claim of unwanted history collection.",
+        "MJ PDF's incognito statement is documentation observed on 2026-11-21, not verification of either app's temporary-state handling.",
+        "The boundary covers only the named Moon-managed records. It does not promise zero operating-system, provider or filesystem traces, secure physical erasure, or deletion of another application's logs. No privacy runtime experiment was performed."
+      ]
+    },
+    {
+      "id": "MOON-074",
+      "title": "Print selected pages from one identifiable edit revision",
+      "application_id": "moonreader",
+      "category": "printing",
+      "priority": "medium",
+      "evidence_type": "proposal",
+      "status": "draft",
+      "observed_at": "2026-11-22",
+      "source_observed_at": "2026-11-21",
+      "relationship_to_baseline": "new-capability-candidate",
+      "existing_capability": "Moon already advertises PDF forms, handwriting, annotations and backup/export. The retained PDF.js source review identifies frozen annotation data for printing; that design reference does not establish Moon's current print interface.",
+      "baseline_refs": ["MF-05", "MF-14"],
+      "related_proposal_ids": ["MOON-032"],
+      "distinction": "MOON-032 distinguishes editable PDFs, flattened copies and sidecars. This outcome specifies a print job's selected physical pages and consistent edit revision across preview and output, independently of export-product semantics.",
+      "rationale": "A paper handout or print-to-PDF copy should match the selected pages and the state approved in preview, even if the user continues editing the document. Ordinary file saving does not establish what the print service actually receives.",
+      "requested_change": "Evaluate selected-page print preview and output from the same identifiable document/edit revision, with explicit markup inclusion and fit-versus-actual-size choices. After later edits, either retain the identified preview snapshot or require regeneration before submission; keep a print-only cancellation separate from saving document, annotation or reading-position state.",
+      "acceptance_criteria": [
+        "Select physical pages 2 and 4 of a five-page synthetic PDF with distinguishable markers: preview and controlled print output contain exactly those pages in that order, reflect the chosen fit or actual-size setting, and agree on the selected markup inclusion.",
+        "After previewing a known form value and annotation set, change both in the live document: the job either uses the visibly identified frozen preview revision or requires a regenerated preview before submission. All output pages belong to one identified revision rather than a mixture of old and new edits.",
+        "Enter the print-only workflow and cancel before submission: no print job is queued, and the workflow causes no document save, annotation mutation or reading-position change. Existing source bytes and pending edits retain their pre-preview state."
+      ],
+      "sources": [
+        "data/moon-baseline.json",
+        "knowledge/moon-baseline.md#existing-capability-baseline",
+        "knowledge/alternatives-desktop-web.md#pdfjs--browser-viewing-and-reusable-pdf-layers",
+        "data/alternatives-desktop-web.json",
+        "https://play.google.com/store/apps/details?id=com.flyersoft.moonreaderp&hl=en",
+        "https://www.moondownload.com/faq.html",
+        "https://github.com/mozilla/pdf.js/blob/57dead10694ead8fb21b97f7812fc95311a38ea1/src/display/annotation_storage.js#L323-L342"
+      ],
+      "limitations": [
+        "Current Moon printing availability and inclusion controls are unknown. The requested print contract does not assert that printing is absent or broken.",
+        "PDF.js supplies a pinned source-level snapshot design reference observed on 2026-11-21, not Android printing verification. No Moon, browser or physical-printer execution is represented.",
+        "Printer capabilities and printable margins vary. A diagnostic print-to-PDF check cannot certify physical output, and successful printing would not establish an editable PDF form/export round trip."
+      ]
+    }
+  ]
+}

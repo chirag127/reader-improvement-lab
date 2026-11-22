@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "optional-moon-supplement-validator-20261122",
+  "evidence_type": "host-unit-test",
+  "source_url": "https://github.com/chirag127/reader-improvement-lab",
+  "observed_at": "2026-11-22T04:32:17.840059+00:00",
+  "status": "pass",
+  "application_tests_executed": false,
+  "baseline_commit": "060fc174671c7e82072db905e4f9f1f1e15e5d60",
+  "working_directory": ".",
+  "command": "python -X utf8 -B -m unittest discover -s tests -p test_repository_validation.py -v",
+  "environment": {"python": "3.13.14", "platform": "Windows 11 AMD64", "python_executable_sha256": "ef8f51028ac5329641985112f8efb1c2d4c47c86b8011ddf7e6fae21e2b4e5a1"},
+  "exit_code": 0,
+  "tests": 50,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_seconds": 54.714,
+  "output_tail": "Ran 50 tests in 54.714s\n\nOK",
+  "inputs": [
+    {"path": "scripts/validate_repository.py", "sha256": "c9cfaf36f62e09adf8a620bbc8e7c4a6552f34bd961939d7a021d40231c04c50", "size_bytes": 57786},
+    {"path": "tests/test_repository_validation.py", "sha256": "a9a6fda77c051d8bcad1bd25839f4d4515191b1f379621a6d4af1654861cff44", "size_bytes": 38713}
+  ],
+  "inputs_unchanged_across_green_runs": true,
+  "scope": "Synthetic repository-validator tests; recognizes the optional exact supplement, applies the Moon schema, aggregates counts, rejects cross-file duplicates and preserves the original fifty-proposal minimum.",
+  "red": {
+    "command": "python -X utf8 -B -m unittest discover -s tests -p test_repository_validation.py -k moon_followup -v",
+    "exit_code": 1,
+    "test_methods": 7,
+    "assertion_or_subtest_failures": 32,
+    "errors": 0,
+    "validator_sha256": "614c042648c3d71520526d80d9f2d04e8efb32a5c3ef73063040111b7cff84fa",
+    "test_source_sha256": "2a090fcf643b4d5db57ac2d4449931f94704d58c42a63ec3ec82b5d9240c409e",
+    "log_sha256": "38ec4e287f2de66bb4891efb430c6e04ba3df08637a7357f505a6fcf83f3cedb",
+    "limitation": "The explicit 50+1 positive assertion was added after red. The red run covered 50+2 count mismatch and original49+supplement1 alongside schema and duplicate failures."
+  },
+  "green_supplement_selection": {"tests": 7, "failures": 0, "errors": 0, "skipped": 0, "duration_seconds": 12.220},
+  "green_full_validator_log_sha256": "9f16b907066ded5d22d41b7c8d1c743ae8013a3c9ff9e4216ed4dbd1c02854cb",
+  "retention": {
+    "private_receipt_ref": "rea-followup-20261122/validator-lane-results.json",
+    "reviewer_log_readback": "The separate reviewer read the red and green logs and matched their recorded digests before reporting no material code findings.",
+    "integration_readback": "The listed validator and test hashes still matched. Both transient raw log paths were no longer present during later integration; they were not recreated or represented as currently readable."
+  },
+  "review": "evidence/reviews/repository-validator.json",
+  "limitations": [
+    "The retained execution receipt, completed worker report and independent log readback support this historical run. The transient full raw logs are unavailable for another readback.",
+    "No reader application, Android device, cloud service or acceptance scenario was executed.",
+    "The published supplement and integrated real corpus require separate record validation; these tests construct their own isolated synthetic records.",
+    "The prior 68-test combined receipt remains historical at its listed hashes. Unchanged fixture groups are reused separately; no combined 75-test run is claimed."
+  ]
+}

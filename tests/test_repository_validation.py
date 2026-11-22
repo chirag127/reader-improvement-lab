@@ -71,6 +71,11 @@ class RepositoryValidation(unittest.TestCase):
         self.assertEqual(report["status"], "fail")
         self.assertIn(code, {error["code"] for error in report["errors"]}, report)
 
+    def moon_followup(self):
+        entry = self.document("data/moon-improvements.json")["proposals"][0]
+        entry.update(id="MOON-065", title="A follow-up workflow", requested_change="Expose a distinct follow-up outcome", related_proposal_ids=["MOON-001"], distinction="A separate acceptance outcome")
+        return {"observed_at": "2026-11-22", "application_id": "moonreader", "proposals": [entry]}
+
     def test_complete_bounded_corpus_passes_without_claiming_application_tests(self):
         report = self.validate()
         self.assertEqual(report["errors"], [])
@@ -79,6 +84,115 @@ class RepositoryValidation(unittest.TestCase):
         self.assertEqual(report["summary"]["alternatives"], 3)
         self.assertEqual(report["status"], "pending")
         self.assertIn("data/runtime-results.json", {item["path"] for item in report["pending"]})
+
+    def test_moon_followup_is_optional_and_valid_proposals_are_counted(self):
+        report = self.validate()
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["summary"]["moon_proposals"], 50)
+        value = self.moon_followup()
+        self.write_json("data/moon-followup-proposals.json", value)
+        report = self.validate()
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["summary"]["moon_proposals"], 51)
+        second = {**value["proposals"][0], "id": "MOON-074", "title": "Another follow-up workflow", "requested_change": "Expose another distinct outcome"}
+        del second["related_proposal_ids"]
+        del second["distinction"]
+        value["proposals"].append(second)
+        self.write_json("data/moon-followup-proposals.json", value)
+        report = self.validate()
+        self.assertEqual(report["errors"], [])
+        self.assertEqual(report["summary"]["moon_proposals"], 52)
+        self.assertEqual(report["summary"]["alternative_proposals"], 2)
+        self.assertFalse(report["application_tests_executed"])
+
+    def test_moon_followup_cannot_fill_the_original_fifty_proposal_minimum(self):
+        self.write_json("data/moon-followup-proposals.json", self.moon_followup())
+        path = "data/moon-improvements.json"
+        value = self.document(path)
+        value["proposals"].pop()
+        self.write_json(path, value)
+        report = self.validate()
+        self.assertEqual(report["summary"]["moon_proposals"], 50)
+        self.assertIn(("proposal-count", path), {(error["code"], error["path"]) for error in report["errors"]}, report)
+
+    def test_moon_followup_ids_are_unique_across_all_backlogs(self):
+        for identifier in ("MOON-001", "ALT-reader-a", "ALT-reader-b"):
+            with self.subTest(identifier=identifier):
+                value = self.moon_followup()
+                value["proposals"][0]["id"] = identifier
+                self.write_json("data/moon-followup-proposals.json", value)
+                self.assert_error("duplicate-id")
+
+    def test_moon_followup_titles_and_outcomes_are_unique_across_moon_backlogs(self):
+        path = "data/moon-followup-proposals.json"
+        for field, duplicate, code in (("title", "  OUTCOME\t 1\n", "duplicate-title"), ("requested_change", "  REFINE\n workflow\t1  ", "duplicate-outcome")):
+            with self.subTest(field=field):
+                value = self.moon_followup()
+                value["proposals"][0][field] = duplicate
+                self.write_json(path, value)
+                report = self.validate()
+                self.assertIn((code, path), {(error["code"], error["path"]) for error in report["errors"]}, report)
+
+    def test_moon_followup_rejects_duplicates_within_the_supplement(self):
+        for field, code in (("id", "duplicate-id"), ("title", "duplicate-title"), ("requested_change", "duplicate-outcome")):
+            with self.subTest(field=field):
+                value = self.moon_followup()
+                first = value["proposals"][0]
+                second = {**first, "id": "MOON-066", "title": "A different follow-up", "requested_change": "A different observable outcome"}
+                second[field] = first[field]
+                value["proposals"].append(second)
+                self.write_json("data/moon-followup-proposals.json", value)
+                self.assert_error(code)
+
+    def test_moon_followup_uses_the_existing_moon_record_contract(self):
+        path = "data/moon-followup-proposals.json"
+        mutations = [
+            ("id", "MOON-000", "invalid-id"),
+            ("application_id", "reader-a", "unknown-application"),
+            ("priority", "urgent", "proposal-priority"),
+            ("evidence_type", "runtime-observation", "proposal-status"),
+            ("status", "pass", "proposal-status"),
+            ("baseline_refs", ["MF-404"], "unknown-baseline"),
+            ("relationship_to_baseline", "already-fixed", "baseline-relationship"),
+            ("sources", [], "missing-source"),
+            ("sources", ["knowledge/missing.md"], "missing-link"),
+            ("acceptance_criteria", [], "record-shape"),
+            ("limitations", [], "record-shape"),
+            ("category", "", "required-field"),
+            ("existing_capability", "", "required-field"),
+            ("rationale", "", "required-field"),
+            ("requested_change", "", "required-field"),
+        ]
+        for field, invalid, code in mutations:
+            with self.subTest(field=field, value=invalid):
+                value = self.moon_followup()
+                value["proposals"][0][field] = invalid
+                self.write_json(path, value)
+                report = self.validate()
+                self.assertIn((code, path), {(error["code"], error["path"]) for error in report["errors"]}, report)
+
+    def test_moon_followup_malformed_documents_report_errors_without_crashing(self):
+        path = "data/moon-followup-proposals.json"
+        malformed_entry = self.moon_followup()
+        malformed_entry["proposals"][0].update(application_id={}, priority=[], evidence_type=[], status={}, baseline_refs=[{}])
+        mutations = [
+            ("{not-json}", "invalid-json"),
+            ('{"proposals": [], "proposals": []}', "invalid-json"),
+            ("null", "required-document"),
+            ("[]", "required-document"),
+            ("{}", "record-shape"),
+            ('{"observed_at": "2026-11-22", "proposals": {}}', "record-shape"),
+            ('{"observed_at": "2026-11-22", "proposals": []}', "record-shape"),
+            ('{"observed_at": "2026-11-22", "proposals": [null]}', "record-shape"),
+            ('{"observed_at": "2026-11-22", "proposals": [{}]}', "required-field"),
+            (json.dumps(malformed_entry), "required-field"),
+            (json.dumps({**self.moon_followup(), "observed_at": "not-a-date"}), "observation-date"),
+        ]
+        for content, code in mutations:
+            with self.subTest(content=content):
+                self.write(path, content)
+                report = self.validate()
+                self.assertIn((code, path), {(error["code"], error["path"]) for error in report["errors"]}, report)
 
     def test_fifty_proposal_boundary_and_duplicate_identity_are_enforced(self):
         path = "data/moon-improvements.json"

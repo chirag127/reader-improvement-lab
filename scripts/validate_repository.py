@@ -535,8 +535,11 @@ class Validator:
                     self.link(entry["report_path"], path)
         self.applications = applications
         all_proposal_ids = set()
-        for filename in ("moon-improvements", "alternative-proposals-android", "alternative-proposals-desktop-web"):
+        moon_outcomes, moon_titles = set(), set()
+        for filename in ("moon-improvements", "moon-followup-proposals", "alternative-proposals-android", "alternative-proposals-desktop-web"):
             path = f"data/{filename}.json"
+            if filename == "moon-followup-proposals" and path not in self.files:
+                continue
             value = self.document(path)
             self.dated(value.get("observed_at"), path)
             entries = self.items(value, "proposals", path)
@@ -544,11 +547,11 @@ class Validator:
             if identifiers & all_proposal_ids:
                 self.error("duplicate-id", path, "Proposal ID is already declared in another backlog")
             all_proposal_ids |= identifiers
-            is_moon = filename == "moon-improvements"
+            is_moon = filename in ("moon-improvements", "moon-followup-proposals")
             self.counts["moon_proposals" if is_moon else "alternative_proposals"] += len(entries)
-            if is_moon and len(entries) < 50:
+            if filename == "moon-improvements" and len(entries) < 50:
                 self.error("proposal-count", path, "At least fifty Moon proposals are required")
-            outcomes, titles = set(), set()
+            outcomes, titles = (moon_outcomes, moon_titles) if is_moon else (set(), set())
             for entry in entries:
                 fields = ("id", "title", "application_id", "priority", "evidence_type", "status")
                 if not self.required_text(entry, fields, path):

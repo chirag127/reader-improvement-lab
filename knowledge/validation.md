@@ -48,12 +48,21 @@ validation outcomes. Neither command starts an Android emulator or submits a
 developer report. Refer to [fixture verification](testing-fixtures.md) and
 [scenario inputs](testing-scenarios.md) for their separate evidence boundaries.
 
-The [retained final suite](../evidence/host-suite-verification.json) passed **68
+The [21 November combined suite](../evidence/host-suite-verification.json) passed **68
 tests**: 17 core-fixture, eight scenario, and 43 validator cases. It includes
 malformed current receipts, NTFS-junction read/output boundaries, input-preserving
 output handling, contribution identities, publication inventory, provenance fields,
 and runtime-record consistency. The [independent review](../evidence/reviews/repository-validator.json)
 records the original findings and their scoped resolutions.
+
+The [22 November supplement change](../evidence/validator-supplement-verification.json)
+passed **50 focused validator tests**, including seven new methods. Its red run
+reported 32 assertion/subtest failures across those seven methods; the explicit
+50+1 positive-count assertion was added afterward. A separate reviewer checked
+the diff and log digests. The transient raw logs were unavailable at integration;
+the execution receipt and reviewer readback remain the retained evidence. The
+unchanged fixture/scenario groups reuse their earlier results, not a new combined
+75-test run.
 
 ## Contracts checked
 
@@ -63,8 +72,11 @@ records the original findings and their scoped resolutions.
   identity across artifact records.
 - Unique application/proposal/contribution IDs, known targets and baseline references, source
   references, nonempty acceptance criteria, and draft-proposal classifications.
-- At least fifty Moon proposals, with normalized duplicate titles/outcomes rejected.
-  Semantic distinctness still needs content review.
+- At least fifty proposals in the original Moon backlog. The optional exact file
+  `data/moon-followup-proposals.json` uses the same Moon record contract, adds to
+  the total, and shares normalized title/outcome and global-ID uniqueness checks.
+  It cannot supply the original backlog's minimum. Semantic distinctness still
+  needs content review.
 - Local Markdown inline/reference links, named anchors, ATX/setext heading anchors,
   duplicate HTML IDs/reference definitions, and source-line ranges. Fenced examples are
   excluded from rendered-link checks.
